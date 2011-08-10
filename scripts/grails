@@ -15,7 +15,7 @@ then
 	run_local_grails "$@"
 fi
 
-if which -s node && node --version | grep "grails-$required_version" >/dev/null
+if which -s grails && grails | grep "grails-$required_version" >/dev/null
 then
 	exec grails "$@"
 fi
