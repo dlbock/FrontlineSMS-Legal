@@ -13,3 +13,5 @@ devDB.*
 testDb.*
 prodDb.*
 *.swp
+grails-*.zip
+/local-grails-*
