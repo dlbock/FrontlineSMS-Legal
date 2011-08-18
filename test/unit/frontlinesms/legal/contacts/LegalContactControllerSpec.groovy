@@ -1,18 +1,15 @@
 package frontlinesms.legal.contacts
 
-import frontlinesms.legal.Case
-import frontlinesms.legal.Event
-import frontlinesms.legal.EventContact
-import frontlinesms.legal.LegalContact
-import grails.plugin.spock.ControllerSpec
 import java.sql.Time
-import frontlinesms.legal.CaseContacts
+import frontlinesms.legal.*
 
-class LegalContactControllerSpec extends ControllerSpec {
+class LegalContactControllerSpec extends FrontlinesmsLegalControllerSpecBase {
 
     def "update action should update contact"() {
         given:
         def newLegalContact = new LegalContact(id: 666, name: "John Doe", primaryMobile: "9090", notes: "He is anonymous.")
+        newLegalContact.beforeUpdate = {}
+
         mockDomain(LegalContact, [newLegalContact])
         mockDomain(Case, [])
         mockDomain(CaseContacts, [])
@@ -33,7 +30,8 @@ class LegalContactControllerSpec extends ControllerSpec {
     def "should save contact"() {
         setup:
         def contacts = []
-        mockDomain(LegalContact, contacts)
+        mockLegalContactToAvoidIssuesWithContactBeforeUpdateEvent()
+        mockDomain(LegalContact)
         controller.params.name = 'bla bla'
         controller.params.primaryMobile = '333333'
 
@@ -62,6 +60,7 @@ class LegalContactControllerSpec extends ControllerSpec {
 
     def 'create action should redirect to Contact detail page'() {
         setup:
+        mockLegalContactToAvoidIssuesWithContactBeforeUpdateEvent()
         mockDomain(LegalContact)
 
         controller.params.name = 'Steve Jobs'
@@ -76,9 +75,7 @@ class LegalContactControllerSpec extends ControllerSpec {
     }
 
     def 'should display error if primaryMobile is blank'() {
-
         given:
-
         mockDomain(LegalContact)
         controller.params.name = 'bla bla'
 
@@ -202,6 +199,7 @@ class LegalContactControllerSpec extends ControllerSpec {
         def newCase1 = new Case(id: 1, caseId: "567")
         def newCase2 = new Case(id: 2, caseId: "568")
         def legalContact = new LegalContact(primaryMobile: "67890", id: 1)
+        mockLegalContactToAvoidIssuesWithContactBeforeUpdateEvent()
         mockDomain(Case, [newCase1, newCase2])
         mockDomain(LegalContact, [legalContact])
         mockDomain(CaseContacts, [])
@@ -229,6 +227,7 @@ class LegalContactControllerSpec extends ControllerSpec {
         def legalContact = new LegalContact(primaryMobile: "67890", id: 1)
         def caseContact1 = new CaseContacts(legalContact: legalContact, legalCase: newCase1, involvement: "client")
         def caseContact2 = new CaseContacts(legalContact: legalContact, legalCase: newCase2, involvement: "witness")
+        mockLegalContactToAvoidIssuesWithContactBeforeUpdateEvent()
         mockDomain(Case, [newCase1, newCase2])
         mockDomain(LegalContact, [legalContact])
         mockDomain(CaseContacts, [caseContact1, caseContact2])

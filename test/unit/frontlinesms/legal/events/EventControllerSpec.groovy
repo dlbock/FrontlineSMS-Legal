@@ -1,11 +1,11 @@
 package frontlinesms.legal.events
 
 import frontlinesms.legal.Event
-import grails.plugin.spock.ControllerSpec
-import frontlinesms.legal.LegalContact
 import frontlinesms.legal.EventContact
+import frontlinesms.legal.FrontlinesmsLegalControllerSpecBase
+import frontlinesms.legal.LegalContact
 
-class EventControllerSpec extends ControllerSpec {
+class EventControllerSpec extends FrontlinesmsLegalControllerSpecBase {
 
     def "should save event"() {
         setup:
@@ -131,7 +131,9 @@ class EventControllerSpec extends ControllerSpec {
         setup:
         mockDomain(Event)
         mockDomain(EventContact)
-        mockDomain(LegalContact,[new LegalContact(id:1,name: "John Doe",primaryMobile: "435352",notes: "hii")])
+        mockLegalContactToAvoidIssuesWithContactBeforeUpdateEvent()
+        mockDomain(LegalContact,
+                   [new LegalContact(id:1,name: "John Doe",primaryMobile: "435352",notes: "hii")])
 
         when:
         controller.params.eventTitle = "Event"
@@ -144,13 +146,14 @@ class EventControllerSpec extends ControllerSpec {
         controller.save()
 
         then:
-         EventContact.count()==1
+        EventContact.count()==1
     }
 
     def "should save multiple contacts when linked on the event"() {
         setup:
         mockDomain(Event)
         mockDomain(EventContact)
+        mockLegalContactToAvoidIssuesWithContactBeforeUpdateEvent()
         mockDomain(LegalContact,[
                 new LegalContact(id:1,name: "John Doe",primaryMobile: "435352",notes: "hii"),
                 new LegalContact(id:34,name: "Jane Do",primaryMobile: "546354",notes: ":)"),
@@ -168,7 +171,7 @@ class EventControllerSpec extends ControllerSpec {
         controller.save()
 
         then:
-         EventContact.count()==3
+        EventContact.count()==3
     }
 
 }

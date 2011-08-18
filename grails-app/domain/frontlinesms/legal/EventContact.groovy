@@ -11,23 +11,20 @@ class EventContact {
     Event event
 
     static EventContact link(event, legalContact) {
-
         def contactEventLink = EventContact.findByEventAndLegalContact(event, legalContact)
         if (!contactEventLink) {
             contactEventLink = new EventContact()
             legalContact?.addToLinkedEvents(contactEventLink)
             event?.addToLinkedContacts(contactEventLink)
             contactEventLink.save()
+            legalContact.save(flush: true)
+            event.save(flush: true)
         }
         return contactEventLink
-
     }
-
 
     static LegalContact[] findContactsByEvent(Event event) {
         def linkedContacts = EventContact.findAllByEvent(event)
         linkedContacts.collect { it -> it.legalContact}
-
     }
-
 }
