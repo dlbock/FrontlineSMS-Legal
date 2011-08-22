@@ -16,9 +16,9 @@ grails.project.dependency.resolution = {
     }
 
     dependencies {
-        compile "org.codehaus.geb:geb-core:latest.release"
-        compile "org.seleniumhq.selenium:selenium-firefox-driver:2.0rc3"
-        compile "org.codehaus.geb:geb-spock:latest.release"
+        test "org.codehaus.geb:geb-core:latest.release"
+        test "org.codehaus.geb:geb-spock:latest.release"
+        test "org.seleniumhq.selenium:selenium-firefox-driver:2.0rc3"
         test 'org.seleniumhq.selenium:selenium-chrome-driver:latest.release'
         test 'org.seleniumhq.selenium:selenium-ie-driver:latest.release'
         test 'org.spockframework:spock-core:0.5-groovy-1.7'
