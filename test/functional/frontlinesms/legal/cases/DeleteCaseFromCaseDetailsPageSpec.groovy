@@ -41,9 +41,10 @@ class DeleteCaseFromCaseDetailsPageSpec extends FrontlinesmsLegalGebSpec {
         when:
         deleteButton.click();
         caseDeleteYes.click();
+        waitFor { !caseDeleteDialog.isVisible() }
 
         then:
-        at SearchCasePage
+        at (SearchCasePage)
         assert searchResults().size() == 1
 
     }
@@ -55,6 +56,7 @@ class DeleteCaseFromCaseDetailsPageSpec extends FrontlinesmsLegalGebSpec {
         when:
         deleteButton.click();
         caseDeleteYes.click();
+        waitFor { !caseDeleteDialog.isVisible() }
 
         then:
         assert at(SearchCasePage)
