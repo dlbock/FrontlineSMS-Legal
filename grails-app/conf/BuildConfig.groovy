@@ -18,10 +18,10 @@ grails.project.dependency.resolution = {
     dependencies {
         test "org.codehaus.geb:geb-core:0.6.0"
         test "org.codehaus.geb:geb-spock:0.6.0"
-        test "org.seleniumhq.selenium:selenium-firefox-driver:2.0rc3"
-        test 'org.seleniumhq.selenium:selenium-chrome-driver:2.4.0'
-        test 'org.seleniumhq.selenium:selenium-ie-driver:2.4.0'
-        test 'org.spockframework:spock-core:0.5-groovy-1.7'
+        test "org.seleniumhq.selenium:selenium-chrome-driver:2.4.0"
+        test "org.seleniumhq.selenium:selenium-firefox-driver:2.4.0"
+        test "org.seleniumhq.selenium:selenium-ie-driver:2.4.0"
+        test "org.spockframework:spock-core:0.5-groovy-1.7"
     }
 
 }
