@@ -148,19 +148,47 @@ class CaseControllerSpec extends ControllerSpec {
         existingCase.active == false
     }
 
-//    def 'should display an error when deleting a case that does not exist'() {
-//        given:
-//        def cases = []
-//        cases.add(new Case(caseId: '1234'))
-//        mockDomain(Case, cases)
-//
-//        controller.params.caseId = 'NaN'
-//
-//        when:
-//        controller.delete()
-//
-//        then:
-//        controller.flash.warning == "Case not found."
-//    }
+    def 'should display a message when case is successfully deleted'() {
+        given:
+        def cases = []
+        cases.add(new Case(caseId: '1234'))
+        mockDomain(Case, cases)
 
+        controller.params.id = '1234'
+
+        when:
+        controller.delete()
+
+        then:
+        controller.flash.message == "Case deleted."
+    }
+
+
+    def 'should display an error when deleting a case that does not exist'() {
+        given:
+        def cases = []
+        cases.add(new Case(caseId: '1234'))
+        mockDomain(Case, cases)
+
+        controller.params.id = 'NaN'
+
+        when:
+        controller.delete()
+
+        then:
+        controller.flash.warning == "Case not found."
+    }
+
+    def "should remove case from database when case is deleted"() {
+        setup:
+        def cases = [new Case(caseId: '1234')]
+        mockDomain(Case, cases)
+        controller.params.id = "1234"
+
+        when:
+        controller.delete()
+
+        then:
+        assert Case.count() == 0
+    }
 }
