@@ -9,19 +9,22 @@
     <g:javascript library="caseUpdate"/>
     <g:javascript library="picnet.table.filter.min"/>
     <g:javascript library="contactSearch"/>
+    <g:javascript library="caseDeleteFromCaseDetails"/>
+    <g:javascript library="confirmationDialog"/>
 
     <script type="text/javascript">
-     $(function() {
-         frontlinesms.showCaseOnLoad();
-         frontlinesms.linkContactToCase();
-         frontlinesms.contactSearchOnLoad();
+        $(function() {
+            frontlinesms.showCaseOnLoad();
+            frontlinesms.linkContactToCase();
+            frontlinesms.contactSearchOnLoad();
+            frontlinesms.initializeCaseDeletion();
         })
     </script>
 </head>
 
 <body>
 <h1 class="form-header">Case Details</h1>
-<g:form action="update" id="save-case-form" >
+<g:form action="update" id="save-case-form" name="save-case-form">
 
     <label>Case Number</label>
     <g:hiddenField name="currentId" id="current-id" value="${caseToDisplay.id}"/>
@@ -32,7 +35,7 @@
     <p><g:checkBox name="caseStatus" id="case-status" checked="${caseToDisplay.active}"/>Case active</p>
 
     <div class="form-submit-area">
-        <button id="link-contact-button">Link contacts</button>
+        <button class="link-button" id="link-contact-button">Link contacts</button>
     </div>
     <g:hiddenField name="caseLinkedContacts" id="case-linked-contacts" value="${caseLinkedContacts}"/>
 
@@ -59,9 +62,15 @@
 
     <div class="form-submit-area">
         <g:actionSubmit id="case-update" value="Update" disabled="disabled"/>
-        <button id="case-update-cancel">Cancel</button>
     </div>
 </g:form>
+
+<g:form action="delete" class="form-delete" id="${caseToDisplay.caseId}">
+    <button id="delete-button" class="action-button">Delete</button>
+
+</g:form>
+<button id="case-update-cancel" class="action-button">Cancel</button>
+
 
 <div id="link-contacts" title="Link Contacts">
     <g:form action="">
@@ -106,6 +115,9 @@
     <p>Do you wish to discard these changes?</p>
 </div>
 
+<div id="caseDeleteDialog" title="Delete Case" style="display: none;">
+    <p>Are you sure you want to delete this case?</p>
+</div>
 </body>
 
 </html>

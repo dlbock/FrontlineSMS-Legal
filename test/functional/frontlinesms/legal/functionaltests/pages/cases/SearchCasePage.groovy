@@ -13,6 +13,9 @@ class SearchCasePage extends Page {
         searchResults {
             $("tbody tr").collect {module CaseRow, it}
         }
+        caseDeleteDialog { $("div", id: "caseDeleteDialog") }
+        caseDeleteYes { $("button", id: "confirm-yes")}
+        caseDeleteNo { $("button", id: "confirm-no")}
     }
 }
 
@@ -21,6 +24,7 @@ class CaseRow extends Module {
         cell { i -> $("td", i) }
         caseId { cell(0).text() }
         active { cell(1).text() }
+        deleteButton { $("button", class: "deleteButtons")}
     }
 }
 

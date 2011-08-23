@@ -103,4 +103,16 @@ class CaseController {
             redirect(action: 'show', params: [id: originalCaseId, description: fetchedCase.description, uniqueId: originalUniqueId, caseStatus: params.caseStatus])
         }
     }
+
+    def delete = {
+        def deleteCase = Case.findByCaseId(params.id);
+        if (deleteCase != null) {
+            deleteCase.delete();
+            flash.message = "Case deleted."
+        }
+        else
+            flash.warning = "Case not found."
+        redirect(action: 'search')
+    }
+
 }
