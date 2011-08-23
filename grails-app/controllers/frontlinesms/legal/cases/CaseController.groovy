@@ -108,10 +108,10 @@ class CaseController {
         def deleteCase = Case.findByCaseId(params.id);
         if (deleteCase != null) {
             deleteCase.delete();
-            flash.message = "Case is successfully deleted"
+//            flash.message = "Case is successfully deleted"
         }
         else
-            flash.warning = "Case not found!!!"
+//            flash.warning = "Case not found!!!"
         redirect(action: 'search')
     }
 
