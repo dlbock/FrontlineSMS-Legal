@@ -4,7 +4,6 @@ import frontlinesms.legal.functionaltests.FrontlinesmsLegalGebSpec
 import frontlinesms.legal.functionaltests.pages.contact.CreateLegalContactPage
 import frontlinesms.legal.functionaltests.pages.events.NewEventPage
 import frontlinesms.legal.functionaltests.pages.schedule.SchedulePage
-import frontlinesms.legal.Event
 import spock.lang.Ignore
 
 class ViewEventSpec extends FrontlinesmsLegalGebSpec {

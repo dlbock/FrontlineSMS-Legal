@@ -1,6 +1,7 @@
 package frontlinesms.legal.functionaltests.pages.schedule
 
 import geb.Page
+import geb.Module
 
 class SchedulePage extends Page {
     static at = { $("title").text() == "Schedule" }
@@ -18,6 +19,7 @@ class SchedulePage extends Page {
         eventContacts {
             try {
                 $("tr[class='event-contact']")
+
             }
             catch (Exception e) {
                 null
@@ -37,11 +39,27 @@ class SchedulePage extends Page {
             $('#cancel-confirm-yes').click()
             true
         }
+        
+        contactsLinkedToEvent {
+            $(".event-contact").collect {module ContactRow, it}
+        }
         eventTitle { $('#event-title').text()}
         eventDate { $('#event-date').text()}
         eventStartTime { $('#event-start-time').text()}
         eventEndTime { $('#event-end-time').text()}
         atDate{$('span.fc-header-title').text()}
+        contactUnlinkDialog { $("div", id: "contactUnlinkDialog") }
+        contactUnlinkYes { $("button", id: "confirm-yes")}
+        contactUnlinkNo { $("button", id: "confirm-no")}
 
+    }
+}
+
+class ContactRow extends Module {
+    static content = {
+        cell { i -> $("td", i) }
+        name { cell(0).text() }
+        primaryMobileNumber { cell(1).text() }
+        unlinkLink { $("button", class: "unlink-contact-link")}
     }
 }

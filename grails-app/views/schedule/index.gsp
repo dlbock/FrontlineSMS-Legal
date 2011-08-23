@@ -7,14 +7,17 @@
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'theme.css')}"/>
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'fullcalendar.print.css')}" media="print"/>
     <g:javascript library="fullcalendar"/>
+    <g:javascript library="confirmationDialog"/>
     <g:javascript library="calendarInteractions"/>
     <g:javascript library="eventDetails"/>
+    <g:javascript library="unlinkContactFromEvent"/>
 
     <script type="text/javascript">
         $(function() {
             $('#view-event').hide();
             frontlinesms.calendarInteractions();
             frontlinesms.eventDetails();
+           frontlinesms.initializeUnlinkContactFromEvent();
             <g:if test="${year}">
             <g:if test="${month}">
             $('#schedule').fullCalendar('gotoDate', ${year}, ${month});
@@ -39,13 +42,12 @@
     <label name="eventEndTime" id="event-end-time"></label><br/><br/>
     <table id="event-contacts-table">
         <thead>
-            <tr class="event-contact">
-                <th>Contact name</th>
-                <th>Phone number</th>
-            </tr>
+        <tr >
+            <th>Contact name</th>
+            <th>Phone number</th>
+        </tr>
         </thead>
         <tbody>
-
         </tbody>
     </table>
     <div align="right"><input type="button" id="delete-event" value="Delete"/></div>
@@ -56,5 +58,10 @@
 <div id="event-cancel-dialog" title="Cancel event?" style="display: none;">
     <p>Are you sure you want to delete this event? Yes or No.</p>
 </div>
+
+<div id="contactUnlinkDialog" title="Unlink Contact fron Event" style="display: none;">
+    <p>Are you sure you want to unlink this contact from the event?</p>
+</div>
+
 </body>
 </html>

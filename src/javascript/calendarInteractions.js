@@ -39,7 +39,15 @@ frontlinesms.constructContactsTable = function(data) {
             '<tr class="event-contact">' +
                 '<td>' + data[i]["name"] + '</td>' +
                 '<td>' + data[i]["primaryMobile"] + '</td>' +
-                '</tr>';
+
+                '<td >' +
+                //'<a href="" class="unlink-contact-link">Unlink</a>' +
+                '<button class="unlink-contact-link">Unlink</button>' +
+                '</td>'
+            + '</tr>';
+
+
+
         $('#event-contacts-table tbody').append(newRow);
     }
 };
