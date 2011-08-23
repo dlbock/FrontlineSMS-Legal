@@ -7,7 +7,7 @@
     <g:javascript library="picnet.table.filter.min"/>
     <g:javascript library="caseSearch"/>
     <g:javascript library="confirmationDialog"/>
-    <g:javascript library="caseDelete"/>
+    <g:javascript library="caseDeleteFromSearch"/>
 
     <script type="text/javascript">
         $(function() {

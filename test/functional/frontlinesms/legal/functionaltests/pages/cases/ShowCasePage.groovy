@@ -11,12 +11,16 @@ class ShowCasePage extends Page {
         currentId {$("input", id: "current-Id").value()}
         description { $("textarea", id: "case-description").value()}
         updateCaseButton {$("input", id: "case-update")}
+        deleteButton{$("button", id:"delete-button")}
         caseActive { $("input", id: "case-status") }
         clickLinkContact {$("#link-contact-button")}
         contactsTable {$("#link-contacts-inner-table-div #contactsTable tbody tr").collect {module ContactRow, it} }
         statusMessage { $("div", id: "status").text() }
         errorMessage { $("div", id: "errorMessage").text() }
         linkedContactsRow {$(name:"contactRow", id: "contact-row")}
+        caseDeleteDialog { $("div", id: "caseDeleteDialog") }
+        caseDeleteYes { $("button", id: "confirm-yes")}
+        caseDeleteNo { $("button", id: "confirm-no")}
     }
 
 }
