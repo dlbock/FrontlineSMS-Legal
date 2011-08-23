@@ -43,7 +43,7 @@
                 <td>
                     <%=legalCase.active ? "active" : "inactive"%>
                 </td>
-                <td>
+                <td class="table-cases-delete-row">
                     <g:form action="delete" id="${legalCase.caseId}">
                         <button class="deleteButtons" id="deleteButton${legalCase.caseId}">Delete</button>
                         <g:hiddenField name="caseId" value="${legalCase.caseId}"/>
