@@ -44,7 +44,7 @@ class SchedulePage extends Page {
         atDate {$('span.fc-header-title').text()}
 
         eventDialog(wait: true) { module EventDialog }
-        unlinkConfirmationDialog(required: false) { module ConfirmationDialog, messageId: "contactUnlinkDialog" }
+        unlinkConfirmationDialog(required: false) { module ConfirmationDialog, messageId: "contactUnlinkDialog", buttonIdPrefix: "cancel-" }
     }
 }
 

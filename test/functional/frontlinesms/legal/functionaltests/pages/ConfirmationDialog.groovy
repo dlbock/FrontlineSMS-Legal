@@ -4,13 +4,14 @@ import geb.Module
 
 class ConfirmationDialog extends Module {
     def messageId
+    def buttonIdPrefix = ""
 
     static base = { $(class: "ui-dialog") }
 
     static content = {
         message { $("div", id: "caseDeleteDialog") }
-        yesButton { $("button", id: "confirm-yes") }
-        noButton { $("button", id: "confirm-no") }
+        yesButton { $("button", id: buttonIdPrefix + "confirm-yes") }
+        noButton { $("button", id: buttonIdPrefix + "confirm-no") }
     }
 
     def confirm() {
