@@ -6,14 +6,14 @@ frontlinesms.calculateScheduleHeight = function (windowHeight) {
     return windowHeight - headerHeight - schedulePadding;
 };
 frontlinesms.displayEventDetails = function(calEvent) {
-    $("#event-title").text(calEvent.title);
-    $('#event-start-time').text(frontlinesms.getFormattedTimeString(calEvent.start.getHours(), calEvent.start.getMinutes()));
+    $('#event-title').val(calEvent.title);
+    $('#event-start-time').val(frontlinesms.getFormattedTimeString(calEvent.start.getHours(), calEvent.start.getMinutes()));
     if(calEvent.end!=null)
-        $('#event-end-time').text(frontlinesms.getFormattedTimeString(calEvent.end.getHours(), calEvent.end.getMinutes()));
+        $('#event-end-time').val(frontlinesms.getFormattedTimeString(calEvent.end.getHours(), calEvent.end.getMinutes()));
     else
-         $('#event-end-time').text($('#event-start-time').text());
-    $("#event-date").text($.datepicker.formatDate("MM d,yy", calEvent.start));
-    $('#event-id').text(calEvent.id);
+         $('#event-end-time').val($('#event-start-time').text());
+    $("#event-date").val($.datepicker.formatDate("MM d,yy", calEvent.start));
+    $('#event-id').val(calEvent.id);
     $.ajax({
         url: "fetchEventContacts/"+calEvent.id,
         type: "POST",
@@ -111,6 +111,7 @@ frontlinesms.calendarInteractions = function() {
         dataType: 'json',
         cache: false
     };
+
     $("#delete-event").click(function() {
         $("#event-cancel-dialog").dialog({
             modal: true,
@@ -120,8 +121,8 @@ frontlinesms.calendarInteractions = function() {
                     click: function() {
 
                         $("#view-event").dialog("close");
-                        $.ajax("deleteEvent/" + $('#event-id').text(), ajaxDefaults);
-                        $('#schedule').fullCalendar('removeEvents', $('#event-id').text())
+                        $.ajax("deleteEvent/" + $('#event-id').val(), ajaxDefaults);
+                        $('#schedule').fullCalendar('removeEvents', $('#event-id').val())
                         $(this).dialog("close");
                         return true;
                     },
