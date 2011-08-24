@@ -186,22 +186,5 @@ class ShowCaseSpec extends FrontlinesmsLegalGebSpec {
         then:
         contactLinkNotVisible().size() == 1
     }
-
-    def "should continue showing the search contact dialog box after pressing RETURN when searching for a contact"() {
-        setup:
-        new Case(caseId: "1112", description: "ertyui").save(flush: true)
-        new LegalContact(name: "fabio", primaryMobile: "22222").save(flush: true)
-        new LegalContact(name: "dev", primaryMobile: "55555").save(flush: true)
-
-        when:
-        to ShowCasePage, "1112"
-        and:
-        clickLinkContact.click()
-        and:
-        contactNameSearch.value("\r")
-
-        then:
-        linkContactDialog.displayed == true
-    }
 }
 
