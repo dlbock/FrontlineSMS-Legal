@@ -18,5 +18,6 @@ class NewCasePage extends Page {
         linkContactDialog { $("div", id: "link-contacts") }
         contactNameSearch { $("input", id: "contact-name-search") }
         contactLinkNotVisible { $("tr", class: "contactLink", filtermatch: "false").collect {module ContactRow, it} }
+        clickDialogCancelButton { $(".ui-button-text").value("Cancel") }
     }
 }

@@ -106,4 +106,46 @@ class CreateCaseSpec extends FrontlinesmsLegalGebSpec {
         then:
         linkContactDialog.displayed == true
     }
+
+    def "should clear the search input when the dialog box is open, closed, reopened"() {
+        setup:
+        new LegalContact(name: "fabio", primaryMobile: "22222").save(flush: true)
+        new LegalContact(name: "dev", primaryMobile: "55555").save(flush: true)
+
+        when:
+        to NewCasePage
+        and:
+        clickLinkContact.click()
+        and:
+        contactNameSearch.value("fab")
+        sleep(500)
+        and:
+        clickDialogCancelButton.click()
+        and:
+        clickLinkContact.click()
+
+        then:
+        contactNameSearch.value() == ""
+    }
+
+     def "should display all the contacts when the dialog box is reopened after a previous filter"() {
+        setup:
+        new LegalContact(name: "fabio", primaryMobile: "22222").save(flush: true)
+        new LegalContact(name: "dev", primaryMobile: "55555").save(flush: true)
+
+        when:
+        to NewCasePage
+        and:
+        clickLinkContact.click()
+        and:
+        contactNameSearch.value("fab")
+        sleep(500)
+        and:
+        clickDialogCancelButton.click()
+        and:
+        clickLinkContact.click()
+
+        then:
+        contactLinkNotVisible().size() == 0
+    }
 }

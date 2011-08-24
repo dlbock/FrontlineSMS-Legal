@@ -5,6 +5,10 @@ frontlinesms.linkContactToEvent = function() {
     $("#link-contacts").dialog({
         autoOpen: false,
         modal: true,
+        open: function() {
+            $("#contact-name-search").val("");
+            $(".contactLink").removeAttr("filtermatch", true).show();
+        },
         buttons: {
             "Cancel": function() {
                 $(this).dialog("close");
