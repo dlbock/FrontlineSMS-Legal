@@ -17,12 +17,14 @@ class UnlinkContactFromEventSpec extends FrontlinesmsLegalGebSpec {
         when:
         at SchedulePage
         testEvent.click()
+        sleep(500)
 
         then:
-        contactsLinkedToEvent.collect { it -> it.unlinkLink }.size() == 1
+        contactsLinkedToEvent.collect { it -> it.unlinkContact }.size() == 1
     }
 
     def 'should not unlink contact when NO is clicked on unlink contact confirmation dialog'() {
+
         given:
         createContact("76575658")
         createEventWithLink("test event")
@@ -31,26 +33,15 @@ class UnlinkContactFromEventSpec extends FrontlinesmsLegalGebSpec {
         when:
         at SchedulePage
         testEvent.click()
-        contactsLinkedToEvent[0].unlinkLink.click()
+        contactsLinkedToEvent[0].unlinkContact.click()
 
         and:
         contactUnlinkNo.click()
+        sleep(500)
 
         then:
         contactsLinkedToEvent.size() == 1
     }
-
-    /*def 'should delete case from database when YES is clicked'() {
-        given:
-        to SearchCasePage
-
-        when:
-        searchResults[0].deleteButton.click();
-        caseDeleteYes.click();
-
-        then:
-        searchResults().size() == 1
-    }*/
 
     def createContact(number) {
         to CreateLegalContactPage
