@@ -9,7 +9,7 @@
     <g:javascript library="caseUpdate"/>
     <g:javascript library="picnet.table.filter.min"/>
     <g:javascript library="contactSearch"/>
-    <g:javascript library="caseDeleteFromCaseDetails"/>
+    <g:javascript library="deleteFromDetailsPage"/>
     <g:javascript library="confirmationDialog"/>
 
     <script type="text/javascript">
@@ -115,7 +115,7 @@
     <p>Do you wish to discard these changes?</p>
 </div>
 
-<div id="caseDeleteDialog" title="Delete Case" style="display: none;">
+<div id="deleteDialog" title="Delete Case" style="display: none;">
     <p>Are you sure you want to delete this case?</p>
 </div>
 </body>

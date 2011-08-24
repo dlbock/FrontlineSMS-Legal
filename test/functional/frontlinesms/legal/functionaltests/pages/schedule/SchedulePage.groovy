@@ -51,11 +51,20 @@ class SchedulePage extends Page {
 class EventDialog extends Module {
     static base = { $(id: "view-event") }
     static content = {
+        
+        contactsLinkedToEvent {
+            $(".event-contact").collect {module ContactRow, it}
+        }
         eventTitle { $('#event-title').text()}
         eventDate { $('#event-date').text()}
         eventStartTime { $('#event-start-time').text()}
         eventEndTime { $('#event-end-time').text()}
         contactsLinkedToEvent { $(".event-contact").collect {module ContactRow, it} }
+        atDate{$('span.fc-header-title').text()}
+        contactUnlinkDialog { $("div", id: "contactUnlinkDialog") }
+        contactUnlinkYes { $("button", id: "confirm-yes")}
+        contactUnlinkNo { $("button", id: "confirm-no")}
+
     }
 }
 

@@ -14,7 +14,7 @@
 
   </head>
   <body>
-    <h1 class="form-header">Contact Details</h1>
+    <h1 class="form-header">Create Contact</h1>
 
     <form action="save" method="POST" id="contact-save-form">
         <label>Name</label>

@@ -21,7 +21,7 @@
 
 <body>
 
-<h1 class="form-header">Case Details</h1>
+<h1 class="form-header">Create Case</h1>
 <g:form action="save" method="post">
 
     <label>Case Number</label>

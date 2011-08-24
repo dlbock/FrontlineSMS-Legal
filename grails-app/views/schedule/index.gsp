@@ -10,6 +10,7 @@
     <g:javascript library="confirmationDialog"/>
     <g:javascript library="calendarInteractions"/>
     <g:javascript library="eventDetails"/>
+    <g:javascript library="unlinkContactFromEvent"/>
 
     <script type="text/javascript">
         $(function() {

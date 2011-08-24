@@ -136,4 +136,15 @@ class LegalContactController {
         def contactLinkedCases = pairUpCaseIdAndRelationship(tempContact.linkedCases) as JSON
         [allCases: Case.list(), contactToDisplay: LegalContact.findById(params.id), pastEvents: pastEventList, ongoingEvents: ongoingEventList, futureEvents: futureEventList, contactLinkedCases: contactLinkedCases.toString()]
     }
+
+    def delete = {
+        def deleteContact = LegalContact.findById(params.id)
+        if (deleteContact != null) {
+            deleteContact.delete();
+            flash.message = "Contact deleted."
+        }
+        else
+            flash.warning = "Contact not found."
+        redirect(action: 'search')
+    }
 }

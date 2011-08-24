@@ -10,6 +10,9 @@ class SearchLegalContactPage extends Page {
       searchResults {
             $("tbody tr").collect {module LegalContactRow, it}
         }
+        deleteDialog { $("div", id: "deleteDialog") }
+        deleteYes { $("button", id: "confirm-yes")}
+        deleteNo { $("button", id: "confirm-no")}
     }
 
 
@@ -22,6 +25,7 @@ class LegalContactRow extends Module {
         cell { i -> $("td", i) }
         name { cell(0).text() }
         primaryMobile { cell(1).text() }
+        deleteButton { $("button", class: "deleteButtons")}
     }
 
 }

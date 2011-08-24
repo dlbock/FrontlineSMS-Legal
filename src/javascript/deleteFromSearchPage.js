@@ -6,6 +6,6 @@ frontlinesms.initializeCaseDeletion = function() {
         $(button).parent("form").submit();
     }
 
-    frontlinesms.attachActionWithConfirmationToButton(".deleteButtons", "#caseDeleteDialog", deleteCaseAction)
+    frontlinesms.attachActionWithConfirmationToButton(".deleteButtons", "#deleteDialog", deleteCaseAction)
 }
 

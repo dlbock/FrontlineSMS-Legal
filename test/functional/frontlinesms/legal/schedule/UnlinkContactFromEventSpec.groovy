@@ -28,6 +28,7 @@ class UnlinkContactFromEventSpec extends FrontlinesmsLegalGebSpec {
 
         given:
         createContact("7657558")
+
         createEventWithLink("test event")
         to SchedulePage, "index"
 

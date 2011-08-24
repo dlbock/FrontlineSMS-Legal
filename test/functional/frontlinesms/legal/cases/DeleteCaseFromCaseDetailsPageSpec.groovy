@@ -28,7 +28,7 @@ class DeleteCaseFromCaseDetailsPageSpec extends FrontlinesmsLegalGebSpec {
         deleteButton.click()
 
         and:
-        deleteConfirmationDialog.noButton.click();
+        deleteNo.click()
 
         then:
         at(ShowCasePage)
@@ -40,8 +40,8 @@ class DeleteCaseFromCaseDetailsPageSpec extends FrontlinesmsLegalGebSpec {
 
         when:
         deleteButton.click();
-
-        deleteConfirmationDialog.confirm();
+        deleteYes.click();
+        waitFor { !deleteDialog.isVisible() }
 
         then:
         assert at(SearchCasePage)

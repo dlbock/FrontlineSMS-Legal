@@ -19,7 +19,9 @@ class ShowCasePage extends Page {
         statusMessage { $("div", id: "status").text() }
         errorMessage { $("div", id: "errorMessage").text() }
         linkedContactsRow {$(name:"contactRow", id: "contact-row")}
-        deleteConfirmationDialog(required: false) { module ConfirmationDialog, messageId: "caseDeleteDialog" }
+        deleteDialog { $("div", id: "deleteDialog") }
+        deleteYes { $("button", id: "confirm-yes")}
+        deleteNo { $("button", id: "confirm-no")}
     }
 }
 

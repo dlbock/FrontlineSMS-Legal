@@ -7,7 +7,7 @@
     <g:javascript library="picnet.table.filter.min"/>
     <g:javascript library="caseSearch"/>
     <g:javascript library="confirmationDialog"/>
-    <g:javascript library="caseDeleteFromSearch"/>
+    <g:javascript library="deleteFromSearchPage"/>
 
     <script type="text/javascript">
         $(function() {
@@ -26,14 +26,6 @@
 </g:form>
 
 <g:if test="${foundCase}">
-    <table class="search-results" id="SearchResults">
-        <thead>
-        <tr>
-            <th>Case ID</th>
-            <th>Status</th>
-        </tr>
-        </thead>
-        <tbody>
     <table class="search-results" id="SearchResults">
         <thead>
         <tr>
@@ -63,7 +55,7 @@
     </table>
 </g:if>
 
-<div id="caseDeleteDialog" title="Delete Case" style="display: none;">
+<div id="deleteDialog" title="Delete Case" style="display: none;">
     <p>Are you sure you want to delete this case?</p>
 </div>
 
