@@ -2,6 +2,7 @@ package frontlinesms.legal.functionaltests.pages.cases
 
 import geb.Page
 import geb.Module
+import frontlinesms.legal.functionaltests.pages.ConfirmationDialog
 
 class SearchCasePage extends Page {
     static url = "case/search"

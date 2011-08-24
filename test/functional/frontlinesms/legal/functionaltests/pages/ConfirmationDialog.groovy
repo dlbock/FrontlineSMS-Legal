@@ -8,7 +8,7 @@ class ConfirmationDialog extends Module {
     static base = { $(class: "ui-dialog") }
 
     static content = {
-        message(required: false) { $("div", id: "caseDeleteDialog") }
+        message { $("div", id: "caseDeleteDialog") }
         yesButton { $("button", id: "confirm-yes") }
         noButton { $("button", id: "confirm-no") }
     }
