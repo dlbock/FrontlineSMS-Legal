@@ -7,7 +7,9 @@ import frontlinesms.legal.LegalContact
 class ScheduleController {
 
     def index = {
-    [hh:"2011, 5"]}
+    [hh:"2011, 5"]
+    [contactList: LegalContact.list()]
+    }
 
     def fetchEvents = {
         def eventsList = Event.list()

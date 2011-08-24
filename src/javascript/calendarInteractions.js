@@ -140,4 +140,6 @@ frontlinesms.calendarInteractions = function() {
         });
 
     });
+
+    frontlinesms.attachActionWithLinkContactButton('#link-contact-to-existing-event-button', '#link-contact-to-existing-event-dialog');
 }

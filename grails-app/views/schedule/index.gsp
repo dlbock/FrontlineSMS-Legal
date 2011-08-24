@@ -17,6 +17,8 @@
             $('#view-event').hide();
             frontlinesms.calendarInteractions();
             frontlinesms.eventDetails();
+            frontlinesms.eventCancelConfirmAction();
+            frontlinesms.attachActionWithLinkContactButton();
             <g:if test="${year}">
             <g:if test="${month}">
             $('#schedule').fullCalendar('gotoDate', ${year}, ${month});
@@ -49,21 +51,61 @@
         <tbody>
         </tbody>
     </table>
+    <div align="left"><input type="button" id="link-contact-to-existing-event-button" value="Link Contact"/></div>
     <div align="right">
         <input type="button" id="update-event" value="Update"/>
         <input type="button" id="delete-event" value="Delete"/>
     </div>
     <g:hiddenField name="eventId" id="event-id"></g:hiddenField>
-
 </div>
 
 <div id="event-cancel-dialog" title="Cancel event?" style="display: none;">
     <p>Are you sure you want to delete this event? Yes or No.</p>
 </div>
 
+
 <div id="contactUnlinkDialog" title="Unlink Contact from Event" style="display: none;">
     <p>Are you sure you want to unlink this contact from the event?</p>
 </div>
+
+
+<div id="link-contact-to-existing-event-dialog" title="Link Contact" style="display: none;">
+     <g:form action="">
+         <p>Enter the name or the mobile number to search for Contacts</p>
+        <g:textField name="contactNameSearch" id="contact-name-search"/>
+           <div id="link-contacts-inner-table-div" style="height:200px;overflow: scroll; width:250px">
+           <table id="contactsTable">
+                           <thead>
+                        <tr>
+                        <td>Name</td>
+                        <td>Number</td>
+                        </tr>
+                         </thead>
+                            <tbody>
+                            <g:each in="${contactList}" var="contact">
+                                <tr class="contactLink" id="${contact.id}">
+
+                                    <td class="contact-name">
+                                        <%=contact.name%>
+                                    </td>
+
+                                    <td class="contact-number">
+                                        <%=contact.primaryMobile%>
+                                    </td>
+                                    <td class="link"><a href="#">Link Contact</a></td>
+
+                                </tr>
+                            </g:each>
+                            </tbody>
+                        </table>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+    </g:form>
+ </div>
 
 </body>
 </html>

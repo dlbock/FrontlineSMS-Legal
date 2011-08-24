@@ -38,6 +38,10 @@ class EventDialog extends Module {
         contactsLinkedToEvent {
             $(".event-contact").collect {module ContactRow, it}
         }
+        linkContactToExistingEvent {
+            $('#link-contact-to-existing-event-button').click()
+            true
+        }
         eventTitle { $('#event-title').text()}
         eventDate { $('#event-date').text()}
         eventStartTime { $('#event-start-time').text()}
@@ -57,5 +61,18 @@ class ContactRow extends Module {
         name { cell(0).text() }
         primaryMobileNumber { cell(1).text() }
         unlinkContact { $("a", class: "unlink-contact")}
+        linkContactToExistingEventDialog{$("div", id: "link-contact-to-existing-event-dialog")}
+        existingContactList {
+            $("#contactsTable tbody tr").collect {module LinkContactRow, it}
+        }
+    }
+}
+
+class LinkContactRow extends Module {
+    static content = {
+        cell { i -> $("td", i) }
+        contactName { cell(0).text() }
+        contactNumber { cell(1).text() }
+        linkContact {$("a", class:"link")}
     }
 }

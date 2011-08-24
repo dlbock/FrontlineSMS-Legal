@@ -27,6 +27,7 @@ describe('show event details',function(){
                         "<input type='text' name=\"eventEndTime\" id=\"event-end-time\" value=''/><br/>" +
                         "<input type=\"button\" id=\"update-event\" value=\"Update\"/>" +
                         "<input type=\"button\" id=\"delete-event\" value=\"Delete\"/>" +
+                        "<input type=\"button\" id=\"link-contact-to-existing-event-button\" value=\"Link Contact\"/>" +
                         "<label name=\"eventId\" id=\"event-id\"></label>" +
                         "</div>";
         $(tempHTML).appendTo("#fixtures");
@@ -52,7 +53,7 @@ describe('show event details',function(){
         expect($('#event-end-time').val()).toEqual("03:50PM");
     });
 
-     afterEach(function(){
-               $("#view-event, #test-dialog-button").remove();
+    afterEach(function(){
+        $("#view-event, #test-dialog-button").remove();
     });
 });

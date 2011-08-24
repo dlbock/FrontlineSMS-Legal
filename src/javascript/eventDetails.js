@@ -9,3 +9,19 @@ frontlinesms.eventDetails = function() {
             });
 };
 
+frontlinesms.attachActionWithLinkContactButton = function(buttonSelector, dialogSelector) {
+
+    $(buttonSelector).click(function() {
+        frontlinesms.displayPopup(dialogSelector);
+        return false;
+    });
+};
+
+frontlinesms.displayPopup = function(dialogSelector) {
+
+    $(dialogSelector).dialog({
+
+    });
+};
+
+
