@@ -13,9 +13,7 @@ class SearchCasePage extends Page {
         searchResults {
             $("tbody tr").collect {module CaseRow, it}
         }
-        caseDeleteDialog { $("div", id: "caseDeleteDialog") }
-        caseDeleteYes { $("button", id: "confirm-yes")}
-        caseDeleteNo { $("button", id: "confirm-no")}
+        deleteConfirmationDialog(required: false) { module ConfirmationDialog, messageId: "caseDeleteDialog" }
     }
 }
 

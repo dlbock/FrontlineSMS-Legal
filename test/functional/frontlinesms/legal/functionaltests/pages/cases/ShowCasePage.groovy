@@ -2,6 +2,7 @@ package frontlinesms.legal.functionaltests.pages.cases
 
 import geb.Page
 import geb.Module
+import frontlinesms.legal.functionaltests.pages.ConfirmationDialog
 
 class ShowCasePage extends Page {
     static at = { $("title").text() == "ShowCasePage"}
@@ -18,12 +19,10 @@ class ShowCasePage extends Page {
         statusMessage { $("div", id: "status").text() }
         errorMessage { $("div", id: "errorMessage").text() }
         linkedContactsRow {$(name:"contactRow", id: "contact-row")}
-        caseDeleteDialog { $("div", id: "caseDeleteDialog") }
-        caseDeleteYes { $("button", id: "confirm-yes")}
-        caseDeleteNo { $("button", id: "confirm-no")}
+        deleteConfirmationDialog(required: false) { module ConfirmationDialog, messageId: "caseDeleteDialog" }
     }
-
 }
+
 class ContactRow extends Module {
     static content = {
         cell { i -> $("td", i) }

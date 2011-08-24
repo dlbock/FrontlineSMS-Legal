@@ -37,13 +37,12 @@ class UnlinkContactFromEventSpec extends FrontlinesmsLegalGebSpec {
 
         and:
         contactUnlinkNo.click()
-        sleep(500)
 
         then:
         contactsLinkedToEvent.size() == 1
     }
 
-    def createContact(number) {
+    private def createContact(number) {
         to CreateLegalContactPage
         name = "Fred"
         primaryMobile = number
@@ -51,7 +50,7 @@ class UnlinkContactFromEventSpec extends FrontlinesmsLegalGebSpec {
         save.click()
     }
 
-    def createEventWithLink(title) {
+    private def createEventWithLink(title) {
         to NewEventPage
         eventTitle = title
         dateFieldSelected = new Date().format("MMMM d, yyyy")
