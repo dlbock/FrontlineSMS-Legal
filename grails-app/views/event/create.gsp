@@ -58,8 +58,8 @@
 </form>
 
 <div id="link-contacts" title="Link Contacts">
+    <g:textField name="contactNameSearch" id="contact-name-search"/>
     <g:form action="">
-        <g:textField name="contactNameSearch" id="contact-name-search"/>
         <table id="link-contacts-outer-table">
             <thead>
             <tr><td>Name</td></tr>
