@@ -5,7 +5,7 @@ frontlinesms.eventDetails = function() {
     $("#view-event").dialog({
                 autoOpen: false,
                 modal: true
+        
             });
-
 };
 

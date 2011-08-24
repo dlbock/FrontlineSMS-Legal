@@ -41,8 +41,7 @@ frontlinesms.constructContactsTable = function(data) {
                 '<td>' + data[i]["primaryMobile"] + '</td>' +
 
                 '<td >' +
-                //'<a href="" class="unlink-contact-link">Unlink</a>' +
-                '<button class="unlink-contact-link">Unlink</button>' +
+                '<a href="" class="unlink-contact-link">Unlink</a>' +
                 '</td>'
             + '</tr>';
 
@@ -50,6 +49,7 @@ frontlinesms.constructContactsTable = function(data) {
 
         $('#event-contacts-table tbody').append(newRow);
     }
+    frontlinesms.attachActionWithConfirmationToButton(".unlink-contact-link", "#contactUnlinkDialog", function(){ alert("Finally reached!!");})
 };
 
 frontlinesms.getFormattedTimeString = function(hr, min) {

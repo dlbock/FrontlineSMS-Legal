@@ -17,7 +17,6 @@
             $('#view-event').hide();
             frontlinesms.calendarInteractions();
             frontlinesms.eventDetails();
-           frontlinesms.initializeUnlinkContactFromEvent();
             <g:if test="${year}">
             <g:if test="${month}">
             $('#schedule').fullCalendar('gotoDate', ${year}, ${month});

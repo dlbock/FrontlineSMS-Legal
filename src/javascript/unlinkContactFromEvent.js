@@ -6,7 +6,5 @@ frontlinesms.initializeUnlinkContactFromEvent = function() {
         $(button).parent("form").submit();
     }*/
 
-
-
-    frontlinesms.attachActionWithConfirmationToButton(".unlink-contact-link", "#contactUnlinkDialog", function(){ alert("Finally reached!!");})
+    //frontlinesms.attachActionWithConfirmationToButton(".unlink-contact-link", "#contactUnlinkDialog", function(){ alert("Finally reached!!");})
 }

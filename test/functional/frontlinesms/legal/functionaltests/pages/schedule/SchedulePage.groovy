@@ -60,6 +60,6 @@ class ContactRow extends Module {
         cell { i -> $("td", i) }
         name { cell(0).text() }
         primaryMobileNumber { cell(1).text() }
-        unlinkLink { $("button", class: "unlink-contact-link")}
+        unlinkLink { $("a", class: "unlink-contact-link")}
     }
 }
