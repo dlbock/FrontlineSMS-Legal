@@ -25,7 +25,7 @@ class UnlinkContactFromEventSpec extends FrontlinesmsLegalGebSpec {
     def 'should not unlink contact when NO is clicked on unlink contact confirmation dialog'() {
 
         given:
-        createContact("76575658")
+        createContact("7657558")
         createEventWithLink("test event")
         to SchedulePage, "index"
 
