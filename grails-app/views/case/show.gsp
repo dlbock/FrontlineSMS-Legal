@@ -60,7 +60,7 @@
         </g:if>
     </table>
 
-    <div class="form-submit-area">
+    <div id="show-case-update-form" class="form-submit-area">
         <g:actionSubmit id="case-update" value="Update" disabled="disabled"/>
     </div>
 </g:form>

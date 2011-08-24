@@ -18,7 +18,14 @@ form
     input
       :margin 0
 
+  div#show-case-update-form
+    :display inline
 
+form#save-case-form
+  :display inline
+
+form.form-delete
+  :display inline
 
 .form-header
   :margin 0 0 15px 20px
@@ -40,8 +47,26 @@ table
   td
     :padding 3px
 
+table td.table-cases-delete-row
+  :border none
+
+table td.table-cases-delete-row form
+  :margin-left 5px
+
 table.search-results
   :min-width 305px
 
 tr.contactLink, tr.caseLink
   :cursor pointer
+
+.action-button
+  :margin-right 30px
+  :width 50px
+  :height 20px
+
+.link-button
+  :margin-right 30px
+  :width 90px
+  :height 20px
+
+
