@@ -17,10 +17,9 @@ class UnlinkContactFromEventSpec extends FrontlinesmsLegalGebSpec {
         when:
         at SchedulePage
         testEvent.click()
-        sleep(500)
 
         then:
-        contactsLinkedToEvent.collect { it -> it.unlinkContact }.size() == 1
+        eventDialog.contactsLinkedToEvent.collect { it -> it.unlinkContact }.size() == 1
     }
 
     def 'should not unlink contact when NO is clicked on unlink contact confirmation dialog'() {
@@ -33,13 +32,13 @@ class UnlinkContactFromEventSpec extends FrontlinesmsLegalGebSpec {
         when:
         at SchedulePage
         testEvent.click()
-        contactsLinkedToEvent[0].unlinkContact.click()
+        eventDialog.contactsLinkedToEvent[0].unlinkContact.click()
 
         and:
-        contactUnlinkNo.click()
+        unlinkConfirmationDialog.noButton.click()
 
         then:
-        contactsLinkedToEvent.size() == 1
+        eventDialog.contactsLinkedToEvent.size() == 1
     }
 
     private def createContact(number) {
@@ -60,6 +59,4 @@ class UnlinkContactFromEventSpec extends FrontlinesmsLegalGebSpec {
         contactsToLink.first().click()
         save.click()
     }
-
-
 }

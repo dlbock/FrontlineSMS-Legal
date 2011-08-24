@@ -1,7 +1,8 @@
 package frontlinesms.legal.functionaltests.pages.schedule
 
-import geb.Page
 import geb.Module
+import geb.Page
+import frontlinesms.legal.functionaltests.pages.ConfirmationDialog
 
 class SchedulePage extends Page {
     static at = { $("title").text() == "Schedule" }
@@ -36,22 +37,25 @@ class SchedulePage extends Page {
         }
         deleteEvent {
             $('#delete-event').click()
-            $('#cancel-confirm-yes').click()
+            unlinkConfirmationDialog.confirm()
             true
         }
-        
-        contactsLinkedToEvent {
-            $(".event-contact").collect {module ContactRow, it}
-        }
+
+        atDate {$('span.fc-header-title').text()}
+
+        eventDialog(wait: true) { module EventDialog }
+        unlinkConfirmationDialog(required: false) { module ConfirmationDialog, messageId: "contactUnlinkDialog" }
+    }
+}
+
+class EventDialog extends Module {
+    static base = { $(id: "view-event") }
+    static content = {
         eventTitle { $('#event-title').text()}
         eventDate { $('#event-date').text()}
         eventStartTime { $('#event-start-time').text()}
         eventEndTime { $('#event-end-time').text()}
-        atDate{$('span.fc-header-title').text()}
-        contactUnlinkDialog { $("div", id: "contactUnlinkDialog") }
-        contactUnlinkYes { $("button", id: "confirm-yes")}
-        contactUnlinkNo { $("button", id: "confirm-no")}
-
+        contactsLinkedToEvent { $(".event-contact").collect {module ContactRow, it} }
     }
 }
 
