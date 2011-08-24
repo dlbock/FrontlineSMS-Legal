@@ -12,23 +12,26 @@ class ShowCasePage extends Page {
         currentId {$("input", id: "current-Id").value()}
         description { $("textarea", id: "case-description").value()}
         updateCaseButton {$("input", id: "case-update")}
-        deleteButton{$("button", id:"delete-button")}
+        deleteButton {$("button", id: "delete-button")}
         caseActive { $("input", id: "case-status") }
         clickLinkContact {$("#link-contact-button")}
         contactsTable {$("#link-contacts-inner-table-div #contactsTable tbody tr").collect {module ContactRow, it} }
         statusMessage { $("div", id: "status").text() }
         errorMessage { $("div", id: "errorMessage").text() }
-        linkedContactsRow {$(name:"contactRow", id: "contact-row")}
+        linkedContactsRow {$(name: "contactRow", id: "contact-row")}
         deleteDialog { $("div", id: "deleteDialog") }
         deleteYes { $("button", id: "confirm-yes")}
         deleteNo { $("button", id: "confirm-no")}
+        linkContactDialog { $("div", id: "link-contacts") }
+        contactNameSearch { $("input", id: "contact-name-search") }
+        contactLinkNotVisible { $("tr", class: "contactLink", filtermatch: "false").collect {module ContactRow, it} }
     }
 }
 
 class ContactRow extends Module {
     static content = {
         cell { i -> $("td", i) }
-        name { cell (0).text() }
+        name { cell(0).text() }
         primaryMobile { cell(1).text() }
     }
 }
