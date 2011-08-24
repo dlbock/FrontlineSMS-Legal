@@ -4,9 +4,10 @@ import frontlinesms.legal.functionaltests.FrontlinesmsLegalGebSpec
 import frontlinesms.legal.functionaltests.pages.contact.CreateLegalContactPage
 import frontlinesms.legal.functionaltests.pages.events.NewEventPage
 import frontlinesms.legal.functionaltests.pages.schedule.SchedulePage
+import spock.lang.Ignore
 
 class UnlinkContactFromEventSpec extends FrontlinesmsLegalGebSpec {
-
+    @Ignore
     def 'should display unlink button next to each contact on events detail pop-up'(){
 
        given:

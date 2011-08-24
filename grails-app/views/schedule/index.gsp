@@ -57,7 +57,7 @@
     <p>Are you sure you want to delete this event? Yes or No.</p>
 </div>
 
-<div id="contactUnlinkDialog" title="Unlink Contact fron Event" style="display: none;">
+<div id="contactUnlinkDialog" title="Unlink Contact from Event" style="display: none;">
     <p>Are you sure you want to unlink this contact from the event?</p>
 </div>
 

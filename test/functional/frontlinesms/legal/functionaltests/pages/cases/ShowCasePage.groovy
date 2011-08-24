@@ -26,7 +26,7 @@ class ShowCasePage extends Page {
 class ContactRow extends Module {
     static content = {
         cell { i -> $("td", i) }
-        name { cell(0).text() }
+        name { cell (0).text() }
         primaryMobile { cell(1).text() }
     }
 }

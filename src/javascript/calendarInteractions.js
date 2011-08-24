@@ -45,8 +45,6 @@ frontlinesms.constructContactsTable = function(data) {
                 '</td>'
             + '</tr>';
 
-
-
         $('#event-contacts-table tbody').append(newRow);
     }
     frontlinesms.attachActionWithConfirmationToButton(".unlink-contact", "#contactUnlinkDialog", function(){})
