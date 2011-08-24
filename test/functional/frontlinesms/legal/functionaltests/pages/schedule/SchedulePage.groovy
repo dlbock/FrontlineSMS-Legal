@@ -53,7 +53,6 @@ class EventDialog extends Module {
         contactUnlinkDialog { $("div", id: "contactUnlinkDialog") }
         contactUnlinkYes { $("button", id: "confirm-yes")}
         contactUnlinkNo { $("button", id: "confirm-no")}
-
     }
 }
 

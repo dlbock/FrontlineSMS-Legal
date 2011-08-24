@@ -3,9 +3,7 @@ package frontlinesms.legal.cases
 import frontlinesms.legal.Case
 import frontlinesms.legal.functionaltests.FrontlinesmsLegalGebSpec
 import frontlinesms.legal.functionaltests.pages.cases.ShowCasePage
-import frontlinesms2.Contact
 import frontlinesms.legal.LegalContact
-import frontlinesms.legal.CaseContacts
 
 class ShowCaseSpec extends FrontlinesmsLegalGebSpec {
 
@@ -186,5 +184,48 @@ class ShowCaseSpec extends FrontlinesmsLegalGebSpec {
         then:
         contactLinkNotVisible().size() == 1
     }
-}
 
+    def "should clear the search input when the dialog box is open, closed, reopened"() {
+        setup:
+        new Case(caseId: "1112", description: "ertyui").save(flush: true)
+        new LegalContact(name: "fabio", primaryMobile: "22222").save(flush: true)
+        new LegalContact(name: "dev", primaryMobile: "55555").save(flush: true)
+
+        when:
+        to ShowCasePage, "1112"
+        and:
+        clickLinkContact.click()
+        and:
+        contactNameSearch.value("fab")
+        sleep(500)
+        and:
+        clickDialogCancelButton.click()
+        and:
+        clickLinkContact.click()
+
+        then:
+        contactNameSearch.value() == ""
+    }
+
+     def "should display all the contacts when the dialog box is reopened after a previous filter"() {
+        setup:
+        new Case(caseId: "1112", description: "ertyui").save(flush: true)
+        new LegalContact(name: "fabio", primaryMobile: "22222").save(flush: true)
+        new LegalContact(name: "dev", primaryMobile: "55555").save(flush: true)
+
+        when:
+        to ShowCasePage, "1112"
+        and:
+        clickLinkContact.click()
+        and:
+        contactNameSearch.value("fab")
+        sleep(500)
+        and:
+        clickDialogCancelButton.click()
+        and:
+        clickLinkContact.click()
+
+        then:
+        contactLinkNotVisible().size() == 0
+    }
+}

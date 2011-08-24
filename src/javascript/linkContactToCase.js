@@ -8,6 +8,10 @@ frontlinesms.linkContactToCase = function() {
     $("#link-contacts").dialog({
         autoOpen: false,
         modal: true,
+        beforeClose: function() {
+            $("#contact-name-search").val("");
+            $(".contactLink").removeAttr("filtermatch", true).show();
+        },
         buttons: {
             "Cancel": function() {
                 $(this).dialog("close");
