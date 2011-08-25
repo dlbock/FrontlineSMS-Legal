@@ -1,31 +1,30 @@
 describe("Validate forms", function() {
     beforeEach(function() {
         var tempHTML =
-            '<input id="contact-primary-mobile-valid" type="text" value="12-34+34#09*1"/>' +
-                '<input id="contact-primary-mobile-too-long" type="text" value="1222222222222222-34+34#09*1"/>' +
-                '<input id="contact-primary-mobile-fifteen-characters" type="text" value="123456789012345"/>'
+            '<input id="contact-primary-mobile-legal-valid" type="text" value="123456789012345"/>' +
+                '<input id="contact-primary-mobile-legal-characters" type="text"/>';
 
-                $(tempHTML).appendTo("#fixtures");
+        $(tempHTML).appendTo("#fixtures");
         frontlinesms.validateContactNumber();
     });
 
-    it("has a contact number text field which is enabled when it has less than 15 characters", function() {
-        var contactNumberLength = $("#contact-primary-mobile-valid").val().length;
-        expect(validateContactNumberLength(contactNumberLength)).toBeTruthy();
+    it("has a contact number field whose maximum acceptable length is 15", function(){
+
     });
 
-    it("has a contact number text field which is disabled when it has more than 15 characters", function() {
-        var contactNumberLength = $("#contact-primary-mobile-too-long").val().length;
-        expect(validateContactNumberLength(contactNumberLength)).toBeFalsy();
-    });
 
-    it("has a contact number text field which is disabled when it has exactly 15 characters", function() {
-        var contactNumberLength = $("#contact-primary-mobile-fifteen-characters").val().length;
-        expect(validateContactNumberLength(contactNumberLength)).toBeFalsy();
-    });
+//    it("has a legal character input", function() {
+//        var element = $("#contact-primary-mobile-legal-characters");
+//
+//        var action = jQuery.Event("keypress");
+//        action.which = 48;
+//        element.trigger(action);
+//
+//        expect(element.val()).toEqual("0");
+//    });
 
     afterEach(function() {
-        $("#contact-primary-mobile-valid, #contact-primary-mobile-too-long, #contact-primary-mobile-fifteen-characters").remove();
+        $("#contact-primary-mobile-legal-characters").remove();
     });
 
 });

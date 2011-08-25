@@ -4,11 +4,13 @@
       <meta name="layout" content="main">
       <link rel="stylesheet" href="${resource(dir: 'css', file: 'forms.css')}"/>
       <g:javascript library="contactCreate"/>
+      <g:javascript library="formValidation"/>
 
       <title>Create New Contact</title>
       <script type="text/javascript">
           $(function() {
               frontlinesms.createNewContactOnLoad();
+              frontlinesms.validateContactNumber();
           })
       </script>
 
@@ -20,7 +22,7 @@
         <label>Name</label>
         <g:textField name="name" id="contact-name" value="${params.name}"/>
         <label>Number</label>
-        <g:textField name="primaryMobile" id="contact-primary-mobile" value="${params.primaryMobile}"/>
+        <g:textField name="primaryMobile" id="contact-primary-mobile" value="${params.primaryMobile}" maxlength="15"/>
         <label>Notes</label>
         <g:textArea name="notes" id="contact-notes" value="${params.notes}" cols="100" rows="10"/>
 

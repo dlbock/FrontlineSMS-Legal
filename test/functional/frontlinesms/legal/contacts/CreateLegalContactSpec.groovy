@@ -43,5 +43,17 @@ class CreateLegalContactSpec extends FrontlinesmsLegalGebSpec {
         assert at(HomePage)
     }
 
+    def 'should not accept more than 15 characters in the contact number field'() {
+        given:
+        to CreateLegalContactPage
+
+        when:
+        primaryMobile = "123456789012345"
+
+        then:
+        assert at(CreateLegalContactPage)
+        primaryMobile == "123456789012345"
+    }
+
 
 }

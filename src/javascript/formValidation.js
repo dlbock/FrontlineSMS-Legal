@@ -1,24 +1,19 @@
 var frontlinesms = this.frontlinesms || {};
 
-function validateContactNumberLength(contactNumberLength) {
-    if (contactNumberLength >= 15) {
-        $("#contact-primary-mobile").attr("disabled", "disabled");
-        return false;
-    }
-    else {
-        $("#contact-primary-mobile").removeAttr("disabled");
-        return true;
-    }
-}
-
-//function validateContactNumberCharacter(contactNumberCharacter) {
-//    var
-//    if(contactNumberCharacter)
-//}
-
 frontlinesms.validateContactNumber = function() {
-//    $("#contact-primary-mobile").keypress() = function(){
-//        var contactNumberLength= $("#contact-primary-mobile").val().length;
-//        validateContactNumberLength(contactNumberLength);
-//    }
+//    console.log('we\'re in validatecontactnumer');
+//    var validCharacters = ['0','1','2','3','4','5','6','7','8','9','#','+','-','*'];
+//    $("#contact-primary-mobile").keypress(function(key) {
+//            console.log("a key has been pressed");
+//            var contactNumberLength = $(this).val().length;
+//            var i;
+//            for (i = 0; i < 14; i++) {
+//                if (key.which == validCharacters[i]) {
+//                    $("#contact-primary-mobile").val().append(key);
+//                    break;
+//                }
+//
+//            }
+//        }
+//    )
 };
