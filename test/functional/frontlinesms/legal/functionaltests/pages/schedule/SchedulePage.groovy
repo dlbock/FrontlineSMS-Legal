@@ -23,6 +23,10 @@ class SchedulePage extends Page {
             unlinkConfirmationDialog.confirm()
             true
         }
+        linkContactToExistingEvent {
+            $('#link-contact-to-existing-event-button').click()
+            true
+        }
 
         atDate {$('span.fc-header-title').text()}
 
@@ -37,10 +41,6 @@ class EventDialog extends Module {
         
         contactsLinkedToEvent {
             $(".event-contact").collect {module ContactRow, it}
-        }
-        linkContactToExistingEvent {
-            $('#link-contact-to-existing-event-button').click()
-            true
         }
         eventTitle { $('#event-title').text()}
         eventDate { $('#event-date').text()}
