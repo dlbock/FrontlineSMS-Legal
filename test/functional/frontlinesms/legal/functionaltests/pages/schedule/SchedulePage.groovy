@@ -23,9 +23,15 @@ class SchedulePage extends Page {
             unlinkConfirmationDialog.confirm()
             true
         }
+        linkContactToExistingEvent {
+            $('#link-contact-to-existing-event-button').click()
+            true
+        }
 
         atDate {$('span.fc-header-title').text()}
-
+        existingContactList {
+            $("#contactsTable tbody tr").collect {module LinkContactRow, it}
+        }
         eventDialog(wait: true) { module EventDialog }
         unlinkConfirmationDialog(required: false) { module ConfirmationDialog, messageId: "contactUnlinkDialog", buttonIdPrefix: "cancel-" }
     }
@@ -47,7 +53,6 @@ class EventDialog extends Module {
         contactUnlinkDialog { $("div", id: "contactUnlinkDialog") }
         contactUnlinkYes { $("button", id: "confirm-yes")}
         contactUnlinkNo { $("button", id: "confirm-no")}
-
     }
 }
 
@@ -57,5 +62,15 @@ class ContactRow extends Module {
         name { cell(0).text() }
         primaryMobileNumber { cell(1).text() }
         unlinkContact { $("a", class: "unlink-contact")}
+        linkContactToExistingEventDialog{$("div", id: "link-contact-to-existing-event-dialog")}
+    }
+}
+
+class LinkContactRow extends Module {
+    static content = {
+        cell { i -> $("td", i) }
+        contactName { cell(0).text() }
+        contactNumber { cell(1).text() }
+        linkContact {$("a", class:"link")}
     }
 }

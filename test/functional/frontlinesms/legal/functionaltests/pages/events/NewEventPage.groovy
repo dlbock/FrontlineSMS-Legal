@@ -1,6 +1,7 @@
 package frontlinesms.legal.functionaltests.pages.events
 
 import geb.Page
+import geb.Module
 
 class NewEventPage extends Page {
     static at = { $("title").text() == "Create New Event" }
@@ -20,7 +21,7 @@ class NewEventPage extends Page {
         cancelNo { $("button", id: "cancel-confirm-no")}
         startTimeField { $("input", id: "event-start-time")}
         endTimeField { $("input", id: "event-end-time")}
-        linkContactButton { $("button", id: "link-contact-button")}
+        clickLinkContact {$("#link-contact-button")}
         contactsToLink {
             try {
                 $("tr[class='contactLink']")
@@ -29,6 +30,18 @@ class NewEventPage extends Page {
                 null
             }
         }
+        linkContactDialog { $("div", id: "link-contacts") }
+        contactNameSearch { $("input", id: "contact-name-search") }
+        contactLinkNotVisible { $("tr", class: "contactLink", filtermatch: "false").collect {module ContactRow, it} }
+        clickDialogCancelButton { $(".ui-button-text").value("Cancel") }
 
+    }
+}
+
+class ContactRow extends Module {
+    static content = {
+        cell { i -> $("td", i) }
+        name { cell(0).text() }
+        primaryMobile { cell(1).text() }
     }
 }

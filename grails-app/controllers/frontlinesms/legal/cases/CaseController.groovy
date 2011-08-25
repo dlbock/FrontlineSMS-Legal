@@ -9,7 +9,6 @@ class CaseController {
 
     def create = {
         [contactList: LegalContact.list()]
-
     }
 
     def save = {

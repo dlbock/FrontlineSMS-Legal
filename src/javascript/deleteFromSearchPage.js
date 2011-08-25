@@ -9,3 +9,5 @@ frontlinesms.initializeCaseDeletion = function() {
     frontlinesms.attachActionWithConfirmationToButton(".deleteButtons", "#deleteDialog", deleteCaseAction)
 }
 
+
+

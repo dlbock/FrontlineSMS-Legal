@@ -1,6 +1,7 @@
 describe('linkContactToEvent', function () {
     beforeEach(function() {
         var tempHTML =
+            '<div id="text-div">' +
             '<input type="hidden" id="event-linked-contacts" value=""/>' +
             '<div id="link-contacts" title="Link Contacts">' +
 
@@ -23,7 +24,8 @@ describe('linkContactToEvent', function () {
                 '<th style="display: none;"></th>' +
                 '</tr> </table>' +
 
-                '<button id="link-contact-button">Link contacts</button>';
+                '<button id="link-contact-button">Link contacts</button>' +
+                '</div>';
 
         $(tempHTML).appendTo("#fixtures");
         frontlinesms.linkContactToEvent();
@@ -36,7 +38,7 @@ describe('linkContactToEvent', function () {
         var secondRowSelector = "table#contacts tr:nth-child(2)";
         $(secondRowSelector + " td.unlink-contact-button").click();
         expect($(secondRowSelector + ":contains('fabio')").size()).toEqual(0);
-    })
+    });
 
     it('when remove button is clicked the appropriate contact id is removed from hidden form field', function(){
         $("#link-contact-button").click();
@@ -46,7 +48,7 @@ describe('linkContactToEvent', function () {
         var secondRowSelector = "table#contacts tr:nth-child(2)";
         $(secondRowSelector + " td.unlink-contact-button").click();
         expect($('#event-linked-contacts').val()).toEqual("dahlia");
-    })
+    });
 
     it('when link-contacts button is clicked contacts dialog is opened', function () {
         $("#link-contact-button").click();
@@ -64,6 +66,7 @@ describe('linkContactToEvent', function () {
         $("#fabio").click();
         expect($('#event-linked-contacts').val()).toEqual("fabio");
     });
+
     it('when two contacts are clicked on link contact dialog box their ids should appear in the hidden field', function() {
         $("#link-contact-button").click();
         $("#fabio").click();
@@ -72,11 +75,7 @@ describe('linkContactToEvent', function () {
         expect($('#event-linked-contacts').val()).toEqual("fabio,dahlia");
     });
 
-
-
     afterEach(function() {
         $('body#fixtures > *').not(".jasmine_reporter").not('script').remove()
-    })
-
-
+    });
 });
