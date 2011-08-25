@@ -24,7 +24,7 @@
 <h1 class="form-header">Create Case</h1>
 <g:form action="save" method="post">
 
-    <label>Case Number</label>
+    <label>Case ID</label>
     <g:textField name="caseId" id="case-id"/>
     <label>Description</label>
 

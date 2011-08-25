@@ -9,6 +9,9 @@ frontlinesms.createNewContactOnLoad = function() {
         frontlinesms.contactCancelConfirmAction();
         return false;
     });
+    frontlinesms.enableUpdateButtonOnDetailsChange("#contact-name", "#contact-save");
+    frontlinesms.enableUpdateButtonOnDetailsChange("#contact-primary-mobile", "#contact-save");
+    frontlinesms.enableUpdateButtonOnDetailsChange("#contact-notes", "#contact-save");
 };
 
 frontlinesms.contactCancelConfirmAction = function() {

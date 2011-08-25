@@ -11,6 +11,8 @@
     <g:javascript library="contactCreate"/>
     <g:javascript library="deleteFromDetailsPage"/>
     <g:javascript library="confirmationDialog"/>
+    <g:javascript library="enableUpdateButtonOnDetailsChange"/>
+
     <script type="text/javascript">
         $(function() {
             frontlinesms.linkCaseToContact();
@@ -42,7 +44,7 @@
     <table name="cases" id="cases">
         <thead>
         <tr>
-            <th>Case Number</th>
+            <th>Case ID</th>
             <th>Relationship</th>
         </tr>
         </thead>
@@ -148,7 +150,8 @@
         </table>
     </g:if>
     <div id="show-contact-update-form" class="form-submit-area">
-        <button id="contact-save" class="action-button">Update</button>
+        <g:actionSubmit id="contact-save" value="Update" disabled="disabled"/>
+        <!--<button id="contact-save" class="action-button" disabled = "">Update</button>-->
     </div>
 </form>
 

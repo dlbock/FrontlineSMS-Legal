@@ -66,7 +66,7 @@ class CaseControllerSpec extends ControllerSpec {
 
         then:
         redirectArgs == [action: "create", params: [description: "1234"]]
-        controller.flash.error == "Case number is required"
+        controller.flash.error == "Case ID is required"
     }
 
     def 'should display an error when creating a case with duplicate id'() {
@@ -81,7 +81,7 @@ class CaseControllerSpec extends ControllerSpec {
         controller.save()
 
         then:
-        controller.flash.error == 'Case number already exists. Please enter a unique case number.'
+        controller.flash.error == 'Case ID already exists. Please enter a unique Case ID.'
     }
 
     def 'should display list of cases matching search criteria'() {

@@ -73,7 +73,7 @@ class ShowCaseSpec extends FrontlinesmsLegalGebSpec {
         updateCaseButton.click()
 
         then:
-        errorMessage == "Case number already exists. Please enter a unique case number."
+        errorMessage == "Case ID already exists. Please enter a unique Case ID."
 
     }
 
@@ -112,7 +112,7 @@ class ShowCaseSpec extends FrontlinesmsLegalGebSpec {
         updateCaseButton.click()
 
         then:
-        errorMessage == "Case number required"
+        errorMessage == "Case ID required"
 
     }
 

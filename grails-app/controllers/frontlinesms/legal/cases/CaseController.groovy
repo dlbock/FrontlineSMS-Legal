@@ -21,11 +21,11 @@ class CaseController {
             redirect(action: 'show', params: [id: newCase.caseId])
         }
         else if (params.caseId == null || params.caseId == "" || params.caseId.isAllWhitespace()) {
-            flash.error = "Case number is required"
+            flash.error = "Case ID is required"
             redirect(action: 'create', params: [description: params.description])
         }
         else {
-            flash.error = "Case number already exists. Please enter a unique case number."
+            flash.error = "Case ID already exists. Please enter a unique Case ID."
             def enteredDescription = params.description
             redirect(action: 'create', params: [description: params.description])
         }
@@ -95,11 +95,11 @@ class CaseController {
             redirect(action: 'show', params: [id: fetchedCase.caseId])
         }
         else if (params.caseId == null || params.caseId == "" || params.caseId.isAllWhitespace()) {
-            flash.error = "Case number required"
+            flash.error = "Case ID required"
             redirect(action: 'show', params: [id: originalCaseId, description: fetchedCase.description, uniqueId: originalUniqueId, caseStatus: params.caseStatus])
         }
         else {
-            flash.error = "Case number already exists. Please enter a unique case number."
+            flash.error = "Case ID already exists. Please enter a unique Case ID."
             redirect(action: 'show', params: [id: originalCaseId, description: fetchedCase.description, uniqueId: originalUniqueId, caseStatus: params.caseStatus])
         }
     }

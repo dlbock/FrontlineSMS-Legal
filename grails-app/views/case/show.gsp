@@ -11,6 +11,7 @@
     <g:javascript library="contactSearch"/>
     <g:javascript library="deleteFromDetailsPage"/>
     <g:javascript library="confirmationDialog"/>
+    <g:javascript library="enableUpdateButtonOnDetailsChange"/>
 
     <script type="text/javascript">
         $(function() {
@@ -26,7 +27,7 @@
 <h1 class="form-header">Case Details</h1>
 <g:form action="update" id="save-case-form" name="save-case-form">
 
-    <label>Case Number</label>
+    <label>Case ID</label>
     <g:hiddenField name="currentId" id="current-id" value="${caseToDisplay.id}"/>
     <g:textField name="caseId" id="case-id" value="${caseToDisplay.caseId}"/>
     <label>Description</label>
