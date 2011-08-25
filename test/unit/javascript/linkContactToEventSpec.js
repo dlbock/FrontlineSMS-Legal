@@ -32,31 +32,6 @@ describe('linkContactToEvent', function () {
 
     });
 
-//    it('link contacts dialog is closed', function () {
-//        expect($('#link-contacts').size()).toEqual(1);
-//    });
-
-//    it('when link-contacts button is clicked contacts dialog is opened', function () {
-//        $("#link-contact-button").click();
-//        expect($('#link-contacts:visible').size()).toEqual(1);
-//    });
-//
-//    it('when the contact dialog is opened and a search phrase is entered, and the cancel button is clicked, contact dialog is reopened, all results are visible and the search bar is cleared', function () {
-//        $("#link-contact-button").click();
-//        $("#contact-name-search").val("fab");
-//        $(".ui-button-text").click();
-//        $("#link-contact-button").click();
-//        expect($("#contact-name-search").val()).toEqual("");
-//    });
-//
-//    it('when remove button is clicked the appropriate contact is removed', function(){
-//        $("#link-contact-button").click();
-//        $("#fabio").click();
-//        var secondRowSelector = "table#contacts tr:nth-child(2)";
-//        $(secondRowSelector + " td.remove-contact-button").click();
-//        expect($(secondRowSelector + ":contains('fabio')").size()).toEqual(0);
-//    })
-
     it('when remove button is clicked the appropriate contact id is removed from hidden form field', function(){
         $("#link-contact-button").click();
         $("#fabio").click();
@@ -65,7 +40,7 @@ describe('linkContactToEvent', function () {
         var secondRowSelector = "table#contacts tr:nth-child(2)";
         $(secondRowSelector + " td.remove-contact-button").click();
         expect($('#event-linked-contacts').val()).toEqual("dahlia");
-    })
+    });
 
     it('when link-contacts button is clicked contacts dialog is opened', function () {
         $("#link-contact-button").click();
@@ -83,6 +58,7 @@ describe('linkContactToEvent', function () {
         $("#fabio").click();
         expect($('#event-linked-contacts').val()).toEqual("fabio");
     });
+
     it('when two contacts are clicked on link contact dialog box their ids should appear in the hidden field', function() {
         $("#link-contact-button").click();
         $("#fabio").click();
@@ -91,11 +67,7 @@ describe('linkContactToEvent', function () {
         expect($('#event-linked-contacts').val()).toEqual("fabio,dahlia");
     });
 
-
-
     afterEach(function() {
         $('body#fixtures > *').not(".jasmine_reporter").not('script').remove()
-    })
-
-
+    });
 });
