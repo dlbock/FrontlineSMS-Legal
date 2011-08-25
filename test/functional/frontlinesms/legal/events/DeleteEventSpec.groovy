@@ -31,17 +31,16 @@ class DeleteEventSpec extends FrontlinesmsLegalGebSpec {
         createEvent("Test Event", "08:09AM", "08:56PM")
         to SchedulePage, "index"
 
-        when:
+        and:
         def oldEventListSize = events().size();
 
+        when:
         events()[0].click()
-        $('#delete-event').click()
-        $('#cancel-confirm-no').click()
-
-        def newEventListSize = eventListSize()
+        deleteEventButton.click()
+        deleteConfirmationDialog.noButton.click()
 
         then:
-        oldEventListSize == newEventListSize;
+        eventListSize() == oldEventListSize;
     }
 
     def 'should redirect to the event date on successful creation of the event'() {

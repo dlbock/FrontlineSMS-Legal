@@ -11,29 +11,30 @@ class SchedulePage extends Page {
         events {
             $("span[class='fc-event-title']")
         }
+        testEvent { $("span[class='fc-event-title']", text: "test event") }
         eventContacts {
-                $("tr[class='event-contact']")
+            $("tr[class='event-contact']")
         }
         eventListSize {
             $("span[class='fc-event-title']").size()
         }
-
+        deleteEventButton { $('#delete-event') }
         deleteEvent {
-            $('#delete-event').click()
-            unlinkConfirmationDialog.confirm()
+            deleteEventButton.click()
+            deleteConfirmationDialog.confirm()
             true
         }
         linkContactToExistingEvent {
             $('#link-contact-to-existing-event-button').click()
             true
         }
-
         atDate {$('span.fc-header-title').text()}
         existingContactList {
             $("#contactsTable tbody tr").collect {module LinkContactRow, it}
         }
         eventDialog(wait: true) { module EventDialog }
         unlinkConfirmationDialog(required: false) { module ConfirmationDialog, messageId: "contactUnlinkDialog" }
+        deleteConfirmationDialog(required: false) { module ConfirmationDialog, messageId: "delete-event-dialog" }
     }
 }
 
@@ -50,9 +51,6 @@ class EventDialog extends Module {
         eventEndTime { $('#event-end-time').text()}
         contactsLinkedToEvent { $(".event-contact").collect {module ContactRow, it} }
         atDate{$('span.fc-header-title').text()}
-        contactUnlinkDialog { $("div", id: "contactUnlinkDialog") }
-        contactUnlinkYes { $("button", id: "confirm-yes")}
-        contactUnlinkNo { $("button", id: "confirm-no")}
     }
 }
 

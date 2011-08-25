@@ -10,7 +10,6 @@
     <g:javascript library="confirmationDialog"/>
     <g:javascript library="calendarInteractions"/>
     <g:javascript library="eventDetails"/>
-    <g:javascript library="unlinkContactFromEvent"/>
 
     <script type="text/javascript">
         $(function() {
@@ -41,6 +40,7 @@
     <input type="text" name="eventStartTime" id="event-start-time" value=""/><br/><br/>
     <label><b>End Time</b></label><br/>
     <input type="text" name="eventEndTime" id="event-end-time" value=""/><br/><br/>
+
     <table id="event-contacts-table">
         <thead>
         <tr >
@@ -59,11 +59,9 @@
     <g:hiddenField name="eventId" id="event-id"></g:hiddenField>
 </div>
 
-<div id="event-cancel-dialog" title="Cancel event?" style="display: none;">
+<div id="delete-event-dialog" title="Delete event?" style="display: none;">
     <p>Are you sure you want to delete this event? Yes or No.</p>
 </div>
-
-<<<<<<< HEAD
 
 <div id="contactUnlinkDialog" title="Unlink Contact from Event" style="display: none;">
     <p>Are you sure you want to unlink this contact from the event?</p>

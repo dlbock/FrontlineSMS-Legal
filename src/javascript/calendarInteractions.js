@@ -23,30 +23,50 @@ frontlinesms.displayEventDetails = function(calEvent) {
             console.log("Failed to get linked contacts for event.");
         },
         success : function(data){
-            console.log("Success"+data.toString()+"  "+calEvent.id);
-            frontlinesms.constructContactsTable(data)
+            console.log("Success" + data.toString() + "  " + calEvent.id);
+            frontlinesms.constructContactsTable(data, calEvent.id)
         },
-                cache:false
+        cache:false
     });
 
     $("#view-event").dialog("open");
 };
 
-frontlinesms.constructContactsTable = function(data) {
+frontlinesms.constructContactsTable = function(data, eventId) {
+
     $('#event-contacts-table tbody *').remove();
     for (var i = 0; i < data.length; i++) {
+        var contactName = data[i]["name"];
         var newRow =
             '<tr class="event-contact">' +
                 '<td>' + data[i]["name"] + '</td>' +
                 '<td>' + data[i]["primaryMobile"] + '</td>' +
+                '<td>' +
+                '<a href="" class="unlink-contact" id = '+contactName+'>Unlink</a>' +
+                '</td>' +
+                '</tr>';
 
-                '<td >' +
-                '<a href="" class="unlink-contact">Unlink</a>' +
-                '</td>'
-            + '</tr>';
         $('#event-contacts-table tbody').append(newRow);
     }
-    frontlinesms.attachActionWithConfirmationToButton(".unlink-contact", "#contactUnlinkDialog", function(){})
+
+    var actionForYes = function(link) {
+        var contactName = $(link).attr('id');
+        $.ajax({
+            url: "unlinkContact",
+            type: "POST",
+            data: { "contactName": contactName, "eventId": eventId },
+            error: function () {
+                console.log("Failed to unlink contact from event.");
+            },
+            success : function() {
+                console.log("Success");
+            },
+            cache:false
+        });
+        $(link).parent().parent().remove();
+    }
+
+    frontlinesms.attachActionWithConfirmationToButton(".unlink-contact", "#contactUnlinkDialog", actionForYes)
 };
 
 frontlinesms.getFormattedTimeString = function(hr, min) {
@@ -112,33 +132,10 @@ frontlinesms.calendarInteractions = function() {
         cache: false
     };
 
-    $("#delete-event").click(function() {
-        $("#event-cancel-dialog").dialog({
-            modal: true,
-            buttons: [
-                {
-                    text: "Yes",
-                    click: function() {
-
-                        $("#view-event").dialog("close");
-                        $.ajax("deleteEvent/" + $('#event-id').val(), ajaxDefaults);
-                        $('#schedule').fullCalendar('removeEvents', $('#event-id').val())
-                        $(this).dialog("close");
-                        return true;
-                    },
-                    id: "cancel-confirm-yes"
-                },
-                {
-                    text: "No",
-                    click: function() {
-                        $(this).dialog("close");
-                        return false;
-                    },
-                    id: "cancel-confirm-no"
-                }
-            ]
-        });
-
+    frontlinesms.attachActionWithConfirmationToButton("#delete-event", "#delete-event-dialog", function () {
+        $("#view-event").dialog("close");
+        $.ajax("deleteEvent/" + $('#event-id').val(), ajaxDefaults);
+        $('#schedule').fullCalendar('removeEvents', $('#event-id').val())
     });
 
     frontlinesms.attachActionWithLinkContactButton('#link-contact-to-existing-event-button', '#link-contact-to-existing-event-dialog');
