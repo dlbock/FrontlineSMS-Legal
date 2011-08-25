@@ -29,7 +29,9 @@ class SchedulePage extends Page {
         }
 
         atDate {$('span.fc-header-title').text()}
-
+        existingContactList {
+            $("#contactsTable tbody tr").collect {module LinkContactRow, it}
+        }
         eventDialog(wait: true) { module EventDialog }
         unlinkConfirmationDialog(required: false) { module ConfirmationDialog, messageId: "contactUnlinkDialog", buttonIdPrefix: "cancel-" }
     }
@@ -62,9 +64,6 @@ class ContactRow extends Module {
         primaryMobileNumber { cell(1).text() }
         unlinkContact { $("a", class: "unlink-contact")}
         linkContactToExistingEventDialog{$("div", id: "link-contact-to-existing-event-dialog")}
-        existingContactList {
-            $("#contactsTable tbody tr").collect {module LinkContactRow, it}
-        }
     }
 }
 
