@@ -9,32 +9,15 @@ class SchedulePage extends Page {
     static url = "schedule"
     static content = {
         events {
-            try {
-                $("span[class='fc-event-title']")
-            }
-            catch (Exception e) {
-                null
-            }
+            $("span[class='fc-event-title']")
         }
-        testEvent { $("span[class='fc-event-title']", text: "test event") }
         eventContacts {
-            try {
                 $("tr[class='event-contact']")
-
-            }
-            catch (Exception e) {
-                null
-            }
         }
         eventListSize {
-            try {
-                $("span[class='fc-event-title']").size()
-
-            }
-            catch (Exception e) {
-                0
-            }
+            $("span[class='fc-event-title']").size()
         }
+
         deleteEvent {
             $('#delete-event').click()
             unlinkConfirmationDialog.confirm()

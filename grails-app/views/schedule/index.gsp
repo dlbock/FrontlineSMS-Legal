@@ -32,13 +32,13 @@
 
 <div id="view-event" title="Event Details" style="display: none;">
     <label><b>Title</b></label><br/>
-    <label name="eventTitle" id="event-title"></label><br/><br/>
+    <input type="text" name="eventTitle" id="event-title" value="" /><br/><br/>
     <label><b>Date</b></label><br/>
-    <label name="eventDate" id="event-date"></label><br/><br/>
+    <input type="text" name="eventDate" id="event-date" value=""/><br/><br/>
     <label><b>Start Time</b></label><br/>
-    <label name="eventStartTime" id="event-start-time"></label><br/><br/>
+    <input type="text" name="eventStartTime" id="event-start-time" value=""/><br/><br/>
     <label><b>End Time</b></label><br/>
-    <label name="eventEndTime" id="event-end-time"></label><br/><br/>
+    <input type="text" name="eventEndTime" id="event-end-time" value=""/><br/><br/>
     <table id="event-contacts-table">
         <thead>
         <tr >
@@ -49,8 +49,11 @@
         <tbody>
         </tbody>
     </table>
-    <div align="right"><input type="button" id="delete-event" value="Delete"/></div>
-    <label style="display:none" name="eventId" id="event-id"></label>
+    <div align="right">
+        <input type="button" id="update-event" value="Update"/>
+        <input type="button" id="delete-event" value="Delete"/>
+    </div>
+    <g:hiddenField name="eventId" id="event-id"></g:hiddenField>
 
 </div>
 
