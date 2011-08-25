@@ -12,6 +12,7 @@
     <g:javascript library="deleteFromDetailsPage"/>
     <g:javascript library="confirmationDialog"/>
     <g:javascript library="enableUpdateButtonOnDetailsChange"/>
+    <g:javascript library="formValidation"/>
 
     <script type="text/javascript">
         $(function() {
@@ -19,6 +20,7 @@
             frontlinesms.caseSearchOnLoad();
             frontlinesms.createNewContactOnLoad();
             frontlinesms.initializeCaseDeletion();
+            frontlinesms.validateContactNumber();
         })
     </script>
 </head>
@@ -32,7 +34,7 @@
     <label>Name</label>
     <g:textField name="name" id="contact-name" value="${contactToDisplay.name}"/>
     <label>Number</label>
-    <g:textField name="primaryMobile" id="contact-primary-mobile" value="${contactToDisplay.primaryMobile}"/>
+    <g:textField name="primaryMobile" id="contact-primary-mobile" value="${contactToDisplay.primaryMobile}" maxlength="15"/>
     <label>Notes</label>
     <g:textArea rows="10" cols="100" name="notes" id="contact-notes" value="${contactToDisplay.notes}"/>
 
