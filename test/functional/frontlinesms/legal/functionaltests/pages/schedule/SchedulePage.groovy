@@ -33,7 +33,7 @@ class SchedulePage extends Page {
             $("#contactsTable tbody tr").collect {module LinkContactRow, it}
         }
         eventDialog(wait: true) { module EventDialog }
-        unlinkConfirmationDialog(required: false) { module ConfirmationDialog, messageId: "contactUnlinkDialog", buttonIdPrefix: "cancel-" }
+        unlinkConfirmationDialog(required: false) { module ConfirmationDialog, messageId: "contactUnlinkDialog" }
     }
 }
 
