@@ -9,6 +9,7 @@
     <g:javascript library="jquery-ui-1.8.14.custom.min"/>
     <g:javascript library="mainLayout"/>
     <g:javascript library="tabs"/>
+    <g:javascript library="console"/>
     <script type="text/javascript">
         $(function() {
             frontlinesms.tabs();
