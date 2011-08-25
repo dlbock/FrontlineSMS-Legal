@@ -12,15 +12,20 @@ frontlinesms.eventDetails = function() {
 frontlinesms.attachActionWithLinkContactButton = function(buttonSelector, dialogSelector) {
 
     $(buttonSelector).click(function() {
-        frontlinesms.displayPopup(dialogSelector);
+        $(dialogSelector).dialog("open");
         return false;
     });
-};
-
-frontlinesms.displayPopup = function(dialogSelector) {
 
     $(dialogSelector).dialog({
-
+        autoOpen: false,
+        modal: true,
+        buttons: [{
+            text: "Cancel",
+            click: function() {
+                $(this).dialog("close");
+            },
+            id: "cancel-button"
+        }]
     });
 };
 

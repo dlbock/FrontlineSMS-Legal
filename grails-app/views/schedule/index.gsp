@@ -63,13 +63,13 @@
     <p>Are you sure you want to delete this event? Yes or No.</p>
 </div>
 
+<<<<<<< HEAD
 
 <div id="contactUnlinkDialog" title="Unlink Contact from Event" style="display: none;">
     <p>Are you sure you want to unlink this contact from the event?</p>
 </div>
 
-
-<div id="link-contact-to-existing-event-dialog" title="Link Contact" style="display: none;">
+<div id="link-contact-to-existing-event-dialog" title="Link Contact to an Event" style="display: none;">
      <g:form action="">
          <p>Enter the name or the mobile number to search for Contacts</p>
         <g:textField name="contactNameSearch" id="contact-name-search"/>

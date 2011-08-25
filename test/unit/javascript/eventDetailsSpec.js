@@ -1,25 +1,47 @@
 describe('Link Contact to existing Event', function () {
         beforeEach(function() {
             var tempHTML =
-                '<div id="actionDialogBox" title="Link Contact" style="display: none;">' +
-                    '<p>Link Contact</p>' +
-                    '</div>' +
-                    '<button id="actionButton">Action</button>';
+                '<div id="view-event" title="Event Details" style="display: none;">'+
+                    '<button id="link-contact-button">Link Contacts</button>'+
+                '</div>' +
+                '<input type="hidden" id="event-linked-contacts" value=""/>' +
+                '<div id="link-contact-to-existing-event-dialog" title="Link Contacts to an Event">' +
+                '<table id="contactsTable"> <tbody>' +
+                '<tr class="contactLink" id="rupa">' +
+                '<td  class="contact-name">Rupa</td>' +
+                '<td class="contact-number">1234</td>' +
+                '<td class="link"><a href="#">Link Contact</a></td>' +
+                '</tr>' +
+                 '<tr class="contactLink" id="neetu">' +
+                '<td  class="contact-name">Neetu</td>' +
+                '<td class="contact-number">3333</td>' +
+                '<td class="link"><a href="#">Link Contact</a></td>'+
+                '</tr>'+
+                '</tbody></table> ' +
+
+                '</div>'
+            ;
             $(tempHTML).appendTo("#fixtures");
 
-            frontlinesms.attachActionWithLinkContactButton("#actionButton", "#actionDialogBox");
+            frontlinesms.attachActionWithLinkContactButton("#link-contact-button", "#link-contact-to-existing-event-dialog");
         });
 
         it("is not visible before the link contact button is clicked", function() {
-            expect($('#actionDialogBox:visible').size()).toEqual(0);
+            expect($('#link-contact-to-existing-event-dialog:visible').size()).toEqual(0);
         });
 
         it("pops up when the button is clicked", function() {
-            $("#actionButton").click();
-            expect($('#actionDialogBox:visible').size()).toEqual(1);
+            $("#link-contact-button").click();
+            expect($('#link-contact-to-existing-event-dialog:visible').size()).toEqual(1);
         });
 
-        afterEach(function() {
+//        it("closes the Link Contact to an Event popup without linking any contacts when cancel button is clicked", function(){
+//            $("#link-contact-button").click();
+//            $("#cancel-button").click();
+//            expect($('#link-contact-to-existing-event-dialog:visible').size()).toEqual(0);
+//        });
+
+       afterEach(function() {
             $('body#fixtures > *').not(".jasmine_reporter").not('script').remove()
         })
     });
