@@ -40,18 +40,18 @@ class DeleteContactFromContactDetailsPageSpec extends FrontlinesmsLegalGebSpec {
     }
 
     def 'should go to search page when YES is clicked in delete confirmation dialog'() {
-            setup:
-            def contactId = createContact()
-            to ShowLegalContactPage, contactId
+        setup:
+        def contactId = createContact()
+        to ShowLegalContactPage, contactId
 
-            when:
-            deleteButton.click();
-            deleteYes.click();
-            waitFor { !deleteDialog.isVisible() }
+        when:
+        deleteButton.click();
+        deleteYes.click();
+        waitFor { !deleteDialog.isVisible() }
 
-            then:
-            assert at(SearchLegalContactPage)
+        then:
+        assert at(SearchLegalContactPage)
 
-        }
+    }
 }
 

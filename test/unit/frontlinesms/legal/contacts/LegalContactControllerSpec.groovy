@@ -247,7 +247,7 @@ class LegalContactControllerSpec extends FrontlinesmsLegalControllerSpecBase {
     }
 
 
-        def 'should display a message when contact is successfully deleted'() {
+    def 'should display a message when contact is successfully deleted'() {
         setup:
         def contacts = [new LegalContact(name: 'Me', primaryMobile: '98765')]
         mockDomain(LegalContact, contacts)
@@ -262,7 +262,7 @@ class LegalContactControllerSpec extends FrontlinesmsLegalControllerSpecBase {
 
 
     def 'should display an error when deleting a contact that does not exist'() {
-         setup:
+        setup:
         def contacts = [new LegalContact(name: 'Me', primaryMobile: '98765')]
         mockDomain(LegalContact, contacts)
         controller.params.id = "NaN"
