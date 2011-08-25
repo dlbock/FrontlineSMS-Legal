@@ -35,12 +35,6 @@ describe('Link Contact to existing Event', function () {
             expect($('#link-contact-to-existing-event-dialog:visible').size()).toEqual(1);
         });
 
-//        it("closes the Link Contact to an Event popup without linking any contacts when cancel button is clicked", function(){
-//            $("#link-contact-button").click();
-//            $("#cancel-button").click();
-//            expect($('#link-contact-to-existing-event-dialog:visible').size()).toEqual(0);
-//        });
-
        afterEach(function() {
             $('body#fixtures > *').not(".jasmine_reporter").not('script').remove()
         })
