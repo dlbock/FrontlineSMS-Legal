@@ -14,6 +14,8 @@ frontlinesms.linkContactToCase = function() {
         },
         buttons: {
             "Cancel": function() {
+                $("#contact-name-search").val("");
+                $(".contactLink").removeAttr("filtermatch", true).show();
                 $(this).dialog("close");
             }
         }

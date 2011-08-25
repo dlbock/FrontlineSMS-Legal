@@ -74,15 +74,12 @@
                             <tbody>
                             <g:each in="${contactList}" var="contact">
                                 <tr class="contactLink" id="${contact.id}">
-
                                     <td class="contact-name">
                                         <a href="#"><%=contact.name%></a>
                                     </td>
-
                                     <td class="contact-number">
                                         <a href="#"><%=contact.primaryMobile%></a>
                                     </td>
-
                                 </tr>
                             </g:each>
                             </tbody>
@@ -92,7 +89,6 @@
             </tr>
             </tbody>
         </table>
-
     </g:form>
 </div>
 

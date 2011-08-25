@@ -1,6 +1,7 @@
 describe('linkContactToEvent', function () {
     beforeEach(function() {
         var tempHTML =
+            '<div id="text-div">' +
             '<input type="hidden" id="event-linked-contacts" value=""/>' +
             '<div id="link-contacts" title="Link Contacts">' +
 
@@ -23,20 +24,38 @@ describe('linkContactToEvent', function () {
                 '<th style="display: none;"></th>' +
                 '</tr> </table>' +
 
-                '<button id="link-contact-button">Link contacts</button>';
+                '<button id="link-contact-button">Link contacts</button>' +
+                '</div>';
 
         $(tempHTML).appendTo("#fixtures");
         frontlinesms.linkContactToEvent();
 
     });
 
-    it('when remove button is clicked the appropriate contact is removed', function(){
-        $("#link-contact-button").click();
-        $("#fabio").click();
-        var secondRowSelector = "table#contacts tr:nth-child(2)";
-        $(secondRowSelector + " td.remove-contact-button").click();
-        expect($(secondRowSelector + ":contains('fabio')").size()).toEqual(0);
-    })
+//    it('link contacts dialog is closed', function () {
+//        expect($('#link-contacts').size()).toEqual(1);
+//    });
+
+//    it('when link-contacts button is clicked contacts dialog is opened', function () {
+//        $("#link-contact-button").click();
+//        expect($('#link-contacts:visible').size()).toEqual(1);
+//    });
+//
+//    it('when the contact dialog is opened and a search phrase is entered, and the cancel button is clicked, contact dialog is reopened, all results are visible and the search bar is cleared', function () {
+//        $("#link-contact-button").click();
+//        $("#contact-name-search").val("fab");
+//        $(".ui-button-text").click();
+//        $("#link-contact-button").click();
+//        expect($("#contact-name-search").val()).toEqual("");
+//    });
+//
+//    it('when remove button is clicked the appropriate contact is removed', function(){
+//        $("#link-contact-button").click();
+//        $("#fabio").click();
+//        var secondRowSelector = "table#contacts tr:nth-child(2)";
+//        $(secondRowSelector + " td.remove-contact-button").click();
+//        expect($(secondRowSelector + ":contains('fabio')").size()).toEqual(0);
+//    })
 
     it('when remove button is clicked the appropriate contact id is removed from hidden form field', function(){
         $("#link-contact-button").click();

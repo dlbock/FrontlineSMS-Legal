@@ -4,8 +4,9 @@ describe('linkContactToCase', function () {
             '<div id="text-div">' +
                 '<input type="hidden" id="case-linked-contacts" value=""/>' +
                 '<div id="link-contacts" title="Link Contacts">' +
-
-                '<table id="contactsTable"> <tbody>' +
+                '<input name="contactNameSearch" id="contact-name-search"/>' +
+                '<table id="contactsTable">' +
+                '<tbody>' +
 
                 '<tr class="contactLink" id="5">' +
                 '<td  class="contact-name"> <a href="#" >fabio</a> </td>' +
@@ -16,7 +17,9 @@ describe('linkContactToCase', function () {
                 '<td  class="contact-name"> <a href="#" >dahlia</a> </td>' +
                 '<td class="contact-number"> <a href="#">88888</a> </td>' +
                 '</tr>' +
-                ' </tbody></table> </div>' +
+                ' </tbody>' +
+                '</table> ' +
+                '</div>' +
 
                 '<table name="contacts" id="contacts">' +
                 '<tr>' +
@@ -27,17 +30,28 @@ describe('linkContactToCase', function () {
                 '</tr> </table>' +
 
                 '<button id="link-contact-button">Link contacts</button>' +
-                '</div>' +
                 '</div>';
+
 
         $(tempHTML).appendTo("#fixtures");
         frontlinesms.linkContactToCase();
+    });
 
+    it('link contacts dialog is closed', function () {
+        expect($('#link-contacts:visible').size()).toEqual(0);
     });
 
     it('when link-contacts button is clicked contacts dialog is opened', function () {
         $("#link-contact-button").click();
         expect($('#link-contacts:visible').size()).toEqual(1);
+    });
+
+    it('when the contact dialog is opened and a search phrase is entered, and the cancel button is clicked, contact dialog is reopened, all results are visible and the search bar is cleared', function () {
+        $("#link-contact-button").click();
+        $("#contact-name-search").val("fab");
+        $(".ui-button-text").click();
+        $("#link-contact-button").click();
+        expect($("#contact-name-search").val()).toEqual("");
     });
 
     it('when a contact is clicked on link contact dialog box it should appear on show case page table', function() {
@@ -79,17 +93,6 @@ describe('linkContactToCase', function () {
         $(secondRowSelector + " td.remove-contact-button").click();
         expect($(secondRowSelector + ":contains('fabio')").size()).toEqual(0);
     });
-
-//    it('when remove button is clicked the appropriate contact id and involvement is removed from hidden form field', function() {
-//        spyOn(window, 'prompt').andReturn('Client');
-//        $("#link-contact-button").click();
-//        $("#5").click();
-//        var secondRowSelector = "table#contacts tr:nth-child(2)";
-//        $(secondRowSelector + " td.remove-contact-button").click();
-//        expect($('#linked-contact-ids').val()).toEqual(",");
-//        expect($('#involvement-list').val()).toEqual(",");
-//    });
-
 
     afterEach(function() {
         $('body#fixtures > *').not(".jasmine_reporter").not('script').remove()

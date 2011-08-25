@@ -11,6 +11,8 @@ frontlinesms.linkContactToEvent = function() {
         },
         buttons: {
             "Cancel": function() {
+                $("#contact-name-search").val("");
+                $(".contactLink").removeAttr("filtermatch", true).show();
                 $(this).dialog("close");
             }
         }
@@ -39,7 +41,6 @@ frontlinesms.linkContactToEvent = function() {
         frontlinesms.removeLinkedContactIdFromHiddenField(contactId);
         return false;
     });
-
 };
 
 
@@ -52,23 +53,23 @@ frontlinesms.addLinkedContactIdToHiddenField = function(contactId) {
 
 frontlinesms.removeLinkedContactIdFromHiddenField = function(contactId) {
     var contactIds = $("#event-linked-contacts").val().split(",");
-    if( contactIds.indexOf(contactId) > -1 )
-        contactIds.splice(contactIds.indexOf(contactId),1);
+    if (contactIds.indexOf(contactId) > -1)
+        contactIds.splice(contactIds.indexOf(contactId), 1);
     $("#event-linked-contacts").val(contactIds.join(","));
 }
 
 frontlinesms.addLinkedContactToTable = function(contactId) {
     var row = $('#contactsTable').find('#' + contactId);
     var rowToAdd = $('<tr>').append(
-            '<td>' +
-                $(row).find('.contact-name').text() +
-                '<span class="id" style="display:none;">' + contactId + '</span>' +
+        '<td>' +
+            $(row).find('.contact-name').text() +
+            '<span class="id" style="display:none;">' + contactId + '</span>' +
             '</td>' +
             '<td>' +
-                $(row).find('.contact-number').text() +
+            $(row).find('.contact-number').text() +
             '</td>' +
             '<td class="remove-contact-button">' +
-                '<a href="">Remove</a>' +
+            '<a href="">Remove</a>' +
             '</td>'
     );
     $('#contacts').append(rowToAdd);
