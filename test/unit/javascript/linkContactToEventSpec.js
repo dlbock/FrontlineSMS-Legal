@@ -34,7 +34,7 @@ describe('linkContactToEvent', function () {
         $("#link-contact-button").click();
         $("#fabio").click();
         var secondRowSelector = "table#contacts tr:nth-child(2)";
-        $(secondRowSelector + " td.remove-contact-button").click();
+        $(secondRowSelector + " td.unlink-contact-button").click();
         expect($(secondRowSelector + ":contains('fabio')").size()).toEqual(0);
     })
 
@@ -44,7 +44,7 @@ describe('linkContactToEvent', function () {
         $("#link-contact-button").click();
         $("#dahlia").click();
         var secondRowSelector = "table#contacts tr:nth-child(2)";
-        $(secondRowSelector + " td.remove-contact-button").click();
+        $(secondRowSelector + " td.unlink-contact-button").click();
         expect($('#event-linked-contacts').val()).toEqual("dahlia");
     })
 

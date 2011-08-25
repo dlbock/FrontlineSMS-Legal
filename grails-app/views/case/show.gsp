@@ -54,7 +54,7 @@
                     </td>
                     <td value="${it.contactNumber}">${it.contactNumber}</td>
                     <td value="${it.contactInvolvement}">${it.contactInvolvement}</td>
-                    <td class="remove-contact-button">Remove</td>
+                    <td class="unlink-contact-button">Unlink</td>
                 </tr>
             </g:each>
         </g:if>

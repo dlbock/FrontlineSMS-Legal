@@ -58,7 +58,7 @@ describe('linkContactToCase', function () {
         $('#5').click();
         $('#6').click();
         var firstContactSelector = "table#contacts tr:nth-child(2)";
-        $(firstContactSelector + " td.remove-contact-button").click();
+        $(firstContactSelector + " td.unlink-contact-button").click();
         expect($('#case-linked-contacts').val()).toEqual("{\"6\":\"Client\"}");
     });
 
@@ -76,7 +76,7 @@ describe('linkContactToCase', function () {
         $("#link-contact-button").click();
         $("#5").click();
         var secondRowSelector = "table#contacts tr:nth-child(2)";
-        $(secondRowSelector + " td.remove-contact-button").click();
+        $(secondRowSelector + " td.unlink-contact-button").click();
         expect($(secondRowSelector + ":contains('fabio')").size()).toEqual(0);
     });
 

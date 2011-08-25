@@ -29,7 +29,7 @@ frontlinesms.linkContactToEvent = function() {
         return false;
     });
 
-    $("td.remove-contact-button").live('click', function() {
+    $("td.unlink-contact-button").live('click', function() {
         var contactId = $(this).parent().find('td span.id:hidden').text();
         $(this).parent().remove();
         frontlinesms.removeLinkedContactIdFromHiddenField(contactId);
@@ -63,8 +63,8 @@ frontlinesms.addLinkedContactToTable = function(contactId) {
             '<td>' +
                 $(row).find('.contact-number').text() +
             '</td>' +
-            '<td class="remove-contact-button">' +
-                '<a href="">Remove</a>' +
+            '<td class="unlink-contact-button">' +
+                '<a href="">Unlink</a>' +
             '</td>'
     );
     $('#contacts').append(rowToAdd);

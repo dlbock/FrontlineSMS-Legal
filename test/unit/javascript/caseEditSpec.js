@@ -39,7 +39,7 @@ describe('submit button', function(){
             '<div id="test-div">' +
             '<input id="case-id" type="text" value="" />' +
                     '<table id="test-table"><tr class="contactLink" id="contact-link"></tr>' +
-                    '<tr><td class="remove-contact-button"></td></tr></table>' +
+                    '<tr><td class="unlink-contact-button"></td></tr></table>' +
             '<button id="case-update" disabled="disabled">Submit</button>' +
                 '</div>';
         $(tempHTML).appendTo("#fixtures");
@@ -52,12 +52,12 @@ describe('submit button', function(){
     })
 
     it ('should be enabled if contacts have been linked', function(){
-        $('.contactLink').click()
+        $('.contactLink').click();
         expect($('#case-update').attr('disabled')).toBeUndefined();
     })
 
     it ('should be enabled if contacts have been removed', function(){
-        $('.remove-contact-button').click()
+        $('.unlink-contact-button').click();
         expect($('#case-update').attr('disabled')).toBeUndefined();
     })
 

@@ -31,7 +31,7 @@ frontlinesms.linkCaseToContact = function() {
         return false;
     });
 
-    $("td.remove-case-button").live('click', function() {
+    $("td.unlink-case-button").live('click', function() {
         var caseId = $(this).parent().find('td span.id:hidden').text();
         $(this).parent().remove();
         frontlinesms.removeLinkedCaseFromHiddenField(caseId);
@@ -60,8 +60,8 @@ frontlinesms.addLinkedCaseToTable = function(caseId, relationship) {
             '<td>' +
             frontlinesms.encodeHTML(relationship) +
             '</td>' +
-            '<td class="remove-case-button">' +
-            '<a href="">Remove</a>' +
+            '<td class="unlink-case-button">' +
+            '<a href="">Unlink</a>' +
             '</td>'
     );
     $('#cases').append(rowToAdd);

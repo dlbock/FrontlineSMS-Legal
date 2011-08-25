@@ -1,7 +1,7 @@
 var frontlinesms = this.frontlinesms || {};
 
 frontlinesms.buildContactsRow = function (row, involvement) {
-    $('#contacts').append('<tr id=' + $(this).attr('id') + '><td>' + $(row).find('.contact-name').text() + '</td><td>' + $(row).find('.contact-number').text() + '</td><td>' + involvement + '</td><td class="remove-contact-button">Remove</td></tr>');
+    $('#contacts').append('<tr id=' + $(this).attr('id') + '><td>' + $(row).find('.contact-name').text() + '</td><td>' + $(row).find('.contact-number').text() + '</td><td>' + involvement + '</td><td class="unlink-contact-button">Unlink</td></tr>');
 }
 frontlinesms.linkContactToCase = function() {
     $('#linked-contact-ids').val("");
@@ -20,7 +20,7 @@ frontlinesms.linkContactToCase = function() {
         return false;
     });
 
-    $(".remove-contact-button").live('click', function() {
+    $(".unlink-contact-button").live('click', function() {
         var contactId = $(this).parent().find('td span.id:hidden').text();
         $(this).parent().remove();
         frontlinesms.removeLinkedContactFromCaseHiddenField(contactId);
@@ -69,8 +69,8 @@ frontlinesms.addLinkedContactToCaseTable = function(contactId, relationship) {
             '<td>' +
             frontlinesms.encodeHTML(relationship) +
             '</td>' +
-            '<td class="remove-contact-button">' +
-            '<a href="">Remove</a>' +
+            '<td class="unlink-contact-button">' +
+            '<a href="">Unlink</a>' +
             '</td>'
     );
     $('#contacts').append(rowToAdd);

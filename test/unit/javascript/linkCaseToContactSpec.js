@@ -33,7 +33,7 @@ describe('linkCaseToContact', function () {
         $("#link-case-button").click();
         $("#case1").click();
         var secondRowSelector = "table#linked-cases tr:first";
-        $(secondRowSelector + " td.remove-case-button").click();
+        $(secondRowSelector + " td.unlink-case-button").click();
         expect($(secondRowSelector + ":contains('case1')").size()).toEqual(0);
     })
     it('when remove button is clicked the appropriate case is removed from hidden form field', function() {
@@ -43,7 +43,7 @@ describe('linkCaseToContact', function () {
         $("#link-case-button").click();
         $("#case2").click();
         var secondRowSelector = "table#cases tr:nth-child(2)";
-        $(secondRowSelector + " td.remove-case-button").click();
+        $(secondRowSelector + " td.unlink-case-button").click();
         expect($('#contact-linked-cases').val()).toEqual("{\"case1\":\"client\"}");
     })
 

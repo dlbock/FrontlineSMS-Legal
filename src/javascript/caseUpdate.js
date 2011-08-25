@@ -10,7 +10,7 @@ frontlinesms.showCaseOnLoad = function() {
         modified = true;
         $('#case-update').removeAttr("disabled");
     })
-    $('tr.contactLink, td.remove-contact-button').click(function() {
+    $('tr.contactLink, td.unlink-contact-button').click(function() {
         modified = true;
         $('#case-update').removeAttr("disabled");
     })

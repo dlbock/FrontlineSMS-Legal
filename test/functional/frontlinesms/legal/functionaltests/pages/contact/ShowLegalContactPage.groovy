@@ -38,6 +38,6 @@ class CaseRow extends Module {
     static content = {
         cell { i -> $("td", i) }
         caseId { $("span").text() }
-        remove { cell(2) }
+        unlink { cell(2) }
     }
 }
