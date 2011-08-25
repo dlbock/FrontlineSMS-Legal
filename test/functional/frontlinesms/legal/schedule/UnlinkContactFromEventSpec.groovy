@@ -23,6 +23,7 @@ class UnlinkContactFromEventSpec extends FrontlinesmsLegalGebSpec {
         eventDialog.contactsLinkedToEvent.collect { it -> it.unlinkContact }.size() == 1
     }
 
+    @Ignore
     def 'should not unlink contact when NO is clicked on unlink contact confirmation dialog'() {
 
         given:
