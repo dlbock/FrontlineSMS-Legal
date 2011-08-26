@@ -35,6 +35,7 @@
     <g:textField name="name" id="contact-name" value="${contactToDisplay.name}"/>
     <label>Number</label>
     <g:textField name="primaryMobile" id="contact-primary-mobile" value="${contactToDisplay.primaryMobile}" maxlength="15"/>
+    <g:hiddenField name="contact-primary-mobile-mock" value="${contactToDisplay.primaryMobile}"/>
     <label>Notes</label>
     <g:textArea rows="10" cols="100" name="notes" id="contact-notes" value="${contactToDisplay.notes}"/>
 
