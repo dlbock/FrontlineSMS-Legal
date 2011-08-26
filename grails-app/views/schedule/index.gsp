@@ -39,7 +39,7 @@
 
 <div id="view-event" title="Event Details" style="display: none;">
     <label><b>Title</b></label><br/>
-    <input type="text" name="eventTitle" id="event-title" value="" /><br/><br/>
+    <input type="text" name="eventTitle" id="event-title" value=""/><br/><br/>
     <label><b>Date</b></label><br/>
     <input type="text" name="eventDate" id="event-date" value=""/><br/><br/>
     <label><b>Start Time</b></label><br/>
@@ -50,7 +50,7 @@
     <g:hiddenField name="linkedContacts" id="event-linked-contacts" value="${params.linkedContacts}"/>
     <table id="event-contacts-table">
         <thead>
-        <tr >
+        <tr>
             <th>Contact name</th>
             <th>Phone number</th>
         </tr>
@@ -58,7 +58,9 @@
         <tbody>
         </tbody>
     </table>
+
     <div align="left"><input type="button" id="link-contact-to-existing-event-button" value="Link Contact"/></div>
+
     <div align="right">
         <input type="button" id="update-event" value="Update"/>
         <input type="button" id="delete-event" value="Delete"/>
@@ -70,47 +72,46 @@
     <p>Are you sure you want to delete this event? Yes or No.</p>
 </div>
 
-<div id="contactUnlinkDialog" title="Unlink Contact from Event" style="display: none;">
+<div id="unlink-contact-dialog" title="Unlink Contact from Event" style="display: none;">
     <p>Are you sure you want to unlink this contact from the event?</p>
 </div>
 
 <div id="link-contact-to-existing-event-dialog" title="Link Contact to an Event" style="display: none;">
-     <g:form action="">
-         <p>Enter the name or the mobile number to search for Contacts</p>
+    <g:form action="">
+        <p>Enter the name or the mobile number to search for Contacts</p>
         <g:textField name="contactNameSearch" id="contact-name-search"/>
-           <div id="link-contacts-inner-table-div" style="height:200px;overflow: scroll; width:250px">
-           <table id="contactsTable">
-                           <thead>
-                        <tr>
-                        <td>Name</td>
-                        <td>Number</td>
-                        </tr>
-                         </thead>
-                            <tbody>
-                            <g:each in="${contactList}" var="contact">
-                                <tr id="${contact.id}" class="contactRow">
+        <div id="link-contacts-inner-table-div" style="height:200px;overflow: scroll; width:250px">
+            <table id="contactsTable">
+                <thead>
+                <tr>
+                    <td>Name</td>
+                    <td>Number</td>
+                </tr>
+                </thead>
+                <tbody>
+                <g:each in="${contactList}" var="contact">
+                    <tr id="${contact.id}" class="contactRow">
 
-                                    <td class="contact-name">
-                                        <%=contact.name%>
-                                    </td>
+                        <td class="contact-name">
+                            <%=contact.name%>
+                        </td>
 
-                                    <td class="contact-number">
-                                        <%=contact.primaryMobile%>
-                                    </td>
-                                    <td class="contactLink" id="${contact.id}"><a href="#">Link Contact</a></td>
-
-                                </tr>
-                            </g:each>
-                            </tbody>
-                        </table>
-                    </div>
-                </td>
+                        <td class="contact-number">
+                            <%=contact.primaryMobile%>
+                        </td>
+                        <td class="contactLink" id="${contact.id}"><a href="#">Link Contact</a></td>
+                    </tr>
+                </g:each>
+                </tbody>
+            </table>
+        </div>
+        </td>
             </tr>
             </tbody>
         </table>
 
     </g:form>
- </div>
+</div>
 
 </body>
 </html>

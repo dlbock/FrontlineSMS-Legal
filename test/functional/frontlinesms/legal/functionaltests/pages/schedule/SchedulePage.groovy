@@ -1,8 +1,8 @@
 package frontlinesms.legal.functionaltests.pages.schedule
 
+import frontlinesms.legal.functionaltests.pages.ConfirmationDialog
 import geb.Module
 import geb.Page
-import frontlinesms.legal.functionaltests.pages.ConfirmationDialog
 
 class SchedulePage extends Page {
     static at = { $("title").text() == "Schedule" }
@@ -37,8 +37,7 @@ class SchedulePage extends Page {
         datePicker { $("div", id: "ui-datepicker-div") }
 
         eventDialog(wait: true) { module EventDialog }
-
-        unlinkConfirmationDialog(required: false) { module ConfirmationDialog, messageId: "contactUnlinkDialog" }
+        unlinkConfirmationDialog(required: false) { module ConfirmationDialog, messageId: "unlink-contact-dialog" }
         deleteConfirmationDialog(required: false) { module ConfirmationDialog, messageId: "delete-event-dialog" }
         linkContactFromPopup {
             $('.contactLink')[0].click()
@@ -62,6 +61,7 @@ class SchedulePage extends Page {
 class EventDialog extends Module {
     static base = { $(id: "view-event") }
     static content = {
+
         contactsLinkedToEvent {
             $(".event-contact").collect {module ContactRow, it}
         }
@@ -70,7 +70,7 @@ class EventDialog extends Module {
         eventStartTime { $('#event-start-time').text()}
         eventEndTime { $('#event-end-time').text()}
         contactsLinkedToEvent { $(".event-contact").collect {module ContactRow, it} }
-        atDate{$('span.fc-header-title').text()}
+        atDate {$('span.fc-header-title').text()}
     }
 }
 
@@ -80,7 +80,7 @@ class ContactRow extends Module {
         name { cell(0).text() }
         primaryMobileNumber { cell(1).text() }
         unlinkContact { $("a", class: "unlink-contact")}
-        linkContactToExistingEventDialog{$("div", id: "link-contact-to-existing-event-dialog")}
+        linkContactToExistingEventDialog {$("div", id: "link-contact-to-existing-event-dialog")}
     }
 }
 
@@ -89,6 +89,6 @@ class LinkContactRow extends Module {
         cell { i -> $("td", i) }
         contactName { cell(0).text() }
         contactNumber { cell(1).text() }
-        linkContact {$("a", class:"link")}
+        linkContact {$("a", class: "link")}
     }
 }

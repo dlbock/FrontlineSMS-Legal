@@ -7,8 +7,8 @@ import frontlinesms.legal.LegalContact
 class ScheduleController {
 
     def index = {
-    [hh:"2011, 5"]
-    [contactList: LegalContact.list()]
+        [hh: "2011, 5"]
+        [contactList: LegalContact.list()]
     }
 
     def fetchEvents = {
@@ -25,7 +25,7 @@ class ScheduleController {
 
     }
 
-        def fetchEventContacts = {
+    def fetchEventContacts = {
         if (params.id != null && params.id != "") {
             def linkedContacts = EventContact.findContactsByEvent(Event.findById(params.id))
             render(contentType: "text/json") {
@@ -55,7 +55,7 @@ class ScheduleController {
 
     def unlinkContact = {
         def event = Event.get(params.eventId as Integer)
-        def contact = LegalContact.findByName(params.contactName )
+        def contact = LegalContact.findByName(params.contactName)
         def eventContact = EventContact.findByEventAndLegalContact(event, contact)
         eventContact.delete()
         render "successfully unlinked"

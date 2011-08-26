@@ -1,10 +1,10 @@
 package frontlinesms.legal.schedule
 
 import frontlinesms.legal.Event
-import frontlinesms.legal.LegalContact
-import grails.plugin.spock.ControllerSpec
-import frontlinesms2.Contact
 import frontlinesms.legal.EventContact
+import frontlinesms.legal.LegalContact
+import frontlinesms2.Contact
+import grails.plugin.spock.ControllerSpec
 
 class ScheduleControllerSpec extends ControllerSpec {
     def "delete event with event id"() {
@@ -31,7 +31,6 @@ class ScheduleControllerSpec extends ControllerSpec {
         controller.deleteEvent()
 
         then:
-
         controller.response.outputStream.targetStream.toString() == 'Event not found!!!'
     }
 
@@ -51,7 +50,7 @@ class ScheduleControllerSpec extends ControllerSpec {
         models['contactList'] == newContact
     }
 
-    def 'unlink contact from event'(){
+    def 'unlink contact from event'() {
         given:
         def contact = new LegalContact(id: 42)
         def otherContact = new LegalContact()

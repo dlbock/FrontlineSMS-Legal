@@ -8,21 +8,21 @@ frontlinesms.calculateScheduleHeight = function (windowHeight) {
 frontlinesms.displayEventDetails = function(calEvent) {
     $('#event-title').val(calEvent.title);
     $('#event-start-time').val(frontlinesms.getFormattedTimeString(calEvent.start.getHours(), calEvent.start.getMinutes()));
-    if(calEvent.end!=null)
+    if (calEvent.end != null)
         $('#event-end-time').val(frontlinesms.getFormattedTimeString(calEvent.end.getHours(), calEvent.end.getMinutes()));
     else
-         $('#event-end-time').val($('#event-start-time').text());
+        $('#event-end-time').val($('#event-start-time').text());
     $("#event-date").val($.datepicker.formatDate("MM d,yy", calEvent.start));
     $('#event-id').val(calEvent.id);
     $.ajax({
-        url: "fetchEventContacts/"+calEvent.id,
+        url: "fetchEventContacts/" + calEvent.id,
         type: "POST",
 
         dataType: 'json',
-        error: function (data){
+        error: function (data) {
             frontlinesms.log("Failed to get linked contacts for event.");
         },
-        success : function(data){
+        success : function(data) {
             frontlinesms.log("Success" + data.toString() + "  " + calEvent.id);
             frontlinesms.constructContactsTable(data, calEvent.id)
         },
@@ -42,7 +42,7 @@ frontlinesms.constructContactsTable = function(data, eventId) {
                 '<td>' + data[i]["name"] + '</td>' +
                 '<td>' + data[i]["primaryMobile"] + '</td>' +
                 '<td>' +
-                '<a href="" class="unlink-contact" id = '+contactName+'>Unlink</a>' +
+                '<a href="" class="unlink-contact" id = ' + contactName + '>Unlink</a>' +
                 '</td>' +
                 '</tr>';
 
@@ -66,7 +66,7 @@ frontlinesms.constructContactsTable = function(data, eventId) {
         $(link).parent().parent().remove();
     }
 
-    frontlinesms.attachActionWithConfirmationToButton(".unlink-contact", "#contactUnlinkDialog", actionForYes)
+    frontlinesms.attachActionWithConfirmationToButton(".unlink-contact", "#unlink-contact-dialog", actionForYes)
 };
 
 frontlinesms.getFormattedTimeString = function(hr, min) {
@@ -100,24 +100,24 @@ frontlinesms.getFormattedTimeString = function(hr, min) {
 }
 frontlinesms.calendarInteractions = function() {
     $('#schedule').fullCalendar({
-                theme: true,
-                height: frontlinesms.calculateScheduleHeight($(window).height()),
-                events: {
-                    url:'fetchEvents',
-                    type: 'POST',
-                    dataType: 'json'
-                },
-                header: {
-                    left: 'prev,next today',
-                    center: 'title',
-                    right: 'month,agendaWeek,agendaDay'
-                },
-                defaultView: 'month',
-                timeFormat: 'hh:mm tt',
-                allDayDefault: false,
-                eventColor: "rgb(0,162,232)",
-                eventClick: function(calEvent, jsEvent, view) {
-                    frontlinesms.displayEventDetails(calEvent);
+        theme: true,
+        height: frontlinesms.calculateScheduleHeight($(window).height()),
+        events: {
+            url:'fetchEvents',
+            type: 'POST',
+            dataType: 'json'
+        },
+        header: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'month,agendaWeek,agendaDay'
+        },
+        defaultView: 'month',
+        timeFormat: 'hh:mm tt',
+        allDayDefault: false,
+        eventColor: "rgb(0,162,232)",
+        eventClick: function(calEvent, jsEvent, view) {
+            frontlinesms.displayEventDetails(calEvent);
 
 
         },
