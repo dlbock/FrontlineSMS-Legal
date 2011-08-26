@@ -30,7 +30,7 @@ class LegalContactControllerSpec extends FrontlinesmsLegalControllerSpecBase {
     def "should save contact"() {
         setup:
         def contacts = []
-        mockLegalContactToAvoidIssuesWithContactBeforeUpdateEvent()
+        mockCoreClassesToAvoidIssuesWithContactEventHandlers()
         mockDomain(LegalContact)
         controller.params.name = 'bla bla'
         controller.params.primaryMobile = '333333'
@@ -60,7 +60,7 @@ class LegalContactControllerSpec extends FrontlinesmsLegalControllerSpecBase {
 
     def 'create action should redirect to Contact detail page'() {
         setup:
-        mockLegalContactToAvoidIssuesWithContactBeforeUpdateEvent()
+        mockCoreClassesToAvoidIssuesWithContactEventHandlers()
         mockDomain(LegalContact)
 
         controller.params.name = 'Steve Jobs'
@@ -199,7 +199,7 @@ class LegalContactControllerSpec extends FrontlinesmsLegalControllerSpecBase {
         def newCase1 = new Case(id: 1, caseId: "567")
         def newCase2 = new Case(id: 2, caseId: "568")
         def legalContact = new LegalContact(primaryMobile: "67890", id: 1)
-        mockLegalContactToAvoidIssuesWithContactBeforeUpdateEvent()
+        mockCoreClassesToAvoidIssuesWithContactEventHandlers()
         mockDomain(Case, [newCase1, newCase2])
         mockDomain(LegalContact, [legalContact])
         mockDomain(CaseContacts, [])
@@ -227,7 +227,7 @@ class LegalContactControllerSpec extends FrontlinesmsLegalControllerSpecBase {
         def legalContact = new LegalContact(primaryMobile: "67890", id: 1)
         def caseContact1 = new CaseContacts(legalContact: legalContact, legalCase: newCase1, involvement: "client")
         def caseContact2 = new CaseContacts(legalContact: legalContact, legalCase: newCase2, involvement: "witness")
-        mockLegalContactToAvoidIssuesWithContactBeforeUpdateEvent()
+        mockCoreClassesToAvoidIssuesWithContactEventHandlers()
         mockDomain(Case, [newCase1, newCase2])
         mockDomain(LegalContact, [legalContact])
         mockDomain(CaseContacts, [caseContact1, caseContact2])
@@ -250,6 +250,7 @@ class LegalContactControllerSpec extends FrontlinesmsLegalControllerSpecBase {
     def 'should display a message when contact is successfully deleted'() {
         setup:
         def contacts = [new LegalContact(name: 'Me', primaryMobile: '98765')]
+        mockCoreClassesToAvoidIssuesWithContactEventHandlers()
         mockDomain(LegalContact, contacts)
         controller.params.id = contacts[0].id
 
@@ -277,6 +278,7 @@ class LegalContactControllerSpec extends FrontlinesmsLegalControllerSpecBase {
     def "should delete Legal contact from database when contact is deleted"() {
         setup:
         def contacts = [new LegalContact(name: 'Me', primaryMobile: '98765')]
+        mockCoreClassesToAvoidIssuesWithContactEventHandlers()
         mockDomain(LegalContact, contacts)
         controller.params.id = contacts[0].id
 

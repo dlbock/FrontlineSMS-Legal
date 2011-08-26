@@ -131,7 +131,7 @@ class EventControllerSpec extends FrontlinesmsLegalControllerSpecBase {
         setup:
         mockDomain(Event)
         mockDomain(EventContact)
-        mockLegalContactToAvoidIssuesWithContactBeforeUpdateEvent()
+        mockCoreClassesToAvoidIssuesWithContactEventHandlers()
         mockDomain(LegalContact,
                    [new LegalContact(id:1,name: "John Doe",primaryMobile: "435352",notes: "hii")])
 
@@ -153,7 +153,7 @@ class EventControllerSpec extends FrontlinesmsLegalControllerSpecBase {
         setup:
         mockDomain(Event)
         mockDomain(EventContact)
-        mockLegalContactToAvoidIssuesWithContactBeforeUpdateEvent()
+        mockCoreClassesToAvoidIssuesWithContactEventHandlers()
         mockDomain(LegalContact,[
                 new LegalContact(id:1,name: "John Doe",primaryMobile: "435352",notes: "hii"),
                 new LegalContact(id:34,name: "Jane Do",primaryMobile: "546354",notes: ":)"),
