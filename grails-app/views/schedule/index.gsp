@@ -88,7 +88,7 @@
                          </thead>
                             <tbody>
                             <g:each in="${contactList}" var="contact">
-                                <tr id="${contact.id}">
+                                <tr id="${contact.id}" class="contactRow">
 
                                     <td class="contact-name">
                                         <%=contact.name%>

@@ -91,6 +91,71 @@ class LinkContactToExistingEventSpec extends FrontlinesmsLegalGebSpec {
         linkedContactsInEventDetailsPopup.collect { it -> it.contactName }.size() == 0
     }
 
+    def "should display all the contacts filtered by the value in the search input of the search contact dialog"() {
+        given:
+        createEvent("Test")
+        new LegalContact(name: "neetu", primaryMobile: "22222").save(flush: true)
+        new LegalContact(name: "rupa", primaryMobile: "55555").save(flush: true)
+        to SchedulePage, "index"
+
+        when:
+        events()[0].click()
+        linkContactToExistingEvent()
+
+        and:
+        contactNameSearch.value("ne")
+        sleep(500)
+
+        then:
+        contactLinkNotVisible().size() == 1
+    }
+
+    def "should clear the search input when the dialog box is open, closed, reopened"() {
+        given:
+        createEvent("Test")
+        new LegalContact(name: "neetu", primaryMobile: "22222").save(flush: true)
+        new LegalContact(name: "rupa", primaryMobile: "55555").save(flush: true)
+        to SchedulePage, "index"
+
+        when:
+        events()[0].click()
+        linkContactToExistingEvent()
+
+        and:
+        contactNameSearch.value("ne")
+        sleep(500)
+        and:
+        CancelButtonIsClicked()
+        and:
+        linkContactToExistingEvent()
+
+        then:
+        contactNameSearch.value() == ""
+    }
+
+    def "should display all the contacts when the dialog box is reopened after a previous filter"() {
+        given:
+        createEvent("Test")
+        new LegalContact(name: "neetu", primaryMobile: "22222").save(flush: true)
+        new LegalContact(name: "rupa", primaryMobile: "55555").save(flush: true)
+        to SchedulePage, "index"
+
+        when:
+        events()[0].click()
+        linkContactToExistingEvent()
+
+        and:
+        contactNameSearch.value("ne")
+        sleep(500)
+        and:
+        CancelButtonIsClicked()
+        and:
+        linkContactToExistingEvent()
+
+        then:
+        existingContactList.collect { it -> it.contactName }.size() == 2
+    }
+
     def createEvent(title) {
         to NewEventPage
         eventTitle = title

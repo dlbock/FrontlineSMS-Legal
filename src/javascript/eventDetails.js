@@ -21,7 +21,7 @@ frontlinesms.attachActionWithLinkContactButton = function(buttonSelector, dialog
         modal: true,
         open: function() {
             $("#contact-name-search").val("");
-            $(".contactLink").removeAttr("filtermatch", true).show();
+            $(".contactRow").removeAttr("filtermatch", true).show();
         },
         buttons: [{
             text: "Cancel",

@@ -51,6 +51,11 @@ class SchedulePage extends Page {
             $("#cancel-button").click()
             true
         }
+        contactNameSearch {
+            $("input", id: "contact-name-search")
+        }
+        contactLinkNotVisible { $("tr", class: "contactRow", filtermatch: "false").collect {module LinkContactRow, it} }
+
     }
 }
 
