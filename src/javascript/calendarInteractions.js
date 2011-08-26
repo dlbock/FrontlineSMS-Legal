@@ -20,10 +20,10 @@ frontlinesms.displayEventDetails = function(calEvent) {
 
         dataType: 'json',
         error: function (data){
-            console.log("Failed to get linked contacts for event.");
+            frontlinesms.log("Failed to get linked contacts for event.");
         },
         success : function(data){
-            console.log("Success" + data.toString() + "  " + calEvent.id);
+            frontlinesms.log("Success" + data.toString() + "  " + calEvent.id);
             frontlinesms.constructContactsTable(data, calEvent.id)
         },
         cache:false
@@ -56,10 +56,10 @@ frontlinesms.constructContactsTable = function(data, eventId) {
             type: "POST",
             data: { "contactName": contactName, "eventId": eventId },
             error: function () {
-                console.log("Failed to unlink contact from event.");
+                frontlinesms.log("Failed to unlink contact from event.");
             },
             success : function() {
-                console.log("Success");
+                frontlinesms.log("Success");
             },
             cache:false
         });

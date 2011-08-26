@@ -7,9 +7,9 @@
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'jquery-ui-1.8.14.custom.css')}"/>
     <g:javascript library="jquery-1.6.1"/>
     <g:javascript library="jquery-ui-1.8.14.custom.min"/>
+    <g:javascript library="logging"/>
     <g:javascript library="mainLayout"/>
     <g:javascript library="tabs"/>
-    <g:javascript library="console"/>
     <script type="text/javascript">
         $(function() {
             frontlinesms.tabs();
