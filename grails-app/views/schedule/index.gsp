@@ -16,7 +16,6 @@
             $('#view-event').hide();
             frontlinesms.calendarInteractions();
             frontlinesms.eventDetails();
-            frontlinesms.eventCancelConfirmAction();
             frontlinesms.attachActionWithLinkContactButton();
             <g:if test="${year}">
             <g:if test="${month}">
