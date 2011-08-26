@@ -25,9 +25,17 @@ class SchedulePage extends Page {
             true
         }
         atDate {$('span.fc-header-title').text()}
+
         existingContactList {
             $("#contactsTable tbody tr").collect {module LinkContactRow, it}
         }
+
+        dateFieldSelected {
+            $("#event-date").click()
+            waitFor(3) { datePicker.present }
+        }
+        datePicker { $("div", id: "ui-datepicker-div") }
+
         eventDialog(wait: true) { module EventDialog }
         unlinkConfirmationDialog(required: false) { module ConfirmationDialog, messageId: "contactUnlinkDialog" }
         deleteConfirmationDialog(required: false) { module ConfirmationDialog, messageId: "delete-event-dialog" }
@@ -37,6 +45,9 @@ class SchedulePage extends Page {
 class EventDialog extends Module {
     static base = { $(id: "view-event") }
     static content = {
+        contactsLinkedToEvent {
+            $(".event-contact").collect {module ContactRow, it}
+        }
         eventTitle { $('#event-title').text()}
         eventDate { $('#event-date').text()}
         eventStartTime { $('#event-start-time').text()}

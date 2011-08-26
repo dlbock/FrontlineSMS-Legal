@@ -10,6 +10,7 @@
     <g:javascript library="confirmationDialog"/>
     <g:javascript library="calendarInteractions"/>
     <g:javascript library="eventDetails"/>
+    <g:javascript library="eventInteractions"/>
 
     <script type="text/javascript">
         $(function() {
@@ -17,6 +18,7 @@
             frontlinesms.calendarInteractions();
             frontlinesms.eventDetails();
             frontlinesms.attachActionWithLinkContactButton();
+            frontlinesms.activateDatePicker();
             <g:if test="${year}">
             <g:if test="${month}">
             $('#schedule').fullCalendar('gotoDate', ${year}, ${month});
