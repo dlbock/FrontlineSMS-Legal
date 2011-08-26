@@ -2,20 +2,20 @@ describe('linkContactToEvent', function () {
     beforeEach(function() {
         var tempHTML =
             '<div id="text-div">' +
-            '<input type="hidden" id="event-linked-contacts" value=""/>' +
-            '<div id="link-contacts" title="Link Contacts">' +
-
+                '<input type="hidden" id="event-linked-contacts" value=""/>' +
+                '<div id="link-contacts" title="Link Contacts">' +
+                '<input name="contactNameSearch" id="contact-name-search"/>' +
                 '<table id="contactsTable"> <tbody>' +
                 '<tr class="contactLink" id="fabio">' +
                 '<td  class="contact-name"> <a href="#" >fabio</a> </td>' +
                 '<td class="contact-number"> <a href="#">99999</a> </td>' +
                 '</tr>' +
-                 '<tr class="contactLink" id="dahlia">' +
+                '<tr class="contactLink" id="dahlia">' +
                 '<td  class="contact-name"> <a href="#" >dahlia</a> </td>' +
                 '<td class="contact-number"> <a href="#">33333</a> </td>' +
-                '</tr>'+
+                '</tr>' +
                 '</tbody></table> ' +
-            '</div>' +
+                '</div>' +
 
                 '<table name="contacts" id="contacts">' +
                 '<tr>' +
@@ -30,6 +30,23 @@ describe('linkContactToEvent', function () {
         $(tempHTML).appendTo("#fixtures");
         frontlinesms.linkContactToEvent();
 
+    });
+
+    it('link contacts dialog is closed', function () {
+        expect($('#link-contacts:visible').size()).toEqual(0);
+    });
+
+    it('when link-contacts button is clicked contacts dialog is opened', function () {
+        $("#link-contact-button").click();
+        expect($('#link-contacts:visible').size()).toEqual(1);
+    });
+
+    it('when the contact dialog is opened and a search phrase is entered, and the cancel button is clicked, contact dialog is reopened, all results are visible and the search bar is cleared', function () {
+        $("#link-contact-button").click();
+        $("#contact-name-search").val("fab");
+        $(".ui-button-text").click();
+        $("#link-contact-button").click();
+        expect($("#contact-name-search").val()).toEqual("");
     });
 
     it('when unlink button is clicked the appropriate contact is unlinked from event', function(){
