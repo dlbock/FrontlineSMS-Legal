@@ -38,7 +38,7 @@ frontlinesms.linkContactToEvent = function() {
     $("td.unlink-contact-button").live('click', function() {
         var contactId = $(this).parent().find('td span.id:hidden').text();
         $(this).parent().remove();
-        frontlinesms.removeLinkedContactIdFromHiddenField(contactId);
+        frontlinesms.unlinkLinkedContactIdFromHiddenField(contactId);
         return false;
     });
 };
@@ -51,7 +51,7 @@ frontlinesms.addLinkedContactIdToHiddenField = function(contactId) {
     $("#event-linked-contacts").val(contactIds.join(","));
 }
 
-frontlinesms.removeLinkedContactIdFromHiddenField = function(contactId) {
+frontlinesms.unlinkLinkedContactIdFromHiddenField = function(contactId) {
     var contactIds = $("#event-linked-contacts").val().split(",");
     if (contactIds.indexOf(contactId) > -1)
         contactIds.splice(contactIds.indexOf(contactId), 1);

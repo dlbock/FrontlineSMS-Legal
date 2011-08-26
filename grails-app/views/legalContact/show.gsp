@@ -151,7 +151,6 @@
     </g:if>
     <div id="show-contact-update-form" class="form-submit-area">
         <g:actionSubmit id="contact-save" value="Update" disabled="disabled"/>
-        <!--<button id="contact-save" class="action-button" disabled = "">Update</button>-->
     </div>
 </form>
 

@@ -1,6 +1,7 @@
 var frontlinesms = this.frontlinesms || {};
 
 frontlinesms.createNewContactOnLoad = function() {
+
     $("#contact-save").click(function() {
         frontlinesms.contactCreateWithoutNameConfirmAction();
         return false;
@@ -12,6 +13,7 @@ frontlinesms.createNewContactOnLoad = function() {
     frontlinesms.enableUpdateButtonOnDetailsChange("#contact-name", "#contact-save");
     frontlinesms.enableUpdateButtonOnDetailsChange("#contact-primary-mobile", "#contact-save");
     frontlinesms.enableUpdateButtonOnDetailsChange("#contact-notes", "#contact-save");
+
 };
 
 frontlinesms.contactCancelConfirmAction = function() {

@@ -179,7 +179,7 @@ class CaseControllerSpec extends ControllerSpec {
         controller.flash.warning == "Case not found."
     }
 
-    def "should remove case from database when case is deleted"() {
+    def "should delete case from database when case is deleted"() {
         setup:
         def cases = [new Case(caseId: '1234')]
         mockDomain(Case, cases)

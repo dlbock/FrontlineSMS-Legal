@@ -32,7 +32,7 @@ describe('linkContactToEvent', function () {
 
     });
 
-    it('when remove button is clicked the appropriate contact is removed', function(){
+    it('when unlink button is clicked the appropriate contact is unlinked from event', function(){
         $("#link-contact-button").click();
         $("#fabio").click();
         var secondRowSelector = "table#contacts tr:nth-child(2)";
@@ -40,7 +40,7 @@ describe('linkContactToEvent', function () {
         expect($(secondRowSelector + ":contains('fabio')").size()).toEqual(0);
     });
 
-    it('when remove button is clicked the appropriate contact id is removed from hidden form field', function(){
+    it('when unlink button is clicked the appropriate contact id is unlinked from hidden form field', function(){
         $("#link-contact-button").click();
         $("#fabio").click();
         $("#link-contact-button").click();

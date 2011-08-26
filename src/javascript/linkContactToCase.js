@@ -29,7 +29,7 @@ frontlinesms.linkContactToCase = function() {
     $(".unlink-contact-button").live('click', function() {
         var contactId = $(this).parent().find('td span.id:hidden').text();
         $(this).parent().remove();
-        frontlinesms.removeLinkedContactFromCaseHiddenField(contactId);
+        frontlinesms.unlinkLinkedContactFromCaseHiddenField(contactId);
         return false;
     });
 
@@ -51,7 +51,7 @@ frontlinesms.addLinkedContactToCaseHiddenField = function(contactId, relationshi
     $('#case-linked-contacts').val(JSON.stringify(linkedContacts));
 };
 
-frontlinesms.removeLinkedContactFromCaseHiddenField = function(contactId) {
+frontlinesms.unlinkLinkedContactFromCaseHiddenField = function(contactId) {
     var linkedContacts = $.parseJSON($('#case-linked-contacts').val()) || {};
     delete linkedContacts[contactId];
 

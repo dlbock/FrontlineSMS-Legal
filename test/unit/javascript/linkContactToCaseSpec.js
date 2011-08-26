@@ -30,6 +30,7 @@ describe('linkContactToCase', function () {
                 '</tr> </table>' +
 
                 '<button id="link-contact-button">Link contacts</button>' +
+
                 '</div>';
 
 
@@ -67,7 +68,7 @@ describe('linkContactToCase', function () {
         expect($('#case-linked-contacts').val()).toEqual("{\"5\":\"Client\"}");
     });
 
-    it('when a contact is removed from the linked contacts list the Unique Id from database should be removed from caseLinkedContact', function() {
+    it('when a contact is unlinked from the linked contacts list the Unique Id from database should be unlinked from caseLinkedContact', function() {
         spyOn(window, 'prompt').andReturn('Client');
         $('#5').click();
         $('#6').click();
@@ -85,7 +86,7 @@ describe('linkContactToCase', function () {
         expect(oldLinkedContacts).toEqual(newLinkedContacts);
     });
 
-    it('when remove button is clicked the appropriate contact is removed', function() {
+    it('when unlink button is clicked the appropriate contact is unlinked from case', function() {
         spyOn(window, 'prompt').andReturn('Client');
         $("#link-contact-button").click();
         $("#5").click();

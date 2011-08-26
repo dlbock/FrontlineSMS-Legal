@@ -3,7 +3,6 @@ var frontlinesms = this.frontlinesms || {};
 frontlinesms.linkCaseToContact = function() {
 
     $("#link-case-dialog").dialog({
-
         autoOpen: false,
         modal: true,
         width: 'auto',
@@ -26,6 +25,7 @@ frontlinesms.linkCaseToContact = function() {
             var relationship = prompt("Relationship to case:") || "";
             frontlinesms.addLinkedCaseToHiddenField(caseId, relationship);
             frontlinesms.addLinkedCaseToTable(caseId, relationship);
+             $('#contact-save').removeAttr("disabled");
         }
         $("#link-case-dialog").dialog("close");
         return false;
@@ -34,7 +34,8 @@ frontlinesms.linkCaseToContact = function() {
     $("td.unlink-case-button").live('click', function() {
         var caseId = $(this).parent().find('td span.id:hidden').text();
         $(this).parent().remove();
-        frontlinesms.removeLinkedCaseFromHiddenField(caseId);
+        $('#contact-save').removeAttr("disabled");
+        frontlinesms.unlinkLinkedCaseFromHiddenField(caseId);
         return false;
     });
 };
@@ -67,7 +68,7 @@ frontlinesms.addLinkedCaseToTable = function(caseId, relationship) {
     $('#cases').append(rowToAdd);
 }
 
-frontlinesms.removeLinkedCaseFromHiddenField = function(caseId) {
+frontlinesms.unlinkLinkedCaseFromHiddenField = function(caseId) {
     var linkedCases = $.parseJSON($('#contact-linked-cases').val()) || {};
     delete linkedCases[caseId];
 

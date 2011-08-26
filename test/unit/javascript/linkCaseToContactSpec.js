@@ -14,6 +14,7 @@ describe('linkCaseToContact', function () {
                 ' <td class="case-name">case2</td>' +
                 '<td>active</td>' +
                 '</tr>' +
+                '<button id = "cancel-button">Cancel</button>' +
                 '</tbody>' +
                 '</table>' +
                 '</div>' +
@@ -21,22 +22,23 @@ describe('linkCaseToContact', function () {
                 '<table id="cases">' +
                 '</table>' +
 
-                '<button id="link-case-button">Link cases</button>';
+                '<button id="link-case-button">Link cases</button>' +
+                '<button id="contact-save" disabled = "disabled">Update</button>';
         $(tempHTML).appendTo("#fixtures");
         frontlinesms.linkCaseToContact();
-
     });
 
 
-    it('when remove button is clicked the appropriate case is removed', function() {
+    it('when unlink button is clicked the appropriate case is unlinked from contact', function() {
         spyOn(window, 'prompt').andReturn('client');
         $("#link-case-button").click();
         $("#case1").click();
         var secondRowSelector = "table#linked-cases tr:first";
         $(secondRowSelector + " td.unlink-case-button").click();
         expect($(secondRowSelector + ":contains('case1')").size()).toEqual(0);
-    })
-    it('when remove button is clicked the appropriate case is removed from hidden form field', function() {
+    });
+
+    it('when unlink button is clicked the appropriate case is unlinked from hidden form field', function() {
         spyOn(window, 'prompt').andReturn('client');
         $("#link-case-button").click();
         $("#case1").click();
@@ -45,7 +47,7 @@ describe('linkCaseToContact', function () {
         var secondRowSelector = "table#cases tr:nth-child(2)";
         $(secondRowSelector + " td.unlink-case-button").click();
         expect($('#contact-linked-cases').val()).toEqual("{\"case1\":\"client\"}");
-    })
+    });
 
     it('when link-cases button is clicked case search dialog is opened', function () {
         spyOn(window, 'prompt').andReturn('client');
@@ -53,9 +55,29 @@ describe('linkCaseToContact', function () {
         expect($('#link-case-dialog:visible').size()).toEqual(1);
     });
 
+    it('should enable the Update button when case is unlinked', function() {
+        spyOn(window, 'prompt').andReturn('client');
+        $("#link-case-button").click();
+        $("#case1").click();
+        var secondRowSelector = "table#linked-cases tr:first";
+        $(secondRowSelector + " td.unlink-case-button").click();
+        expect($("#contact-save").attr("disabled")).toBeUndefined();
+    });
+
+    it('should enable the Update button when case is linked', function() {
+        spyOn(window, 'prompt').andReturn('client');
+        $("#link-case-button").click();
+        $("#case1").click();
+        expect($("#contact-save").attr("disabled")).toBeUndefined();
+    });
+
+    it('should keep Update button Disabled when case linking is canceled', function() {
+        spyOn(window, 'prompt').andReturn('client');
+        $("#link-case-button").click();
+        $("#cancel-button").click();
+        expect($("#contact-save").attr("disabled")).toBeTruthy();
+    });
     afterEach(function() {
-        $('body#fixtures > *').not(".jasmine_reporter").not('script').remove()
-    })
-
-
+        $('body#fixtures > *').not(".jasmine_reporter").not('script').remove();
+    });
 });

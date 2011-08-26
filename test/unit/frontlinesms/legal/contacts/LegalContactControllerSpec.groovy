@@ -274,7 +274,7 @@ class LegalContactControllerSpec extends FrontlinesmsLegalControllerSpecBase {
         controller.flash.warning == "Contact not found."
     }
 
-    def "should remove Legal contact from database when contact is deleted"() {
+    def "should delete Legal contact from database when contact is deleted"() {
         setup:
         def contacts = [new LegalContact(name: 'Me', primaryMobile: '98765')]
         mockDomain(LegalContact, contacts)
