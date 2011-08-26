@@ -19,6 +19,10 @@ frontlinesms.attachActionWithLinkContactButton = function(buttonSelector, dialog
     $(dialogSelector).dialog({
         autoOpen: false,
         modal: true,
+        open: function() {
+            $("#contact-name-search").val("");
+            $(".contactLink").removeAttr("filtermatch", true).show();
+        },
         buttons: [{
             text: "Cancel",
             click: function() {
@@ -27,6 +31,35 @@ frontlinesms.attachActionWithLinkContactButton = function(buttonSelector, dialog
             id: "cancel-button"
         }]
     });
+
+
+    $(".contactLink").click(function() {
+        var contactId = $(this).attr('id');
+        if (!frontlinesms.checkIfEventHasContactLinked(contactId)) {
+            frontlinesms.addLinkedContactIdToHiddenField(contactId);
+            frontlinesms.addLinkedContactToTableOnPopup(contactId);
+        }
+        $(dialogSelector).dialog("close");
+        return false;
+    });
+
+    frontlinesms.addLinkedContactToTableOnPopup = function(contactId) {
+    var row = $('#contactsTable').find('#' + contactId);
+    var rowToAdd = $('<tr>').append(
+        '<td>' +
+            $(row).find('.contact-name').text() +
+            '<span class="id" style="display:none;">' + contactId + '</span>' +
+            '</td>' +
+            '<td>' +
+            $(row).find('.contact-number').text() +
+            '</td>'
+    );
+    $('#event-contacts-table').append(rowToAdd);
+
+}
+
 };
+
+
 
 

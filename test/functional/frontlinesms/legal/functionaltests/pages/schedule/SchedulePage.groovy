@@ -37,8 +37,20 @@ class SchedulePage extends Page {
         datePicker { $("div", id: "ui-datepicker-div") }
 
         eventDialog(wait: true) { module EventDialog }
+
         unlinkConfirmationDialog(required: false) { module ConfirmationDialog, messageId: "contactUnlinkDialog" }
         deleteConfirmationDialog(required: false) { module ConfirmationDialog, messageId: "delete-event-dialog" }
+        linkContactFromPopup {
+            $('.contactLink')[0].click()
+            true
+        }
+        linkedContactsInEventDetailsPopup {
+            $("#event-contacts-table tbody tr").collect {module LinkContactRow, it}
+        }
+        CancelButtonIsClicked {
+            $("#cancel-button").click()
+            true
+        }
     }
 }
 

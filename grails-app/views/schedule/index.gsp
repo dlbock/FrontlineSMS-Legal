@@ -11,6 +11,10 @@
     <g:javascript library="calendarInteractions"/>
     <g:javascript library="eventDetails"/>
     <g:javascript library="eventInteractions"/>
+    <g:javascript library="unlinkContactFromEvent"/>
+    <g:javascript library="picnet.table.filter.min"/>
+    <g:javascript library="contactSearch"/>
+    <g:javascript library="linkContactToEvent"/>
 
     <script type="text/javascript">
         $(function() {
@@ -19,6 +23,7 @@
             frontlinesms.eventDetails();
             frontlinesms.attachActionWithLinkContactButton();
             frontlinesms.activateDatePicker();
+            frontlinesms.contactSearchOnLoad();
             <g:if test="${year}">
             <g:if test="${month}">
             $('#schedule').fullCalendar('gotoDate', ${year}, ${month});
@@ -42,6 +47,7 @@
     <label><b>End Time</b></label><br/>
     <input type="text" name="eventEndTime" id="event-end-time" value=""/><br/><br/>
 
+    <g:hiddenField name="linkedContacts" id="event-linked-contacts" value="${params.linkedContacts}"/>
     <table id="event-contacts-table">
         <thead>
         <tr >
@@ -82,7 +88,7 @@
                          </thead>
                             <tbody>
                             <g:each in="${contactList}" var="contact">
-                                <tr class="contactLink" id="${contact.id}">
+                                <tr id="${contact.id}">
 
                                     <td class="contact-name">
                                         <%=contact.name%>
@@ -91,7 +97,7 @@
                                     <td class="contact-number">
                                         <%=contact.primaryMobile%>
                                     </td>
-                                    <td class="link"><a href="#">Link Contact</a></td>
+                                    <td class="contactLink" id="${contact.id}"><a href="#">Link Contact</a></td>
 
                                 </tr>
                             </g:each>

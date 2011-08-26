@@ -36,6 +36,61 @@ class LinkContactToExistingEventSpec extends FrontlinesmsLegalGebSpec {
         existingContactList[0].contactNumber == "1234567"
     }
 
+    def 'should link contact to an existing event when the LINK CONTACT link (next to respective contact) is clicked on th Link Contact to an Event popup'() {
+        given:
+        createEvent("Test")
+        new LegalContact(name: 'fa', primaryMobile: '1234567').save(flush: true)
+        new LegalContact(name: 'fafd', primaryMobile: '1234567').save(flush: true)
+        to SchedulePage, "index"
+
+        when:
+        events()[0].click()
+        linkContactToExistingEvent()
+
+        and:
+        linkContactFromPopup()
+
+        then:
+        linkedContactsInEventDetailsPopup.collect { it -> it.contactName }.size() == 1
+    }
+
+    def 'should link the correct contact to an exisitng event when the LINK CONTACT link next to it is clicked'() {
+        given:
+        createEvent("Test")
+        new LegalContact(name: 'fa', primaryMobile: '1234567').save(flush: true)
+        new LegalContact(name: 'fafd', primaryMobile: '1234567').save(flush: true)
+        to SchedulePage, "index"
+
+        when:
+        events()[0].click()
+        linkContactToExistingEvent()
+
+        and:
+        linkContactFromPopup()
+
+        then:
+        linkedContactsInEventDetailsPopup.collect { it -> it.contactName }[0] == 'fa'
+        linkedContactsInEventDetailsPopup.collect { it -> it.contactNumber }[0] == '1234567'
+    }
+
+    def 'should not link any contacts when cancel button is clicked'(){
+        given:
+        createEvent("Test")
+        new LegalContact(name: 'fa', primaryMobile: '1234567').save(flush: true)
+        new LegalContact(name: 'fafd', primaryMobile: '1234567').save(flush: true)
+        to SchedulePage, "index"
+
+        when:
+        events()[0].click()
+        linkContactToExistingEvent()
+
+        and:
+        CancelButtonIsClicked()
+
+        then:
+        linkedContactsInEventDetailsPopup.collect { it -> it.contactName }.size() == 0
+    }
+
     def createEvent(title) {
         to NewEventPage
         eventTitle = title
