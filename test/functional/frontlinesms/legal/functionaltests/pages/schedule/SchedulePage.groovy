@@ -11,12 +11,8 @@ class SchedulePage extends Page {
         events {
             $("span[class='fc-event-title']")
         }
-        testEvent { $("span[class='fc-event-title']", text: "test event") }
         eventContacts {
             $("tr[class='event-contact']")
-        }
-        eventListSize {
-            $("span[class='fc-event-title']").size()
         }
         deleteEventButton { $('#delete-event') }
         deleteEvent {
@@ -41,10 +37,6 @@ class SchedulePage extends Page {
 class EventDialog extends Module {
     static base = { $(id: "view-event") }
     static content = {
-        
-        contactsLinkedToEvent {
-            $(".event-contact").collect {module ContactRow, it}
-        }
         eventTitle { $('#event-title').text()}
         eventDate { $('#event-date').text()}
         eventStartTime { $('#event-start-time').text()}

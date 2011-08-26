@@ -16,7 +16,7 @@ class UnlinkContactFromEventSpec extends FrontlinesmsLegalGebSpec {
 
         when:
         at SchedulePage
-        testEvent.click()
+        events.find{ it.text() == "test event" }.click()
 
         then:
         eventDialog.contactsLinkedToEvent.collect { it -> it.unlinkContact }.size() == 1
@@ -31,7 +31,7 @@ class UnlinkContactFromEventSpec extends FrontlinesmsLegalGebSpec {
 
         when:
         at SchedulePage
-        testEvent.click()
+        events.find{ it.text() == "test event" }.click()
         eventDialog.contactsLinkedToEvent[0].unlinkContact.click()
 
         and:
@@ -51,7 +51,7 @@ class UnlinkContactFromEventSpec extends FrontlinesmsLegalGebSpec {
 
         when:
         at SchedulePage
-        testEvent.click()
+        events.find{ it.text() == "test event" }.click()
         eventDialog.contactsLinkedToEvent[0].unlinkContact.click()
 
         and:

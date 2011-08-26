@@ -40,7 +40,7 @@ class DeleteEventSpec extends FrontlinesmsLegalGebSpec {
         deleteConfirmationDialog.noButton.click()
 
         then:
-        eventListSize() == oldEventListSize;
+        events().size() == oldEventListSize;
     }
 
     def 'should redirect to the event date on successful creation of the event'() {
