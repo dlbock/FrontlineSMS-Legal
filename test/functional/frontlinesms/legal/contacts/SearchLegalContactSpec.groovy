@@ -27,4 +27,27 @@ class SearchLegalContactSpec extends FrontlinesmsLegalGebSpec {
 
     }
 
+     def "should display only the filtered contacts on pressing RETURN in the contact search bar"() {
+        setup:
+
+        new LegalContact(name: "fabio", primaryMobile: "22222").save(flush: true)
+        new LegalContact(name: "dev", primaryMobile: "55555").save(flush: true)
+
+        and:
+        to HomePage
+
+        when:
+        searchContactLink.click()
+
+        then:
+        at SearchLegalContactPage
+
+        and:
+        contactNameSearch.value("fab\r")
+        sleep(500)
+
+        then:
+        contactLinkNotVisible().size() == 1
+    }
+
 }

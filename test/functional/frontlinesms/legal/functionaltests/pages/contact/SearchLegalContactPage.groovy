@@ -13,6 +13,8 @@ class SearchLegalContactPage extends Page {
         deleteDialog { $("div", id: "deleteDialog") }
         deleteYes { $("button", id: "confirm-yes")}
         deleteNo { $("button", id: "confirm-no")}
+        contactNameSearch { $("input", id: "contact-search-bar") }
+        contactLinkNotVisible { $("tr", class: "contactLink", filtermatch: "false").collect {module LegalContactRow, it} }
     }
 
 

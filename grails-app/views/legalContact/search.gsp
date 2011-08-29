@@ -19,11 +19,10 @@
 <body>
 
 <h1 class="form-header">Search for Contact by Name/Mobile Number</h1>
+<label>Enter the contact Name/Mobile Number to search for a contact</label>
+<br>
+<g:textField class="wide-text-box" name="contact-search-bar" id="contact-search-bar" value="" size="70"/>
 
-<g:form action="search" method="POST">
-    <label>Enter the contact Name/Mobile Number to search for a contact</label>
-    <g:textField class="wide-text-box" name="contact-search-bar" id="contact-search-bar" value=""/>
-</g:form>
 <g:if test="${foundContact}">
     <table class="search-results" id="SearchResults">
         <thead>
@@ -35,10 +34,11 @@
         <tbody>
 
         <g:each in="${foundContact}" var="legalContact">
-            <tr>
+             <tr class="contactLink" id="<%=legalContact.id%>">
                 <td>
                     <g:link controller="legalContact" action="show"
                             id="${legalContact.id}"><%=legalContact.name%></g:link>
+
                 </td>
                 <td>
                     <g:link controller="legalContact" action="show"
