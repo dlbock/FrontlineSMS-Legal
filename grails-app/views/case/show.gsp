@@ -112,8 +112,8 @@
     </g:form>
 </div>
 
-<div id="case-update-cancel-dialog" style="display: none;">
-    <p>Do you wish to discard these changes?</p>
+<div id="case-update-cancel-dialog" title="Discard Changes?" style="display: none;">
+    <p>Do you want to discard changes to this case? Your changes will not be saved.</p>
 </div>
 
 <div id="deleteDialog" title="Delete Case" style="display: none;">

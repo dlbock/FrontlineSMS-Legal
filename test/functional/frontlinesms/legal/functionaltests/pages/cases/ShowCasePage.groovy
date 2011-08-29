@@ -26,6 +26,10 @@ class ShowCasePage extends Page {
         contactNameSearch { $("input", id: "contact-name-search") }
         contactLinkNotVisible { $("tr", class: "contactLink", filtermatch: "false").collect {module ContactRow, it} }
         clickDialogCancelButton { $(".ui-button-text").value("Cancel") }
+        cancelDialog { $("div", id: "case-update-cancel-dialog") }
+        cancelButton {$("button", id: "case-update-cancel")}
+        cancelYes { $("button", id: "cancel-confirm-yes")}
+        cancelNo { $("button", id: "cancel-confirm-no")}
     }
 }
 

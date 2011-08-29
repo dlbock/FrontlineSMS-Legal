@@ -3,6 +3,7 @@ package frontlinesms.legal.cases
 import frontlinesms.legal.Case
 import frontlinesms.legal.functionaltests.FrontlinesmsLegalGebSpec
 import frontlinesms.legal.functionaltests.pages.cases.ShowCasePage
+import frontlinesms.legal.functionaltests.pages.HomePage
 import frontlinesms.legal.LegalContact
 
 class ShowCaseSpec extends FrontlinesmsLegalGebSpec {

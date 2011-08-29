@@ -11,6 +11,11 @@ frontlinesms.showCaseOnLoad = function() {
         $('#case-update').removeAttr('disabled');
     });
 
+    $('textarea').change(function() {
+        modified = true;
+        $('#case-update').removeAttr('disabled');
+    });
+
     frontlinesms.enableUpdateButtonOnDetailsChange("#case-description", "#case-update");
     frontlinesms.enableUpdateButtonOnDetailsChange("#case-id", "#case-update");
 
