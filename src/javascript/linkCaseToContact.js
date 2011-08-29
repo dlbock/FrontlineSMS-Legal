@@ -7,6 +7,7 @@ frontlinesms.linkCaseToContact = function() {
         modal: true,
         width: 'auto',
         open: function() {
+            frontlinesms.log("inside open function in link case dialog");
             $("#caseId").val("");
             $(".caseLink").removeAttr("filtermatch", true).show();
         },
@@ -20,6 +21,7 @@ frontlinesms.linkCaseToContact = function() {
     });
 
     $("#link-case-button").click(function() {
+        frontlinesms.log("clicked link case button");
         $("#link-case-dialog").dialog("open");
         return false;
     });

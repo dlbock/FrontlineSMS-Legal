@@ -9,6 +9,10 @@ import frontlinesms.legal.LegalContact
 
 class CreateLegalContactSpec extends FrontlinesmsLegalGebSpec {
 
+    def setup(){
+
+    }
+
     def "should save contact and redirect to show page when user chooses to save contact without name"() {
         given:
         to HomePage
@@ -51,6 +55,22 @@ class CreateLegalContactSpec extends FrontlinesmsLegalGebSpec {
 
         then:
         linkCaseButton.size() == 1
+    }
+
+    def "should show link case search window with search box and list of cases when link case button is clicked"() {
+        given:
+        new Case(caseId: "123", description: "test").save(flush: true)
+        new Case(caseId: "321", description: "test2").save(flush: true)
+
+        when:
+        to CreateLegalContactPage
+        linkCaseButton.click()
+
+        then:
+        linkCaseDialog.present
+        casesToLink.size() == 2
+        caseIdSearch.present
+        linkCaseCancelButton.present
     }
 
 }

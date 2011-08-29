@@ -37,10 +37,3 @@ class EventRow extends Module {
         title { cell(0).text() }
     }
 }
-class CaseRow extends Module {
-    static content = {
-        cell { i -> $("td", i) }
-        caseId { $("span").text() }
-        unlink { cell(2) }
-    }
-}

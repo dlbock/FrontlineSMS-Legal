@@ -22,7 +22,6 @@
             frontlinesms.initializeCaseDeletion();
             frontlinesms.enableUpdateButtonOnDetailsChange();
             frontlinesms.validateContactNumber();
-
         })
     </script>
 </head>

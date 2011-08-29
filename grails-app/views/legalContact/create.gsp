@@ -1,12 +1,12 @@
-<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ page import="org.springframework.web.util.HtmlUtils" contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
     <meta name="layout" content="main">
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'forms.css')}"/>
     <g:javascript library="linkCaseToContact"/>
     <g:javascript library="picnet.table.filter.min"/>
-    <g:javascript library="caseSearch"/>
     <g:javascript library="contactCreate"/>
+    <g:javascript library="caseSearch"/>
     <g:javascript library="enableUpdateButtonOnDetailsChange"/>
     <g:javascript library="formValidation"/>
 
@@ -15,8 +15,8 @@
     <script type="text/javascript">
         $(function() {
             frontlinesms.linkCaseToContact();
-            frontlinesms.caseSearchOnLoad();
             frontlinesms.createNewContactOnLoad();
+            frontlinesms.caseSearchOnLoad();
             frontlinesms.enableUpdateButtonOnDetailsChange();
             frontlinesms.validateContactNumber();
 
@@ -29,17 +29,21 @@
 <h1 class="form-header">Create Contact</h1>
 
 <form action="save" method="POST" id="contact-save-form">
+    <g:hiddenField name="linkedCases" id="contact-linked-cases" value="${contactLinkedCases}"/>
     <label>Name</label>
     <g:textField name="name" id="contact-name" value="${params.name}"/>
     <label>Number</label>
     <g:textField name="primaryMobile" id="contact-primary-mobile" value="${params.primaryMobile}" maxlength="15"/>
     <label>Notes</label>
     <g:textArea name="notes" id="contact-notes" value="${params.notes}" cols="100" rows="10"/>
+    
+    <div class="form-submit-area">
+        <button id="link-case-button">Link Cases</button>
+    </div>
 
     <div class="form-submit-area">
         <button id="contact-save">Save</button>
         <button id="contact-create-cancel">Cancel</button>
-        <button id="link-case-button">Link Case</button>
     </div>
 </form>
 
@@ -74,7 +78,6 @@
             </table>
         </g:if>
     </g:form>
-
 </div>
 
 <div id="contact-save-no-name-dialog" title="Save Contact without Contact Name?" style="display: none;">

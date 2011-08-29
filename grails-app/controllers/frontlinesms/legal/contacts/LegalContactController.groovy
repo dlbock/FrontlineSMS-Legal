@@ -12,6 +12,7 @@ class LegalContactController {
     def index = { }
 
     def create = {
+        [allCases: Case.list()]
     }
 
     def search = {

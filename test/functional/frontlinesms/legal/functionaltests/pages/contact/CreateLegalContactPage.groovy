@@ -20,10 +20,15 @@ class CreateLegalContactPage extends Page {
         cancelYes { $("button", id: "contact-create-cancel-confirm") }
         cancelNo { $("button", id: "contact-create-cancel-abort") }
         linkCaseDialog { $("div", id: "link-case-dialog")}
-        caseIdSearch { $("input", id: "caseId") }
-        searchResults {
-            $("tbody tr").collect {module CaseRow, it}
+        casesToLink {
+            try {
+                $("tr[class='caseLink']")
+            }
+            catch (Exception e) {
+                null
+            }
         }
+        caseIdSearch { $("input", id: "caseId") }
         linkCaseCancelButton { $(".ui-button-text").value("Cancel") }
     }
 }
