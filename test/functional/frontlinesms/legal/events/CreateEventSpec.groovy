@@ -25,6 +25,27 @@ class CreateEventSpec extends FrontlinesmsLegalGebSpec {
     }
 
 
+    def "when hours are typed in the StartTime text box then minutes should be set to zero"(){
+        given: to NewEventPage
+
+        when: startTimeField.click()
+
+        and: startTimeField << "3"
+
+        then: startTimeField.value() == "03:00AM"
+    }
+
+        def "when hours are typed in the EndTime text box then minutes should be set to zero"(){
+        given: to NewEventPage
+
+        when: endTimeField.click()
+
+        and: endTimeField << "5"
+
+        then: endTimeField.value() == "05:00AM"
+    }
+
+
     def 'should hide cancel confirm dialog when no is clicked'(){
         given:
         to NewEventPage
