@@ -4,13 +4,17 @@
       <meta name="layout" content="main">
       <link rel="stylesheet" href="${resource(dir: 'css', file: 'forms.css')}"/>
       <g:javascript library="contactCreate"/>
+      <g:javascript library="enableUpdateButtonOnDetailsChange"/>
       <g:javascript library="formValidation"/>
+
 
       <title>Create New Contact</title>
       <script type="text/javascript">
           $(function() {
               frontlinesms.createNewContactOnLoad();
+              frontlinesms.enableUpdateButtonOnDetailsChange();
               frontlinesms.validateContactNumber();
+
           })
       </script>
 
