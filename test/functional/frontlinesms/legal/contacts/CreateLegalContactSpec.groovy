@@ -4,6 +4,8 @@ import frontlinesms.legal.functionaltests.FrontlinesmsLegalGebSpec
 import frontlinesms.legal.functionaltests.pages.HomePage
 import frontlinesms.legal.functionaltests.pages.contact.CreateLegalContactPage
 import frontlinesms.legal.functionaltests.pages.contact.ShowLegalContactPage
+import frontlinesms.legal.Case
+import frontlinesms.legal.LegalContact
 
 class CreateLegalContactSpec extends FrontlinesmsLegalGebSpec {
 
@@ -41,6 +43,14 @@ class CreateLegalContactSpec extends FrontlinesmsLegalGebSpec {
 
         then:
         assert at(HomePage)
+    }
+
+    def "should see link case button on the create legal contact page"() {
+        when:
+        to CreateLegalContactPage
+
+        then:
+        linkCaseButton.size() == 1
     }
 
 }

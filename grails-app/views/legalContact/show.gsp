@@ -36,7 +36,8 @@
     <label>Name</label>
     <g:textField name="name" id="contact-name" value="${contactToDisplay.name}"/>
     <label>Number</label>
-    <g:textField name="primaryMobile" id="contact-primary-mobile" value="${contactToDisplay.primaryMobile}" maxlength="15"/>
+    <g:textField name="primaryMobile" id="contact-primary-mobile" value="${contactToDisplay.primaryMobile}"
+                 maxlength="15"/>
     <label>Notes</label>
     <g:textArea rows="10" cols="100" name="notes" id="contact-notes" value="${contactToDisplay.notes}"/>
 
@@ -44,6 +45,7 @@
     <div class="form-submit-area">
         <button id="link-case-button">Link Cases</button>
     </div>
+
 
     <table name="cases" id="cases">
         <thead>
