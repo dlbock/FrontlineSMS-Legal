@@ -3,6 +3,9 @@ package frontlinesms.legal.schedule
 import frontlinesms.legal.Event
 import frontlinesms.legal.EventContact
 import frontlinesms.legal.LegalContact
+import java.sql.Time
+import frontlinesms.legal.TimeFormatter
+import org.openqa.selenium.Alert
 
 class ScheduleController {
 
@@ -59,5 +62,29 @@ class ScheduleController {
         def eventContact = EventContact.findByEventAndLegalContact(event, contact)
         eventContact.delete()
         render "successfully unlinked"
+    }
+
+    def updateEvent = {
+        def formattedParams = formatParameters()
+        def event = Event.findById(params.eventId)
+        if (event != null) {
+            event.eventTitle = formattedParams.eventTitle
+            event.dateFieldSelected = new Date(params.eventDate)
+            event.startTimeField = Time.valueOf(formattedParams.startTimeField)
+            event.endTimeField = Time.valueOf(formattedParams.endTimeField)
+            event.save(flush: true)
+//            redirect(action: "index")
+        }
+        else
+            render "Event not found!!!"
+
+    }
+
+    private def formatParameters() {
+        [
+                startTimeField: TimeFormatter.formatTime(params.eventStartTime),
+                endTimeField: TimeFormatter.formatTime(params.eventEndTime),
+                eventTitle: (params.eventTitle == null || params.eventTitle.trim() == "") ? "Untitled Event" : params.eventTitle.trim()
+        ]
     }
 }

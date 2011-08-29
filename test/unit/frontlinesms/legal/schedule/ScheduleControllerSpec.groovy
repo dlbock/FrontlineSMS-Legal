@@ -5,6 +5,8 @@ import frontlinesms.legal.EventContact
 import frontlinesms.legal.LegalContact
 import frontlinesms2.Contact
 import grails.plugin.spock.ControllerSpec
+import frontlinesms.legal.EventContact
+import java.sql.Time
 
 class ScheduleControllerSpec extends ControllerSpec {
     def "delete event with event id"() {
@@ -82,6 +84,32 @@ class ScheduleControllerSpec extends ControllerSpec {
 
         then:
         controller.response.contentAsString == "successfully unlinked"
+    }
+
+    def 'should update event when title, date, start date, end date are given'() {
+        given:
+        def date = new Date("August 26,2011")
+        def startTime = Time.valueOf("08:45:00")
+        def endTime = Time.valueOf("11:45:00")
+
+        def theEvent = new Event(eventTitle: "test", dateFieldSelected: date, startTimeField: startTime, endTimeField: endTime)
+        def events = [theEvent]
+        mockDomain(Event, events)
+
+        controller.params.eventId = theEvent.id;
+        controller.params.eventTitle = "update-test";
+        controller.params.eventDate = "August 26,2011";
+        controller.params.eventStartTime = "02:39AM";
+        controller.params.eventEndTime = "03:39AM";
+        
+
+        when:
+        controller.updateEvent()
+
+        then:
+        def updatedEvent = Event.findByEventTitle("update-test")
+        updatedEvent.eventTitle.equals("update-test")
+        Event.findByEventTitle("test") == null
     }
 }
 
