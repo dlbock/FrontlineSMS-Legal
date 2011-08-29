@@ -1,11 +1,10 @@
 package frontlinesms.legal.events
 
+import frontlinesms.legal.Case
+import frontlinesms.legal.LegalContact
 import frontlinesms.legal.functionaltests.FrontlinesmsLegalGebSpec
 import frontlinesms.legal.functionaltests.pages.HomePage
 import frontlinesms.legal.functionaltests.pages.events.NewEventPage
-import frontlinesms.legal.functionaltests.pages.schedule.SchedulePage
-import spock.lang.Ignore
-import frontlinesms.legal.LegalContact
 
 class CreateEventSpec extends FrontlinesmsLegalGebSpec {
      def "should be able to navigate to the create event page from the menu"() {
@@ -147,7 +146,7 @@ class CreateEventSpec extends FrontlinesmsLegalGebSpec {
         contactNameSearch.value("fab")
         sleep(500)
         and:
-        clickDialogCancelButton.click()
+        contactDialogCancelButton.click()
         and:
         clickLinkContact.click()
 
@@ -168,7 +167,7 @@ class CreateEventSpec extends FrontlinesmsLegalGebSpec {
         contactNameSearch.value("fab")
         sleep(500)
         and:
-        clickDialogCancelButton.click()
+        contactDialogCancelButton.click()
         and:
         clickLinkContact.click()
 
@@ -176,7 +175,63 @@ class CreateEventSpec extends FrontlinesmsLegalGebSpec {
         contactLinkNotVisible().size() == 0
     }
 
+    def "should display a Link Case button"(){
 
+        when:
+        to NewEventPage
 
+        then:
+        linkCaseButton.size() == 1
+    }
 
+    def "should not display link case dialog when page is loaded"()
+    {
+        when:
+        to NewEventPage
+
+        then:
+        linkCaseDialog.displayed == false
+    }
+
+    def "should display a dialog with list of cases when link case button is clicked"()
+    {
+        when:
+        to NewEventPage
+
+        and:
+        linkCaseButton.click()
+
+        then:
+        linkCaseDialog.displayed == true
+    }
+
+    def "should close case dialog when cancel button is clicked on the dialog"(){
+        when:
+        to NewEventPage
+
+        and:
+        linkCaseButton.click()
+
+        and:
+        caseDialogCancelButton.click()
+
+        then:
+        linkCaseDialog.displayed == false
+    }
+
+    def "should display cases in the case dialog "(){
+
+        setup:
+        new Case(caseId: "1112", description: "ertyui").save(flush: true)
+        new Case(caseId: "1113", description: "erdstyui").save(flush: true)
+
+        when:
+        to NewEventPage
+
+        and:
+        linkCaseButton.click()
+
+        then:
+        casesToLink.size() == 2
+    }
 }

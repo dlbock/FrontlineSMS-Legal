@@ -9,11 +9,16 @@ frontlinesms.linkContactToEvent = function() {
             $("#contact-name-search").val("");
             $(".contactLink").removeAttr("filtermatch", true).show();
         },
+
         buttons: {
-            "Cancel": function() {
-                $("#contact-name-search").val("");
-                $(".contactLink").removeAttr("filtermatch", true).show();
-                $(this).dialog("close");
+            "Cancel" : {
+                text: "Cancel",
+                id: "cancel-link-contact",
+                click: function() {
+                    $("#contact-name-search").val("");
+                    $(".contactLink").removeAttr("filtermatch", true).show();
+                    $(this).dialog("close");
+                }
             }
         }
     });
@@ -69,7 +74,7 @@ frontlinesms.addLinkedContactToTable = function(contactId) {
             $(row).find('.contact-number').text() +
             '</td>' +
             '<td class="unlink-contact-button">' +
-                '<a href="">Unlink</a>' +
+            '<a href="">Unlink</a>' +
 
             '</td>'
     );

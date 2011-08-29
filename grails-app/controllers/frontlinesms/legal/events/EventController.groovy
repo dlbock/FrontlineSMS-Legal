@@ -1,11 +1,8 @@
 package frontlinesms.legal.events
 
-import frontlinesms.legal.Event
-import frontlinesms.legal.EventContact
-import frontlinesms.legal.LegalContact
-import frontlinesms.legal.TimeFormatter
-import java.text.SimpleDateFormat
 import java.sql.Time
+import java.text.SimpleDateFormat
+import frontlinesms.legal.*
 
 class EventController {
 
@@ -15,7 +12,7 @@ class EventController {
         params.startTimeField = params.startTimeField ? params.startTimeField : ""
         params.dateFieldSelected = params.dateFieldSelected ? params.dateFieldSelected : ""
         params.endTimeField = params.endTimeField ? params.endTimeField : ""
-        [contactList: LegalContact.list()]
+        [allCases: Case.getAll(),contactList: LegalContact.list()]
     }
 
 

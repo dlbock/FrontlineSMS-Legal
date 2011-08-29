@@ -29,8 +29,11 @@ class NewEventPage extends Page {
         linkContactDialog { $("div", id: "link-contacts") }
         contactNameSearch { $("input", id: "contact-name-search") }
         contactLinkNotVisible { $("tr", class: "contactLink", filtermatch: "false").collect {module ContactRow, it} }
-        clickDialogCancelButton { $(".ui-button-text").value("Cancel") }
-
+        contactDialogCancelButton { $("#cancel-link-contact") }
+        linkCaseButton {$("button", id: "link-case-button")}
+        linkCaseDialog { $("div", id: "link-case-dialog") }
+        caseDialogCancelButton { $("#cancel-link-case") }
+        casesToLink { $(".caseLink") }
     }
 }
 

@@ -1,4 +1,4 @@
-
+<%@ page import="org.springframework.web.util.HtmlUtils" contentType="text/html;charset=UTF-8" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
@@ -9,13 +9,14 @@
     <g:javascript library="jquery.timeentry.min"/>
     <g:javascript library="eventInteractions"/>
     <g:javascript library="linkContactToEvent"/>
+    <g:javascript library="linkCaseToEvent"/>
     <g:javascript library="contactSearch"/>
 
     <script type="text/javascript">
         $(function() {
             frontlinesms.linkContactToEvent();
+            frontlinesms.linkCaseToEvent();
             frontlinesms.contactSearchOnLoad();
-
         })
     </script>
 
@@ -24,7 +25,7 @@
 <body>
 <h1>Create Event</h1>
 
-<form action="save" name="createEventForm" method="post">
+<form action="save" name="createEventForm" method="post"> 
     <label>Title</label>
     <g:textField id="event-title" name="eventTitle" value="${params.eventTitle}"/><br><br>
     <label>Date</label>
@@ -49,6 +50,10 @@
 
     </table>
     <br>
+
+    <div class="form-submit-area">
+        <button id="link-case-button">Link case</button>
+    </div>
 
     <div class="form-submit-area">
         <input type="submit" id="event-save" value="Save"/>
@@ -93,6 +98,39 @@
     </g:form>
 </div>
 
+<div id="link-case-dialog" title="Link Cases">
+    <h3 class="form-header">Search for Case by Case ID</h3>
+    <label>Enter the case ID to search for cases</label>
+    <g:textField class="medium-text-box" name="caseId" id="caseId"/>
+
+    <g:form action="search" method="POST">
+
+        <g:if test="${allCases}">
+            <table class="search-results" id="SearchResults">
+                <thead>
+                <tr>
+                    <th>Case ID</th>
+                    <th>Status</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <g:each in="${allCases}" var="legalCase">
+                    <tr class="caseLink" id="${legalCase.id}">
+                        <td class="case-name">
+                            <%=HtmlUtils.htmlEscape(legalCase.caseId)%>
+                        </td>
+                        <td>
+                            <%=legalCase.active ? "active" : "inactive"%>
+                        </td>
+                    </tr>
+                </g:each>
+                </tbody>
+            </table>
+        </g:if>
+    </g:form>
+
+</div>
 
 <div id="event-cancel-dialog" title="Cancel event creation?" style="display: none;">
     <p>Are you sure you want to cancel this event? Your event will not be saved?</p>
