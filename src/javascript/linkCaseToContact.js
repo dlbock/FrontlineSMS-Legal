@@ -6,8 +6,14 @@ frontlinesms.linkCaseToContact = function() {
         autoOpen: false,
         modal: true,
         width: 'auto',
+        open: function() {
+            $("#caseId").val("");
+            $(".caseLink").removeAttr("filtermatch", true).show();
+        },
         buttons: {
             "Cancel": function() {
+                $("#caseId").val("");
+                $(".caseLink").removeAttr("filtermatch", true).show();
                 $(this).dialog("close");
             }
         }

@@ -27,7 +27,11 @@
         <div class="form-submit-area">
             <button id="contact-save">Save</button>
             <button id="contact-create-cancel">Cancel</button>
-        </div>
+
+
+        <div class="form-submit-area">
+        <button id="link-case-button">Link Cases</button>
+    </div>
 
     </form>
 

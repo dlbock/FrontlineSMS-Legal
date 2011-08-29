@@ -6,6 +6,7 @@ import frontlinesms.legal.LegalContact
 import frontlinesms.legal.functionaltests.FrontlinesmsLegalGebSpec
 import frontlinesms.legal.functionaltests.pages.contact.ShowLegalContactPage
 import java.sql.Time
+import frontlinesms.legal.Case
 
 class ShowLegalContactSpec extends FrontlinesmsLegalGebSpec {
 
@@ -33,7 +34,6 @@ class ShowLegalContactSpec extends FrontlinesmsLegalGebSpec {
         EventContact.link(pastEvent, legalContact)
         EventContact.link(futureEvent, legalContact)
         legalContact.id
-
     }
 
 
@@ -71,5 +71,22 @@ class ShowLegalContactSpec extends FrontlinesmsLegalGebSpec {
 
     }
 
+    def "should continue showing the search contact dialog box after pressing RETURN when searching for a contact"() {
+        setup:
+        new Case(caseId: "1112", description: "ertyui").save(flush: true)
+        new Case(caseId: "1123", description: "ertooo").save(flush: true)
+        def contact1 = new LegalContact(name: "fabio", primaryMobile: "22222").save(flush: true)
+        def contact2 =new LegalContact(name: "dev", primaryMobile: "55555").save(flush: true)
 
+        when:
+        to ShowLegalContactPage, contact1.id
+        and:
+        linkCaseButton.click()
+        and:
+        caseIdSearch.value("\r")
+        sleep(500)
+
+        then:
+        caseLinkNotVisible.size() == 0
+    }
 }

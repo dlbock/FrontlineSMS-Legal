@@ -3,6 +3,7 @@ describe('linkCaseToContact', function () {
         var tempHTML =
             '<input type="hidden" id="contact-linked-cases" value=""/>' +
                 '<div id="link-case-dialog" title="Link Cases">' +
+                '<input name="caseIdSearch" id="caseId"/>' +
                 '<table id="SearchResults">' +
                 '<thead></thead>' +
                 '<tbody>' +
@@ -28,6 +29,22 @@ describe('linkCaseToContact', function () {
         frontlinesms.linkCaseToContact();
     });
 
+    it('link case dialog is closed', function () {
+        expect($('#link-case-dialog:visible').size()).toEqual(0);
+    });
+
+    it('when link-contacts button is clicked contacts dialog is opened', function () {
+        $("#link-case-button").click();
+        expect($('#link-case-dialog:visible').size()).toEqual(1);
+    });
+
+    it('when the case dialog is opened and a search phrase is entered, and the cancel button is clicked, case dialog is reopened, all results are visible and the search bar is cleared', function () {
+        $("#link-case-button").click();
+        $("#caseId").val("cas");
+        $(".ui-button-text").click();
+        $("#link-case-button").click();
+        expect($("#caseId").val()).toEqual("");
+    });
 
     it('when unlink button is clicked the appropriate case is unlinked from contact', function() {
         spyOn(window, 'prompt').andReturn('client');

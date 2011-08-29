@@ -13,11 +13,11 @@ class ShowLegalContactPage extends Page {
         linkCaseButton { $("button", id: "link-case-button")}
         pastEventsTable {$("#past-events tbody tr").collect {module EventRow, it} }
         futureEventsTable {$("#future-events tbody tr").collect {module EventRow, it} }
-        deleteButton{$("button", id:"delete-button")}
+        deleteButton {$("button", id: "delete-button")}
         deleteDialog { $("div", id: "deleteDialog") }
         deleteYes { $("button", id: "confirm-yes")}
         deleteNo { $("button", id: "confirm-no")}
-         casesToLink {
+        casesToLink {
             try {
                 $("tr[class='caseLink']")
             }
@@ -26,6 +26,9 @@ class ShowLegalContactPage extends Page {
             }
         }
         currentEventsTable {$("#current-events tbody tr").collect {module EventRow, it} }
+        caseIdSearch { $("input", id: "caseId") }
+        caseLinkNotVisible { $("tr", class: "caseLink", filtermatch: "false").collect {module LegalContactRow, it} }
+        clickDialogCancelButton { $(".ui-button-text").value("Cancel") }
     }
 }
 class EventRow extends Module {
