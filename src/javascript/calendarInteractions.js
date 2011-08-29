@@ -138,5 +138,5 @@ frontlinesms.calendarInteractions = function() {
         $('#schedule').fullCalendar('removeEvents', $('#event-id').val())
     });
 
-    frontlinesms.attachActionWithLinkContactButton('#link-contact-to-existing-event-button', '#link-contact-to-existing-event-dialog');
+    frontlinesms.attachActionWithLinkContactButton('#link-contact-button', '#link-contact-dialog');
 }

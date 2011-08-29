@@ -21,7 +21,7 @@ class SchedulePage extends Page {
             true
         }
         linkContactToExistingEvent {
-            $('#link-contact-to-existing-event-button').click()
+            $('#link-contact-button').click()
             true
         }
         atDate {$('span.fc-header-title').text()}
@@ -80,7 +80,7 @@ class ContactRow extends Module {
         name { cell(0).text() }
         primaryMobileNumber { cell(1).text() }
         unlinkContact { $("a", class: "unlink-contact")}
-        linkContactToExistingEventDialog {$("div", id: "link-contact-to-existing-event-dialog")}
+        linkContactToExistingEventDialog {$("div", id: "link-contact-dialog")}
     }
 }
 

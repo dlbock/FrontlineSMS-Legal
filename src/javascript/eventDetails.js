@@ -32,10 +32,18 @@ frontlinesms.attachActionWithLinkContactButton = function(buttonSelector, dialog
         }]
     });
 
+    $('#view-event').dialog({
+        autoOpen: false,
+        modal: true,
+        close: function(){
+            $("#event-linked-contacts").val("");
+        }
+    });
+
 
     $(".contactLink").click(function() {
         var contactId = $(this).attr('id');
-        if (!frontlinesms.checkIfEventHasContactLinked(contactId)) {
+        if (!frontlinesms.checkIfEventHasContactLinked(contactId) && !frontlinesms.checkForExistingContacts(contactId)) {
             frontlinesms.addLinkedContactIdToHiddenField(contactId);
             frontlinesms.addLinkedContactToTableOnPopup(contactId);
         }
@@ -44,20 +52,22 @@ frontlinesms.attachActionWithLinkContactButton = function(buttonSelector, dialog
     });
 
     frontlinesms.addLinkedContactToTableOnPopup = function(contactId) {
-    var row = $('#contactsTable').find('#' + contactId);
-    var rowToAdd = $('<tr>').append(
-        '<td>' +
-            $(row).find('.contact-name').text() +
-            '<span class="id" style="display:none;">' + contactId + '</span>' +
-            '</td>' +
+        var row = $('#contactsTable').find('#' + contactId);
+        var rowToAdd = $('<tr>').append(
             '<td>' +
-            $(row).find('.contact-number').text() +
-            '</td>'
-    );
+                $(row).find('.contact-name').text() +
+                '<span class="id" style="display:none;">' + contactId + '</span>' +
+                '</td>' +
+                '<td>' +
+                $(row).find('.contact-number').text() +
+                '</td>'
+        );
     $('#event-contacts-table').append(rowToAdd);
+    }
 
-}
-
+    frontlinesms.checkForExistingContacts = function(contactId) {
+        //$(".event-contact").collect
+    }
 };
 
 

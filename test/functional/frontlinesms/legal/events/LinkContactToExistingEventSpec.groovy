@@ -54,7 +54,7 @@ class LinkContactToExistingEventSpec extends FrontlinesmsLegalGebSpec {
         linkedContactsInEventDetailsPopup.collect { it -> it.contactName }.size() == 1
     }
 
-    def 'should link the correct contact to an exisitng event when the LINK CONTACT link next to it is clicked'() {
+    def 'should link the correct contact to an existing event when the LINK CONTACT link next to it is clicked'() {
         given:
         createEvent("Test")
         new LegalContact(name: 'fa', primaryMobile: '1234567').save(flush: true)
@@ -89,6 +89,28 @@ class LinkContactToExistingEventSpec extends FrontlinesmsLegalGebSpec {
 
         then:
         linkedContactsInEventDetailsPopup.collect { it -> it.contactName }.size() == 0
+    }
+
+    def 'should be able to link a contact to multiple events'(){
+        given:
+        createEvent("Test1")
+        createEvent("Test2")
+        new LegalContact(name: 'fa', primaryMobile: '1234567').save(flush: true)
+        to SchedulePage, "index"
+
+        when:
+        events()[0].click()
+        linkContactToExistingEvent()
+        linkContactFromPopup()
+        to SchedulePage, "index"
+
+        and:
+        events()[1].click()
+        linkContactToExistingEvent()
+        linkContactFromPopup()
+
+        then:
+        linkedContactsInEventDetailsPopup.collect { it -> it.contactName }[0] == 'fa'
     }
 
     def "should display all the contacts filtered by the value in the search input of the search contact dialog"() {

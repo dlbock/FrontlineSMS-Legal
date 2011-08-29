@@ -59,7 +59,7 @@
         </tbody>
     </table>
 
-    <div align="left"><input type="button" id="link-contact-to-existing-event-button" value="Link Contact"/></div>
+    <div align="left"><input type="button" id="link-contact-button" value="Link Contact"/></div>
 
     <div align="right">
         <input type="button" id="update-event" value="Update"/>
@@ -76,7 +76,7 @@
     <p>Are you sure you want to unlink this contact from the event?</p>
 </div>
 
-<div id="link-contact-to-existing-event-dialog" title="Link Contact to an Event" style="display: none;">
+<div id="link-contact-dialog" title="Link Contact to an Event" style="display: none;">
     <g:form action="">
         <p>Enter the name or the mobile number to search for Contacts</p>
         <g:textField name="contactNameSearch" id="contact-name-search"/>
