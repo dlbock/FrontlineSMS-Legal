@@ -24,7 +24,8 @@ frontlinesms.displayEventDetails = function(calEvent) {
         },
         success : function(data) {
             frontlinesms.log("Success" + data.toString() + "  " + calEvent.id);
-            frontlinesms.constructContactsTable(data, calEvent.id)
+            frontlinesms.constructContactsTable(data, calEvent.id);
+            frontlinesms.populateHiddenFieldOnClick(data);
         },
         cache:false
     });
