@@ -1,0 +1,3 @@
+[submodule "core"]
+	path = frontlinesms2-core
+	url = https://github.com/frontlinesms/frontlinesms2.git

@@ -2,6 +2,8 @@ grails.project.class.dir = "target/classes"
 grails.project.test.class.dir = "target/test-classes"
 grails.project.test.reports.dir = "target/test-reports"
 
+grails.plugin.location.frontlinesms2 = "frontlinesms2-core"
+
 grails.project.dependency.resolution = {
     inherits("global") {
     }
