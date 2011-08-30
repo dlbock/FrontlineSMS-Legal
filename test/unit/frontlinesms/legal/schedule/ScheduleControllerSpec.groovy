@@ -96,11 +96,11 @@ class ScheduleControllerSpec extends ControllerSpec {
         def events = [theEvent]
         mockDomain(Event, events)
 
-        controller.params.eventId = theEvent.id;
-        controller.params.eventTitle = "update-test";
-        controller.params.eventDate = "August 26,2011";
-        controller.params.eventStartTime = "02:39AM";
-        controller.params.eventEndTime = "03:39AM";
+        controller.params.eventId = theEvent.id
+        controller.params.eventTitle = "update-test"
+        controller.params.eventDate = "August 26,2011"
+        controller.params.eventStartTime = "02:39AM"
+        controller.params.eventEndTime = "03:39AM"
         
 
         when:

@@ -49,7 +49,7 @@
         <input type="text" name="eventStartTime" id="event-start-time" value="${params.eventStartTime}"/><br/><br/>
         <label><b>End Time</b></label><br/>
         <input type="text" name="eventEndTime" id="event-end-time" value="${params.eventEndTime}"/><br/><br/>
-
+        <g:hiddenField name="linkedContacts" id="event-linked-contacts" value="${params.linkedContacts}"/>
         <table id="event-contacts-table">
             <thead>
             <tr >
@@ -61,7 +61,7 @@
             </tbody>
         </table>
         <div align="left">
-            <input type="button" id="link-contact-to-existing-event-button" value="Link Contact"/>
+            <input type="button" id="link-contact-button" value="Link Contact"/>
         </div>
         <div align="right" class="form-submit-area">
             <input type="submit" id="update-event" value="Update"/>

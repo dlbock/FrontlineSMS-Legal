@@ -67,17 +67,11 @@ class ScheduleController {
     def updateEvent = {
         def formattedParams = formatParameters()
         def event = Event.findById(params.eventId)
-        if (event != null) {
-            event.eventTitle = formattedParams.eventTitle
-            event.dateFieldSelected = new Date(params.eventDate)
-            event.startTimeField = Time.valueOf(formattedParams.startTimeField)
-            event.endTimeField = Time.valueOf(formattedParams.endTimeField)
-            event.save(flush: true)
-//            redirect(action: "index")
-        }
-        else
-            render "Event not found!!!"
-
+        event.eventTitle = formattedParams.eventTitle
+        event.dateFieldSelected = new Date(params.eventDate)
+        event.startTimeField = Time.valueOf(formattedParams.startTimeField)
+        event.endTimeField = Time.valueOf(formattedParams.endTimeField)
+        event.save(flush: true)
     }
 
     private def formatParameters() {
