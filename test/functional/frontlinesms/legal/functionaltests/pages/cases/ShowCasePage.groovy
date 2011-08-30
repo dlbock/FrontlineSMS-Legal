@@ -13,6 +13,7 @@ class ShowCasePage extends Page {
         description { $("textarea", id: "case-description").value()}
         updateCaseButton {$("input", id: "case-update")}
         deleteButton {$("button", id: "delete-button")}
+        deleteButtonExists {$("button", id: "delete-button").size() == 1}
         caseActive { $("input", id: "case-status") }
         clickLinkContact {$("#link-contact-button")}
         contactsTable {$("#link-contacts-inner-table-div #contactsTable tbody tr").collect {module ContactRow, it} }
@@ -20,7 +21,8 @@ class ShowCasePage extends Page {
         errorMessage { $("div", id: "errorMessage").text() }
         linkedContactsRow {$(name: "contactRow", id: "contact-row")}
         deleteDialog { $("div", id: "deleteDialog") }
-        deleteYes { $("button", id: "confirm-yes")}
+        deleteYes { $("button", id: "confirm-yes")
+        waitFor { !deleteDialog.isVisible() }}
         deleteNo { $("button", id: "confirm-no")}
         linkContactDialog { $("div", id: "link-contacts") }
         contactNameSearch { $("input", id: "contact-name-search") }

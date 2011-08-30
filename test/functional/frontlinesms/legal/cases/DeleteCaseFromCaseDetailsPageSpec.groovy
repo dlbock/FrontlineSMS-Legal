@@ -12,12 +12,12 @@ class DeleteCaseFromCaseDetailsPageSpec extends FrontlinesmsLegalGebSpec {
         new Case(caseId: "321", description: "test2").save(flush: true)
     }
     
-    def "should have a delete button"() {
+    def "case details page should have a delete button"() {
         when:
         to ShowCasePage, "123"
 
         then:
-        assert deleteButton.size()==1
+        assert deleteButtonExists
     }
 
     def 'should not delete when NO is clicked on delete confirmation dialog'() {
