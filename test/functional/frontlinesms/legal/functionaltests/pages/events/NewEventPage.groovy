@@ -33,7 +33,8 @@ class NewEventPage extends Page {
         linkCaseButton {$("button", id: "link-case-button")}
         linkCaseDialog { $("div", id: "link-case-dialog") }
         caseDialogCancelButton { $("#cancel-link-case") }
-        casesToLink { $(".caseLink") }
+        casesToLink { $("tr", class:"caseLink").collect {module LinkableCase, it} }
+        linkedCasesTable{$("#cases")}
     }
 }
 
@@ -49,5 +50,14 @@ class LinkableContact extends Module {
     static content = {
         name { $(class: "contact-name").text() }
         number { $(class: "contact-number").text() }
+    }
+}
+
+class LinkableCase extends Module {
+    static content = {
+        cell { i -> $("td", i) }
+        name { $(class: "case-name").text() }
+        number { cell(1).text() }
+        linkCase { cell(2) }
     }
 }

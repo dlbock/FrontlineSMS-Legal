@@ -11,12 +11,14 @@
     <g:javascript library="linkContactToEvent"/>
     <g:javascript library="linkCaseToEvent"/>
     <g:javascript library="contactSearch"/>
+    <g:javascript library="caseSearch"/>
 
     <script type="text/javascript">
         $(function() {
             frontlinesms.linkContactToEvent();
             frontlinesms.linkCaseToEvent();
             frontlinesms.contactSearchOnLoad();
+            frontlinesms.caseSearchOnLoad();
         })
     </script>
 
@@ -25,7 +27,7 @@
 <body>
 <h1>Create Event</h1>
 
-<form action="save" name="createEventForm" method="post"> 
+<form action="save" name="createEventForm" method="post">
     <label>Title</label>
     <g:textField id="event-title" name="eventTitle" value="${params.eventTitle}"/><br><br>
     <label>Date</label>
@@ -54,6 +56,19 @@
     <div class="form-submit-area">
         <button id="link-case-button">Link case</button>
     </div>
+    
+    <g:hiddenField name="linkedCases" id="event-linked-cases" value="${params.linkedCases}"/>
+    <table name="cases" id="cases">
+        <thead>
+        <tr>
+            <th>Case ID</th>
+            <th>Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    <br>
 
     <div class="form-submit-area">
         <input type="submit" id="event-save" value="Save"/>
@@ -116,12 +131,15 @@
                 <tbody>
 
                 <g:each in="${allCases}" var="legalCase">
-                    <tr class="caseLink" id="${legalCase.id}">
-                        <td class="case-name">
+                    <tr class="caseLink" id="${legalCase.caseId}">
+                        <td class="case-id">
                             <%=HtmlUtils.htmlEscape(legalCase.caseId)%>
                         </td>
-                        <td>
+                        <td class="case-status">
                             <%=legalCase.active ? "active" : "inactive"%>
+                        </td>
+                        <td>
+                            <a href="" class="link-case" id="${legalCase.caseId}">Link</a>
                         </td>
                     </tr>
                 </g:each>

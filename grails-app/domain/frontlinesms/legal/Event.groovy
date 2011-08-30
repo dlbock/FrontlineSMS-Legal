@@ -13,5 +13,5 @@ class Event {
     Date dateFieldSelected
     Time startTimeField, endTimeField
 
-    static hasMany = [linkedContacts: EventContact]
+    static hasMany = [linkedContacts: EventContact, linkedCases: EventCase]
 }

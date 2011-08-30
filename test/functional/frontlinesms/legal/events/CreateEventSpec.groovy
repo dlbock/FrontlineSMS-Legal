@@ -232,4 +232,38 @@ class CreateEventSpec extends FrontlinesmsLegalGebSpec {
         then:
         casesToLink.size() == 2
     }
+
+    def "should display link button next to each case in the case dialog"(){
+        setup:
+        new Case(caseId: "1112", description: "ertyui").save(flush: true)
+        new Case(caseId: "1113", description: "erdstyui").save(flush: true)
+
+        when:
+        to NewEventPage
+
+        and:
+        linkCaseButton.click()
+
+        then:
+        casesToLink.collect { it -> it.linkCase }.size() == 2
+    }
+
+    def "should append the selected case to the linked case table on the create event page"(){
+        setup:
+        new Case(caseId: "1112", description: "ertyui").save(flush: true)
+        new Case(caseId: "1113", description: "erdstyui").save(flush: true)
+
+        when:
+        to NewEventPage
+
+        and:
+        linkCaseButton.click()
+
+        and:
+        casesToLink[0].linkCase.click()
+
+        then:
+        linkedCasesTable.size() == 1
+
+    }
 }

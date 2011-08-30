@@ -29,4 +29,41 @@ frontlinesms.linkCaseToEvent = function() {
         return false;
     });
 
+    $(".link-case").click(function() {
+        var caseId = $(this).attr('id');
+        alert(caseId);
+        if (!frontlinesms.checkIfEventHasCaseLinked(caseId)) {
+            frontlinesms.addLinkedCaseIdToHiddenField(caseId);
+            frontlinesms.addLinkedCaseToTable(caseId);
+        }
+        $("#link-case").dialog("close");
+        return false;
+    });
+
+    frontlinesms.checkIfEventHasCaseLinked = function(caseId) {
+        var caseIds = $("#event-linked-cases").val().split(",");
+        return (caseIds.indexOf(caseId) > -1);
+    };
+
+    frontlinesms.addLinkedCaseIdToHiddenField = function(caseId) {
+        var caseIds = $("#event-linked-cases").val().split(",");
+        caseIds = (caseIds.length == 1 && caseIds[0] == "") ? [] : caseIds;
+        caseIds.push(caseId);
+        $("#event-linked-cases").val(caseIds.join(","));
+    };
+
+    frontlinesms.addLinkedCaseToTable = function(caseId) {
+        var row = $('.search-results').find('#' + caseId);
+        var rowToAdd = $('<tr>').append(
+            '<td>' +
+                $(row).find('.case-id').text() +
+                caseId +
+                '</td>' +
+                '<td>' +
+                $(row).find('.case-status').text() +
+                '</td>'
+        );
+        $('#cases').append(rowToAdd);
+
+    }
 };
