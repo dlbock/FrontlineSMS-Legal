@@ -178,7 +178,24 @@ class LinkContactToExistingEventSpec extends FrontlinesmsLegalGebSpec {
         existingContactList.collect { it -> it.contactName }.size() == 2
     }
 
-    def createEvent(title) {
+    def "should not be able to link already linked contact"() {
+        given:
+        createEventWithContact("Test")
+        to SchedulePage, "index"
+
+        when:
+        events()[0].click()
+        linkContactToExistingEvent()
+        linkContactFromPopup()
+
+        then:
+        linkedContactsInEventDetailsPopup.collect { it -> it.contactName }.size() == 1
+
+        and:
+        linkedContactsInEventDetailsPopup.collect { it -> it.contactName }[0] == "neetu"
+    }
+
+    private def createEvent(title) {
         to NewEventPage
         eventTitle = title
         dateFieldSelected = new Date().format("MMMM d, yyyy")
@@ -186,4 +203,19 @@ class LinkContactToExistingEventSpec extends FrontlinesmsLegalGebSpec {
         endTimeField = "08:56PM"
         save.click()
     }
+
+    private def createEventWithContact(title) {
+        new LegalContact(name: "neetu", primaryMobile: "22222").save(flush: true)
+        to NewEventPage
+        eventTitle = title
+        dateFieldSelected = new Date().format("MMMM d, yyyy")
+        startTimeField = "08:09AM"
+        endTimeField = "08:56PM"
+        clickLinkContact.click()
+        contactNameSearch.value("ne")
+        sleep(500)
+        contactsToLink[0].click()
+        save.click()
+    }
+
 }

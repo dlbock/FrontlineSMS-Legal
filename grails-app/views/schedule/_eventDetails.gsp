@@ -9,7 +9,7 @@
         <input type="text" name="eventStartTime" id="event-start-time" value="${params.eventStartTime}"/><br/><br/>
         <label><b>End Time</b></label><br/>
         <input type="text" name="eventEndTime" id="event-end-time" value="${params.eventEndTime}"/><br/><br/>
-        <g:hiddenField name="linkedContacts" id="event-linked-contacts" value="${params.linkedContacts}"/>
+        <g:hiddenField name="linkedContacts" id="event-linked-contacts"/>
         <table id="event-contacts-table">
             <thead>
             <tr >
