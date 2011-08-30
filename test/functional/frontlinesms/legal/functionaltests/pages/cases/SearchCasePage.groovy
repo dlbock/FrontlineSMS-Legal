@@ -17,6 +17,19 @@ class SearchCasePage extends Page {
         deleteDialog { $("div", id: "deleteDialog") }
         deleteYes { $("button", id: "confirm-yes")}
         deleteNo { $("button", id: "confirm-no")}
+        NumberOfCases {
+            $("#SearchResults tbody tr")
+            true
+        }
+        caseLinkNotVisible { $("tr", class: "caseLink", filtermatch: "false").collect {module CaseRow, it} }
+        caseLinkVisible { $("tr", class: "caseLink", filtermatch: "true").collect {module CaseRow, it} }
+        goToSearchPage{
+            $("a", name: "searchByCaseId")
+        }
+        goToContactSearchPage{
+            $("a", name: "contactSearch")
+        }
+
     }
 }
 

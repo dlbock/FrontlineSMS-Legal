@@ -5,9 +5,15 @@ frontlinesms.caseSearchOnLoad = function() {
 }
 
 frontlinesms.initializeAutocomplete = function() {
+    //$("#SearchResults tbody tr").attr('filtermatch','true')
+    //$("#SearchResults tbody tr").attr('style','display:true')
     $("#SearchResults").tableFilter({
         additionalFilterTriggers: [$("#caseId")]
     });
-    $("#SearchResults thead tr.filters").remove();
     $("#caseId").removeAttr("title").val("").focus();
+    $("#SearchResults thead tr.filters").remove();
 }
+
+
+
+

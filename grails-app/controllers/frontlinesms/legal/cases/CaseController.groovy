@@ -60,6 +60,7 @@ class CaseController {
     }
 
     def search = {
+
         if (params.caseId && !params.caseId.isAllWhitespace()) {
             def foundCases = Case.findAllByCaseIdLike("${params.caseId}%")
             if (foundCases.size() == 0) {

@@ -15,9 +15,14 @@ class SearchLegalContactPage extends Page {
         deleteNo { $("button", id: "confirm-no")}
         contactNameSearch { $("input", id: "contact-search-bar") }
         contactLinkNotVisible { $("tr", class: "contactLink", filtermatch: "false").collect {module LegalContactRow, it} }
+        goToSearchPage{
+            $("a", name: "searchByCaseId")
+        }
+        goToContactSearchPage{
+            $("a", name: "contactSearch")
+        }
+
     }
-
-
 }
 
 

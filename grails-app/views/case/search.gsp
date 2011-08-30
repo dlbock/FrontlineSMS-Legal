@@ -8,6 +8,7 @@
     <g:javascript library="caseSearch"/>
     <g:javascript library="confirmationDialog"/>
     <g:javascript library="deleteFromSearchPage"/>
+    <g:javascript library="caseSearchForSearchPage"/>
 
     <script type="text/javascript">
         $(function() {
@@ -22,7 +23,7 @@
 
 <g:form action="search" method="POST">
     <label>Enter the case ID to search for cases</label>
-    <g:textField class="wide-text-box" name="caseId" id="caseId"/>
+    <g:textField class="wide-text-box" name="caseId" id="caseId" value=""/>
 </g:form>
 
 <g:if test="${foundCase}">
@@ -35,7 +36,7 @@
         </thead>
         <tbody>
         <g:each in="${foundCase}" var="legalCase">
-            <tr>
+            <tr class="caseLink" id="<%=legalCase.caseId%>">
                 <td>
                     <g:link controller="case" action="show" id="${legalCase.caseId}"><%=legalCase.caseId%></g:link>
                 </td>
@@ -45,10 +46,8 @@
                 <td class="table-cases-delete-row">
                     <g:form action="delete" id="${legalCase.caseId}">
                         <button class="deleteButtons action-button" id="deleteButton${legalCase.caseId}">Delete</button>
-                        <g:hiddenField name="caseId" value="${legalCase.caseId}"/>
                     </g:form>
                 </td>
-
             </tr>
         </g:each>
         </tbody>
