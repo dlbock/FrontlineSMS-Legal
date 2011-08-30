@@ -1,6 +1,7 @@
 package frontlinesms.legal.events
 
 import frontlinesms.legal.*
+import java.sql.Time
 
 class EventControllerSpec extends FrontlinesmsLegalControllerSpecBase {
 
@@ -218,5 +219,30 @@ class EventControllerSpec extends FrontlinesmsLegalControllerSpecBase {
             EventCase.count() == 3
         }
 
+    def 'should update event when title, date, start date, end date are given'() {
+        given:
+        def date = new Date("August 26,2011")
+        def startTime = Time.valueOf("08:45:00")
+        def endTime = Time.valueOf("11:45:00")
+
+        def theEvent = new Event(eventTitle: "test", dateFieldSelected: date, startTimeField: startTime, endTimeField: endTime)
+        def events = [theEvent]
+        mockDomain(Event, events)
+
+        controller.params.eventId = theEvent.id
+        controller.params.eventTitle = "update-test"
+        controller.params.dateFieldSelected = "August 26,2011"
+        controller.params.startTimeField = "02:39AM"
+        controller.params.endTimeField = "03:39AM"
+
+
+        when:
+        controller.update()
+
+        then:
+        def updatedEvent = Event.findByEventTitle("update-test")
+        updatedEvent.eventTitle.equals("update-test")
+        Event.findByEventTitle("test") == null
+    }
 }
 

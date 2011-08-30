@@ -38,7 +38,7 @@ class RescheduleEventSpec extends FrontlinesmsLegalGebSpec {
         updateEvent.click()
 
         then:
-        def updatedEvent = Event.findByEventTitle(newTitle)
+        def updatedEvent = Event.findByEventTitle("Some new title")
         updatedEvent.eventTitle == newTitle
     }
 
