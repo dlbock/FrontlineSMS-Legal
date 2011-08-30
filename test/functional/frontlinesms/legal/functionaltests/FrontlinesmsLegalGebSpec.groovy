@@ -6,9 +6,12 @@ import geb.Browser
 class FrontlinesmsLegalGebSpec extends GebSpec {
     Browser createBrowser() {
         Browser browser = new Browser()
-        String port = getPort()
-        browser.baseUrl = "http://localhost:${port}/"
+        browser.baseUrl = getBaseUrl()
         browser
+    }
+
+    protected GString getBaseUrl() {
+        return "http://localhost:${getPort()}/"
     }
 
     String getPort() {

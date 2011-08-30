@@ -13,7 +13,7 @@ class CacheSpec extends FrontlinesmsLegalGebSpec {
         def httpClient = new DefaultHttpClient()
 
         when:
-        def httpResponse = httpClient.execute(new HttpGet("http://localhost:8080/case/search"))
+        def httpResponse = httpClient.execute(new HttpGet("${getBaseUrl()}case/search"))
 
         then:
         httpResponse.getHeaders("Cache-Control").collect{ it.value } == ["no-cache", "no-store"]
