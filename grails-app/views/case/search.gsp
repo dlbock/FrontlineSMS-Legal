@@ -20,11 +20,9 @@
 
 <body>
 <h1 class="form-header">Search for Case by Case ID</h1>
-
-<g:form action="search" method="POST">
-    <label>Enter the case ID to search for cases</label>
-    <g:textField class="wide-text-box" name="caseId" id="caseId" value=""/>
-</g:form>
+ <label>Enter the case ID to search for cases</label>
+ <br />
+ <g:textField class="wide-text-box" name="caseId" id="caseId" value="" size="70"/>
 
 <g:if test="${foundCase}">
     <table class="search-results" id="SearchResults">

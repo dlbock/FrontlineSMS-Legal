@@ -27,4 +27,18 @@ class SearchCaseSpec extends FrontlinesmsLegalGebSpec {
         assert id.value() == ""
         caseLinkNotVisible().size()==0
     }
+
+    def "should display only the filtered search on pressing RETURN"() {
+        given:
+        new Case(caseId: "123", description: "test1").save(flush: true)
+        new Case(caseId: "321", description: "test2").save(flush: true)
+        to SearchCasePage
+
+        when:
+        id.value("1234\r")
+        sleep(500)
+
+        then:
+        caseLinkNotVisible().size()==2
+    }
 }
