@@ -21,8 +21,7 @@ class ShowCasePage extends Page {
         errorMessage { $("div", id: "errorMessage").text() }
         linkedContactsRow {$(name: "contactRow", id: "contact-row")}
         deleteDialog { $("div", id: "deleteDialog") }
-        deleteYes { $("button", id: "confirm-yes")
-        waitFor { !deleteDialog.isVisible() }}
+        deleteYes { $("button", id: "confirm-yes")}
         deleteNo { $("button", id: "confirm-no")}
         linkContactDialog { $("div", id: "link-contacts") }
         contactNameSearch { $("input", id: "contact-name-search") }
