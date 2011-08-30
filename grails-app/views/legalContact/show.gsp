@@ -205,8 +205,8 @@
     <p>Are you sure you would like to save contact without a name?</p>
 </div>
 
-<div id="contact-create-cancel-dialog" title="Discard Changes?" style="display: none;">
-    <p>Do you want to discard changes to this contact? Your changes will not be saved.</p>
+<div id="contact-create-cancel-dialog" title="Cancel contact changes?" style="display: none;">
+    <p>Your changes have not been saved. Are you sure you want to cancel?</p>
 </div>
 
 <div id="deleteDialog" title="Delete Contact" style="display: none;">

@@ -102,7 +102,7 @@
 </div>
 
 <div id="case-cancel-dialog" title="Cancel case creation?" style="display: none;">
-    <p>Are you sure you do not want to save this case?</p>
+    <p>Your changes have not been saved. Are you sure you want to cancel?</p>
 </div>
 
 </body>

@@ -41,14 +41,14 @@ frontlinesms.eventCancelConfirmAction = function() {
             modal: true,
             buttons: [
                 {
-                    text: "Yes, Cancel This Event",
+                    text: "Yes",
                     click: function() {
                         $(window.location).attr("href", "/");
                     },
                     id: "cancel-confirm-yes"
                 },
                 {
-                    text: "No, Don't Cancel This Event",
+                    text: "No",
                     click: function() {
                         $(this).dialog("close")
                     },
@@ -57,7 +57,6 @@ frontlinesms.eventCancelConfirmAction = function() {
             ]
         });
         $("#event-cancel-dialog").dialog('open');
-
     }
 }
 

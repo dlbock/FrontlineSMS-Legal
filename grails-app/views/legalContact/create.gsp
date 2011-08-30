@@ -36,7 +36,7 @@
     <g:textField name="primaryMobile" id="contact-primary-mobile" value="${params.primaryMobile}" maxlength="15"/>
     <label>Notes</label>
     <g:textArea name="notes" id="contact-notes" value="${params.notes}" cols="100" rows="10"/>
-    
+
     <div class="form-submit-area">
         <button id="link-case-button">Link Cases</button>
     </div>
@@ -85,7 +85,7 @@
 </div>
 
 <div id="contact-create-cancel-dialog" title="Cancel Contact Creation?" style="display: none;">
-    <p>Do you want to cancel creation of this contact? Your changes will not be saved.</p>
+    <p>Your changes have not been saved. Are you sure you want to cancel?</p>
 </div>
 
 </body>

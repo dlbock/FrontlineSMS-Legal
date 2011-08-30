@@ -41,7 +41,7 @@ frontlinesms.caseUpdateCancelConfirmAction = function(setter) {
             modal: true,
             buttons: [
                 {
-                    text: "Yes, discard",
+                    text: "Yes",
                     click: function() {
                         $(window.location).attr("href", "/");
                     },

@@ -56,7 +56,7 @@
     <div class="form-submit-area">
         <button id="link-case-button">Link case</button>
     </div>
-    
+
     <g:hiddenField name="linkedCases" id="event-linked-cases" value="${params.linkedCases}"/>
     <table name="cases" id="cases">
         <thead>
@@ -151,7 +151,7 @@
 </div>
 
 <div id="event-cancel-dialog" title="Cancel event creation?" style="display: none;">
-    <p>Are you sure you want to cancel this event? Your event will not be saved?</p>
+    <p>Your changes have not been saved. Are you sure you want to cancel?</p>
 </div>
 <script type="text/javascript">
     $(function() {
