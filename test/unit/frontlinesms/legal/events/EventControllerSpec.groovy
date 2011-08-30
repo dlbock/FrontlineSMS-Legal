@@ -1,9 +1,6 @@
 package frontlinesms.legal.events
 
-import frontlinesms.legal.Event
-import frontlinesms.legal.EventContact
-import frontlinesms.legal.FrontlinesmsLegalControllerSpecBase
-import frontlinesms.legal.LegalContact
+import frontlinesms.legal.*
 
 class EventControllerSpec extends FrontlinesmsLegalControllerSpecBase {
 
@@ -106,6 +103,7 @@ class EventControllerSpec extends FrontlinesmsLegalControllerSpecBase {
         then:
         controller.isStartTimeBeforeEndTime() == true
     }
+
     def 'should return true if start time  and end time are equal'() {
         when:
         controller.params.startTimeField = "04:30PM"
@@ -133,7 +131,7 @@ class EventControllerSpec extends FrontlinesmsLegalControllerSpecBase {
         mockDomain(EventContact)
         mockCoreClassesToAvoidIssuesWithContactEventHandlers()
         mockDomain(LegalContact,
-                   [new LegalContact(id:1,name: "John Doe",primaryMobile: "435352",notes: "hii")])
+                [new LegalContact(id: 1, name: "John Doe", primaryMobile: "435352", notes: "hii")])
 
         when:
         controller.params.eventTitle = "Event"
@@ -146,7 +144,7 @@ class EventControllerSpec extends FrontlinesmsLegalControllerSpecBase {
         controller.save()
 
         then:
-        EventContact.count()==1
+        EventContact.count() == 1
     }
 
     def "should save multiple contacts when linked on the event"() {
@@ -154,10 +152,10 @@ class EventControllerSpec extends FrontlinesmsLegalControllerSpecBase {
         mockDomain(Event)
         mockDomain(EventContact)
         mockCoreClassesToAvoidIssuesWithContactEventHandlers()
-        mockDomain(LegalContact,[
-                new LegalContact(id:1,name: "John Doe",primaryMobile: "435352",notes: "hii"),
-                new LegalContact(id:34,name: "Jane Do",primaryMobile: "546354",notes: ":)"),
-                new LegalContact(id:87,name: "Jason D",primaryMobile: "57766",notes: "???")
+        mockDomain(LegalContact, [
+                new LegalContact(id: 1, name: "John Doe", primaryMobile: "435352", notes: "hii"),
+                new LegalContact(id: 34, name: "Jane Do", primaryMobile: "546354", notes: ":)"),
+                new LegalContact(id: 87, name: "Jason D", primaryMobile: "57766", notes: "???")
         ])
 
         when:
@@ -171,8 +169,54 @@ class EventControllerSpec extends FrontlinesmsLegalControllerSpecBase {
         controller.save()
 
         then:
-        EventContact.count()==3
+        EventContact.count() == 3
     }
+
+    def "should save case when linked to the event"() {
+        setup:
+        mockDomain(Event)
+        mockDomain(EventCase)
+        mockDomain(Case,
+                [new Case(caseId: "1112", description: "ertyui")])
+
+        when:
+        controller.params.eventTitle = "Event"
+        controller.params.dateFieldSelected = "July 12, 2011"
+        controller.params.startTimeField = "06:30AM"
+        controller.params.endTimeField = "07:30AM"
+        controller.params.linkedCases = "1112"
+
+        and:
+        controller.save()
+
+        then:
+
+        EventCase.count() == 1
+    }
+
+    def "should save multiple cases when linked to the event"() {
+            setup:
+            mockDomain(Event)
+            mockDomain(EventCase)
+            mockDomain(Case, [
+                    new Case(caseId: "1112", description: "ertyui"),
+                    new Case(caseId: "1113", description: "ertydfgsui"),
+                    new Case(caseId: "1114", description: "edfgrtyui")
+            ])
+
+            when:
+            controller.params.eventTitle = "Event"
+            controller.params.dateFieldSelected = "July 12, 2011"
+            controller.params.startTimeField = "06:30AM"
+            controller.params.endTimeField = "07:30AM"
+            controller.params.linkedCases = "1112,1113,1114"
+
+            and:
+            controller.save()
+
+            then:
+            EventCase.count() == 3
+        }
 
 }
 

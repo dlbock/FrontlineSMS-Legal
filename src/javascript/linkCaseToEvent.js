@@ -31,12 +31,11 @@ frontlinesms.linkCaseToEvent = function() {
 
     $(".link-case").click(function() {
         var caseId = $(this).attr('id');
-        alert(caseId);
         if (!frontlinesms.checkIfEventHasCaseLinked(caseId)) {
             frontlinesms.addLinkedCaseIdToHiddenField(caseId);
             frontlinesms.addLinkedCaseToTable(caseId);
         }
-        $("#link-case").dialog("close");
+        $("#link-case-dialog").dialog("close");
         return false;
     });
 
@@ -57,7 +56,6 @@ frontlinesms.linkCaseToEvent = function() {
         var rowToAdd = $('<tr>').append(
             '<td>' +
                 $(row).find('.case-id').text() +
-                caseId +
                 '</td>' +
                 '<td>' +
                 $(row).find('.case-status').text() +

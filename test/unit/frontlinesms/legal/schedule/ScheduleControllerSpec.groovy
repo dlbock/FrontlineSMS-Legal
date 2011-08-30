@@ -112,4 +112,3 @@ class ScheduleControllerSpec extends ControllerSpec {
         Event.findByEventTitle("test") == null
     }
 }
-

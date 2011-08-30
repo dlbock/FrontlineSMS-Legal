@@ -38,6 +38,48 @@
 <div id="schedule"></div>
 
 <g:render template="eventDetails"/>
+<div id="view-event" title="Event Details" style="display: none;">
+    <label><b>Title</b></label><br/>
+    <input type="text" name="eventTitle" id="event-title" value=""/><br/><br/>
+    <label><b>Date</b></label><br/>
+    <input type="text" name="eventDate" id="event-date" value=""/><br/><br/>
+    <label><b>Start Time</b></label><br/>
+    <input type="text" name="eventStartTime" id="event-start-time" value=""/><br/><br/>
+    <label><b>End Time</b></label><br/>
+    <input type="text" name="eventEndTime" id="event-end-time" value=""/><br/><br/>
+
+    <g:hiddenField name="linkedContacts" id="event-linked-contacts" value="${params.linkedContacts}"/>
+    <table id="event-contacts-table">
+        <thead>
+        <tr>
+            <th>Contact name</th>
+            <th>Phone number</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <g:hiddenField name="linkedCases" id="event-linked-cases" value="${params.linkedCases}"/>
+    <table id="event-cases-table">
+        <thead>
+        <tr>
+            <th>Case ID</th>
+            <th>Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <div align="left"><input type="button" id="link-contact-button" value="Link Contact"/></div>
+
+    <div align="right">
+        <input type="button" id="update-event" value="Update"/>
+        <input type="button" id="delete-event" value="Delete"/>
+    </div>
+    <g:hiddenField name="eventId" id="event-id"></g:hiddenField>
+</div>
 
 <div id="delete-event-dialog" title="Delete event?" style="display: none;">
     <p>Are you sure you want to delete this event? Yes or No.</p>

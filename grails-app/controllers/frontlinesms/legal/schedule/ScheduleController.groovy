@@ -1,6 +1,7 @@
 package frontlinesms.legal.schedule
 
 import frontlinesms.legal.Event
+import frontlinesms.legal.EventCase
 import frontlinesms.legal.EventContact
 import frontlinesms.legal.LegalContact
 import java.sql.Time
@@ -35,6 +36,24 @@ class ScheduleController {
                 array {
                     for (c in linkedContacts) {
                         event(id: c.id, name: c.name, primaryMobile: c.primaryMobile, notes: c.notes)
+                    }
+                }
+            }
+        } else {
+            render(contentType: "text/json") {
+                array {
+                }
+            }
+        }
+    }
+
+    def fetchEventCases = {
+        if (params.id != null && params.id != "") {
+            def linkedCases = EventCase.findCasesByEvent(Event.findById(params.id))
+            render(contentType: "text/json") {
+                array {
+                    for (c in linkedCases) {
+                        event(id: c.caseId, status: c.active)
                     }
                 }
             }

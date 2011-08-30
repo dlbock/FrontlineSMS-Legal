@@ -39,7 +39,7 @@
 
 
     <div class="form-submit-area">
-        <button id="link-contact-button">Link contacts</button>
+        <button id="link-contact-button">Link contact</button>
     </div>
 
 

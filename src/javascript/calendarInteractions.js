@@ -30,6 +30,22 @@ frontlinesms.displayEventDetails = function(calEvent) {
         cache:false
     });
 
+    $.ajax({
+        url: "fetchEventCases/" + calEvent.id,
+        type: "POST",
+
+        dataType: 'json',
+        error: function (data) {
+            frontlinesms.log("Failed to get linked cases for event.");
+        },
+        success : function(data) {
+            frontlinesms.log("SuccessCases:");
+            frontlinesms.log(data);
+            frontlinesms.constructCasesTable(data)
+        },
+        cache:false
+    });
+
     $("#view-event").dialog("open");
 };
 
@@ -46,7 +62,6 @@ frontlinesms.constructContactsTable = function(data, eventId) {
                 '<a href="" class="unlink-contact" id = ' + contactName + '>Unlink</a>' +
                 '</td>' +
                 '</tr>';
-
         $('#event-contacts-table tbody').append(newRow);
     }
 
@@ -69,6 +84,27 @@ frontlinesms.constructContactsTable = function(data, eventId) {
 
     frontlinesms.attachActionWithConfirmationToButton(".unlink-contact", "#unlink-contact-dialog", actionForYes)
 };
+
+frontlinesms.constructCasesTable = function(data) {
+
+    $('#event-cases-table tbody *').remove();
+    for (var i = 0; i < data.length; i++) {
+        var status;
+        if(data[i]["status"]) {
+            status = "active";
+        }
+        else {
+            status = "inactive";
+        }
+        var newRow =
+            '<tr class="event-cases">' +
+                '<td>' + data[i]["id"] + '</td>' +
+                '<td>' + status + '</td>' +
+            '</tr>';
+        $('#event-cases-table tbody').append(newRow);
+    }
+};
+
 
 frontlinesms.getFormattedTimeString = function(hr, min) {
     formattedString = "";

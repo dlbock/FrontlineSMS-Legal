@@ -33,6 +33,7 @@ class EventController {
                 def newEvent = new Event(eventTitle: formattedParams.eventTitle, dateFieldSelected: new Date(params.dateFieldSelected), startTimeField: Time.valueOf(formattedParams.startTimeField), endTimeField: Time.valueOf(formattedParams.endTimeField))
                 if (newEvent.save(flush: true)) {
                     linkContactsToEvent(newEvent)
+                    linkCasesToEvent(newEvent)
                     flash.message = "Event created."
                     chain(controller: "schedule", action: "index", model:[year:YearFormat.format(selectedDate),month:selectedDate.month])
                 }
@@ -80,5 +81,15 @@ class EventController {
 
     private def checkForNullDateTimes() {
         return (params.dateFieldSelected == null || params.startTimeField == null || params.endTimeField == null || params.dateFieldSelected == "" || params.startTimeField == "" || params.endTimeField == "")
+    }
+
+    private def linkCasesToEvent(event) {
+        if (params.linkedCases != null && params.linkedCases != "") {
+            def caseIds = params.linkedCases.split(",")
+            caseIds.each { it ->
+                def eventCase = Case.findByCaseId(it as String)
+                EventCase.link(event, eventCase)
+            }
+        }
     }
 }

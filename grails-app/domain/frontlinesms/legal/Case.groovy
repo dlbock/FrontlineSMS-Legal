@@ -11,7 +11,7 @@ class Case {
         description(nullable: true)
     }
 
-    static hasMany = [contacts: LegalContact, linkedContacts: CaseContacts]
+    static hasMany = [contacts: LegalContact, linkedContacts: CaseContacts, linkedEvents: EventCase]
 
     String caseId
     String description
