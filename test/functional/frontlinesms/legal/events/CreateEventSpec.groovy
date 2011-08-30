@@ -44,6 +44,15 @@ class CreateEventSpec extends FrontlinesmsLegalGebSpec {
         then: endTimeField.value() == "05:00AM"
     }
 
+    def "when a time is set in the StartTime text box the EndTime should be auto set to one hour more"(){
+        given: to NewEventPage
+
+        when: startTimeField.click()
+
+        and: startTimeField << "3"
+
+        then: endTimeField.value() == "04:00AM"
+    }
 
     def 'should hide cancel confirm dialog when no is clicked'(){
         given:
