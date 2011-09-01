@@ -26,6 +26,7 @@ frontlinesms.displayEventDetails = function(calEvent) {
         url: "fetchEventContacts/" + calEvent.id,
         type: "POST",
 
+
         dataType: 'json',
         error: function (data) {
             frontlinesms.log("Failed to get linked contacts for event.");

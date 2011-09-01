@@ -1,4 +1,5 @@
 var frontlinesms = this.frontlinesms || {};
+var contactIds = ""
 frontlinesms.eventDetails = function() {
     $("#view-event").hide();
     $("#view-event").dialog({
@@ -32,7 +33,7 @@ frontlinesms.updateEventDetails = function () {
         $.ajax({
             url :"../event/update",
             type: "POST",
-            data:{"eventId": $('#event-id').val(), "eventTitle": $('#event-title').val(), "dateFieldSelected":$('#event-date').val(), "startTimeField":$('#event-start-time').val(), "endTimeField":$('#event-end-time').val()},
+            data:{"eventId": $('#event-id').val(), "eventTitle": $('#event-title').val(), "dateFieldSelected":$('#event-date').val(), "startTimeField":$('#event-start-time').val(), "endTimeField":$('#event-end-time').val(), "linkedContacts":contactIds},
             error: function () {
                 frontlinesms.log("Failed to update.");
             },
@@ -41,6 +42,7 @@ frontlinesms.updateEventDetails = function () {
             },
             cache:false
         });
+
         window.location.reload(true);
     }
 }
@@ -101,5 +103,6 @@ frontlinesms.attachActionWithLinkContactButton = function(buttonSelector, dialog
                 '</td>'
         );
         $('#event-contacts-table').append(rowToAdd);
+        contactIds += contactId + ",";
     }
 };

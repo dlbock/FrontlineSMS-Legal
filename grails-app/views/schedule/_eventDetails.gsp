@@ -11,7 +11,7 @@
         <label><b>End Time</b></label><br/>
         <input type="text" name="endTimeField" id="event-end-time"/><br/><br/>
         <g:hiddenField name="linkedContacts" id="event-linked-contacts"/>
-        <table id="event-contacts-table">
+        <table name="linkedContacts" id="event-contacts-table">
             <thead>
             <tr>
                 <th>Contact name</th>

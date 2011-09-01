@@ -191,6 +191,23 @@ class LinkContactToExistingEventSpec extends FrontlinesmsLegalGebSpec {
         linkContactSearchDialog.displayed == true
     }
 
+    def "should link contact to event on hitting the update button"() {
+        given:
+        createEvent("Test")
+        new LegalContact(name: "fabio", primaryMobile: "22222").save(flush: true)
+        to SchedulePage, "index"
+
+        when:
+        events()[0].click()
+        linkContactToExistingEvent()
+        linkContactFromPopup()
+        updateEvent.click()
+
+        then:
+        events()[0].click()
+        linkedContactsInEventDetailsPopup.collect { it -> it.contactName }.size() == 1
+    }
+
     private def createEvent(title) {
         to NewEventPage
         eventTitle = title
