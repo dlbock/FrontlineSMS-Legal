@@ -114,4 +114,22 @@ class CreateLegalContactSpec extends FrontlinesmsLegalGebSpec {
         linkedCasesTable[0].unlinkButton.present
 
     }
+
+    def "should retain search results after cancelling relationship dialog"(){
+        given:
+        new Case(caseId: "123", description: "test").save(flush: true)
+        new Case(caseId: "321", description: "test2").save(flush: true)
+
+        when:
+        to CreateLegalContactPage
+        linkCaseButton.click()
+        caseIdSearch << "123"
+        casesToLink[0].linkCaseButton.click()
+        relationshipCancelButton.click()
+
+        then:
+        linkCaseDialog.displayed
+        caseIdSearch.value() == "123"
+        !caseContactRelationshipDialog.displayed
+    }
 }

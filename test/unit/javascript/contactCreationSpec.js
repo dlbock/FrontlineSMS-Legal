@@ -22,7 +22,7 @@ describe("Contact Create Dialog", function() {
         $("#contact-name").val("");
         $("#contact-save").click();
         expect($('#contact-save-no-name-dialog:visible').size()).toEqual(0);
-    })
+    });
 
     afterEach(function() {
         $("#contact-name, #contact-primary-mobile, #contact-save, #contact-save-no-name-dialog").remove();
