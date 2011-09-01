@@ -39,7 +39,7 @@
         </table>
 
         <div align="right" class="form-submit-area">
-            <input type="button" id="update-event" value="Update"/>
+            <input type="button" id="update-event" value="Update" disabled="disabled"/>
             <input type="button" id="delete-event" value="Delete"/>
         </div>
     </g:form>

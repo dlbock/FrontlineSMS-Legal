@@ -4,6 +4,7 @@ import frontlinesms.legal.functionaltests.FrontlinesmsLegalGebSpec
 import frontlinesms.legal.functionaltests.pages.schedule.SchedulePage
 import frontlinesms.legal.functionaltests.pages.events.NewEventPage
 import frontlinesms.legal.Event
+import org.openqa.selenium.Keys
 
 class RescheduleEventSpec extends FrontlinesmsLegalGebSpec {
 
@@ -11,6 +12,25 @@ class RescheduleEventSpec extends FrontlinesmsLegalGebSpec {
         given:
         createEvent("Test Event 1", "08:09AM", "08:56PM")
         to SchedulePage, "index"
+    }
+
+    def "should not enable the update button when text fields have no change"() {
+        when:
+        events()[0].click()
+
+        then:
+        updateEvent.@disabled == 'true'
+    }
+
+    def "should enable the update button when text fields have changes"() {
+        when:
+        events()[0].click()
+
+        and:
+        eventTitleField << "enable update button"
+
+        then:
+        updateEvent.@disabled == 'false'
     }
 
     def 'should show calendar when date text box is clicked'() {
@@ -29,7 +49,8 @@ class RescheduleEventSpec extends FrontlinesmsLegalGebSpec {
         events()[0].click()
 
         and:
-        eventTitleField.value("Some new title")
+        eventTitleField.value("")
+        eventTitleField << "Some new title"
 
         and:
         updateEvent.click()
@@ -45,6 +66,7 @@ class RescheduleEventSpec extends FrontlinesmsLegalGebSpec {
 
         and:
         eventTitleField.value("")
+        eventTitleField << Keys.DELETE
 
         and:
         updateEvent.click()
@@ -59,6 +81,7 @@ class RescheduleEventSpec extends FrontlinesmsLegalGebSpec {
 
         and:
         eventDateField.value("")
+        eventDateField << Keys.DELETE
 
         and:
         updateEvent.click()
@@ -73,6 +96,7 @@ class RescheduleEventSpec extends FrontlinesmsLegalGebSpec {
 
         and:
         eventStartTimeField.value("")
+        eventStartTimeField << Keys.DELETE
 
         and:
         updateEvent.click()
@@ -87,6 +111,7 @@ class RescheduleEventSpec extends FrontlinesmsLegalGebSpec {
 
         and:
         eventEndTimeField.value("")
+        eventEndTimeField << Keys.DELETE
 
         and:
         updateEvent.click()

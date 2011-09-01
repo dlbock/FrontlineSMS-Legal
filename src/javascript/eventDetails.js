@@ -8,6 +8,10 @@ frontlinesms.eventDetails = function() {
 
     $('#error-message').html("").fadeIn();
     $('#update-event').click(frontlinesms.updateEventDetails);
+
+    $('input').keyup(function() {
+        $('#update-event').attr('disabled', false)
+    })
 };
 
 frontlinesms.updateEventDetails = function () {
