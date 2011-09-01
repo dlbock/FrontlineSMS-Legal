@@ -40,28 +40,6 @@ describe('Link Contact to existing Event', function () {
     });
 });
 
-describe('Hidden Field', function () {
-    beforeEach(function() {
-        var tempHTML = '<input type="hidden" id="event-linked-contacts" value=""/>';
-        $(tempHTML).appendTo("#fixtures");
-
-        var data = [
-            {id: 'id1', name: 'john', primaryMobile: '1234', notes: 'aa'},
-            {id: 'id2', name: 'bob', primaryMobile: '2345', notes: 'aa'},
-            {id: 'id3', name: 'jane', primaryMobile: '3456', notes: 'aa'}
-        ];
-        frontlinesms.populateHiddenFieldOnClick(data);
-    });
-
-    it("populates the hidden field with linked contacts on clicking an event on the Schedule Page", function() {
-        expect($('#event-linked-contacts').val()).toEqual("id1,id2,id3");
-    });
-
-    afterEach(function() {
-        $('body#fixtures > *').not(".jasmine_reporter").not('script').remove();
-    });
-});
-
 describe('event detail pop up', function() {
     beforeEach(function() {
         var tempHTML =
