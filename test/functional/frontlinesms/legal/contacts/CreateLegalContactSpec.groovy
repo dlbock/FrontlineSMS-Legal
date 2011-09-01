@@ -9,7 +9,7 @@ import frontlinesms.legal.LegalContact
 
 class CreateLegalContactSpec extends FrontlinesmsLegalGebSpec {
 
-    def setup(){
+    def setup() {
 
     }
 
@@ -73,4 +73,22 @@ class CreateLegalContactSpec extends FrontlinesmsLegalGebSpec {
         linkCaseCancelButton.present
     }
 
+    def "should show relationship description dialog when link case button is clicked for a desired case"() {
+        given:
+        new Case(caseId: "123", description: "test").save(flush: true)
+        new Case(caseId: "321", description: "test2").save(flush: true)
+
+        when:
+        to CreateLegalContactPage
+        linkCaseButton.click()
+        casesToLink[0].linkCaseButton.click()
+
+
+        then:
+        caseContactRelationshipDialog.present
+        relationshipInput.present
+        relationshipConfirmButton.present
+        relationshipCancelButton.present
+
+    }
 }

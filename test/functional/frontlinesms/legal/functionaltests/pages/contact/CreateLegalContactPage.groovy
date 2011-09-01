@@ -23,6 +23,10 @@ class CreateLegalContactPage extends Page {
         casesToLink { $("tbody tr").collect {module CaseRow, it} }
         caseIdSearch { $("input", id: "caseId") }
         linkCaseCancelButton { $(".ui-button-text").value("Cancel") }
+        caseContactRelationshipDialog { $("div", id: "case-contact-relationship-dialog")}
+        relationshipInput { $("input", id: "case-contact-relationship")}
+        relationshipConfirmButton { $("button", id: "confirm-yes")}
+        relationshipCancelButton { $("button", id: "confirm-no")}
     }
 }
 class CaseRow extends Module {
@@ -30,6 +34,6 @@ class CaseRow extends Module {
         cell { i -> $("td", i) }
         caseId { cell(0).text() }
         status { cell(1).text() }
-        linkCaseButton { $("a", class: "linkCaseButton") }
+        linkCaseButton { $("a", class: "caseLinkButton") }
     }
 }

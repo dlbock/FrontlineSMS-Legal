@@ -3,7 +3,7 @@
 <head>
     <meta name="layout" content="main">
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'forms.css')}"/>
-    <g:javascript library="linkCaseToContact"/>
+    <g:javascript library="linkCaseToContactOnCreateContact"/>
     <g:javascript library="picnet.table.filter.min"/>
     <g:javascript library="contactCreate"/>
     <g:javascript library="caseSearch"/>
@@ -14,12 +14,11 @@
     <title>Create New Contact</title>
     <script type="text/javascript">
         $(function() {
-            frontlinesms.linkCaseToContact();
+            frontlinesms.linkCaseToContactOnCreateContact();
             frontlinesms.createNewContactOnLoad();
             frontlinesms.caseSearchOnLoad();
             frontlinesms.enableUpdateButtonOnDetailsChange();
             frontlinesms.validateContactNumber();
-
         })
     </script>
 
@@ -69,11 +68,11 @@
                         <td class="case-name">
                             <%=HtmlUtils.htmlEscape(legalCase.caseId)%>
                         </td>
-                        <td>
+                        <td class="case-status">
                             <%=legalCase.active ? "active" : "inactive"%>
                         </td>
                         <td>
-                            <a href="" class="linkCaseButton">Link Case</a>
+                            <a href="#" class="caseLinkButton">Link Case</a>
                         </td>
                     </tr>
                 </g:each>
@@ -91,5 +90,8 @@
     <p>Your changes have not been saved. Are you sure you want to cancel?</p>
 </div>
 
+<div id="case-contact-relationship-dialog" title="Relationship to case" style="display: none;">
+    <input id="case-contact-relationship"/>
+</div>
 </body>
 </html>
