@@ -4,11 +4,26 @@ set -e
 jenkins_server=221.134.198.6
 project=FrontlineSMS2-Core
 
-metadata_url=http://$jenkins_server/job/$project/lastStableBuild/api/json?tree=actions[lastBuiltRevision[SHA1]]
-metadata_url=$(echo "$metadata_url" | sed -E "s/\[/%5B/g")
-metadata_url=$(echo "$metadata_url" | sed -E "s/\]/%5D/g")
+build_url() {
+    url=http://$1/job/$project/lastStableBuild/api/json?tree=actions[lastBuiltRevision[SHA1]]
+    url=$(echo "$url" | sed -E 's/\[/%5B/g')
+    url=$(echo "$url" | sed -E 's/\]/%5D/g')
+    echo $url
+}
 
-metadata=$(curl --silent "$metadata_url")
+if which -s curl
+then
+    get_command="curl --connect-timeout 5"
+elif which -s wget
+then
+    get_command="wget --tries=1 --connect-timeout=5"
+else
+    echo "Can't find curl or wget"
+    exit 1
+fi
+
+url=$(build_url $jenkins_server) metadata=$($get_command "$url") ||
+url=$(build_url localhost) metadata=$($get_command "$url")
 last_successful_revision=$(echo "$metadata" | sed -E 's/.*"SHA1":"([0-9a-f]{40}).*/\1/')
 
 cd frontlinesms2-core
