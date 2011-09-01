@@ -53,7 +53,7 @@ class SchedulePage extends Page {
         contactNameSearch {
             $("input", id: "contact-name-search")
         }
-        contactLinkNotVisible { $("tr", class: "contactRow", filtermatch: "false").collect {module LinkContactRow, it} }
+        contactsNotInSearchResults { $("tr", class: "contactRow", filtermatch: "false").collect {module LinkContactRow, it} }
 
         updateEvent { $("input", id: "update-event") }
         errorMessage { $("div", id: "error-message").text()}

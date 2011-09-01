@@ -18,40 +18,13 @@ class LinkContactToExistingEventSpec extends FrontlinesmsLegalGebSpec {
         linkContactToExistingEvent()
 
         then:
-        assert existingContactList.collect { it -> it.contactName }.size() == 2
-    }
-
-    def 'should display a summary of all contacts in the Link Contact to an Event popup'() {
-        given:
-        createEvent("Test Event")
-        new LegalContact(name: 'fa', primaryMobile: '1234567').save(flush: true)
-        to SchedulePage, "index"
-
-        when:
-        events()[0].click()
-        linkContactToExistingEvent()
-
-        then:
+        existingContactList.collect { it -> it.contactName }.size() == 2
+        and:
         existingContactList[0].contactName == "fa"
         existingContactList[0].contactNumber == "1234567"
-    }
+        existingContactList[1].contactName == "faooio"
+        existingContactList[1].contactNumber == "12309004567"
 
-    def 'should link contact to an existing event when the LINK CONTACT link (next to respective contact) is clicked on th Link Contact to an Event popup'() {
-        given:
-        createEvent("Test")
-        new LegalContact(name: 'fa', primaryMobile: '1234567').save(flush: true)
-        new LegalContact(name: 'fafd', primaryMobile: '1234567').save(flush: true)
-        to SchedulePage, "index"
-
-        when:
-        events()[0].click()
-        linkContactToExistingEvent()
-
-        and:
-        linkContactFromPopup()
-
-        then:
-        linkedContactsInEventDetailsPopup.collect { it -> it.contactName }.size() == 1
     }
 
     def 'should link the correct contact to an existing event when the LINK CONTACT link next to it is clicked'() {
@@ -69,6 +42,9 @@ class LinkContactToExistingEventSpec extends FrontlinesmsLegalGebSpec {
         linkContactFromPopup()
 
         then:
+        linkedContactsInEventDetailsPopup.collect { it -> it.contactName }.size() == 1
+
+        and:
         linkedContactsInEventDetailsPopup.collect { it -> it.contactName }[0] == 'fa'
         linkedContactsInEventDetailsPopup.collect { it -> it.contactNumber }[0] == '1234567'
     }
@@ -113,26 +89,7 @@ class LinkContactToExistingEventSpec extends FrontlinesmsLegalGebSpec {
         linkedContactsInEventDetailsPopup.collect { it -> it.contactName }[0] == 'fa'
     }
 
-    def "should display all the contacts filtered by the value in the search input of the search contact dialog"() {
-        given:
-        createEvent("Test")
-        new LegalContact(name: "neetu", primaryMobile: "22222").save(flush: true)
-        new LegalContact(name: "rupa", primaryMobile: "55555").save(flush: true)
-        to SchedulePage, "index"
-
-        when:
-        events()[0].click()
-        linkContactToExistingEvent()
-
-        and:
-        contactNameSearch.value("ne")
-        sleep(500)
-
-        then:
-        contactLinkNotVisible().size() == 1
-    }
-
-    def "should clear the search input when the dialog box is open, closed, reopened"() {
+    def "should clear the search input when the contacts search dialog is opened, closed and reopened"() {
         given:
         createEvent("Test")
         new LegalContact(name: "neetu", primaryMobile: "22222").save(flush: true)
@@ -153,6 +110,26 @@ class LinkContactToExistingEventSpec extends FrontlinesmsLegalGebSpec {
 
         then:
         contactNameSearch.value() == ""
+    }
+
+    def "should display all the contacts filtered by the value in the search input of the search contact dialog"() {
+        given:
+        createEvent("Test")
+        new LegalContact(name: "neetu", primaryMobile: "22222").save(flush: true)
+        new LegalContact(name: "neil", primaryMobile: "11111").save(flush: true)
+        new LegalContact(name: "rupa", primaryMobile: "55555").save(flush: true)
+        to SchedulePage, "index"
+
+        when:
+        events()[0].click()
+        linkContactToExistingEvent()
+
+        and:
+        contactNameSearch.value("ne")
+        sleep(500)
+
+        then:
+        contactsNotInSearchResults().size() == 1
     }
 
     def "should display all the contacts when the dialog box is reopened after a previous filter"() {

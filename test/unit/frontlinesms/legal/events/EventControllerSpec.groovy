@@ -259,7 +259,7 @@ class EventControllerSpec extends FrontlinesmsLegalControllerSpecBase {
                  new LegalContact(id: 2, name: "Jane Smith", primaryMobile: "12345", notes: "hii")])
 
         controller.params.eventId = event.id
-        controller.params.eventTitle = "test"
+        controller.params.eventTitle = "u-test"
         controller.params.dateFieldSelected = "August 26,2011"
         controller.params.startTimeField = "08:45:00"
         controller.params.endTimeField = "11:45:00"
@@ -270,6 +270,7 @@ class EventControllerSpec extends FrontlinesmsLegalControllerSpecBase {
 
         then:
         EventContact.count() == 2
+        Event.findByEventTitle("u-test") == 1
         event.linkedContacts.size() == 2
     }
 }
