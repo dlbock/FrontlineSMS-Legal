@@ -26,9 +26,9 @@ frontlinesms.updateEventDetails = function () {
     } else {
         $("#view-event").dialog("close");
         $.ajax({
-            url :"updateEvent",
+            url :"../event/update",
             type: "POST",
-            data:{"eventId": $('#event-id').val(), "eventTitle": $('#event-title').val(), "eventDate":$('#event-date').val(), "eventStartTime":$('#event-start-time').val(), "eventEndTime":$('#event-end-time').val()},
+            data:{"eventId": $('#event-id').val(), "eventTitle": $('#event-title').val(), "dateFieldSelected":$('#event-date').val(), "startTimeField":$('#event-start-time').val(), "endTimeField":$('#event-end-time').val()},
             error: function () {
                 frontlinesms.log("Failed to update.");
             },

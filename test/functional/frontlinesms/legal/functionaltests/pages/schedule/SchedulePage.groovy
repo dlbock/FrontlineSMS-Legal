@@ -59,6 +59,10 @@ class SchedulePage extends Page {
         errorMessage { $("div", id: "error-message").text()}
         eventStartTime {$("input", id: "event-start-time")}
         eventEndTime {$("input", id: "event-end-time")}
+        eventTitleField {$("#event-title")}
+        eventDateField {$("input", id: "event-date")}
+        eventStartTimeField { $('#event-start-time')}
+        eventEndTimeField { $('#event-end-time')}
     }
 }
 

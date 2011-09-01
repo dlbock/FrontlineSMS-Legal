@@ -29,15 +29,14 @@ class RescheduleEventSpec extends FrontlinesmsLegalGebSpec {
         events()[0].click()
 
         and:
-        def newTitle = "Some new title"
-        eventTitle = newTitle
+        eventTitleField.value("Some new title")
 
         and:
         updateEvent.click()
 
         then:
         def updatedEvent = Event.findByEventTitle("Some new title")
-        updatedEvent.eventTitle == newTitle
+        updatedEvent.eventTitle == "Some new title"
     }
 
     def "should show error message when title field is blank"() {
@@ -45,7 +44,7 @@ class RescheduleEventSpec extends FrontlinesmsLegalGebSpec {
         events()[0].click()
 
         and:
-        eventTitle = ""
+        eventTitleField.value("")
 
         and:
         updateEvent.click()
@@ -59,7 +58,7 @@ class RescheduleEventSpec extends FrontlinesmsLegalGebSpec {
         events()[0].click()
 
         and:
-        eventDate = ""
+        eventDateField.value("")
 
         and:
         updateEvent.click()
@@ -73,7 +72,7 @@ class RescheduleEventSpec extends FrontlinesmsLegalGebSpec {
         events()[0].click()
 
         and:
-        eventStartTime = ""
+        eventStartTimeField.value("")
 
         and:
         updateEvent.click()
@@ -87,7 +86,7 @@ class RescheduleEventSpec extends FrontlinesmsLegalGebSpec {
         events()[0].click()
 
         and:
-        eventEndTime = ""
+        eventEndTimeField.value("")
 
         and:
         updateEvent.click()
