@@ -86,6 +86,7 @@ frontlinesms.addLinkedCaseToHiddenField = function(caseId, relationship) {
 };
 
 frontlinesms.addLinkedCaseToTable = function(caseId, status, relationship) {
+    frontlinesms.log("inside linking case");
     var row = $('#SearchResults #' + caseId);   
     var rowToAdd = $('<tr>').append(
         '<td>' +

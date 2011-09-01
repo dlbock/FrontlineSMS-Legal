@@ -40,6 +40,19 @@
         <button id="link-case-button">Link Cases</button>
     </div>
 
+    <table id="cases">
+        <thead>
+        <tr>
+            <th>Case Id</th>
+            <th>Status</th>
+            <th>Relationship</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+
     <div class="form-submit-area">
         <button id="contact-save">Save</button>
         <button id="contact-create-cancel">Cancel</button>

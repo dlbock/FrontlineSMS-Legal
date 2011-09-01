@@ -91,4 +91,27 @@ class CreateLegalContactSpec extends FrontlinesmsLegalGebSpec {
         relationshipCancelButton.present
 
     }
+
+    def "should return to create contact page with CASE ID, Status, Relationship and an Unlink link updated in the linked cases table"() {
+
+        given:
+        new Case(caseId: "123", description: "test").save(flush: true)
+        new Case(caseId: "321", description: "test2").save(flush: true)
+
+        when:
+        to CreateLegalContactPage
+        linkCaseButton.click()
+        casesToLink[0].linkCaseButton.click()
+        relationshipInput << "Victim"
+        relationshipConfirmButton.click()
+
+
+        then:
+        at (CreateLegalContactPage)
+        linkedCasesTable[0].caseId == "123"
+        linkedCasesTable[0].active == "active"
+        linkedCasesTable[0].relationship == "Victim"
+        linkedCasesTable[0].unlinkButton.present
+
+    }
 }
