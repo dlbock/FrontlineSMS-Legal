@@ -277,4 +277,32 @@ class CreateEventSpec extends FrontlinesmsLegalGebSpec {
         linkedCasesTable.size() == 1
 
     }
+
+    def "an already linked case should not be linked again"(){
+        setup:
+        new Case(caseId: "1112", description: "ertyui").save(flush: true)
+        new Case(caseId: "1113", description: "erdstyui").save(flush: true)
+
+        when:
+        to NewEventPage
+
+        and:
+        linkCaseButton.click()
+
+        and:
+        casesToLink[0].linkCase.click()
+
+        and:
+        linkCaseButton.click()
+
+        and:
+        casesToLink[0].linkCase.click()
+
+        then:
+        assert NewEventPage
+
+        and:
+        linkedCasesTable.size() == 1
+
+    }
 }
