@@ -11,12 +11,12 @@ build_url() {
     echo $url
 }
 
-if which -s curl
+if which curl >/dev/null
 then
-    get_command="curl --connect-timeout 5"
-elif which -s wget
+    get_command="curl --silent --connect-timeout 5"
+elif which wget >/dev/null
 then
-    get_command="wget --tries=1 --connect-timeout=5"
+    get_command="wget --quiet --tries=1 --connect-timeout=5"
 else
     echo "Can't find curl or wget"
     exit 1
