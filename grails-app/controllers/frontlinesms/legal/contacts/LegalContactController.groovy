@@ -6,6 +6,7 @@ import frontlinesms.legal.Case
 import frontlinesms.legal.CaseContacts
 import frontlinesms.legal.LegalContact
 import grails.converters.JSON
+import frontlinesms.legal.EventContact
 
 class LegalContactController {
 
@@ -141,8 +142,12 @@ class LegalContactController {
     def delete = {
         def deleteContact = LegalContact.findById(params.id)
         if (deleteContact != null) {
-            deleteContact.delete();
-            flash.message = "Contact deleted."
+            if (deleteContact != null) {
+                EventContact.unlink(deleteContact)
+                sleep(500)
+                deleteContact.delete()
+                flash.message = "Contact deleted."
+            }
         }
         else
             flash.warning = "Contact not found."

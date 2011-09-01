@@ -27,4 +27,18 @@ class EventContact {
         def linkedContacts = EventContact.findAllByEvent(event)
         linkedContacts.collect { it -> it.legalContact}
     }
+
+    static Event[] findEventsByContact(LegalContact legalContact) {
+        def linkedEventContacts = EventContact.findAllByLegalContact(legalContact)
+        linkedEventContacts.collect {it -> it.event}
+    }
+
+    static void unlink(legalContact) {
+        def allEvent = frontlinesms.legal.EventContact.findEventsByContact(legalContact)
+         if (allEvent) {
+            for(oneEvent in allEvent){
+            EventContact.findByEventAndLegalContact(oneEvent, legalContact).delete()
+            }
+         }
+    }
 }

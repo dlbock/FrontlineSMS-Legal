@@ -252,6 +252,8 @@ class LegalContactControllerSpec extends FrontlinesmsLegalControllerSpecBase {
         def contacts = [new LegalContact(name: 'Me', primaryMobile: '98765')]
         mockCoreClassesToAvoidIssuesWithContactEventHandlers()
         mockDomain(LegalContact, contacts)
+        mockDomain(EventContact)
+        mockDomain(CaseContacts)
         controller.params.id = contacts[0].id
 
         when:
@@ -266,6 +268,8 @@ class LegalContactControllerSpec extends FrontlinesmsLegalControllerSpecBase {
         setup:
         def contacts = [new LegalContact(name: 'Me', primaryMobile: '98765')]
         mockDomain(LegalContact, contacts)
+        mockDomain(EventContact)
+        mockDomain(CaseContacts)
         controller.params.id = "NaN"
 
         when:
@@ -280,6 +284,8 @@ class LegalContactControllerSpec extends FrontlinesmsLegalControllerSpecBase {
         def contacts = [new LegalContact(name: 'Me', primaryMobile: '98765')]
         mockCoreClassesToAvoidIssuesWithContactEventHandlers()
         mockDomain(LegalContact, contacts)
+        mockDomain(EventContact)
+        mockDomain(CaseContacts)
         controller.params.id = contacts[0].id
 
         when:
@@ -287,5 +293,28 @@ class LegalContactControllerSpec extends FrontlinesmsLegalControllerSpecBase {
 
         then:
         assert LegalContact.count() == 0
+    }
+
+    def "should be able to delete a contact which is linked to some event"(){
+        setup:
+        def newEvent = [new Event(eventTitle: "Test", dateFieldSelected: new Date("July 12,2011"), startTimeField: Time.valueOf("09:00:00"),endTimeField: Time.valueOf("10:00:00"))]
+        mockCoreClassesToAvoidIssuesWithContactEventHandlers()
+        mockDomain(Event, newEvent)
+
+        def contact = [new LegalContact(name: "Henry", primaryMobile: "276387243")]
+        mockCoreClassesToAvoidIssuesWithContactEventHandlers()
+        mockDomain(LegalContact, contact)
+        mockDomain(EventContact)
+        mockDomain(CaseContacts)
+        EventContact.link(newEvent[0], contact[0])
+        LegalContactController controller = new LegalContactController()
+        controller.params.id = contact[0].id
+
+        when:
+        controller.delete()
+
+        then:
+        assert LegalContact.count() == 0
+        assert EventContact.findAllByEvent(newEvent[0]).size() == 0
     }
 }
