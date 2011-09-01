@@ -68,7 +68,7 @@ class CreateLegalContactSpec extends FrontlinesmsLegalGebSpec {
 
         then:
         linkCaseDialog.present
-        casesToLink.size() == 2
+        casesToLink.collect { it -> it.linkCaseButton }.size() == 2
         caseIdSearch.present
         linkCaseCancelButton.present
     }

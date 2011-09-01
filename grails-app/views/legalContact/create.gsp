@@ -72,6 +72,9 @@
                         <td>
                             <%=legalCase.active ? "active" : "inactive"%>
                         </td>
+                        <td>
+                            <a href="" class="linkCaseButton">Link Case</a>
+                        </td>
                     </tr>
                 </g:each>
                 </tbody>
