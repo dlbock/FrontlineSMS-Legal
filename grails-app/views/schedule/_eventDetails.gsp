@@ -1,14 +1,15 @@
 <div id="view-event" title="Event Details" style="display: none;">
-    <g:form controller="event" action="update" method="post">
-        <g:hiddenField name="eventId" id="event-id" value="${params.id}"></g:hiddenField>
+    <g:form id="event-detail">
+        <g:hiddenField name="eventId" id="event-id"></g:hiddenField>
+        <div id="error-message" style="color:#FF0000"></div><br/>
         <label><b>Title</b></label><br/>
-        <input type="text" name="eventTitle" id="event-title" value="${params.eventTitle}"/><br/><br/>
+        <input type="text" name="eventTitle" id="event-title"/><br/><br/>
         <label><b>Date</b></label><br/>
-        <input type="text" name="dateFieldSelected" id="event-date" value="${params.dateFieldSelected}"/><br/><br/>
+        <input type="text" name="dateFieldSelected" id="event-date"/><br/><br/>
         <label><b>Start Time</b></label><br/>
-        <input type="text" name="startTimeField" id="event-start-time" value="${params.startTimeField}"/><br/><br/>
+        <input type="text" name="startTimeField" id="event-start-time"/><br/><br/>
         <label><b>End Time</b></label><br/>
-        <input type="text" name="endTimeField" id="event-end-time" value="${params.endTimeField}"/><br/><br/>
+        <input type="text" name="endTimeField" id="event-end-time"/><br/><br/>
         <g:hiddenField name="linkedContacts" id="event-linked-contacts"/>
         <table id="event-contacts-table">
             <thead>
@@ -20,6 +21,7 @@
             <tbody>
             </tbody>
         </table>
+
         <div align="left">
             <input type="button" id="link-contact-button" value="Link Contact"/>
         </div>
@@ -36,9 +38,8 @@
             </tbody>
         </table>
 
-
         <div align="right" class="form-submit-area">
-            <input type="submit" id="update-event" value="Update"/>
+            <input type="button" id="update-event" value="Update"/>
             <input type="button" id="delete-event" value="Delete"/>
         </div>
     </g:form>

@@ -10,6 +10,7 @@
     <g:javascript library="confirmationDialog"/>
     <g:javascript library="calendarInteractions"/>
     <g:javascript library="eventDetails"/>
+    <g:javascript library="jquery.timeentry.min"/>
     <g:javascript library="eventInteractions"/>
     <g:javascript library="unlinkContactFromEvent"/>
     <g:javascript library="picnet.table.filter.min"/>
@@ -23,6 +24,7 @@
             frontlinesms.eventDetails();
             frontlinesms.attachActionWithLinkContactButton();
             frontlinesms.activateDatePicker();
+            frontlinesms.activateTimePicker();
             frontlinesms.contactSearchOnLoad();
             <g:if test="${year}">
             <g:if test="${month}">

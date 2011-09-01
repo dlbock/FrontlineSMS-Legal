@@ -7,11 +7,13 @@ import frontlinesms.legal.Event
 
 class RescheduleEventSpec extends FrontlinesmsLegalGebSpec {
 
-    def 'should show calendar when date text box is clicked'() {
+    def setup() {
         given:
         createEvent("Test Event 1", "08:09AM", "08:56PM")
         to SchedulePage, "index"
+    }
 
+    def 'should show calendar when date text box is clicked'() {
         when:
         events()[0].click()
 
@@ -23,10 +25,6 @@ class RescheduleEventSpec extends FrontlinesmsLegalGebSpec {
     }
 
     def "should update event when the title has changed"() {
-        given:
-        createEvent("Test Event 1", "08:09AM", "08:56PM")
-        to SchedulePage, "index"
-
         when:
         events()[0].click()
 
@@ -42,6 +40,62 @@ class RescheduleEventSpec extends FrontlinesmsLegalGebSpec {
         updatedEvent.eventTitle == newTitle
     }
 
+    def "should show error message when title field is blank"() {
+        when:
+        events()[0].click()
+
+        and:
+        eventTitle = ""
+
+        and:
+        updateEvent.click()
+
+        then:
+        errorMessage == "An event must have a title, date and time. Please enter a title."
+    }
+
+    def "should show error message when date field is blank"() {
+        when:
+        events()[0].click()
+
+        and:
+        eventDate = ""
+
+        and:
+        updateEvent.click()
+
+        then:
+        errorMessage == "An event must have a title, date and time. Please enter a date."
+    }
+
+    def "should show error message when start time field is blank"() {
+        when:
+        events()[0].click()
+
+        and:
+        eventStartTime = ""
+
+        and:
+        updateEvent.click()
+
+        then:
+        errorMessage == "An event must have a title, date and time. Please enter a start time."
+    }
+
+    def "should show error message when end time field is blank"() {
+        when:
+        events()[0].click()
+
+        and:
+        eventEndTime = ""
+
+        and:
+        updateEvent.click()
+
+        then:
+        errorMessage == "An event must have a title, date and time. Please enter a end time."
+    }
+
     def createEvent(title, String startTime, String endTime) {
         to NewEventPage
         eventTitle = title
@@ -50,7 +104,6 @@ class RescheduleEventSpec extends FrontlinesmsLegalGebSpec {
         endTimeField = endTime
         save.click()
     }
-
 }
 
 

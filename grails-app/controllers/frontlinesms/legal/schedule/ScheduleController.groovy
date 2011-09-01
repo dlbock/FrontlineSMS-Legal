@@ -83,16 +83,6 @@ class ScheduleController {
         render "successfully unlinked"
     }
 
-    def updateEvent = {
-        def formattedParams = formatParameters()
-        def event = Event.findById(params.eventId)
-        event.eventTitle = formattedParams.eventTitle
-        event.dateFieldSelected = new Date(params.eventDate)
-        event.startTimeField = Time.valueOf(formattedParams.startTimeField)
-        event.endTimeField = Time.valueOf(formattedParams.endTimeField)
-        event.save(flush: true)
-    }
-
     private def formatParameters() {
         [
                 startTimeField: TimeFormatter.formatTime(params.eventStartTime),

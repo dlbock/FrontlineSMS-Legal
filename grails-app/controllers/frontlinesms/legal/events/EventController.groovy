@@ -53,7 +53,6 @@ class EventController {
     }
 
     def update = {
-        println(params)
         def formattedParams = formatParameters()
         def event = Event.findById(params.eventId)
         event.eventTitle = formattedParams.eventTitle

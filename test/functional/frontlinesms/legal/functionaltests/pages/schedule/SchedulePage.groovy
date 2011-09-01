@@ -56,6 +56,9 @@ class SchedulePage extends Page {
         contactLinkNotVisible { $("tr", class: "contactRow", filtermatch: "false").collect {module LinkContactRow, it} }
 
         updateEvent { $("input", id: "update-event") }
+        errorMessage { $("div", id: "error-message").text()}
+        eventStartTime {$("input", id: "event-start-time")}
+        eventEndTime {$("input", id: "event-end-time")}
     }
 }
 

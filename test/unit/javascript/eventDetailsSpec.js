@@ -61,3 +61,63 @@ describe('Hidden Field', function () {
         $('body#fixtures > *').not(".jasmine_reporter").not('script').remove();
     });
 });
+
+describe('event detail pop up', function() {
+    beforeEach(function() {
+        var tempHTML =
+            "<input type=\"button\" name=\"li\" id=\"update-button\"/>" +
+                "<div id=\"error-message\"/><br/>" +
+                "<div id=\"view-event\" title=\"Event Details\">" +
+                "<label>Title :</label>" +
+                "<input type='text' name=\"eventTitle\" id=\"event-title\" value=''/><br/>" +
+                "<label>Date :</label>" +
+                "<input type='text' name=\"eventDate\" id=\"event-date\" value=''/><br/>" +
+                "<label>Start Time :</label>" +
+                "<input type='text' name=\"eventStartTime\" id=\"event-start-time\" value=''/><br/>" +
+                "<label>End Time :</label>" +
+                "<input type='text' name=\"eventEndTime\" id=\"event-end-time\" value=''/><br/>" +
+                "<input type=\"button\" id=\"update-event\" value=\"Update\"/>" +
+                "<input type=\"button\" id=\"delete-event\" value=\"Delete\"/>" +
+                "<input type=\"button\" id=\"link-contact-to-existing-event-button\" value=\"Link Contact\"/>" +
+                "<label name=\"eventId\" id=\"event-id\"></label>" +
+                "</div>";
+        $(tempHTML).appendTo("#fixtures");
+        $('#update-button').click(function() {
+            frontlinesms.updateEventDetails();
+        });
+    });
+
+    it("show error message when title field is blank", function() {
+        $('#event-title').val("");
+        $("#update-button").click();
+        expect($('#error-message').html()).toBe("An event must have a title, date and time. Please enter a title.");
+    });
+
+    it("show error message when date field is blank", function() {
+        $('#event-title').val("test-title");
+        $('#event-date').val("");
+        $("#update-button").click();
+        expect($('#error-message').html()).toBe("An event must have a title, date and time. Please enter a date.");
+    });
+
+    it("show error message when start time field is blank", function() {
+        $('#event-title').val("test-title");
+        $('#event-date').val("August 31,2011");
+        $('#event-start-time').val("");
+        $("#update-button").click();
+        expect($('#error-message').html()).toBe("An event must have a title, date and time. Please enter a start time.");
+    });
+
+    it("show error message when end time field is blank", function() {
+        $('#event-title').val("test-title");
+        $('#event-date').val("August 31,2011");
+        $('#event-start-time').val("05:20PM");
+        $('#event-end-time').val("");
+        $("#update-button").click();
+        expect($('#error-message').html()).toBe("An event must have a title, date and time. Please enter a end time.");
+    });
+
+    afterEach(function() {
+        $("#view-event, #test-dialog-button").remove();
+    });
+});
