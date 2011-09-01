@@ -244,5 +244,33 @@ class EventControllerSpec extends FrontlinesmsLegalControllerSpecBase {
         updatedEvent.eventTitle.equals("update-test")
         Event.findByEventTitle("test") == null
     }
+
+    def 'should link contact to event when the event is updated'() {
+        setup:
+        def date = new Date("August 26,2011")
+        def startTime = Time.valueOf("08:45:00")
+        def endTime = Time.valueOf("11:45:00")
+        def event = new Event(eventTitle: "test", dateFieldSelected: date, startTimeField: startTime, endTimeField: endTime)
+        mockDomain(Event, [event])
+        mockDomain(EventContact)
+        mockCoreClassesToAvoidIssuesWithContactEventHandlers()
+        mockDomain(LegalContact,
+                [new LegalContact(id: 1, name: "John Doe", primaryMobile: "435352", notes: "hii"),
+                 new LegalContact(id: 2, name: "Jane Smith", primaryMobile: "12345", notes: "hii")])
+
+        controller.params.eventId = event.id
+        controller.params.eventTitle = "test"
+        controller.params.dateFieldSelected = "August 26,2011"
+        controller.params.startTimeField = "08:45:00"
+        controller.params.endTimeField = "11:45:00"
+        controller.params.linkedContacts = "1,2"
+
+        when:
+        controller.update()
+
+        then:
+        EventContact.count() == 2
+        event.linkedContacts.size() == 2
+    }
 }
 
