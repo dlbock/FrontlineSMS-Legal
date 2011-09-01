@@ -9,7 +9,7 @@ then
     grails update-core
     grails codenarc
     grails sass-compile
-    grails test-app -coverage
+    grails -Dserver.port=4000 test-app -coverage
     grails dist
     after="$(date +%s)"
     elapsed_time="$(expr $after - $before)"
