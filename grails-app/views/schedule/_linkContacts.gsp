@@ -1,7 +1,7 @@
 <div id="link-contact-dialog" title="Link Contact to an Event" style="display: none;">
-    <g:form action="">
+<g:textField name="contactNameSearch" id="contact-name-search"/>
+<g:form action="">
         <p>Enter the name or the mobile number to search for Contacts</p>
-        <g:textField name="contactNameSearch" id="contact-name-search"/>
         <div id="link-contacts-inner-table-div" style="height:200px;overflow: scroll; width:250px">
             <table id="contactsTable">
                 <thead>

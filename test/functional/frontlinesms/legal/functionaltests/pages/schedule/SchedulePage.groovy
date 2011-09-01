@@ -63,6 +63,8 @@ class SchedulePage extends Page {
         eventDateField {$("input", id: "event-date")}
         eventStartTimeField { $('#event-start-time')}
         eventEndTimeField { $('#event-end-time')}
+
+        linkContactSearchDialog {$('#link-contact-dialog')}
     }
 }
 

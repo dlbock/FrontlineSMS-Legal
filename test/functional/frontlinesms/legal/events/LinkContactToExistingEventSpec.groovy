@@ -195,6 +195,25 @@ class LinkContactToExistingEventSpec extends FrontlinesmsLegalGebSpec {
         linkedContactsInEventDetailsPopup.collect { it -> it.contactName }[0] == "neetu"
     }
 
+    def "should continue showing the search contact dialog box after pressing RETURN when searching for a contact"() {
+        setup:
+        createEvent("Test")
+        new LegalContact(name: "fabio", primaryMobile: "22222").save(flush: true)
+        new LegalContact(name: "dev", primaryMobile: "55555").save(flush: true)
+
+        when:
+        to SchedulePage, "index"
+        events()[0].click()
+        linkContactToExistingEvent()
+        contactNameSearch.value("fab\r")
+
+        then:
+        linkedContactsInEventDetailsPopup.collect { it -> it.contactName }.size() == 0
+
+        and:
+        linkContactSearchDialog.displayed == true
+    }
+
     private def createEvent(title) {
         to NewEventPage
         eventTitle = title
