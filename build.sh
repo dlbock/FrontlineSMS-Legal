@@ -14,7 +14,7 @@ fi
 
 before="$(date +%s)"
 grails clean
-if [ "$#" != "--no-update" ]
+if [ "$*" != "--no-update" ]
 then
     ./updateCore.sh
 fi
