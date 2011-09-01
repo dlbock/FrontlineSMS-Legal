@@ -34,7 +34,7 @@ class NewEventPage extends Page {
         linkCaseDialog { $("div", id: "link-case-dialog") }
         caseDialogCancelButton { $("#cancel-link-case") }
         casesToLink { $("tr", class:"caseLink").collect {module LinkableCase, it} }
-        linkedCasesTable{$("#cases")}
+        oneContactIsDisplayed{$("#cases").size()==1}
     }
 }
 

@@ -274,7 +274,7 @@ class CreateEventSpec extends FrontlinesmsLegalGebSpec {
         casesToLink[0].linkCase.click()
 
         then:
-        linkedCasesTable.size() == 1
+        oneContactIsDisplayed
 
     }
 
@@ -302,7 +302,7 @@ class CreateEventSpec extends FrontlinesmsLegalGebSpec {
         assert NewEventPage
 
         and:
-        linkedCasesTable.size() == 1
+        oneContactIsDisplayed
 
     }
 }
