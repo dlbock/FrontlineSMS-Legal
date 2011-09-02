@@ -9,5 +9,6 @@ frontlinesms.initializeSearchAutocomplete = function() {
         additionalFilterTriggers: [$("#contact-name-search")]
     });
     $("#contact-name-search").removeAttr("title");
-    $('#contactsTable thead').remove()
+    $('#contactsTable thead .filters').remove()
+
 }
