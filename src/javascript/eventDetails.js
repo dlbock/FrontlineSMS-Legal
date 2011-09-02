@@ -6,7 +6,7 @@ frontlinesms.eventDetails = function() {
         autoOpen: false,
         modal: true,
         open: function(event, ui) {
-           $('#update-event').attr('disabled', true)
+            $('#update-event').attr('disabled', true)
         }
     });
 
@@ -104,6 +104,9 @@ frontlinesms.attachActionWithLinkContactButton = function(buttonSelector, dialog
                 '</td>' +
                 '<td>' +
                 $(row).find('.contact-number').text() +
+                '</td>' +
+                '<td>' +
+                '<a href="" class="unlink-contact" id = ' + contactId + '>Unlink</a>' +
                 '</td>'
         );
         $('#event-contacts-table').append(rowToAdd);

@@ -108,3 +108,54 @@ describe('event detail pop up', function() {
         $('body#fixtures > *').not(".jasmine_reporter").not('script').remove();
     });
 });
+
+describe('event detail pop up', function() {
+    beforeEach(function() {
+        var tempHTML = '<div id="view-event" title="Event Details" style="display: none;">' +
+            '<button id="link-contact-button">Link Contacts</button>' +
+            '</div>' +
+            '<input type="hidden" id="event-linked-contacts" value=""/>' +
+            '<div id="link-contact-to-existing-event-dialog" title="Link Contacts to an Event">' +
+            '<table id="contactsTable"> <tbody>' +
+            '<tr class="contactRow" id="rupa">' +
+            '<td  class="contact-name">Rupa</td>' +
+            '<td class="contact-number">1234</td>' +
+            '<td class="contactLink" id="1">' +
+            '<a href="#">Link Contact</a> +' +
+            '</td>' +
+            '</tr>' +
+            '<tr class="contactRow" id="neetu">' +
+            '<td  class="contact-name">Neetu</td>' +
+            '<td class="contact-number">3333</td>' +
+            '<td class="contactLink" id="2">' +
+            '<a href="#">Link Contact</a></td>' +
+            '</tr>' +
+            '</tbody></table> ' +
+            '</div>' +
+            '<table name="linkedContacts" id="event-contacts-table"> ' +
+            '<thead>' +
+            '<tr>' +
+            '<th>Contact name</th>' +
+            '<th> Phone number </th>' +
+            '</tr>' +
+            '</thead>' +
+            '<tbody >' +
+            '</tbody>' +
+            '</table>'
+            ;
+        $(tempHTML).appendTo("#fixtures");
+        frontlinesms.attachActionWithLinkContactButton('#link-contact-button', '#link-contact-to-existing-event-dialog');
+    });
+
+    it("should have an UNLINK link next to every contact", function() {
+        $('#link-contact-button').click();
+        $("#1 a").click();
+        expect($('#event-contacts-table #1.unlink-contact').size()).toEqual(1);
+    })
+
+    afterEach(function() {
+        $('body#fixtures > *').not(".jasmine_reporter").not('script').remove();
+    });
+
+});
+
