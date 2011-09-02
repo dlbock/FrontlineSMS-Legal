@@ -44,7 +44,6 @@
         <thead>
         <tr>
             <th>Case Id</th>
-            <th>Status</th>
             <th>Relationship</th>
         </tr>
         </thead>

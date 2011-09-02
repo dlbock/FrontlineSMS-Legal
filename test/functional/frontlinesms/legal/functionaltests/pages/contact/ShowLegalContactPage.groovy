@@ -11,6 +11,9 @@ class ShowLegalContactPage extends Page {
         primaryMobile { $("input", id: "contact-primary-mobile").value()}
         notes {$("textarea", id: "contact-notes")}
         linkCaseButton { $("button", id: "link-case-button")}
+        linkedCasesTable {
+            $("#cases tbody tr").collect {module LinkedCaseRow, it}
+        }
         pastEventsTable {$("#past-events tbody tr").collect {module EventRow, it} }
         futureEventsTable {$("#future-events tbody tr").collect {module EventRow, it} }
         deleteButton {$("button", id: "delete-button")}

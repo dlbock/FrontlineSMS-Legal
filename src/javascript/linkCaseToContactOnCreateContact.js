@@ -27,7 +27,6 @@ frontlinesms.linkCaseToContactOnCreateContact = function() {
 
     $(".caseLinkButton").click(function() {
         var caseId = $(this).parents("tr").attr('id');
-        var status = $(this).parents("tr").children(".case-status").html().trim();
 
         if (!frontlinesms.checkIfContactHasCaseLinked(caseId)) {
             $("#case-contact-relationship-dialog").dialog({
@@ -41,7 +40,7 @@ frontlinesms.linkCaseToContactOnCreateContact = function() {
                         click: function() {
                             var relationship = $("#case-contact-relationship").val();
                             frontlinesms.addLinkedCaseToHiddenField(caseId, relationship);
-                            frontlinesms.addLinkedCaseToTable(caseId, status, relationship);
+                            frontlinesms.addLinkedCaseToTable(caseId, relationship);
                             $('#contact-save').removeAttr("disabled");
                             $(this).dialog("close");
                             $("#link-case-dialog").dialog("close");
@@ -84,7 +83,7 @@ frontlinesms.addLinkedCaseToHiddenField = function(caseId, relationship) {
     $('#contact-linked-cases').val(JSON.stringify(linkedCases));
 };
 
-frontlinesms.addLinkedCaseToTable = function(caseId, status, relationship) {
+frontlinesms.addLinkedCaseToTable = function(caseId, relationship) {
     var row = $('#SearchResults #' + caseId);
     var rowToAdd = $('<tr>').append(
         '<td>' +
@@ -92,13 +91,10 @@ frontlinesms.addLinkedCaseToTable = function(caseId, status, relationship) {
             '<span class="id" style="display:none;">' + caseId + '</span>' +
             '</td>' +
             '<td>' +
-            frontlinesms.encodeHTML(status) +
-            '</td>' +
-            '<td>' +
             frontlinesms.encodeHTML(relationship) +
             '</td>' +
             '<td>' +
-            '<a class="unlink-case-button" href="">Unlink</a>' +
+            '<a class="unlink-case" href="">Unlink</a>' +
             '</td>'
     );
     $('#cases').append(rowToAdd);

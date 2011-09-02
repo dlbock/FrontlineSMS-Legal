@@ -63,8 +63,8 @@
                 <td>
                     <%=HtmlUtils.htmlEscape(legalCase.involvement)%>
                 </td>
-                <td class="unlink-case-button">
-                    <a href="">Unlink</a>
+                <td>
+                    <a class="unlink-case" href="">Unlink</a>
                 </td>
             </tr>
         </g:each>

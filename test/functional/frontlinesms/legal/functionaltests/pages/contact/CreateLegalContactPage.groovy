@@ -16,7 +16,7 @@ class CreateLegalContactPage extends Page {
         cancel { $("button", id: "contact-create-cancel") }
         linkCaseButton { $("button", id: "link-case-button")}
         linkedCasesTable {
-            $("tbody tr").collect {module LinkedCaseRow, it}
+            $("#cases tbody tr").collect {module LinkedCaseRow, it}
         }
         saveWithoutNameDialog { $("div", id: "contact-save-no-name-dialog")}
         saveWithoutNameYes { $("button", id: "save-confirm-yes") }
@@ -38,15 +38,5 @@ class CaseRow extends Module {
         caseId { cell(0).text() }
         status { cell(1).text() }
         linkCaseButton { $("a", class: "caseLinkButton") }
-    }
-}
-
-class LinkedCaseRow extends Module {
-    static content = {
-        cell { i -> $("td", i) }
-        caseId { cell(0).text() }
-        active { cell(1).text() }
-        relationship { cell(2).text() }
-        unlinkButton { $("a", class: "unlink-case-button") }
     }
 }

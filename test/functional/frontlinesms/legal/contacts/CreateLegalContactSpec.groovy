@@ -88,7 +88,6 @@ class CreateLegalContactSpec extends FrontlinesmsLegalGebSpec {
     }
 
     def "should return to create contact page with CASE ID, Status, Relationship and an Unlink link updated in the linked cases table"() {
-
         given:
         new Case(caseId: "123", description: "test").save(flush: true)
         new Case(caseId: "321", description: "test2").save(flush: true)
@@ -100,14 +99,11 @@ class CreateLegalContactSpec extends FrontlinesmsLegalGebSpec {
         relationshipInput << "Victim"
         relationshipConfirmButton.click()
 
-
         then:
         at(CreateLegalContactPage)
         linkedCasesTable[0].caseId == "123"
-        linkedCasesTable[0].active == "active"
         linkedCasesTable[0].relationship == "Victim"
-        linkedCasesTable[0].unlinkButton.present
-
+        linkedCasesTable[0].unlink.displayed
     }
 
     def "should retain search results after cancelling relationship dialog"() {
@@ -132,21 +128,26 @@ class CreateLegalContactSpec extends FrontlinesmsLegalGebSpec {
         given:
         new Case(caseId: "123", description: "test").save(flush: true)
         new Case(caseId: "321", description: "test2").save(flush: true)
-        at CreateLegalContactPage
+        to CreateLegalContactPage
 
         when:
+        name << "Bob"
+        primaryMobile << "8675309"
+        notes << "Testing"
         linkCaseButton.click()
         caseIdSearch << "123"
         casesToLink[0].linkCaseButton.click()
         relationshipInput << "Victim"
         relationshipConfirmButton.click()
-        name << "Bob"
-        primaryMobile << "8675309"
-        notes << "Testing"
         save.click()
 
         then:
         assert at(ShowLegalContactPage)
+        name == "Bob"
+        primaryMobile == "8675309"
+        notes.text() == "Testing"
+        linkedCasesTable[0].caseId == "123"
+        linkedCasesTable[0].relationship == "Victim"
+        linkedCasesTable[0].unlink.displayed
     }
-
 }
