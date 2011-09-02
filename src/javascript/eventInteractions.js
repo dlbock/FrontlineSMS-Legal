@@ -1,10 +1,17 @@
 var frontlinesms = this.frontlinesms || {};
 
 frontlinesms.activateDatePicker = function() {
+    var initialDate;
     $('#event-date').datepicker({
+        beforeShow:function(input, inst){initialDate = $(input).val()},
         changeMonth: true,
         changeYear: true,
-        dateFormat: 'MM d, yy'
+        dateFormat: 'MM d,yy',
+        onSelect: function(dateText, inst) {
+            if (initialDate != dateText) {
+                $('#update-event').attr('disabled', false);
+            }
+        }
     });
 }
 frontlinesms.activateTimePicker = function() {
@@ -19,13 +26,13 @@ frontlinesms.activateTimePicker = function() {
     });
 
     $("#event-start-time").change(
-      frontlinesms.autoUpdateEventEndTime
+        frontlinesms.autoUpdateEventEndTime
     );
 }
 
-frontlinesms.autoUpdateEventEndTime = function(){
+frontlinesms.autoUpdateEventEndTime = function() {
     var date = $("#event-start-time").timeEntry('getTime');
-    $("#event-end-time").timeEntry("setTime", new Date(0, 0, 0, date.getHours()+1, date.getMinutes(), 0));
+    $("#event-end-time").timeEntry("setTime", new Date(0, 0, 0, date.getHours() + 1, date.getMinutes(), 0));
 }
 
 frontlinesms.redirectToHomePage = function() {
