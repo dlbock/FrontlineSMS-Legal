@@ -23,7 +23,6 @@ class CreateEventSpec extends FrontlinesmsLegalGebSpec {
         then: datePicker.present
     }
 
-
     def "when hours are typed in the StartTime text box then minutes should be set to zero"(){
         given: to NewEventPage
 

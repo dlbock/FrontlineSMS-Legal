@@ -56,7 +56,7 @@ class DeleteEventSpec extends FrontlinesmsLegalGebSpec {
     def createEvent(title, String startTime, String endTime) {
         to NewEventPage
         eventTitle = title
-        dateFieldSelected = new Date().format("MMMM d, yyyy")
+        setDate()
         startTimeField = startTime
         endTimeField = endTime
         save.click()

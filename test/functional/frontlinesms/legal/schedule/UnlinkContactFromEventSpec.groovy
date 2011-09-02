@@ -72,7 +72,7 @@ class UnlinkContactFromEventSpec extends FrontlinesmsLegalGebSpec {
     private def createEventWithLink(title, String... names) {
         to NewEventPage
         eventTitle = title
-        dateFieldSelected = new Date().format("MMMM d, yyyy")
+        setDate()
         startTimeField = "08:09AM"
         endTimeField = "08:56PM"
         for (name in names) {

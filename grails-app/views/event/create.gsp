@@ -12,6 +12,7 @@
     <g:javascript library="linkCaseToEvent"/>
     <g:javascript library="contactSearch"/>
     <g:javascript library="caseSearch"/>
+    <g:javascript library="formValidation"/>
 
     <script type="text/javascript">
         $(function() {
@@ -19,6 +20,7 @@
             frontlinesms.linkCaseToEvent();
             frontlinesms.contactSearchOnLoad();
             frontlinesms.caseSearchOnLoad();
+            frontlinesms.blockKeyPressInDateField();
         })
     </script>
 

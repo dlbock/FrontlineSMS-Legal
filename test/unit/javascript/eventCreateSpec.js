@@ -29,6 +29,10 @@ describe('eventCreateCancelDialog', function () {
         expect($('#event-cancel-dialog:visible').size()).toEqual(1);
     });
 
+    it('should block key press in date field', function () {
+        $('#event-date').keypress('s')
+        expect($("#event-date").val()).toEqual('');
+    });
 
     afterEach(function() {
         $("#event-create-div, #event-cancel-dialog").remove();

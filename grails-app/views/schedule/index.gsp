@@ -16,6 +16,7 @@
     <g:javascript library="picnet.table.filter.min"/>
     <g:javascript library="contactSearch"/>
     <g:javascript library="linkContactToEvent"/>
+    <g:javascript library="formValidation"/>
 
     <script type="text/javascript">
         $(function() {
@@ -26,6 +27,7 @@
             frontlinesms.activateDatePicker();
             frontlinesms.activateTimePicker();
             frontlinesms.contactSearchOnLoad();
+            frontlinesms.blockKeyPressInDateField();
             <g:if test="${year}">
             <g:if test="${month}">
             $('#schedule').fullCalendar('gotoDate', ${year}, ${month});

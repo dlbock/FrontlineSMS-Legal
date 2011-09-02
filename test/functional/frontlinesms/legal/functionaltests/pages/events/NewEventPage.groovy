@@ -36,6 +36,12 @@ class NewEventPage extends Page {
         casesToLink { $("tr", class:"caseLink").collect {module LinkableCase, it} }
         oneContactIsDisplayed{$("#cases").size()==1}
     }
+
+    def setDate(){
+        $("input", id: "event-date").click()
+        waitFor(3) { datePicker.present }
+        $(".ui-state-default").find{ it.text() == "16" }.click()
+    }
 }
 
 class ContactRow extends Module {

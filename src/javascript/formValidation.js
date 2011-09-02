@@ -21,3 +21,16 @@ frontlinesms.validateContactNumber = function() {
         }
     );
 };
+
+frontlinesms.blockKeyPressInDateField = function() {
+
+    var keyCodeForTabKey = 9;
+    $("#event-date").keypress(function(key) {
+            /*if(key.keyCode == keyCodeForTabKey)
+            {
+                return true;
+            }*/
+            return false;
+        }
+    );
+};

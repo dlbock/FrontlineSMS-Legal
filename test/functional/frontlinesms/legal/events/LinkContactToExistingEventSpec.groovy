@@ -211,7 +211,7 @@ class LinkContactToExistingEventSpec extends FrontlinesmsLegalGebSpec {
     private def createEvent(title) {
         to NewEventPage
         eventTitle = title
-        dateFieldSelected = new Date().format("MMMM d, yyyy")
+        setDate()
         startTimeField = "08:09AM"
         endTimeField = "08:56PM"
         save.click()
@@ -221,7 +221,7 @@ class LinkContactToExistingEventSpec extends FrontlinesmsLegalGebSpec {
         new LegalContact(name: "neetu", primaryMobile: "22222").save(flush: true)
         to NewEventPage
         eventTitle = title
-        dateFieldSelected = new Date().format("MMMM d, yyyy")
+        setDate()
         startTimeField = "08:09AM"
         endTimeField = "08:56PM"
         clickLinkContact.click()
