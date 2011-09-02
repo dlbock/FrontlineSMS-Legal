@@ -4,6 +4,7 @@ import frontlinesms.legal.Case
 import frontlinesms.legal.CaseContacts
 import frontlinesms.legal.LegalContact
 import grails.converters.JSON
+import frontlinesms.legal.EventCase
 
 class CaseController {
 
@@ -107,6 +108,8 @@ class CaseController {
     def delete = {
         def deleteCase = Case.findByCaseId(params.id);
         if (deleteCase != null) {
+            EventCase.unlink(deleteCase)
+            sleep(500)
             deleteCase.delete();
             flash.message = "Case deleted."
         }

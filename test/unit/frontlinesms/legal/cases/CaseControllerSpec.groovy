@@ -4,8 +4,10 @@ import grails.plugin.spock.ControllerSpec
 import frontlinesms.legal.Case
 import frontlinesms.legal.LegalContact
 import frontlinesms2.Contact
-import org.junit.Ignore
 import frontlinesms.legal.CaseContacts
+import frontlinesms.legal.Event
+import java.sql.Time
+import frontlinesms.legal.EventCase
 
 class CaseControllerSpec extends ControllerSpec {
 
@@ -153,6 +155,7 @@ class CaseControllerSpec extends ControllerSpec {
         def cases = []
         cases.add(new Case(caseId: '1234'))
         mockDomain(Case, cases)
+        mockDomain(EventCase)
 
         controller.params.id = '1234'
 
@@ -169,6 +172,7 @@ class CaseControllerSpec extends ControllerSpec {
         def cases = []
         cases.add(new Case(caseId: '1234'))
         mockDomain(Case, cases)
+        mockDomain(EventCase)
 
         controller.params.id = 'NaN'
 
@@ -182,6 +186,7 @@ class CaseControllerSpec extends ControllerSpec {
     def "should delete case from database when case is deleted"() {
         setup:
         def cases = [new Case(caseId: '1234')]
+        mockDomain(EventCase)
         mockDomain(Case, cases)
         controller.params.id = "1234"
 
@@ -190,5 +195,24 @@ class CaseControllerSpec extends ControllerSpec {
 
         then:
         assert Case.count() == 0
+    }
+
+    def "should be able to unlink a case which is linked to some event before deleting it"(){
+        setup:
+        def newEvent = [new Event(eventTitle: "Test", dateFieldSelected: new Date("July 12,2011"), startTimeField: Time.valueOf("09:00:00"),endTimeField: Time.valueOf("10:00:00"))]
+        mockDomain(Event, newEvent)
+
+        def cases = [new Case(caseId: '1234')]
+        mockDomain(Case, cases)
+        mockDomain(EventCase)
+        EventCase.link(newEvent[0], cases[0])
+        CaseController controller = new CaseController()
+        controller.params.id = cases[0].id
+
+        when:
+        controller.delete()
+
+        then:
+        assert EventCase.findAllByEvent(newEvent).size() == 0
     }
 }

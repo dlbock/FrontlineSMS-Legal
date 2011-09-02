@@ -1,11 +1,11 @@
-package frontlinesms.legal
+package frontlinesms.legal                                                                                                                                                                             //            oneCase.linkedEvents.removeAll(eventCase)
 
 class EventCase {
     static mapping = {
         table 'event_case_links'
     }
 
-    static belongsTo = [event :Event]
+    static belongsTo = [event: Event]
 
     Case eventCase
     Event event
@@ -27,4 +27,14 @@ class EventCase {
         def linkedCases = EventCase.findAllByEvent(event)
         linkedCases.collect { it -> it.eventCase}
     }
+
+    static void unlink(Case oneCase)
+    {
+        for(eventCase in oneCase.linkedEvents) {
+            eventCase.event.removeFromLinkedCases(eventCase)
+            oneCase.removeFromLinkedEvents(eventCase)
+            eventCase.delete()
+        }
+    }
+
 }

@@ -80,8 +80,39 @@ class EventIntegrationSpec extends IntegrationSpec {
         eventContact.event.id == newEvent.id
         and:
         eventContact.legalContact.id == contact.id
+    }
+
+    def "should link cases to event"() {
+        given:
+        def newEvent = new Event(eventTitle: "Test", dateFieldSelected: new Date("July 12,2011"), startTimeField: Time.valueOf("09:00:00"),endTimeField: Time.valueOf("10:00:00"))
+        newEvent.save()
+        def newCase = new Case(caseId: "4567", description: "adding contact")
+        newCase.save()
+
+        when:
+        def eventCaseLink = EventCase.link(newEvent, newCase)
+
+        then:
+        eventCaseLink.event.id == newEvent.id
+        and:
+        eventCaseLink.eventCase.caseId == newCase.caseId
+    }
 
 
+    def "should be able to unlink case from event"() {
+        given:
+        def newEvent = new Event(eventTitle: "Test", dateFieldSelected: new Date("July 12,2011"), startTimeField: Time.valueOf("09:00:00"),endTimeField: Time.valueOf("10:00:00"))
+        newEvent.save()
+        def newCase = new Case(caseId: "4567", description: "adding contact")
+        newCase.save()
+        and:
+        def eventCaseLink = EventCase.link(newEvent, newCase)
+
+        when:
+        EventCase.unlink(newCase)
+
+        then:
+        assert EventCase.findAllByEvent(newEvent).size() == 0
     }
 
 }

@@ -147,12 +147,10 @@ class LegalContactController {
     def delete = {
         def deleteContact = LegalContact.findById(params.id)
         if (deleteContact != null) {
-            if (deleteContact != null) {
-                EventContact.unlink(deleteContact)
-                sleep(500)
-                deleteContact.delete()
-                flash.message = "Contact deleted."
-            }
+           EventContact.unlink(deleteContact)
+           sleep(500)
+           deleteContact.delete()
+           flash.message = "Contact deleted."
         }
         else
             flash.warning = "Contact not found."
