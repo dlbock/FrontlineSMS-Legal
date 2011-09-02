@@ -120,6 +120,59 @@ class RescheduleEventSpec extends FrontlinesmsLegalGebSpec {
         errorMessage == "An event must have a title, date and time. Please enter a end time."
     }
 
+    def "should not show confirmation dialog when user close the event detail pop up and fields have no changes"() {
+        when:
+        events()[0].click()
+
+        and:
+        eventDialog << Keys.ESCAPE
+
+        then:
+        $('#confirmation-dialog').size() == 0
+    }
+
+    def "should show confirmation dialog when user close the event detail pop up and fields have changes"() {
+        when:
+        events()[0].click()
+
+        and:
+        eventTitleField << "hello"
+        eventDialog << Keys.ESCAPE
+
+        then:
+        $('#confirmation-dialog').size() != 0
+    }
+
+    def "should return to event detail pop up when NO is clicked in confirmation dialog"() {
+        when:
+        events()[0].click()
+
+        and:
+        eventTitleField << "hello"
+        eventDialog << Keys.ESCAPE
+
+        and:
+        noConfirmationButton.click()
+
+        then:
+        $('#confirmation-dialog').size() == 0
+    }
+
+    def "should close event detail pop up and confirmation dialog when YES is clicked in confirmation dialog"() {
+        when:
+        events()[0].click()
+
+        and:
+        eventTitleField << "hello"
+        eventDialog << Keys.ESCAPE
+
+        and:
+        yesConfirmationButton.click()
+
+        then:
+        $('#confirmation-dialog').size() == 0
+    }
+
     def createEvent(title, String startTime, String endTime) {
         to NewEventPage
         eventTitle = title

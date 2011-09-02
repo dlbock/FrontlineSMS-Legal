@@ -5,9 +5,10 @@ frontlinesms.eventDetails = function() {
     $("#view-event").dialog({
         autoOpen: false,
         modal: true,
-        open: function(event, ui) {
-            $('#update-event').attr('disabled', true)
-        }
+        open: function() {
+            $('#update-event').attr('disabled', true);
+        },
+        beforeClose: frontlinesms.yesNoDialogBox
     });
 
     $('#error-message').html("").fadeIn();
@@ -32,6 +33,7 @@ frontlinesms.updateEventDetails = function () {
     if (errorMessage != "") {
         $('#error-message').html("An event must have a title, date and time. Please enter a " + errorMessage).fadeIn();
     } else {
+        $('#update-event').attr('disabled', true);
         $("#view-event").dialog("close");
         $.ajax({
             url :"../event/update",
