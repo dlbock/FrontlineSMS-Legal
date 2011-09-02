@@ -30,10 +30,12 @@ class EventCase {
 
     static void unlink(Case oneCase)
     {
-        for(eventCase in oneCase.linkedEvents) {
+        if(oneCase.linkedEvents){
+        for(eventCase in oneCase.linkedEvents.asList()) {
             eventCase.event.removeFromLinkedCases(eventCase)
             oneCase.removeFromLinkedEvents(eventCase)
             eventCase.delete()
+        }
         }
     }
 
