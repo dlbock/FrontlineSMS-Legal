@@ -4,7 +4,10 @@ frontlinesms.eventDetails = function() {
     $("#view-event").hide();
     $("#view-event").dialog({
         autoOpen: false,
-        modal: true
+        modal: true,
+        open: function(event, ui) {
+           $('#update-event').attr('disabled', true)
+        }
     });
 
     $('#error-message').html("").fadeIn();
@@ -86,6 +89,7 @@ frontlinesms.attachActionWithLinkContactButton = function(buttonSelector, dialog
         if (!frontlinesms.checkIfEventHasContactLinked(contactId)) {
             frontlinesms.addLinkedContactIdToHiddenField(contactId);
             frontlinesms.addLinkedContactToTableOnPopup(contactId);
+            $('#update-event').attr('disabled', false)
         }
         $(dialogSelector).dialog("close");
         return false;

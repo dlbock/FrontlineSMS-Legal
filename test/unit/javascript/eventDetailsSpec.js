@@ -2,23 +2,25 @@ describe('Link Contact to existing Event', function () {
     beforeEach(function() {
         var tempHTML =
             '<div id="view-event" title="Event Details" style="display: none;">' +
+                '<input type="button" id="update-event" value="Update" disabled="disabled"/>' +
                 '<button id="link-contact-button">Link Contacts</button>' +
                 '</div>' +
                 '<input type="hidden" id="event-linked-contacts" value=""/>' +
                 '<div id="link-contact-to-existing-event-dialog" title="Link Contacts to an Event">' +
                 '<table id="contactsTable"> <tbody>' +
-                '<tr class="contactLink" id="rupa">' +
+                '<tr class="contactRow" id="rupa">' +
                 '<td  class="contact-name">Rupa</td>' +
                 '<td class="contact-number">1234</td>' +
-                '<td class="link"><a href="#">Link Contact</a></td>' +
+                '<td class="contactLink"> +' +
+                '<a href="#">Link Contact</a> +' +
+                '</td>' +
                 '</tr>' +
-                '<tr class="contactLink" id="neetu">' +
+                '<tr class="contactRow" id="neetu">' +
                 '<td  class="contact-name">Neetu</td>' +
                 '<td class="contact-number">3333</td>' +
-                '<td class="link"><a href="#">Link Contact</a></td>' +
+                '<td class="contactLink"><a href="#">Link Contact</a></td>' +
                 '</tr>' +
                 '</tbody></table> ' +
-
                 '</div>'
             ;
         $(tempHTML).appendTo("#fixtures");
@@ -33,6 +35,13 @@ describe('Link Contact to existing Event', function () {
     it("pops up when the button is clicked", function() {
         $("#link-contact-button").click();
         expect($('#link-contact-to-existing-event-dialog:visible').size()).toEqual(1);
+    });
+
+    it("should enable update button when a contact has been linked to an existing event", function() {
+        $("#link-contact-button").click();
+        $("#rupa a").click();
+        expect($("#update-event").attr("disabled")).toBeUndefined();
+
     });
 
     afterEach(function() {
@@ -96,6 +105,6 @@ describe('event detail pop up', function() {
     });
 
     afterEach(function() {
-        $("#view-event, #test-dialog-button").remove();
+        $('body#fixtures > *').not(".jasmine_reporter").not('script').remove();
     });
 });
