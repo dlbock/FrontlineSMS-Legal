@@ -5,13 +5,8 @@ import frontlinesms.legal.functionaltests.pages.HomePage
 import frontlinesms.legal.functionaltests.pages.contact.CreateLegalContactPage
 import frontlinesms.legal.functionaltests.pages.contact.ShowLegalContactPage
 import frontlinesms.legal.Case
-import frontlinesms.legal.LegalContact
 
 class CreateLegalContactSpec extends FrontlinesmsLegalGebSpec {
-
-    def setup() {
-
-    }
 
     def "should save contact and redirect to show page when user chooses to save contact without name"() {
         given:
@@ -107,7 +102,7 @@ class CreateLegalContactSpec extends FrontlinesmsLegalGebSpec {
 
 
         then:
-        at (CreateLegalContactPage)
+        at(CreateLegalContactPage)
         linkedCasesTable[0].caseId == "123"
         linkedCasesTable[0].active == "active"
         linkedCasesTable[0].relationship == "Victim"
@@ -115,7 +110,7 @@ class CreateLegalContactSpec extends FrontlinesmsLegalGebSpec {
 
     }
 
-    def "should retain search results after cancelling relationship dialog"(){
+    def "should retain search results after cancelling relationship dialog"() {
         given:
         new Case(caseId: "123", description: "test").save(flush: true)
         new Case(caseId: "321", description: "test2").save(flush: true)
@@ -132,4 +127,26 @@ class CreateLegalContactSpec extends FrontlinesmsLegalGebSpec {
         caseIdSearch.value() == "123"
         !caseContactRelationshipDialog.displayed
     }
+
+    def "should go to Contacts details page, save the contact and the linked cases when SAVE button is clicked"() {
+        given:
+        new Case(caseId: "123", description: "test").save(flush: true)
+        new Case(caseId: "321", description: "test2").save(flush: true)
+        at CreateLegalContactPage
+
+        when:
+        linkCaseButton.click()
+        caseIdSearch << "123"
+        casesToLink[0].linkCaseButton.click()
+        relationshipInput << "Victim"
+        relationshipConfirmButton.click()
+        name << "Bob"
+        primaryMobile << "8675309"
+        notes << "Testing"
+        save.click()
+
+        then:
+        assert at(ShowLegalContactPage)
+    }
+
 }

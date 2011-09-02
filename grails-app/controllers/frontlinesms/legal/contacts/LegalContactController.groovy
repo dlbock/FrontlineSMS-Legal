@@ -27,7 +27,8 @@ class LegalContactController {
     }
 
     def save = {
-        def legalContact = new LegalContact(params)
+        def contactParams = [name: params.name, primaryMobile: params.primaryMobile, notes: params.notes]
+        def legalContact = new LegalContact(contactParams)
         saveLegalContact(legalContact)
     }
 
@@ -40,9 +41,13 @@ class LegalContactController {
     private def saveLegalContact(legalContact) {
 
         if (legalContact.save(flush: true)) {
+            if (params.linkedCases != null) {
+                linkCasesToContact(params.linkedCases, legalContact)
+            }
             flash.message = "Contact Saved"
             redirect(action: 'show', params: [id: legalContact.id])
         }
+
         else if (params.primaryMobile == null || params.primaryMobile == "" || params.primaryMobile.isAllWhitespace()) {
             flash.error = "Please enter a contact number. Contact cannot be saved without a contact number."
             redirect(action: 'create', params: [name: params.name, notes: params.notes])
@@ -52,9 +57,9 @@ class LegalContactController {
             redirect(action: 'create', params: [name: params.name, notes: params.notes, primaryMobile: params.primaryMobile])
         }
         else if (params.notes.size() > 1024) {
-                flash.error = "Please reduce the number of characters entered in notes field to save contact. Notes field cannot have more than 1024 characters"
-                redirect(action: 'create', params: [name: params.name, notes: params.notes, primaryMobile: params.primaryMobile])
-            }
+            flash.error = "Please reduce the number of characters entered in notes field to save contact. Notes field cannot have more than 1024 characters"
+            redirect(action: 'create', params: [name: params.name, notes: params.notes, primaryMobile: params.primaryMobile])
+        }
     }
 
     private def updateLegalContact(legalContact) {

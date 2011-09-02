@@ -26,8 +26,7 @@ frontlinesms.linkCaseToContactOnCreateContact = function() {
     });
 
     $(".caseLinkButton").click(function() {
-        frontlinesms.log("caseLinkButton has been clicked");
-        var caseId = $(this).parents("tr").attr('id').trim();
+        var caseId = $(this).parents("tr").attr('id');
         var status = $(this).parents("tr").children(".case-status").html().trim();
 
         if (!frontlinesms.checkIfContactHasCaseLinked(caseId)) {
@@ -86,8 +85,7 @@ frontlinesms.addLinkedCaseToHiddenField = function(caseId, relationship) {
 };
 
 frontlinesms.addLinkedCaseToTable = function(caseId, status, relationship) {
-    frontlinesms.log("inside linking case");
-    var row = $('#SearchResults #' + caseId);   
+    var row = $('#SearchResults #' + caseId);
     var rowToAdd = $('<tr>').append(
         '<td>' +
             $(row).find('.case-name').html().trim() +
