@@ -33,7 +33,7 @@ class EventControllerSpec extends FrontlinesmsLegalControllerSpecBase {
         then:
 
 
-        controller.flash.error == 'Please complete date and time fields.'
+        controller.flash.error == 'Please complete all fields.'
 
     }
 
@@ -49,7 +49,7 @@ class EventControllerSpec extends FrontlinesmsLegalControllerSpecBase {
 
         then:
 
-        controller.flash.error == "Please complete date and time fields."
+        controller.flash.error == "Please complete all fields."
     }
 
     def "should show error message when end time is not specified"() {
@@ -63,7 +63,7 @@ class EventControllerSpec extends FrontlinesmsLegalControllerSpecBase {
         controller.save()
 
         then:
-        controller.flash.error == "Please complete date and time fields."
+        controller.flash.error == "Please complete all fields."
     }
 
     def "should not save event when end time is before start time"() {

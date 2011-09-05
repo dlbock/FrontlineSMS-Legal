@@ -19,7 +19,7 @@ class EventController {
     def save = {
         if (checkForNullDateTimes()) {
 
-            flash.error = "Please complete date and time fields."
+            flash.error = "Please complete all fields."
 
             redirect(action: "create", params: [eventTitle: params.eventTitle, dateFieldSelected: params.dateFieldSelected, startTimeField: params.startTimeField, endTimeField: params.endTimeField])
 

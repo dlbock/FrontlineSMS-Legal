@@ -32,7 +32,7 @@
     <label>Name</label>
     <g:textField name="name" id="contact-name" value="${params.name}"/>
     <label>Number</label>
-    <g:textField name="primaryMobile" id="contact-primary-mobile" value="${params.primaryMobile}" maxlength="15"/>
+    <g:textField name="primaryMobile" id="contact-primary-mobile" value="${params.primaryMobile}" maxlength="25"/>
     <label>Notes</label>
     <g:textArea name="notes" id="contact-notes" value="${params.notes}" cols="100" rows="10" maxlength="1024" />
 
