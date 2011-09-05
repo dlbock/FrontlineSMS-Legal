@@ -1,4 +1,4 @@
-package frontlinesms.legal                                                                                                                                                                             //            oneCase.linkedEvents.removeAll(eventCase)
+package frontlinesms.legal
 
 class EventCase {
     static mapping = {

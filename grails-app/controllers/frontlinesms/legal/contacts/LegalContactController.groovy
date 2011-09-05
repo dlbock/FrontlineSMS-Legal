@@ -75,6 +75,9 @@ class LegalContactController {
         else if (params.primaryMobile == null || params.primaryMobile == "" || params.primaryMobile.isAllWhitespace()) {
             flash.error = "Please enter a contact number. Contact cannot be saved without a contact number."
         }
+        else if (params.notes.size() > 1024) {
+            flash.error = "Please reduce the number of characters entered in notes field to save contact. Notes field cannot have more than 1024 characters"
+        }
         else if ((LegalContact.findByPrimaryMobile(legalContact.primaryMobile) != null)) {
             flash.error = "Contact number already exists. Please enter a unique contact number."
         }

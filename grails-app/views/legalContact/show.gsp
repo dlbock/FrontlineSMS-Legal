@@ -38,7 +38,7 @@
     <g:textField name="primaryMobile" id="contact-primary-mobile" value="${contactToDisplay.primaryMobile}"
                  maxlength="15"/>
     <label>Notes</label>
-    <g:textArea rows="10" cols="100" name="notes" id="contact-notes" value="${contactToDisplay.notes}"/>
+    <g:textArea rows="10" cols="100" name="notes" id="contact-notes" value="${contactToDisplay.notes}" maxlength="1024"/>
 
 
     <div class="form-submit-area">

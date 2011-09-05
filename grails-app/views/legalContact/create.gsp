@@ -34,7 +34,7 @@
     <label>Number</label>
     <g:textField name="primaryMobile" id="contact-primary-mobile" value="${params.primaryMobile}" maxlength="15"/>
     <label>Notes</label>
-    <g:textArea name="notes" id="contact-notes" value="${params.notes}" cols="100" rows="10"/>
+    <g:textArea name="notes" id="contact-notes" value="${params.notes}" cols="100" rows="10" maxlength="1024" />
 
     <div class="form-submit-area">
         <button id="link-case-button">Link Cases</button>
