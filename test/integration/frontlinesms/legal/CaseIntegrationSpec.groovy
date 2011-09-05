@@ -182,4 +182,20 @@ class CaseIntegrationSpec extends IntegrationSpec {
         then:
         Case.findByCaseId(newCase.caseId).active == false
     }
+
+    def "should be able to unlink case from contact" () {
+         given:
+         def contact = new LegalContact(name: "Dumbledore", primaryMobile: "987654321")
+         contact.save()
+         def newCase = new Case(caseId: "4567", description: "blah blah")
+         newCase.save()
+         and:
+         def contactCaseLink=CaseContacts.link(newCase, contact, "killer")
+
+         when:
+         CaseContacts.unlink(contact)
+
+         then:
+         assert CaseContacts.findContactsByCase(newCase).size()==0
+    }
 }

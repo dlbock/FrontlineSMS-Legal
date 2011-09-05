@@ -151,6 +151,7 @@ class LegalContactController {
         def deleteContact = LegalContact.findById(params.id)
         if (deleteContact != null) {
            EventContact.unlink(deleteContact)
+           CaseContacts.unlink(deleteContact)
            sleep(500)
            deleteContact.delete()
            flash.message = "Contact deleted."

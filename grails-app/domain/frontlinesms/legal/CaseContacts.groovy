@@ -25,10 +25,10 @@ class CaseContacts {
         return contactCaseLink
 
     }
- static LegalContact[] findContactsByCase(frontlinesms.legal.Case legalCase) {
+
+    static LegalContact[] findContactsByCase(frontlinesms.legal.Case legalCase) {
         def linkedContacts = CaseContacts.findAllByLegalCase(legalCase)
         linkedContacts.collect { it -> it.legalContact}
-
     }
 
     static List findContactsAndInvolvementByCase(Case legalCase){
@@ -41,9 +41,20 @@ class CaseContacts {
 
 
     static Case[] findCasesByLegalContact(LegalContact contact) {
-        def linkedCases = EventContact.findAllByLegalContact(contact)
+        def linkedCases = CaseContacts.findAllByLegalContact(contact)
         linkedCases.collect { it -> it.legalCase}
+    }
+
+    static void unlink(LegalContact legalContact) {
+        if(legalContact.linkedCases){
+            for(caseContactObject in legalContact.linkedCases.asList()){
+                caseContactObject.legalCase.removeFromLinkedContacts(caseContactObject)
+                legalContact.removeFromLinkedCases(caseContactObject)
+                caseContactObject.delete()
+            }
+        }
 
     }
 
 }
+

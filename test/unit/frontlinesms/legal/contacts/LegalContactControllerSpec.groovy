@@ -317,4 +317,25 @@ class LegalContactControllerSpec extends FrontlinesmsLegalControllerSpecBase {
         assert LegalContact.count() == 0
         assert EventContact.findAllByEvent(newEvent[0]).size() == 0
     }
+
+    def "should be able to delete a contact which is linked to some case"(){
+        setup:
+        def newCase = [new Case(id: 1, caseId: "567")]
+        def contact = [new LegalContact(name: "Henry", primaryMobile: "276387243")]
+        mockCoreClassesToAvoidIssuesWithContactEventHandlers()
+        mockDomain(Case, newCase)
+        mockDomain(LegalContact, contact)
+        mockDomain(EventContact)
+        mockDomain(CaseContacts)
+        CaseContacts.link(newCase[0], contact[0], "involve")
+        LegalContactController controller = new LegalContactController()
+        controller.params.id = contact[0].id
+
+        when:
+        controller.delete()
+
+        then:
+        assert LegalContact.count() == 0
+        assert CaseContacts.findAllByLegalCase(newCase[0]).size() == 0
+    }
 }
