@@ -3,7 +3,9 @@ var frontlinesms = this.frontlinesms || {};
 frontlinesms.activateDatePicker = function() {
     var initialDate;
     $('#event-date').datepicker({
-        beforeShow:function(input, inst){initialDate = $(input).val()},
+        beforeShow:function(input, inst) {
+            initialDate = $(input).val()
+        },
         changeMonth: true,
         changeYear: true,
         dateFormat: 'MM d,yy',
@@ -12,8 +14,12 @@ frontlinesms.activateDatePicker = function() {
                 $('#update-event').attr('disabled', false);
             }
         }
+    })
+    $('#event-date').click(function() {
+        $(this).datepicker('show');
     });
 }
+
 frontlinesms.activateTimePicker = function() {
     $('#event-start-time').timeEntry({
         spinnerImage: '',

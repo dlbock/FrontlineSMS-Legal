@@ -18,16 +18,6 @@ frontlinesms.eventDetails = function() {
     $('input').keyup(function() {
         $('#update-event').attr('disabled', false)
     });
-
-//    $("#event-date").focus(function() {
-//        eventDate = $("#event-date").val();
-//    })
-//    $("#ui-datepicker-div").focusout(
-//        function() {
-//            if (eventDate != $("#event-date").val()) {
-//                $('#update-event').attr('disabled', false);
-//            }
-//        });
 };
 
 frontlinesms.updateEventDetails = function () {

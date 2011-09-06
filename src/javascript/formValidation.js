@@ -28,7 +28,7 @@ frontlinesms.validateContactNumber = function() {
             var characterPressed = String.fromCharCode(key.which);
             var i;
             for (i = 0; i < keyCodesForAllowedKeys.length; i++) {
-                if(key.which == keyCodesForAllowedKeys[i]) {
+                if (key.keyCode == keyCodesForAllowedKeys[i]) {
                     return true;
                 }
             }
@@ -43,10 +43,12 @@ frontlinesms.validateContactNumber = function() {
 };
 
 frontlinesms.blockKeyPressInDateField = function() {
-
     var keyCodeForTabKey = 9;
-    $("#event-date").keypress(function(key) {
-           return false;
-    }
+    $("#event-date").keydown(function(key) {
+            if (key.keyCode == keyCodeForTabKey) {
+                return true;
+            }
+            return false;
+        }
     );
 };
