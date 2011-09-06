@@ -60,6 +60,7 @@ class EventController {
         linkContactsToEvent(event)
         unlinkContact(event)
         event.save(flush: true)
+        render "Success"
     }
 
     private def linkContactsToEvent(event) {

@@ -59,9 +59,9 @@ class EventDialog extends Module {
         deleteEventButton { $('#delete-event') }
         errorMessage { $("div", id: "error-message").text() }
 
-        updateEvent() {
+        updateEvent {
             updateEventButton.click()
-            true
+            waitFor { try { !$().isVisible() } catch(e) { true } }
         }
 
         deleteEvent {
