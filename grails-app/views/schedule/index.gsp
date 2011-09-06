@@ -15,8 +15,10 @@
     <g:javascript library="unlinkContactFromEvent"/>
     <g:javascript library="picnet.table.filter.min"/>
     <g:javascript library="contactSearch"/>
+    <g:javascript library="caseSearch"/>
     <g:javascript library="linkContactToEvent"/>
     <g:javascript library="formValidation"/>
+    <g:javascript library="linkCaseToEvent"/>
 
     <script type="text/javascript">
         $(function() {
@@ -27,7 +29,9 @@
             frontlinesms.activateDatePicker();
             frontlinesms.activateTimePicker();
             frontlinesms.contactSearchOnLoad();
+            frontlinesms.caseSearchOnLoad();
             frontlinesms.blockKeyPressInDateField();
+            frontlinesms.linkCaseToEvent();
             <g:if test="${year}">
             <g:if test="${month}">
             $('#schedule').fullCalendar('gotoDate', ${year}, ${month});
@@ -52,6 +56,7 @@
 </div>
 
 <g:render template="linkContacts"/>
+<g:render template="linkCases"/>
 
 </body>
 </html>

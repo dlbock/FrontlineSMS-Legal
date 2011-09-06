@@ -51,6 +51,16 @@ class SchedulePage extends Page {
         yesConfirmationButton { $("#confirm-yes")}
         noConfirmationButton { $("#confirm-no")}
         confirmationDialog { $("#confirmation-dialog")}
+
+        linkCaseButton {  $("#link-case-button")}
+        linkCaseButtonExists { $("#link-case-button").size() == 1}
+        linkCaseDialog { $("div", id: "link-case-dialog") }
+        caseDialogCancelButton { $("#cancel-link-case") }
+        casesToLink { $("tr", class: "caseLink").collect {module LinkableCase, it} }
+        existingCaseList {
+            $("#cases tbody tr").collect {module LinkableCase, it}
+        }
+        linkToBeSelected{ $(".link-case")}
     }
 }
 
@@ -118,3 +128,13 @@ class LinkContactRow extends Module {
         linkContact {$("a", class: "link")}
     }
 }
+
+class LinkableCase extends Module {
+    static content = {
+        cell { i -> $("td", i) }
+        name { $(class: "case-name").text() }
+        number { cell(1).text() }
+        linkCase { cell(2) }
+    }
+}
+

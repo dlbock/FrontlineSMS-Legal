@@ -5,8 +5,7 @@ import frontlinesms.legal.EventContact
 import frontlinesms.legal.LegalContact
 import frontlinesms2.Contact
 import grails.plugin.spock.ControllerSpec
-import frontlinesms.legal.EventContact
-import java.sql.Time
+import frontlinesms.legal.Case
 
 class ScheduleControllerSpec extends ControllerSpec {
     def "delete event with event id"() {
@@ -39,11 +38,12 @@ class ScheduleControllerSpec extends ControllerSpec {
     def 'should populate contactList when the Schedule Page is loaded'() {
         given:
         def theEvent = new Event(eventTitle: "test")
-        def events = [theEvent]
-        mockDomain(Event, events)
-        controller.params.id = theEvent.id;
+        mockDomain(Event, [theEvent])
         def newContact = [new Contact(), new Contact(), new Contact()]
         mockDomain(Contact, newContact)
+        mockDomain(Case)
+
+        controller.params.id = theEvent.id;
 
         when:
         def models = controller.index()

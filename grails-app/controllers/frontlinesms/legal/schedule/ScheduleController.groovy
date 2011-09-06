@@ -1,18 +1,12 @@
 package frontlinesms.legal.schedule
 
-import frontlinesms.legal.Event
-import frontlinesms.legal.EventCase
-import frontlinesms.legal.EventContact
-import frontlinesms.legal.LegalContact
-import java.sql.Time
-import frontlinesms.legal.TimeFormatter
-import org.openqa.selenium.Alert
+import frontlinesms.legal.*
 
 class ScheduleController {
 
     def index = {
         [hh: "2011, 5"]
-        [contactList: LegalContact.list()]
+        [contactList: LegalContact.list(), allCases: Case.list()]
     }
 
     def fetchEvents = {

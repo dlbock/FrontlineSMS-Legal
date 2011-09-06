@@ -27,7 +27,7 @@
         </div>
 
         <g:hiddenField name="linkedCases" id="event-linked-cases" value="${params.linkedCases}"/>
-        <table id="event-cases-table">
+        <table id="cases">
             <thead>
             <tr>
                 <th>Case ID</th>
@@ -37,6 +37,10 @@
             <tbody>
             </tbody>
         </table>
+
+         <div align="left">
+            <input type="button" id="link-case-button" value="Link Case"/>
+        </div>
 
         <div align="right" class="form-submit-area">
             <input type="button" id="update-event" value="Update" disabled="disabled"/>
