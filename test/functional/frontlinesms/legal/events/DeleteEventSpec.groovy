@@ -49,7 +49,7 @@ class DeleteEventSpec extends FrontlinesmsLegalGebSpec {
 
         then:
         at SchedulePage
-        atDate == new Date().format("MMMM yyyy")
+        calendarHeader == new Date().format("MMMM yyyy")
     }
 
     def createEvent(title, String startTime, String endTime) {

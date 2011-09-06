@@ -9,18 +9,17 @@ class SchedulePage extends Page {
     static at = { $("title").text() == "Schedule" }
     static url = "schedule"
     static content = {
-        events {
-            $("span[class='fc-event-title']")
-        }
-        atDate {$('span.fc-header-title').text()}
+        calendarHeader { $('.fc-header-title').text() }
+        events { $('.fc-event-title') }
+
+        eventDialog(wait: true) { module EventDialog }
+        unlinkConfirmationDialog(required: false) { module ConfirmationDialog, messageId: "unlink-contact-dialog" }
+        deleteConfirmationDialog(required: false) { module ConfirmationDialog, messageId: "delete-event-dialog" }
 
         existingContactList {
             $("#contactsTable tbody tr").collect {module LinkContactRow, it}
         }
 
-        eventDialog(wait: true) { module EventDialog }
-        unlinkConfirmationDialog(required: false) { module ConfirmationDialog, messageId: "unlink-contact-dialog" }
-        deleteConfirmationDialog(required: false) { module ConfirmationDialog, messageId: "delete-event-dialog" }
         linkContactFromPopup {
             $('.contactLink')[0].click()
             true
@@ -47,17 +46,14 @@ class SchedulePage extends Page {
 class EventDialog extends Module {
     static base = { $(id: "view-event") }
     static content = {
-        contactsLinkedToEvent {
-            $(".event-contact").collect {module ContactRow, it}
-        }
-        eventTitle { $('#event-title') }
+        title { $('#event-title') }
         date { module DateField, $('#event-date') }
         startTime { $('#event-start-time') }
         endTime { $('#event-end-time') }
         contactsLinkedToEvent { $(".event-contact").collect {module ContactRow, it} }
         updateEventButton { $('#update-event') }
         deleteEventButton { $('#delete-event') }
-        errorMessage { $("div", id: "error-message").text() }
+        errorMessage { $(id: "error-message").text() }
 
         updateEvent {
             updateEventButton.click()

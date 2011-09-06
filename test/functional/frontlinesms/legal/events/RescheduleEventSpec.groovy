@@ -27,7 +27,7 @@ class RescheduleEventSpec extends FrontlinesmsLegalGebSpec {
         events()[0].click()
 
         and:
-        eventDialog.eventTitle << "enable update button"
+        eventDialog.title << "enable update button"
 
         then:
         eventDialog.updateEventButton.@disabled == 'false'
@@ -49,8 +49,8 @@ class RescheduleEventSpec extends FrontlinesmsLegalGebSpec {
         events()[0].click()
 
         and:
-        eventDialog.eventTitle.value("")
-        eventDialog.eventTitle << "Some new title"
+        eventDialog.title.value("")
+        eventDialog.title << "Some new title"
 
         and:
         eventDialog.updateEvent()
@@ -65,8 +65,8 @@ class RescheduleEventSpec extends FrontlinesmsLegalGebSpec {
         events()[0].click()
 
         and:
-        eventDialog.eventTitle.value("")
-        eventDialog.eventTitle << Keys.DELETE
+        eventDialog.title.value("")
+        eventDialog.title << Keys.DELETE
 
         and:
         eventDialog.updateEvent()
@@ -135,7 +135,7 @@ class RescheduleEventSpec extends FrontlinesmsLegalGebSpec {
         events()[0].click()
 
         and:
-        eventDialog.eventTitle << "hello"
+        eventDialog.title << "hello"
         eventDialog << Keys.ESCAPE
 
         then:
@@ -147,7 +147,7 @@ class RescheduleEventSpec extends FrontlinesmsLegalGebSpec {
         events()[0].click()
 
         and:
-        eventDialog.eventTitle << "hello"
+        eventDialog.title << "hello"
         eventDialog << Keys.ESCAPE
 
         and:
@@ -162,7 +162,7 @@ class RescheduleEventSpec extends FrontlinesmsLegalGebSpec {
         events()[0].click()
 
         and:
-        eventDialog.eventTitle << "hello"
+        eventDialog.title << "hello"
         eventDialog << Keys.ESCAPE
 
         and:
