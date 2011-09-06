@@ -62,13 +62,13 @@ frontlinesms.constructContactsTable = function(data, eventId) {
 
     $('#event-contacts-table tbody *').remove();
     for (var i = 0; i < data.length; i++) {
-        var contactName = data[i]["name"];
+        var contactId = data[i]["id"];
         var newRow =
             '<tr class="event-contact">' +
                 '<td>' + data[i]["name"] + '</td>' +
                 '<td>' + data[i]["primaryMobile"] + '</td>' +
                 '<td>' +
-                '<a href="#" class="unlink-contact" id = ' + contactName + '>Unlink</a>' +
+                '<a href="#" class="unlink-contact" id = ' + contactId + '>Unlink</a>' +
                 '</td>' +
                 '</tr>';
         $('#event-contacts-table tbody').append(newRow);

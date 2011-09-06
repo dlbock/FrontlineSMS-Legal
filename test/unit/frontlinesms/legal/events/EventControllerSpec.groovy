@@ -196,28 +196,28 @@ class EventControllerSpec extends FrontlinesmsLegalControllerSpecBase {
     }
 
     def "should save multiple cases when linked to the event"() {
-            setup:
-            mockDomain(Event)
-            mockDomain(EventCase)
-            mockDomain(Case, [
-                    new Case(caseId: "1112", description: "ertyui"),
-                    new Case(caseId: "1113", description: "ertydfgsui"),
-                    new Case(caseId: "1114", description: "edfgrtyui")
-            ])
+        setup:
+        mockDomain(Event)
+        mockDomain(EventCase)
+        mockDomain(Case, [
+                new Case(caseId: "1112", description: "ertyui"),
+                new Case(caseId: "1113", description: "ertydfgsui"),
+                new Case(caseId: "1114", description: "edfgrtyui")
+        ])
 
-            when:
-            controller.params.eventTitle = "Event"
-            controller.params.dateFieldSelected = "July 12, 2011"
-            controller.params.startTimeField = "06:30AM"
-            controller.params.endTimeField = "07:30AM"
-            controller.params.linkedCases = "1112,1113,1114"
+        when:
+        controller.params.eventTitle = "Event"
+        controller.params.dateFieldSelected = "July 12, 2011"
+        controller.params.startTimeField = "06:30AM"
+        controller.params.endTimeField = "07:30AM"
+        controller.params.linkedCases = "1112,1113,1114"
 
-            and:
-            controller.save()
+        and:
+        controller.save()
 
-            then:
-            EventCase.count() == 3
-        }
+        then:
+        EventCase.count() == 3
+    }
 
     def 'should update event when title, date, start date, end date are given'() {
         given:
@@ -256,7 +256,7 @@ class EventControllerSpec extends FrontlinesmsLegalControllerSpecBase {
         mockCoreClassesToAvoidIssuesWithContactEventHandlers()
         mockDomain(LegalContact,
                 [new LegalContact(id: 1, name: "John Doe", primaryMobile: "435352", notes: "hii"),
-                 new LegalContact(id: 2, name: "Jane Smith", primaryMobile: "12345", notes: "hii")])
+                        new LegalContact(id: 2, name: "Jane Smith", primaryMobile: "12345", notes: "hii")])
 
         controller.params.eventId = event.id
         controller.params.eventTitle = "test"
@@ -271,6 +271,32 @@ class EventControllerSpec extends FrontlinesmsLegalControllerSpecBase {
         then:
         EventContact.count() == 2
         event.linkedContacts.size() == 2
+    }
+
+    def 'should unlink contact from event when the event is updated'() {
+
+        given:
+        def contact = new LegalContact(id: 42)
+        def otherContact = new LegalContact()
+        def event = new Event(id: 1)
+        def eventContact = new EventContact(event: event, legalContact: contact)
+        def otherEventContact = new EventContact(event: event, legalContact: otherContact)
+        mockDomain(LegalContact, [contact, otherContact])
+        mockDomain(Event, [event])
+        mockDomain(EventContact, [eventContact, otherEventContact])
+        controller.params.eventId = 1
+        controller.params.eventTitle = "test"
+        controller.params.dateFieldSelected = "August 26,2011"
+        controller.params.startTimeField = "08:45:00"
+        controller.params.endTimeField = "11:45:00"
+        controller.params.unlinkedContacts = "42"
+
+        when:
+        controller.update()
+
+        then:
+        def links = EventContact.findAll()
+        links.size() == 1 && !links.contains(eventContact)
     }
 }
 

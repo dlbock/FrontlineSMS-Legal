@@ -75,14 +75,6 @@ class ScheduleController {
             render "Event not found!!!"
     }
 
-    def unlinkContact = {
-        def event = Event.get(params.eventId as Integer)
-        def contact = LegalContact.findByName(params.contactName)
-        def eventContact = EventContact.findByEventAndLegalContact(event, contact)
-        eventContact.delete()
-        render "successfully unlinked"
-    }
-
     private def formatParameters() {
         [
                 startTimeField: TimeFormatter.formatTime(params.eventStartTime),

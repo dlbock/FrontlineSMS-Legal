@@ -51,38 +51,4 @@ class ScheduleControllerSpec extends ControllerSpec {
         then:
         models['contactList'] == newContact
     }
-
-    def 'unlink contact from event'() {
-        given:
-        def contact = new LegalContact(id: 42)
-        def otherContact = new LegalContact()
-        def event = new Event(id: 1)
-        def eventContact = new EventContact(event: event, legalContact: contact)
-        def otherEventContact = new EventContact(event: event, legalContact: otherContact)
-        mockDomain(LegalContact, [contact, otherContact])
-        mockDomain(Event, [event])
-        mockDomain(EventContact, [eventContact, otherEventContact])
-
-        when:
-        controller.params.eventId = "1"
-        controller.params.contactId = "42"
-        controller.unlinkContact()
-
-        then:
-        def links = EventContact.findAll()
-        links.size() == 1 && !links.contains(eventContact)
-    }
-
-    def 'send success message when unlinking contact from event'() {
-        given:
-        mockDomain(Event)
-        mockDomain(LegalContact)
-        mockDomain(EventContact, [new EventContact()])
-
-        when:
-        controller.unlinkContact()
-
-        then:
-        controller.response.contentAsString == "successfully unlinked"
-    }
 }

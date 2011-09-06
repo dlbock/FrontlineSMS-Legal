@@ -37,7 +37,7 @@ class EventContact {
         def allEvent = frontlinesms.legal.EventContact.findEventsByContact(legalContact)
          if (allEvent) {
             for(oneEvent in allEvent){
-            EventContact.findByEventAndLegalContact(oneEvent, legalContact).delete()
+                EventContact.findByEventAndLegalContact(oneEvent, legalContact).delete()
             }
          }
     }

@@ -1,5 +1,6 @@
 var frontlinesms = this.frontlinesms || {};
-var contactIds = "";
+var linkContactIds = "";
+var unlinkContactIds = "";
 var eventDate = "";
 frontlinesms.eventDetails = function() {
     $("#view-event").hide();
@@ -40,7 +41,7 @@ frontlinesms.updateEventDetails = function () {
         $.ajax({
             url :"../event/update",
             type: "POST",
-            data:{"eventId": $('#event-id').val(), "eventTitle": $('#event-title').val(), "dateFieldSelected":$('#event-date').val(), "startTimeField":$('#event-start-time').val(), "endTimeField":$('#event-end-time').val(), "linkedContacts":contactIds},
+            data:{"eventId": $('#event-id').val(), "eventTitle": $('#event-title').val(), "dateFieldSelected":$('#event-date').val(), "startTimeField":$('#event-start-time').val(), "endTimeField":$('#event-end-time').val(), "linkedContacts":linkContactIds, "unlinkedContacts": unlinkContactIds},
             error: function () {
                 frontlinesms.log("Failed to update.");
             },
@@ -101,7 +102,7 @@ frontlinesms.attachActionWithLinkContactButton = function(buttonSelector, dialog
 
     frontlinesms.addLinkedContactToTableOnPopup = function(contactId) {
         var row = $('#contactsTable').find('#' + contactId);
-        var rowToAdd = $('<tr>').append(
+        var rowToAdd = $('<tr class="event-contact" >').append(
             '<td>' +
                 $(row).find('.contact-name').text() +
                 '<span class="id" style="display:none;">' + contactId + '</span>' +
@@ -114,14 +115,24 @@ frontlinesms.attachActionWithLinkContactButton = function(buttonSelector, dialog
                 '</td>'
         );
         $('#event-contacts-table').append(rowToAdd);
-        contactIds += contactId + ",";
+        linkContactIds += contactId + ",";
     }
 
     frontlinesms.attachActionWithUnlink = function() {
         $(".unlink-contact").live('click', function() {
-            var contactId = $(this).parent().find('td span.id:hidden').text();
+            var contactId = $(this).attr("id");
             $(this).parent().parent().remove();
             frontlinesms.unlinkLinkedContactIdFromHiddenField(contactId);
+            if (linkContactIds.indexOf(contactId) > -1) {
+                var contactsArray = linkContactIds.split(",");
+                for(var i=0; i<contactsArray.length; i++) {
+                    if(contactsArray[i] == contactId)
+                        contactsArray.splice(i,1);
+                }
+                linkContactIds = contactsArray.toString();
+            }
+            else
+                unlinkContactIds += contactId + ",";
             $('#update-event').attr('disabled', false)
             return false;
         });

@@ -15,8 +15,7 @@ class UnlinkContactFromEventSpec extends FrontlinesmsLegalGebSpec {
         to SchedulePage, "index"
 
         when:
-        at SchedulePage
-        events.find{ it.text() == "test event" }.click()
+        events.find { it.text() == "test event" }.click()
 
         then:
         eventDialog.contactsLinkedToEvent.collect { it -> it.unlinkContact }.size() == 1
@@ -30,8 +29,7 @@ class UnlinkContactFromEventSpec extends FrontlinesmsLegalGebSpec {
         to SchedulePage, "index"
 
         when:
-        at SchedulePage
-        events.find{ it.text() == "test event" }.click()
+        events.find { it.text() == "test event" }.click()
         eventDialog.contactsLinkedToEvent[0].unlinkContact.click()
 
         then:
@@ -46,34 +44,33 @@ class UnlinkContactFromEventSpec extends FrontlinesmsLegalGebSpec {
         to SchedulePage, "index"
 
         when:
-        at SchedulePage
-        events.find{ it.text() == "test event" }.click()
+        events.find { it.text() == "test event" }.click()
         linkContactToExistingEvent
         linkContactFromPopup
-        updateEvent.click()
 
         and:
-        events.find{ it.text() == "test event" }.click()
         eventDialog.contactsLinkedToEvent[0].unlinkContact.click()
 
         then:
         eventDialog.contactsLinkedToEvent.size() == 0
     }
 
-    def 'should enable update button when unlink link next to a linked contact is clicked on event details pop-up'() {
-
+    def 'should unlink contact from event when the UPDATE button is clicked'() {
         given:
         createContact("76575658", "Bob")
         createEventWithLink("test event", "Bob")
         to SchedulePage, "index"
 
         when:
-        at SchedulePage
-        events.find{ it.text() == "test event" }.click()
+        events.find { it.text() == "test event" }.click()
         eventDialog.contactsLinkedToEvent[0].unlinkContact.click()
+        updateEvent.click()
+
+        and:
+        events.find { it.text() == "test event" }.click()
 
         then:
-        updateEvent
+        eventDialog.contactsLinkedToEvent.size() == 0
     }
 
     private def createContact(number, name) {
@@ -92,7 +89,7 @@ class UnlinkContactFromEventSpec extends FrontlinesmsLegalGebSpec {
         endTimeField = "08:56PM"
         for (name in names) {
             linkContactButton.click()
-            contactsToLink.find{ it.name == name }.click()
+            contactsToLink.find { it.name == name }.click()
         }
         save.click()
     }

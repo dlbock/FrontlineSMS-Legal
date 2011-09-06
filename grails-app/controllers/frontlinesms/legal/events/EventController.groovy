@@ -12,7 +12,7 @@ class EventController {
         params.startTimeField = params.startTimeField ? params.startTimeField : ""
         params.dateFieldSelected = params.dateFieldSelected ? params.dateFieldSelected : ""
         params.endTimeField = params.endTimeField ? params.endTimeField : ""
-        [allCases: Case.getAll(),contactList: LegalContact.list()]
+        [allCases: Case.getAll(), contactList: LegalContact.list()]
     }
 
 
@@ -28,14 +28,14 @@ class EventController {
             def formattedParams = formatParameters()
 
             if (isStartTimeBeforeEndTime()) {
-                def YearFormat =new SimpleDateFormat("yyyy");
-                Date selectedDate= new Date(params.dateFieldSelected);
+                def YearFormat = new SimpleDateFormat("yyyy");
+                Date selectedDate = new Date(params.dateFieldSelected);
                 def newEvent = new Event(eventTitle: formattedParams.eventTitle, dateFieldSelected: new Date(params.dateFieldSelected), startTimeField: Time.valueOf(formattedParams.startTimeField), endTimeField: Time.valueOf(formattedParams.endTimeField))
                 if (newEvent.save(flush: true)) {
                     linkContactsToEvent(newEvent)
                     linkCasesToEvent(newEvent)
                     flash.message = "Event created."
-                    chain(controller: "schedule", action: "index", model:[year:YearFormat.format(selectedDate),month:selectedDate.month])
+                    chain(controller: "schedule", action: "index", model: [year: YearFormat.format(selectedDate), month: selectedDate.month])
                 }
                 else {
                     flash.error = "There was a problem saving your event."
@@ -47,8 +47,6 @@ class EventController {
                 flash.error = "End time cannot be before the start time."
                 redirect(action: "create", params: [eventTitle: params.eventTitle, dateFieldSelected: params.dateFieldSelected, startTimeField: params.startTimeField, endTimeField: params.endTimeField])
             }
-
-
         }
     }
 
@@ -60,6 +58,7 @@ class EventController {
         event.startTimeField = Time.valueOf(formattedParams.startTimeField)
         event.endTimeField = Time.valueOf(formattedParams.endTimeField)
         linkContactsToEvent(event)
+        unlinkContact(event)
         event.save(flush: true)
     }
 
@@ -100,6 +99,16 @@ class EventController {
             caseIds.each { it ->
                 def eventCase = Case.findByCaseId(it as String)
                 EventCase.link(event, eventCase)
+            }
+        }
+    }
+
+    private def unlinkContact(event) {
+        if (params.unlinkedContacts != null && params.unlinkedContacts != "") {
+            def contactIds = params.unlinkedContacts.split(",")
+            contactIds.each { it ->
+                def contact = LegalContact.findById(it as Integer)
+                EventContact.findByEventAndLegalContact(event, contact).delete()
             }
         }
     }
