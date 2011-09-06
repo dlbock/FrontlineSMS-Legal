@@ -215,4 +215,80 @@ class CaseControllerSpec extends ControllerSpec {
         then:
         assert EventCase.findAllByEvent(newEvent).size() == 0
     }
+
+    def 'should return past and future event'() {
+        def yearOffsetForDate = 1900 //To fix bug in java.sql.Date year attribute
+        def cases = new Case(caseId: '1234', description: 'hello')
+
+        def pastEvent = new Event(eventTitle: "Past", dateFieldSelected: new Date(1990 - yearOffsetForDate, 7, 3), startTimeField: new Time(13, 50, 0), endTimeField: new Time(15, 30, 0))
+        def futureEvent = new Event(eventTitle: "Future", dateFieldSelected: new Date(2020 - yearOffsetForDate, 7, 3), startTimeField: new Time(13, 50, 0), endTimeField: new Time(15, 30, 0))
+
+        def pastEventCase = new EventCase(event: pastEvent, eventCase: cases)
+        def futureEventCase = new EventCase(event: futureEvent, eventCase: cases)
+        def eventCaseList = [pastEventCase, futureEventCase]
+
+        cases.linkedEvents = eventCaseList
+        mockDomain(Case, [cases])
+        mockDomain(LegalContact, [])
+        mockDomain(EventCase, eventCaseList)
+        controller.params.id = cases.caseId
+
+        when:
+        def models = controller.show()
+
+        then:
+        models["pastEvents"].contains(pastEvent)
+        models["futureEvents"].contains(futureEvent)
+    }
+
+    def 'should return overlapping past events'() {
+        given:
+        def yearOffsetForDate = 1900
+        def cases = new Case(caseId: '1234', description: 'hello')
+
+        def pastEvent1 = new Event(eventTitle: "Past1", dateFieldSelected: new Date(1990 - yearOffsetForDate, 7, 3), startTimeField: new Time(13, 50, 0), endTimeField: new Time(15, 30, 0))
+        def pastEvent2 = new Event(eventTitle: "Past2", dateFieldSelected: new Date(1990 - yearOffsetForDate, 7, 3), startTimeField: new Time(13, 50, 0), endTimeField: new Time(15, 30, 0))
+
+        def pastEventCase1 = new EventCase(event: pastEvent1, eventCase: cases)
+        def pastEventCase2 = new EventCase(event: pastEvent2, eventCase: cases)
+        def eventCaseList = [pastEventCase1, pastEventCase2]
+
+        cases.linkedEvents = eventCaseList
+        mockDomain(Case, [cases])
+        mockDomain(LegalContact, [])
+        mockDomain(EventCase, eventCaseList)
+        controller.params.id = cases.caseId
+
+        when:
+        def models = controller.show()
+
+        then:
+        models["pastEvents"].contains(pastEvent1)
+        models["pastEvents"].contains(pastEvent2)
+    }
+
+    def 'should return overlapping future events'() {
+        def yearOffsetForDate = 1900
+        def cases = new Case(caseId: '1234', description: 'hello')
+
+        def futureEvent1 = new Event(eventTitle: "Future1", dateFieldSelected: new Date(2020 - yearOffsetForDate, 7, 3), startTimeField: new Time(13, 50, 0), endTimeField: new Time(15, 30, 0))
+        def futureEvent2 = new Event(eventTitle: "Future2", dateFieldSelected: new Date(2020 - yearOffsetForDate, 7, 3), startTimeField: new Time(13, 50, 0), endTimeField: new Time(15, 30, 0))
+
+        def futureEventCase1 = new EventCase(event: futureEvent1, eventCase: cases)
+        def futureEventCase2 = new EventCase(event: futureEvent2, eventCase: cases)
+        def eventCaseList = [futureEventCase1, futureEventCase2]
+
+        cases.linkedEvents = eventCaseList
+        mockDomain(Case, [cases])
+        mockDomain(LegalContact, [])
+        mockDomain(EventCase, eventCaseList)
+        controller.params.id = cases.caseId
+
+        when:
+        def models = controller.show()
+
+        then:
+        models["futureEvents"].contains(futureEvent1)
+        models["futureEvents"].contains(futureEvent2)
+    }
 }
