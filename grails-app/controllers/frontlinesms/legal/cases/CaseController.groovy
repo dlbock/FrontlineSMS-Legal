@@ -44,12 +44,52 @@ class CaseController {
 
     def show = {
         def caseToDisplay = (params.description) ? Case.get(params.uniqueId) : Case.findByCaseId(params.id)
+        def tempCase = Case.findByCaseId(params.id)
+        def linkedEvents = tempCase.linkedEvents
+        def currentDate = new Date()
+        def pastEventList = []
+        def futureEventList = []
+        def nearestPastEventTime = null
+        def nearestFutureEventTime = null
+        def ongoingEventList = []
         def caseLinkedContacts = pairUpContactIdAndRelationship(caseToDisplay.linkedContacts) as JSON
         if (params.description) {
             caseToDisplay.description = params.description
             caseToDisplay.active = params.caseStatus
         }
-        [caseToDisplay: caseToDisplay, caseLinkedContacts: caseLinkedContacts, contactList: LegalContact.list(), linkedContactRowData: CaseContacts.findContactsAndInvolvementByCase(caseToDisplay)]
+        linkedEvents.each {eventContact ->
+            def eventIterator = eventContact.event
+            def linkedEventStartTime = new Date(eventIterator.dateFieldSelected.year, eventIterator.dateFieldSelected.month, eventIterator.dateFieldSelected.date, eventIterator.startTimeField.hours, eventIterator.startTimeField.minutes)
+            def linkedEventEndTime = new Date(eventIterator.dateFieldSelected.year, eventIterator.dateFieldSelected.month, eventIterator.dateFieldSelected.date, eventIterator.endTimeField.hours, eventIterator.endTimeField.minutes)
+            if (linkedEventStartTime.after(currentDate)) {
+                if (nearestFutureEventTime == null || linkedEventStartTime.compareTo(nearestFutureEventTime) < 0) {
+                    nearestFutureEventTime = linkedEventStartTime
+                    futureEventList = [eventIterator]
+                }
+                else if (linkedEventStartTime.compareTo(nearestFutureEventTime) == 0) {
+                    nearestFutureEventTime = linkedEventStartTime
+                    futureEventList.add(eventIterator)
+                }
+            }
+            else {
+                if (linkedEventEndTime.compareTo(currentDate) > 0) {
+                    ongoingEventList.add(eventIterator)
+                }
+                else if (nearestPastEventTime == null || linkedEventEndTime.compareTo(nearestPastEventTime) > 0) {
+                    nearestPastEventTime = linkedEventEndTime
+                    pastEventList = [eventIterator]
+                }
+                else if (linkedEventEndTime == nearestPastEventTime) {
+                    nearestPastEventTime = linkedEventEndTime
+                    pastEventList.add(eventIterator)
+                }
+
+            }
+        }
+        if (!ongoingEventList.isEmpty()) {
+            futureEventList = null
+        }
+        [caseToDisplay: caseToDisplay, caseLinkedContacts: caseLinkedContacts, contactList: LegalContact.list(), linkedContactRowData: CaseContacts.findContactsAndInvolvementByCase(caseToDisplay),pastEvents: pastEventList, ongoingEvents: ongoingEventList, futureEvents: futureEventList]
     }
 
     private def pairUpContactIdAndRelationship(caseContacts) {
