@@ -7,19 +7,6 @@ import frontlinesms.legal.functionaltests.pages.schedule.SchedulePage
 
 class LinkCaseToExistingEventSpec extends FrontlinesmsLegalGebSpec {
 
-    def "should display a Link Case button"() {
-
-        given:
-        createEvent("fabio")
-        to SchedulePage, "index"
-
-        when:
-        events()[0].click()
-
-        then:
-        linkCaseButtonExists
-    }
-
     def "should not display link case dialog when event details pop up is loaded"() {
         given:
         createEvent("fabio")
@@ -147,7 +134,7 @@ class LinkCaseToExistingEventSpec extends FrontlinesmsLegalGebSpec {
     private def createEvent(title) {
         to NewEventPage
         eventTitle = title
-        setDate()
+        date.setDate(6)
         startTimeField = "08:09AM"
         endTimeField = "08:56PM"
         save.click()

@@ -91,7 +91,7 @@ frontlinesms.attachActionWithLinkContactButton = function(buttonSelector, dialog
     $(".contactLink").click(function() {
         var contactId = $(this).attr('id');
         if (!frontlinesms.checkIfEventHasContactLinked(contactId)) {
-            frontlinesms.addLinkedContactIdToHiddenField(contactId);
+            frontlinesms.addDomainIdsToHiddenField(contactId, "event-linked-contacts");
             frontlinesms.addLinkedContactToTableOnPopup(contactId);
             $('#update-event').attr('disabled', false)
         }
@@ -126,7 +126,6 @@ frontlinesms.attachActionWithLinkContactButton = function(buttonSelector, dialog
     }
 };
 
-
 frontlinesms.attachActionWithUnlink = function() {
     $(".unlink-contact").live('click', function() {
         var contactId = $(this).attr("id");
@@ -146,3 +145,4 @@ frontlinesms.attachActionWithUnlink = function() {
         return false;
     });
 };
+

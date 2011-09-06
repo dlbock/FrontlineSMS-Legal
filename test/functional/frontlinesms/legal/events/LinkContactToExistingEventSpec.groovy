@@ -1,9 +1,9 @@
 package frontlinesms.legal.events
 
+import frontlinesms.legal.LegalContact
 import frontlinesms.legal.functionaltests.FrontlinesmsLegalGebSpec
 import frontlinesms.legal.functionaltests.pages.events.NewEventPage
 import frontlinesms.legal.functionaltests.pages.schedule.SchedulePage
-import frontlinesms.legal.LegalContact
 
 class LinkContactToExistingEventSpec extends FrontlinesmsLegalGebSpec {
     def 'should display all contacts in the Link Contact to an Event popup'() {
@@ -243,8 +243,8 @@ class LinkContactToExistingEventSpec extends FrontlinesmsLegalGebSpec {
         endTimeField = "08:56PM"
         clickLinkContact.click()
         contactNameSearch.value("ne")
-        sleep(500)
-        contactsToLink[0].click()
+        sleep(5000)
+        contactsToLink.first().click()
         save.click()
     }
 

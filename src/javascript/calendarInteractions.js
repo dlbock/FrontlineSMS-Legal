@@ -6,11 +6,25 @@ frontlinesms.calculateScheduleHeight = function (windowHeight) {
     return windowHeight - headerHeight - schedulePadding;
 };
 
-frontlinesms.populateHiddenFieldOnClick = function(data) {
+frontlinesms.populateHiddenFieldWithLinkedContacts = function(data) {
     for (var i = 0; i < data.length; i++) {
-       var contactId = data[i]["id"];
-       frontlinesms.addLinkedContactIdToHiddenField(contactId);
+        var contactId = data[i]["id"];
+        frontlinesms.addDomainIdsToHiddenField(contactId, "event-linked-contacts");
     }
+};
+
+frontlinesms.populateHiddenFieldWithLinkedCases = function(data) {
+    for (var i = 0; i < data.length; i++) {
+        var caseId = data[i]["id"];
+        frontlinesms.addDomainIdsToHiddenField(caseId, "event-linked-cases");
+    }
+};
+
+frontlinesms.addDomainIdsToHiddenField = function(domainId, hiddenFieldId) {
+    var domainIds = $("#" + hiddenFieldId).val().split(",");
+    domainIds = (domainIds.length == 1 && domainIds[0] == "") ? [] : domainIds;
+    domainIds.push(domainId);
+    $("#" + hiddenFieldId).val(domainIds.join(","));
 };
 
 frontlinesms.displayEventDetails = function(calEvent) {
@@ -25,8 +39,6 @@ frontlinesms.displayEventDetails = function(calEvent) {
     $.ajax({
         url: "fetchEventContacts/" + calEvent.id,
         type: "POST",
-
-
         dataType: 'json',
         error: function (data) {
             frontlinesms.log("Failed to get linked contacts for event.");
@@ -34,7 +46,7 @@ frontlinesms.displayEventDetails = function(calEvent) {
         success : function(data) {
             frontlinesms.log("Success" + data.toString() + "  " + calEvent.id);
             frontlinesms.constructContactsTable(data, calEvent.id);
-            frontlinesms.populateHiddenFieldOnClick(data);
+            frontlinesms.populateHiddenFieldWithLinkedContacts(data);
         },
         cache:false
     });
@@ -50,7 +62,8 @@ frontlinesms.displayEventDetails = function(calEvent) {
         success : function(data) {
             frontlinesms.log("SuccessCases:");
             frontlinesms.log(data);
-            frontlinesms.constructCasesTable(data)
+            frontlinesms.constructCasesTable(data);
+            frontlinesms.populateHiddenFieldWithLinkedCases(data);
         },
         cache:false
     });
@@ -80,7 +93,7 @@ frontlinesms.constructCasesTable = function(data) {
     $('#event-cases-table tbody *').remove();
     for (var i = 0; i < data.length; i++) {
         var status;
-        if(data[i]["status"]) {
+        if (data[i]["status"]) {
             status = "active";
         }
         else {
@@ -90,7 +103,7 @@ frontlinesms.constructCasesTable = function(data) {
             '<tr class="event-cases">' +
                 '<td>' + data[i]["id"] + '</td>' +
                 '<td>' + status + '</td>' +
-            '</tr>';
+                '</tr>';
         $('#event-cases-table tbody').append(newRow);
     }
 };

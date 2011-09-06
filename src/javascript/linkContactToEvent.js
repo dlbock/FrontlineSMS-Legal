@@ -31,7 +31,7 @@ frontlinesms.linkContactToEvent = function() {
     $(".contactLink").click(function() {
         var contactId = $(this).attr('id');
         if (!frontlinesms.checkIfEventHasContactLinked(contactId)) {
-            frontlinesms.addLinkedContactIdToHiddenField(contactId);
+            frontlinesms.addDomainIdsToHiddenField(contactId, "event-linked-contacts");
             frontlinesms.addLinkedContactToTable(contactId);
 
 
@@ -47,14 +47,6 @@ frontlinesms.linkContactToEvent = function() {
         return false;
     });
 };
-
-
-frontlinesms.addLinkedContactIdToHiddenField = function(contactId) {
-    var contactIds = $("#event-linked-contacts").val().split(",");
-    contactIds = (contactIds.length == 1 && contactIds[0] == "") ? [] : contactIds;
-    contactIds.push(contactId);
-    $("#event-linked-contacts").val(contactIds.join(","));
-}
 
 frontlinesms.unlinkLinkedContactIdFromHiddenField = function(contactId) {
     var contactIds = $("#event-linked-contacts").val().split(",");

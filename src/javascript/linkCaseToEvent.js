@@ -32,7 +32,7 @@ frontlinesms.linkCaseToEvent = function() {
     $(".link-case").click(function() {
         var caseId = $(this).attr('id');
         if (!frontlinesms.checkIfEventHasCaseLinked(caseId)) {
-            frontlinesms.addLinkedCaseIdToHiddenField(caseId);
+            frontlinesms.addDomainIdsToHiddenField(caseId, "event-linked-cases");
             frontlinesms.addLinkedCaseToTable(caseId);
         }
         $("#link-case-dialog").dialog("close");
@@ -42,13 +42,6 @@ frontlinesms.linkCaseToEvent = function() {
     frontlinesms.checkIfEventHasCaseLinked = function(caseId) {
         var caseIds = $("#event-linked-cases").val().split(",");
         return (caseIds.indexOf(caseId) > -1);
-    };
-
-    frontlinesms.addLinkedCaseIdToHiddenField = function(caseId) {
-        var caseIds = $("#event-linked-cases").val().split(",");
-        caseIds = (caseIds.length == 1 && caseIds[0] == "") ? [] : caseIds;
-        caseIds.push(caseId);
-        $("#event-linked-cases").val(caseIds.join(","));
     };
 
     frontlinesms.addLinkedCaseToTable = function(caseId) {

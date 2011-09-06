@@ -8,44 +8,44 @@ describe('calculateScheduleHeight', function () {
         expect(frontlinesms.calculateScheduleHeight(windowHeight)).toEqual(windowHeight - 10 - 10 - 5);
     });
     afterEach(function() {
-         $("#header, #schedule").remove();
+        $("#header, #schedule").remove();
     });
 });
 
-describe('show event details',function(){
-    beforeEach(function(){
-       var tempHTML =
+describe('show event details', function() {
+    beforeEach(function() {
+        var tempHTML =
+            "<input id=\"event-linked-contacts\" type=\"hidden\" name=\"linkedContacts\">" +
+                "<input id=\"event-linked-cases\" type=\"hidden\" name=\"linkedCases\">" +
                 "<input type=\"button\" name=\"li\" id=\"test-dialog-button\"/>" +
-                        "<div id=\"view-event\" title=\"Event Details\">" +
-                        "<label>Title :</label>" +
-                        "<input type='text' name=\"eventTitle\" id=\"event-title\" value=''/><br/>" +
-                        "<label>Date :</label>" +
-                        "<input type='text' name=\"eventDate\" id=\"event-date\" value=''/><br/>" +
-                        "<label>Start Time :</label>" +
-                        "<input type='text' name=\"eventStartTime\" id=\"event-start-time\" value=''/><br/>" +
-                        "<label>End Time :</label>" +
-                        "<input type='text' name=\"eventEndTime\" id=\"event-end-time\" value=''/><br/>" +
-                        "<input type=\"button\" id=\"update-event\" value=\"Update\"/>" +
-                        "<input type=\"button\" id=\"delete-event\" value=\"Delete\"/>" +
-                        "<input type=\"button\" id=\"link-contact-to-existing-event-button\" value=\"Link Contact\"/>" +
-                        "<label name=\"eventId\" id=\"event-id\"></label>" +
-                        "</div>";
+                "<div id=\"view-event\" title=\"Event Details\">" +
+                "<label>Title :</label>" +
+                "<input type='text' name=\"eventTitle\" id=\"event-title\" value=''/><br/>" +
+                "<label>Date :</label>" +
+                "<input type='text' name=\"eventDate\" id=\"event-date\" value=''/><br/>" +
+                "<label>Start Time :</label>" +
+                "<input type='text' name=\"eventStartTime\" id=\"event-start-time\" value=''/><br/>" +
+                "<label>End Time :</label>" +
+                "<input type='text' name=\"eventEndTime\" id=\"event-end-time\" value=''/><br/>" +
+                "<input type=\"button\" id=\"update-event\" value=\"Update\"/>" +
+                "<input type=\"button\" id=\"delete-event\" value=\"Delete\"/>" +
+                "<input type=\"button\" id=\"link-contact-to-existing-event-button\" value=\"Link Contact\"/>" +
+                "<label name=\"eventId\" id=\"event-id\"></label>" +
+                "</div>";
         $(tempHTML).appendTo("#fixtures");
-         $(tempHTML).appendTo("#fixtures");
         frontlinesms.eventDetails();
         function EventTemplate() {
             this.title = "test";
             this.start = new Date(2011, 6, 3, 0, 0, 0);
             this.end = new Date(2011, 6, 3, 15, 50, 0);
-        }
+        };
 
-        ;
         $('#test-dialog-button').click(function() {
             frontlinesms.displayEventDetails(new EventTemplate());
         });
     });
 
-    it('should display event details in pop up',function(){
+    it('should display event details in pop up', function() {
         $('#test-dialog-button').click();
         expect($('#event-title').val()).toEqual("test");
         expect($('#event-date').val()).toEqual("July 3,2011");
@@ -53,26 +53,35 @@ describe('show event details',function(){
         expect($('#event-end-time').val()).toEqual("03:50PM");
     });
 
-    afterEach(function(){
-        $("#view-event, #test-dialog-button").remove();
-    });
-});
-
-describe('Linked contacts hidden field', function () {
-    beforeEach(function() {
-        var tempHTML = '<input type="hidden" id="event-linked-contacts" value=""/>';
-        $(tempHTML).appendTo("#fixtures");
-
+    it("should populate the linked contacts hidden field with ids on success of ajax calls", function() {
         var data = [
             {id: 'id1', name: 'john', primaryMobile: '1234', notes: 'aa'},
             {id: 'id2', name: 'bob', primaryMobile: '2345', notes: 'aa'},
             {id: 'id3', name: 'jane', primaryMobile: '3456', notes: 'aa'}
         ];
-        frontlinesms.populateHiddenFieldOnClick(data);
+
+        spyOn($, "ajax").andCallFake(function(params) {
+            params.success(data);
+        });
+
+        $('#test-dialog-button').click();
+    
+        expect($('#event-linked-contacts').val()).toEqual("id1,id2,id3");
     });
 
-    it("populates the hidden field with linked contacts on clicking an event on the Schedule Page", function() {
-        expect($('#event-linked-contacts').val()).toEqual("id1,id2,id3");
+    it("should populate the linked cases hidden field with ids on success of ajax calls", function() {
+        var data = [
+            {id: 'id1', status: true},
+            {id: 'id2', status: true}
+        ];
+
+        spyOn($, "ajax").andCallFake(function(params) {
+            params.success(data);
+        });
+
+        $('#test-dialog-button').click();
+
+        expect($('#event-linked-cases').val()).toEqual("id1,id2");
     });
 
     afterEach(function() {
