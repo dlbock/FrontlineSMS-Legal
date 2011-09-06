@@ -37,7 +37,7 @@
     <label>Number</label>
     <g:textField name="primaryMobile" id="contact-primary-mobile" value="${contactToDisplay.primaryMobile}"
                  maxlength="25"/>
-    <label>Notes</label>
+    <label>Notes (Maximum 1024 characters allowed)</label>
     <g:textArea rows="10" cols="100" name="notes" id="contact-notes" value="${contactToDisplay.notes}" maxlength="1024"/>
 
 
