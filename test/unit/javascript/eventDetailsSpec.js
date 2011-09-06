@@ -115,23 +115,6 @@ describe('event detail pop up', function() {
             '<button id="link-contact-button">Link Contacts</button>' +
             '</div>' +
             '<input type="hidden" id="event-linked-contacts" value=""/>' +
-            '<div id="link-contact-to-existing-event-dialog" title="Link Contacts to an Event">' +
-            '<table id="contactsTable"> <tbody>' +
-            '<tr class="contactRow" id="rupa">' +
-            '<td  class="contact-name">Rupa</td>' +
-            '<td class="contact-number">1234</td>' +
-            '<td class="contactLink" id="1">' +
-            '<a href="#">Link Contact</a> +' +
-            '</td>' +
-            '</tr>' +
-            '<tr class="contactRow" id="neetu">' +
-            '<td  class="contact-name">Neetu</td>' +
-            '<td class="contact-number">3333</td>' +
-            '<td class="contactLink" id="2">' +
-            '<a href="#">Link Contact</a></td>' +
-            '</tr>' +
-            '</tbody></table> ' +
-            '</div>' +
             '<table name="linkedContacts" id="event-contacts-table"> ' +
             '<thead>' +
             '<tr>' +
@@ -140,17 +123,24 @@ describe('event detail pop up', function() {
             '</tr>' +
             '</thead>' +
             '<tbody >' +
+            '<tr class="event-contact">' +
+            '<td>Abc</td>' +
+            '<td>1234</td>' +
+            '<td>' +
+            '<a href="#" class="unlink-contact" id =1>Unlink</a>' +
+            '</td>' +
+            '</tr>' +
             '</tbody>' +
-            '</table>'
+            '</table>' +
+            '<input type="button" id="update-event" value="Update" disabled="disabled"/>'
             ;
         $(tempHTML).appendTo("#fixtures");
-        frontlinesms.attachActionWithLinkContactButton('#link-contact-button', '#link-contact-to-existing-event-dialog');
+        frontlinesms.attachActionWithUnlink();
     });
 
-    it("should have an UNLINK link next to every contact", function() {
-        $('#link-contact-button').click();
-        $("#1 a").click();
-        expect($('#event-contacts-table #1.unlink-contact').size()).toEqual(1);
+    it("should enable Update button when UNLINK link next to a contact is clicked", function() {
+        $('#1.unlink-contact').click();
+        expect($('#update-event').attr("disabled")).toBeUndefined();
     })
 
     afterEach(function() {
@@ -158,4 +148,3 @@ describe('event detail pop up', function() {
     });
 
 });
-

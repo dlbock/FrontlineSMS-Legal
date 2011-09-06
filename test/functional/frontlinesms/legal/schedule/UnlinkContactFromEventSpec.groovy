@@ -7,7 +7,7 @@ import frontlinesms.legal.functionaltests.pages.schedule.SchedulePage
 
 class UnlinkContactFromEventSpec extends FrontlinesmsLegalGebSpec {
 
-    def 'should display unlink button next to each contact on event details pop-up'() {
+    def 'should display unlink link next to each contact on event details pop-up'() {
 
         given:
         createContact("76575658", "Bob")
@@ -22,11 +22,11 @@ class UnlinkContactFromEventSpec extends FrontlinesmsLegalGebSpec {
         eventDialog.contactsLinkedToEvent.collect { it -> it.unlinkContact }.size() == 1
     }
 
-    def 'should not unlink contact when NO is clicked on unlink contact confirmation dialog'() {
+    def 'should remove pre-existing contact when unlink link next to it is clicked on event details pop-up'() {
 
         given:
-        createContact("7657558", "Sally")
-        createEventWithLink("test event", "Sally")
+        createContact("76575658", "Bob")
+        createEventWithLink("test event", "Bob")
         to SchedulePage, "index"
 
         when:
@@ -34,19 +34,37 @@ class UnlinkContactFromEventSpec extends FrontlinesmsLegalGebSpec {
         events.find{ it.text() == "test event" }.click()
         eventDialog.contactsLinkedToEvent[0].unlinkContact.click()
 
-        and:
-        unlinkConfirmationDialog.noButton.click()
-
         then:
-        eventDialog.contactsLinkedToEvent.size() == 1
+        eventDialog.contactsLinkedToEvent.size() == 0
     }
 
-    def 'should unlink contact when YES is clicked on unlink contact confirmation dialog'() {
+    def 'should remove newly created contact when unlink link next to it is clicked on event details pop-up'() {
 
         given:
-        createContact("7657558", "Fred")
-        createContact("7657555", "Mary")
-        createEventWithLink("test event", "Fred", "Mary")
+        createContact("76575658", "Bob")
+        createEvent("test event")
+        to SchedulePage, "index"
+
+        when:
+        at SchedulePage
+        events.find{ it.text() == "test event" }.click()
+        linkContactToExistingEvent
+        linkContactFromPopup
+        updateEvent.click()
+
+        and:
+        events.find{ it.text() == "test event" }.click()
+        eventDialog.contactsLinkedToEvent[0].unlinkContact.click()
+
+        then:
+        eventDialog.contactsLinkedToEvent.size() == 0
+    }
+
+    def 'should enable update button when unlink link next to a linked contact is clicked on event details pop-up'() {
+
+        given:
+        createContact("76575658", "Bob")
+        createEventWithLink("test event", "Bob")
         to SchedulePage, "index"
 
         when:
@@ -54,11 +72,8 @@ class UnlinkContactFromEventSpec extends FrontlinesmsLegalGebSpec {
         events.find{ it.text() == "test event" }.click()
         eventDialog.contactsLinkedToEvent[0].unlinkContact.click()
 
-        and:
-        unlinkConfirmationDialog.confirm()
-
         then:
-        eventDialog.contactsLinkedToEvent.size() == 1
+        updateEvent
     }
 
     private def createContact(number, name) {
@@ -79,6 +94,15 @@ class UnlinkContactFromEventSpec extends FrontlinesmsLegalGebSpec {
             linkContactButton.click()
             contactsToLink.find{ it.name == name }.click()
         }
+        save.click()
+    }
+
+    private def createEvent(title) {
+        to NewEventPage
+        eventTitle = title
+        setDate()
+        startTimeField = "08:09AM"
+        endTimeField = "08:56PM"
         save.click()
     }
 }

@@ -28,6 +28,7 @@ frontlinesms.yesNoDialogBox = function() {
                     click: function() {
                         $(".confirmation-dialog").remove();
                         $("#view-event").dialog("open");
+                        $('#update-event').attr('disabled', false);
                         return true
                     },
                     id: "confirm-no"

@@ -68,30 +68,11 @@ frontlinesms.constructContactsTable = function(data, eventId) {
                 '<td>' + data[i]["name"] + '</td>' +
                 '<td>' + data[i]["primaryMobile"] + '</td>' +
                 '<td>' +
-                '<a href="" class="unlink-contact" id = ' + contactName + '>Unlink</a>' +
+                '<a href="#" class="unlink-contact" id = ' + contactName + '>Unlink</a>' +
                 '</td>' +
                 '</tr>';
         $('#event-contacts-table tbody').append(newRow);
     }
-
-    var actionForYes = function(link) {
-        var contactName = $(link).attr('id');
-        $.ajax({
-            url: "unlinkContact",
-            type: "POST",
-            data: { "contactName": contactName, "eventId": eventId },
-            error: function () {
-                frontlinesms.log("Failed to unlink contact from event.");
-            },
-            success : function() {
-                frontlinesms.log("Success");
-            },
-            cache:false
-        });
-        $(link).parent().parent().remove();
-    }
-
-    frontlinesms.attachActionWithConfirmationToButton(".unlink-contact", "#unlink-contact-dialog", actionForYes)
 };
 
 frontlinesms.constructCasesTable = function(data) {
@@ -144,6 +125,7 @@ frontlinesms.getFormattedTimeString = function(hr, min) {
     formattedString += isAM ? "AM" : "PM";
     return formattedString;
 }
+
 frontlinesms.calendarInteractions = function() {
     $('#schedule').fullCalendar({
         theme: true,

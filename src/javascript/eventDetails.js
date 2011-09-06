@@ -8,6 +8,7 @@ frontlinesms.eventDetails = function() {
         modal: true,
         open: function() {
             $('#update-event').attr('disabled', true);
+            frontlinesms.attachActionWithUnlink();
         },
         beforeClose: frontlinesms.yesNoDialogBox
     });
@@ -109,10 +110,20 @@ frontlinesms.attachActionWithLinkContactButton = function(buttonSelector, dialog
                 $(row).find('.contact-number').text() +
                 '</td>' +
                 '<td>' +
-                '<a href="" class="unlink-contact" id = ' + contactId + '>Unlink</a>' +
+                '<a href="#" class="unlink-contact" id = ' + contactId + '>Unlink</a>' +
                 '</td>'
         );
         $('#event-contacts-table').append(rowToAdd);
         contactIds += contactId + ",";
+    }
+
+    frontlinesms.attachActionWithUnlink = function() {
+        $(".unlink-contact").live('click', function() {
+            var contactId = $(this).parent().find('td span.id:hidden').text();
+            $(this).parent().parent().remove();
+            frontlinesms.unlinkLinkedContactIdFromHiddenField(contactId);
+            $('#update-event').attr('disabled', false)
+            return false;
+        });
     }
 };
