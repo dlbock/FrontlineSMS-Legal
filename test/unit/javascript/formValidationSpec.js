@@ -8,7 +8,7 @@ describe("form validation", function() {
 
     it("accept only number & some special character if the user pastes any string containing alphanumeric character ", function() {
         $("#contact-primary-mobile").val("hello123+*-#$/")
-        $("#contact-primary-mobile").change();
+        $("#contact-primary-mobile").keyup();
         expect($("#contact-primary-mobile").val()).toEqual("123+*-#");
     });
 

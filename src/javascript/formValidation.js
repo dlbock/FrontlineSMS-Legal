@@ -4,11 +4,10 @@ frontlinesms.validateContactNumber = function() {
     var validCharacters = ['0','1','2','3','4','5','6','7','8','9','#','+','-','*'];
     var keyCodesForAllowedKeys = [0, 8, 9];
 
-
-    $("#contact-primary-mobile").change(function(){
+    $("#contact-primary-mobile").keyup(function(){
         var validMobileNumber= "";
-        var primaryMobileNumber = $(this).val();
-           for(var i=0; i < primaryMobileNumber.length ; i++)
+        var primaryMobileNumber = $("#contact-primary-mobile").val();
+        for(var i=0; i < primaryMobileNumber.length ; i++)
            {
                for(var j=0 ; j < validCharacters.length ; j++){
                    if(primaryMobileNumber[i] == validCharacters[j]){
@@ -16,7 +15,7 @@ frontlinesms.validateContactNumber = function() {
                    }
                }
                for(var k=0 ; k < keyCodesForAllowedKeys.length ; k++){
-                   if(primaryMobileNumber[i] == keyCodesForAllowedKeys[k]){
+                   if(primaryMobileNumber[i].which == keyCodesForAllowedKeys[k]){
                        validMobileNumber = validMobileNumber + primaryMobileNumber[i];
                    }
                }
@@ -41,7 +40,6 @@ frontlinesms.validateContactNumber = function() {
             return false;
         }
     );
-
 };
 
 frontlinesms.blockKeyPressInDateField = function() {
