@@ -10,7 +10,27 @@ frontlinesms.validateContactNumber = function() {
         var primaryMobileNumber = $("#contact-primary-mobile").val();
         for(var i=0; i < primaryMobileNumber.length ; i++)
            {
-               var key = primaryMobileNumber.which;
+               var key = primaryMobileNumber[i].which;
+               for(var j=0 ; j < validCharacters.length ; j++){
+                   if(primaryMobileNumber[i] == validCharacters[j]){
+                       validMobileNumber = validMobileNumber + primaryMobileNumber[i];
+                   }
+               }
+               for(var k=0 ; k < keyCodesForAllowedKeys.length ; k++){
+                   if(key == keyCodesForAllowedKeys[k]){
+                       validMobileNumber = validMobileNumber + primaryMobileNumber[i];
+                   }
+               }
+           }
+        $("#contact-primary-mobile").val(validMobileNumber);
+    });
+
+    $("#contact-primary-mobile").change(function(){
+        var validMobileNumber= "";
+        var primaryMobileNumber = $("#contact-primary-mobile").val();
+        for(var i=0; i < primaryMobileNumber.length ; i++)
+           {
+               var key = primaryMobileNumber[i].which;
                for(var j=0 ; j < validCharacters.length ; j++){
                    if(primaryMobileNumber[i] == validCharacters[j]){
                        validMobileNumber = validMobileNumber + primaryMobileNumber[i];
