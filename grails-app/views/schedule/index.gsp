@@ -56,7 +56,7 @@
 </div>
 
 <g:render template="linkContacts"/>
-<g:render template="linkCases"/>
+<g:render template="../shared/linkCases"/>
 
 </body>
 </html>

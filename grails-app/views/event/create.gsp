@@ -62,7 +62,6 @@
         <button id="link-case-button">Link case</button>
     </div>
 
-    <g:hiddenField name="linkedCases" id="event-linked-cases" value="${params.linkedCases}"/>
     <table name="cases" id="cases">
         <thead>
         <tr>
@@ -118,42 +117,7 @@
     </g:form>
 </div>
 
-<div id="link-case-dialog" title="Link Cases">
-    <h3 class="form-header">Search for Case by Case ID</h3>
-    <label>Enter the case ID to search for cases</label>
-    <g:textField class="medium-text-box" name="caseId" id="caseId"/>
-
-    <g:form action="search" method="POST">
-
-        <g:if test="${allCases}">
-            <table class="search-results" id="SearchResults">
-                <thead>
-                <tr>
-                    <th>Case ID</th>
-                    <th>Status</th>
-                </tr>
-                </thead>
-                <tbody>
-
-                <g:each in="${allCases}" var="legalCase">
-                    <tr class="caseLink" id="${legalCase.caseId}">
-                        <td class="case-id">
-                            <%=HtmlUtils.htmlEscape(legalCase.caseId)%>
-                        </td>
-                        <td class="case-status">
-                            <%=legalCase.active ? "active" : "inactive"%>
-                        </td>
-                        <td>
-                            <a href="" class="link-case" id="${legalCase.caseId}">Link</a>
-                        </td>
-                    </tr>
-                </g:each>
-                </tbody>
-            </table>
-        </g:if>
-    </g:form>
-
-</div>
+<g:render template="../shared/linkCases" />
 
 <div id="event-cancel-dialog" title="Cancel event creation?" style="display: none;">
     <p>Your changes have not been saved. Are you sure you want to cancel?</p>
