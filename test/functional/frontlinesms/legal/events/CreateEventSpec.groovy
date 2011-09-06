@@ -18,9 +18,9 @@ class CreateEventSpec extends FrontlinesmsLegalGebSpec {
     def "should show date picker when date field is focused"(){
         given: to NewEventPage
 
-        when: dateFieldSelected
+        when: date.openDatePicker()
 
-        then: datePicker.present
+        then: date.datePicker.present
     }
 
     def "when hours are typed in the StartTime text box then minutes should be set to zero"(){

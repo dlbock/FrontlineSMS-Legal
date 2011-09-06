@@ -8,7 +8,6 @@ import frontlinesms.legal.functionaltests.pages.schedule.SchedulePage
 class UnlinkContactFromEventSpec extends FrontlinesmsLegalGebSpec {
 
     def 'should display unlink link next to each contact on event details pop-up'() {
-
         given:
         createContact("76575658", "Bob")
         createEventWithLink("test event", "Bob")
@@ -22,7 +21,6 @@ class UnlinkContactFromEventSpec extends FrontlinesmsLegalGebSpec {
     }
 
     def 'should remove pre-existing contact when unlink link next to it is clicked on event details pop-up'() {
-
         given:
         createContact("76575658", "Bob")
         createEventWithLink("test event", "Bob")
@@ -45,7 +43,7 @@ class UnlinkContactFromEventSpec extends FrontlinesmsLegalGebSpec {
 
         when:
         events.find { it.text() == "test event" }.click()
-        linkContactToExistingEvent
+        eventDialog.linkContact()
         linkContactFromPopup
 
         and:
@@ -64,7 +62,7 @@ class UnlinkContactFromEventSpec extends FrontlinesmsLegalGebSpec {
         when:
         events.find { it.text() == "test event" }.click()
         eventDialog.contactsLinkedToEvent[0].unlinkContact.click()
-        updateEvent.click()
+        eventDialog.updateEvent()
 
         and:
         events.find { it.text() == "test event" }.click()
@@ -84,7 +82,7 @@ class UnlinkContactFromEventSpec extends FrontlinesmsLegalGebSpec {
     private def createEventWithLink(title, String... names) {
         to NewEventPage
         eventTitle = title
-        setDate()
+        date.setDate(16)
         startTimeField = "08:09AM"
         endTimeField = "08:56PM"
         for (name in names) {
@@ -97,7 +95,7 @@ class UnlinkContactFromEventSpec extends FrontlinesmsLegalGebSpec {
     private def createEvent(title) {
         to NewEventPage
         eventTitle = title
-        setDate()
+        date.setDate(16)
         startTimeField = "08:09AM"
         endTimeField = "08:56PM"
         save.click()

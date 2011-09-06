@@ -20,7 +20,7 @@ class DeleteEventSpec extends FrontlinesmsLegalGebSpec {
 
         when:
         events()[0].click()
-        deleteEvent()
+        eventDialog.deleteEvent()
 
         then:
         events().size() == 2
@@ -36,7 +36,7 @@ class DeleteEventSpec extends FrontlinesmsLegalGebSpec {
 
         when:
         events()[0].click()
-        deleteEventButton.click()
+        eventDialog.deleteEventButton.click()
         deleteConfirmationDialog.noButton.click()
 
         then:
@@ -44,23 +44,20 @@ class DeleteEventSpec extends FrontlinesmsLegalGebSpec {
     }
 
     def 'should redirect to the event date on successful creation of the event'() {
-
         when:
         createEvent("Test1", "08:09AM", "08:56PM")
+
         then:
         at SchedulePage
         atDate == new Date().format("MMMM yyyy")
-
     }
 
     def createEvent(title, String startTime, String endTime) {
         to NewEventPage
         eventTitle = title
-        setDate()
+        date.setDate(16)
         startTimeField = startTime
         endTimeField = endTime
         save.click()
     }
-
-
 }

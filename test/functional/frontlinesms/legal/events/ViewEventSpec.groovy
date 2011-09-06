@@ -35,7 +35,7 @@ class ViewEventSpec extends FrontlinesmsLegalGebSpec {
     def createEventWithLink(title) {
         to NewEventPage
         eventTitle = title
-        dateFieldSelected = new Date().format("MMMM d, yyyy")
+        date.setValue(new Date().format("MMMM d, yyyy"))
         startTimeField = "08:09AM"
         endTimeField = "08:56PM"
         linkContactButton.click()

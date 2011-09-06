@@ -3,6 +3,7 @@ package frontlinesms.legal.functionaltests.pages.schedule
 import frontlinesms.legal.functionaltests.pages.ConfirmationDialog
 import geb.Module
 import geb.Page
+import frontlinesms.legal.functionaltests.pages.DateField
 
 class SchedulePage extends Page {
     static at = { $("title").text() == "Schedule" }
@@ -11,31 +12,11 @@ class SchedulePage extends Page {
         events {
             $("span[class='fc-event-title']")
         }
-        eventContacts {
-            $("tr[class='event-contact']")
-        }
-        deleteEventButton { $('#delete-event') }
-        deleteEvent {
-            deleteEventButton.click()
-            deleteConfirmationDialog.confirm()
-            true
-        }
-        linkContactToExistingEvent {
-            $('#link-contact-button').click()
-            true
-        }
         atDate {$('span.fc-header-title').text()}
 
         existingContactList {
             $("#contactsTable tbody tr").collect {module LinkContactRow, it}
         }
-
-        dateFieldSelected {
-            $("#event-date").click()
-            waitFor(3) { datePicker.present }
-        }
-
-        datePicker { $("div", id: "ui-datepicker-div") }
 
         eventDialog(wait: true) { module EventDialog }
         unlinkConfirmationDialog(required: false) { module ConfirmationDialog, messageId: "unlink-contact-dialog" }
@@ -56,15 +37,6 @@ class SchedulePage extends Page {
         }
         contactsNotInSearchResults { $("tr", class: "contactRow", filtermatch: "false").collect {module LinkContactRow, it} }
 
-        updateEvent { $("input", id: "update-event") }
-        errorMessage { $("div", id: "error-message").text()}
-        eventStartTime {$("input", id: "event-start-time")}
-        eventEndTime {$("input", id: "event-end-time")}
-        eventTitleField {$("input", id: "event-title")}
-        eventDateField {$("input", id: "event-date")}
-        eventStartTimeField { $('#event-start-time')}
-        eventEndTimeField { $('#event-end-time')}
-
         linkContactSearchDialog {$('#link-contact-dialog')}
         yesConfirmationButton { $("#confirm-yes")}
         noConfirmationButton { $("#confirm-no")}
@@ -75,18 +47,36 @@ class SchedulePage extends Page {
 class EventDialog extends Module {
     static base = { $(id: "view-event") }
     static content = {
-
         contactsLinkedToEvent {
             $(".event-contact").collect {module ContactRow, it}
         }
-        eventTitle { $('#event-title').text()}
-        eventDate { $('#event-date').text()}
-        eventStartTime { $('#event-start-time').text()}
-        eventEndTime { $('#event-end-time').text()}
+        eventTitle { $('#event-title') }
+        date { module DateField, $('#event-date') }
+        startTime { $('#event-start-time') }
+        endTime { $('#event-end-time') }
         contactsLinkedToEvent { $(".event-contact").collect {module ContactRow, it} }
-        atDate {$('span.fc-header-title').text()}
+        updateEventButton { $('#update-event') }
+        deleteEventButton { $('#delete-event') }
+        errorMessage { $("div", id: "error-message").text() }
+
+        updateEvent() {
+            updateEventButton.click()
+            true
+        }
+
+        deleteEvent {
+            deleteEventButton.click()
+            page.deleteConfirmationDialog.confirm()
+            true
+        }
+
+        linkContact {
+            $('#link-contact-button').click()
+            true
+        }
     }
 }
+
 
 class ContactRow extends Module {
     static content = {
@@ -94,7 +84,6 @@ class ContactRow extends Module {
         name { cell(0).text() }
         primaryMobileNumber { cell(1).text() }
         unlinkContact { $("a", class: "unlink-contact")}
-        linkContactToExistingEventDialog {$("div", id: "link-contact-dialog")}
     }
 }
 

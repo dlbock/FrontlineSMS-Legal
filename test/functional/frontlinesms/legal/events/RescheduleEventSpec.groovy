@@ -1,9 +1,9 @@
 package frontlinesms.legal.events
 
-import frontlinesms.legal.functionaltests.FrontlinesmsLegalGebSpec
-import frontlinesms.legal.functionaltests.pages.schedule.SchedulePage
-import frontlinesms.legal.functionaltests.pages.events.NewEventPage
 import frontlinesms.legal.Event
+import frontlinesms.legal.functionaltests.FrontlinesmsLegalGebSpec
+import frontlinesms.legal.functionaltests.pages.events.NewEventPage
+import frontlinesms.legal.functionaltests.pages.schedule.SchedulePage
 import org.openqa.selenium.Keys
 
 class RescheduleEventSpec extends FrontlinesmsLegalGebSpec {
@@ -19,7 +19,7 @@ class RescheduleEventSpec extends FrontlinesmsLegalGebSpec {
         events()[0].click()
 
         then:
-        updateEvent.@disabled == 'true'
+        eventDialog.updateEventButton.@disabled == 'true'
     }
 
     def "should enable the update button when text fields have changes"() {
@@ -27,10 +27,10 @@ class RescheduleEventSpec extends FrontlinesmsLegalGebSpec {
         events()[0].click()
 
         and:
-        eventTitleField << "enable update button"
+        eventDialog.eventTitle << "enable update button"
 
         then:
-        updateEvent.@disabled == 'false'
+        eventDialog.updateEventButton.@disabled == 'false'
     }
 
     def 'should show calendar when date text box is clicked'() {
@@ -38,10 +38,10 @@ class RescheduleEventSpec extends FrontlinesmsLegalGebSpec {
         events()[0].click()
 
         and:
-        dateFieldSelected()
+        eventDialog.date.openDatePicker()
 
         then:
-        datePicker.present
+        eventDialog.date.datePicker.present
     }
 
     def "should update event when the title has changed"() {
@@ -49,11 +49,11 @@ class RescheduleEventSpec extends FrontlinesmsLegalGebSpec {
         events()[0].click()
 
         and:
-        eventTitleField.value("")
-        eventTitleField << "Some new title"
+        eventDialog.eventTitle.value("")
+        eventDialog.eventTitle << "Some new title"
 
         and:
-        updateEvent.click()
+        eventDialog.updateEvent()
 
         then:
         def updatedEvent = Event.findByEventTitle("Some new title")
@@ -65,14 +65,14 @@ class RescheduleEventSpec extends FrontlinesmsLegalGebSpec {
         events()[0].click()
 
         and:
-        eventTitleField.value("")
-        eventTitleField << Keys.DELETE
+        eventDialog.eventTitle.value("")
+        eventDialog.eventTitle << Keys.DELETE
 
         and:
-        updateEvent.click()
+        eventDialog.updateEvent()
 
         then:
-        errorMessage == "An event must have a title, date and time. Please enter a title."
+        eventDialog.errorMessage == "An event must have a title, date and time. Please enter a title."
     }
 
     def "should show error message when date field is blank"() {
@@ -80,14 +80,13 @@ class RescheduleEventSpec extends FrontlinesmsLegalGebSpec {
         events()[0].click()
 
         and:
-        eventDateField.value("")
-        eventDateField << Keys.DELETE
+        eventDialog.date.clear()
 
         and:
-        updateEvent.click()
+        eventDialog.updateEvent()
 
         then:
-        errorMessage == "An event must have a title, date and time. Please enter a date."
+        eventDialog.errorMessage == "An event must have a title, date and time. Please enter a date."
     }
 
     def "should show error message when start time field is blank"() {
@@ -95,14 +94,14 @@ class RescheduleEventSpec extends FrontlinesmsLegalGebSpec {
         events()[0].click()
 
         and:
-        eventStartTimeField.value("")
-        eventStartTimeField << Keys.DELETE
+        eventDialog.startTime.value("")
+        eventDialog.startTime << Keys.DELETE
 
         and:
-        updateEvent.click()
+        eventDialog.updateEvent()
 
         then:
-        errorMessage == "An event must have a title, date and time. Please enter a start time."
+        eventDialog.errorMessage == "An event must have a title, date and time. Please enter a start time."
     }
 
     def "should show error message when end time field is blank"() {
@@ -110,14 +109,14 @@ class RescheduleEventSpec extends FrontlinesmsLegalGebSpec {
         events()[0].click()
 
         and:
-        eventEndTimeField.value("")
-        eventEndTimeField << Keys.DELETE
+        eventDialog.endTime.value("")
+        eventDialog.endTime << Keys.DELETE
 
         and:
-        updateEvent.click()
+        eventDialog.updateEvent()
 
         then:
-        errorMessage == "An event must have a title, date and time. Please enter a end time."
+        eventDialog.errorMessage == "An event must have a title, date and time. Please enter a end time."
     }
 
     def "should not show confirmation dialog when user close the event detail pop up and fields have no changes"() {
@@ -136,7 +135,7 @@ class RescheduleEventSpec extends FrontlinesmsLegalGebSpec {
         events()[0].click()
 
         and:
-        eventTitleField << "hello"
+        eventDialog.eventTitle << "hello"
         eventDialog << Keys.ESCAPE
 
         then:
@@ -148,7 +147,7 @@ class RescheduleEventSpec extends FrontlinesmsLegalGebSpec {
         events()[0].click()
 
         and:
-        eventTitleField << "hello"
+        eventDialog.eventTitle << "hello"
         eventDialog << Keys.ESCAPE
 
         and:
@@ -163,7 +162,7 @@ class RescheduleEventSpec extends FrontlinesmsLegalGebSpec {
         events()[0].click()
 
         and:
-        eventTitleField << "hello"
+        eventDialog.eventTitle << "hello"
         eventDialog << Keys.ESCAPE
 
         and:
@@ -176,7 +175,7 @@ class RescheduleEventSpec extends FrontlinesmsLegalGebSpec {
     def createEvent(title, String startTime, String endTime) {
         to NewEventPage
         eventTitle = title
-        setDate()
+        date.setDate(16)
         startTimeField = startTime
         endTimeField = endTime
         save.click()
