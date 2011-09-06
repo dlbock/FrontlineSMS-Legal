@@ -61,7 +61,7 @@
 
 
 <div id="deleteDialog" title="Delete Contact" style="display: none;">
-    <p>Are you sure you want to delete this case?</p>
+    <p>Are you sure you want to delete this contact?</p>
 </div>
 
 </body>
