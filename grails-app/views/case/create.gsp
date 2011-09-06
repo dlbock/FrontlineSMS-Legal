@@ -9,12 +9,15 @@
     <g:javascript library="linkContactToCase"/>
     <g:javascript library="picnet.table.filter.min"/>
     <g:javascript library="contactSearch"/>
+    <g:javascript library="enableOrDisableKeyStrokeOnField"/>
 
     <script type="text/javascript">
         $(function() {
             frontlinesms.createNewCaseOnLoad();
             frontlinesms.linkContactToCase();
             frontlinesms.contactSearchOnLoad();
+            var keyCodeForEnterKey = 13;
+            frontlinesms.blockKeyInField(keyCodeForEnterKey, '#case-id');
         })
     </script>
 </head>

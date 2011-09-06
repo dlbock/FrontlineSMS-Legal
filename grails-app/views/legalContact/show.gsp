@@ -13,6 +13,7 @@
     <g:javascript library="confirmationDialog"/>
     <g:javascript library="enableUpdateButtonOnDetailsChange"/>
     <g:javascript library="formValidation"/>
+    <g:javascript library="enableOrDisableKeyStrokeOnField"/>
 
     <script type="text/javascript">
         $(function() {
@@ -22,6 +23,8 @@
             frontlinesms.initializeCaseDeletion();
             frontlinesms.enableUpdateButtonOnDetailsChange();
             frontlinesms.validateContactNumber();
+            var keyCodeForEnterKey = 13;
+            frontlinesms.blockKeyInField(keyCodeForEnterKey, '#contact-name');
         })
     </script>
 </head>

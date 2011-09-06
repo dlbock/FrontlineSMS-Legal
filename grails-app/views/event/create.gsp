@@ -13,6 +13,7 @@
     <g:javascript library="contactSearch"/>
     <g:javascript library="caseSearch"/>
     <g:javascript library="formValidation"/>
+    <g:javascript library="enableOrDisableKeyStrokeOnField"/>
 
     <script type="text/javascript">
         $(function() {
@@ -20,7 +21,10 @@
             frontlinesms.linkCaseToEvent();
             frontlinesms.contactSearchOnLoad();
             frontlinesms.caseSearchOnLoad();
-            frontlinesms.blockKeyPressInDateField();
+            var keyCodeForEnterKey = 13;
+            var keyCodeForTabKey = 9;
+            frontlinesms.blockKeyInField(keyCodeForEnterKey, '#event-title');
+            frontlinesms.enableKeyInField(keyCodeForTabKey, '#event-date');
         })
     </script>
 

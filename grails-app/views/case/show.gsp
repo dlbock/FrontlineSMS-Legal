@@ -12,6 +12,7 @@
     <g:javascript library="deleteFromDetailsPage"/>
     <g:javascript library="confirmationDialog"/>
     <g:javascript library="enableUpdateButtonOnDetailsChange"/>
+    <g:javascript library="enableOrDisableKeyStrokeOnField"/>
 
     <script type="text/javascript">
         $(function() {
@@ -19,6 +20,8 @@
             frontlinesms.linkContactToCase();
             frontlinesms.contactSearchOnLoad();
             frontlinesms.initializeCaseDeletion();
+            var keyCodeForEnterKey = 13;
+            frontlinesms.blockKeyInField(keyCodeForEnterKey, '#case-id');
         })
     </script>
 </head>

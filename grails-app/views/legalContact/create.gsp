@@ -9,7 +9,7 @@
     <g:javascript library="caseSearch"/>
     <g:javascript library="enableUpdateButtonOnDetailsChange"/>
     <g:javascript library="formValidation"/>
-
+    <g:javascript library="enableOrDisableKeyStrokeOnField"/>
 
     <title>Create New Contact</title>
     <script type="text/javascript">
@@ -19,6 +19,8 @@
             frontlinesms.caseSearchOnLoad();
             frontlinesms.enableUpdateButtonOnDetailsChange();
             frontlinesms.validateContactNumber();
+            var keyCodeForEnterKey = 13;
+            frontlinesms.blockKeyInField(keyCodeForEnterKey, '#contact-name');
         })
     </script>
 
