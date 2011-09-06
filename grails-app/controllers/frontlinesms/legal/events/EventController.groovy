@@ -61,6 +61,7 @@ class EventController {
         event.endTimeField = Time.valueOf(formattedParams.endTimeField)
         linkContactsToEvent(event)
         event.save(flush: true)
+        render "Success"
     }
 
     private def linkContactsToEvent(event) {

@@ -55,11 +55,10 @@ frontlinesms.updateEventDetails = function () {
             },
             success : function() {
                 frontlinesms.log("update success");
+                window.location.reload(true);
             },
             cache:false
         });
-
-        window.location.reload(true);
     }
 }
 
