@@ -49,7 +49,7 @@ class LinkContactToExistingEventSpec extends FrontlinesmsLegalGebSpec {
         linkedContactsInEventDetailsPopup.collect { it -> it.contactNumber }[0] == '1234567'
     }
 
-    def 'should not link any contacts when cancel button is clicked'(){
+    def 'should not link any contacts when cancel button is clicked'() {
         given:
         createEvent("Test")
         new LegalContact(name: 'fa', primaryMobile: '1234567').save(flush: true)
@@ -67,7 +67,7 @@ class LinkContactToExistingEventSpec extends FrontlinesmsLegalGebSpec {
         linkedContactsInEventDetailsPopup.collect { it -> it.contactName }.size() == 0
     }
 
-    def 'should be able to link a contact to multiple events'(){
+    def 'should be able to link a contact to multiple events'() {
         given:
         createEvent("Test1")
         createEvent("Test2")
@@ -206,6 +206,23 @@ class LinkContactToExistingEventSpec extends FrontlinesmsLegalGebSpec {
         then:
         events()[0].click()
         linkedContactsInEventDetailsPopup.collect { it -> it.contactName }.size() == 1
+    }
+
+    def 'should be able to link a contact which has already been unlinked on the event details pop up'() {
+        given:
+        createEventWithContact("Test")
+        to SchedulePage, "index"
+
+        when:
+        events()[0].click()
+        eventDialog.contactsLinkedToEvent[0].unlinkContact.click()
+        linkContactToExistingEvent()
+        linkContactFromPopup()
+        updateEvent.click()
+
+        then:
+        events()[0].click()
+        linkedContactsInEventDetailsPopup.size() == 1
     }
 
     private def createEvent(title) {

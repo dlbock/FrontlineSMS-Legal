@@ -115,6 +115,14 @@ frontlinesms.attachActionWithLinkContactButton = function(buttonSelector, dialog
                 '</td>'
         );
         $('#event-contacts-table').append(rowToAdd);
+        if (unlinkContactIds.indexOf(contactId) > -1) {
+            var contactsArray = unlinkContactIds.split(",");
+            for (var i = 0; i < contactsArray.length; i++) {
+                if (contactsArray[i] == contactId)
+                    contactsArray.splice(i, 1);
+            }
+            unlinkContactIds = contactsArray.toString();
+        }
         linkContactIds += contactId + ",";
     }
 
@@ -125,9 +133,9 @@ frontlinesms.attachActionWithLinkContactButton = function(buttonSelector, dialog
             frontlinesms.unlinkLinkedContactIdFromHiddenField(contactId);
             if (linkContactIds.indexOf(contactId) > -1) {
                 var contactsArray = linkContactIds.split(",");
-                for(var i=0; i<contactsArray.length; i++) {
-                    if(contactsArray[i] == contactId)
-                        contactsArray.splice(i,1);
+                for (var i = 0; i < contactsArray.length; i++) {
+                    if (contactsArray[i] == contactId)
+                        contactsArray.splice(i, 1);
                 }
                 linkContactIds = contactsArray.toString();
             }
