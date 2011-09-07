@@ -14,7 +14,7 @@ class UnlinkContactFromEventSpec extends FrontlinesmsLegalGebSpec {
         to SchedulePage, "index"
 
         when:
-        selectTestEvent
+        selectEvent "test event"
         unlinkFirstContactLinkedToEvent
 
         then:
@@ -28,7 +28,7 @@ class UnlinkContactFromEventSpec extends FrontlinesmsLegalGebSpec {
         to SchedulePage, "index"
 
         when:
-        selectTestEvent
+        selectEvent "test event"
         eventDialog.clickLinkContact()
         linkContactFromPopup
 
@@ -46,12 +46,12 @@ class UnlinkContactFromEventSpec extends FrontlinesmsLegalGebSpec {
         to SchedulePage, "index"
 
         when:
-        selectTestEvent
+        selectEvent "test event"
         unlinkFirstContactLinkedToEvent
         eventDialog.updateEvent()
 
         and:
-        selectTestEvent
+        selectEvent "test event"
 
         then:
         noLinkedContactsToEvent
@@ -64,13 +64,13 @@ class UnlinkContactFromEventSpec extends FrontlinesmsLegalGebSpec {
         to SchedulePage, "index"
 
         when:
-        selectTestEvent
+        selectEvent "test event"
         unlinkFirstContactLinkedToEvent
         eventDialog.close
         eventDialog.confirmYesOnCloseWithoutUpdating
 
         and:
-        selectTestEvent
+        selectEvent "test event"
 
         then:
         noLinkedContactsToEvent == false

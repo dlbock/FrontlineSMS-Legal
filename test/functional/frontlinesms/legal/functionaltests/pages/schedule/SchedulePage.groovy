@@ -11,10 +11,12 @@ class SchedulePage extends Page {
     static content = {
         calendarHeader { $('.fc-header-title').text() }
         events { $("span[class='fc-event-title']") }
-        selectTestEvent {
-            events.find { it.text() == "test event" }.click()
+
+        selectEvent { title ->
+            events.find { it.text() == title }.click()
             true
         }
+
         existingContactList {
             $("#contactsTable tbody tr").collect {module LinkContactRow, it}
         }
