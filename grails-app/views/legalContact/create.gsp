@@ -23,7 +23,6 @@
             frontlinesms.blockKeyInField(keyCodeForEnterKey, '#contact-name');
         })
     </script>
-
 </head>
 
 <body>
@@ -35,8 +34,8 @@
     <g:textField name="name" id="contact-name" value="${params.name}"/>
     <label>Number</label>
     <g:textField name="primaryMobile" id="contact-primary-mobile" value="${params.primaryMobile}" maxlength="25"/>
-    <label>Notes(Maximum 1024 characters allowed)</label>
-    <g:textArea name="notes" id="contact-notes" value="${params.notes}" cols="100" rows="10" maxlength="1024" />
+    <label>Notes (Max 1024 characters)</label>
+    <g:textArea name="notes" id="contact-notes" value="${params.notes}" cols="100" rows="10" maxlength="1024"/>
 
     <div class="form-submit-area">
         <button id="link-case-button">Link Cases</button>
