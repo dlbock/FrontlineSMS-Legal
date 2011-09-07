@@ -52,10 +52,10 @@ class CreateLegalContactSpec extends FrontlinesmsLegalGebSpec {
         linkCaseButton.size() == 1
     }
 
-    def "should show link case search window with search box and list of cases when link case button is clicked"() {
+    def "should show link case search window with search box and list of cases with case title when link case button is clicked"() {
         given:
-        new Case(caseId: "123", description: "test").save(flush: true)
-        new Case(caseId: "321", description: "test2").save(flush: true)
+        new Case(caseId: "123", description: "test", caseTitle:"Case 1").save(flush: true)
+        new Case(caseId: "321", description: "test2", caseTitle:"Case 2").save(flush: true)
 
         when:
         to CreateLegalContactPage
@@ -64,6 +64,8 @@ class CreateLegalContactSpec extends FrontlinesmsLegalGebSpec {
         then:
         linkCaseDialog.present
         casesToLink.collect { it -> it.linkCaseButton }.size() == 2
+        casesToLink[0].caseTitle == "Case 1"
+        casesToLink[1].caseTitle=="Case 2"
         caseIdSearch.present
         linkCaseCancelButton.present
     }
@@ -87,10 +89,10 @@ class CreateLegalContactSpec extends FrontlinesmsLegalGebSpec {
 
     }
 
-    def "should return to create contact page with CASE ID, Status, Relationship and an Unlink link updated in the linked cases table"() {
+    def "should return to create contact page with CASE ID, Case Title, Relationship and an Unlink link updated in the linked cases table"() {
         given:
-        new Case(caseId: "123", description: "test").save(flush: true)
-        new Case(caseId: "321", description: "test2").save(flush: true)
+        new Case(caseId: "123", caseTitle: "Case Title 1", description: "test").save(flush: true)
+        new Case(caseId: "321", caseTitle: "Case Title 2",description: "test2").save(flush: true)
 
         when:
         to CreateLegalContactPage
@@ -103,6 +105,7 @@ class CreateLegalContactSpec extends FrontlinesmsLegalGebSpec {
         at(CreateLegalContactPage)
         linkedCasesTable[0].caseId == "123"
         linkedCasesTable[0].relationship == "Victim"
+        linkedCasesTable[0].caseTitle == "Case Title 1"
         linkedCasesTable[0].unlink.displayed
     }
 
@@ -150,4 +153,6 @@ class CreateLegalContactSpec extends FrontlinesmsLegalGebSpec {
         linkedCasesTable[0].relationship == "Victim"
         linkedCasesTable[0].unlink.displayed
     }
+
+
 }

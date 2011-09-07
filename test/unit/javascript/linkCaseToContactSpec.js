@@ -8,12 +8,18 @@ describe('linkCaseToContact', function () {
                 '<thead></thead>' +
                 '<tbody>' +
                 '<tr class="caseLink" id="case1">' +
-                '<td class="case-name">case1</td>' +
-                '<td>active</td>' +
+                '<td class="caseId">case1</td>' +
+                '<td class="status">active</td>' +
+                '<td>' +
+                '<a href="#" class="caseLinkButton">Link Case</a>' +
+                '</td>' +
                 '</tr>' +
                 '<tr class="caseLink" id="case2">' +
-                ' <td class="case-name">case2</td>' +
-                '<td>active</td>' +
+                ' <td class="caseId">case2</td>' +
+                '<td class="status">active</td>' +
+                '<td>' +
+                '<a href="#" class="caseLinkButton">Link Case</a>' +
+                '</td>' +
                 '</tr>' +
                 '<button id = "cancel-button">Cancel</button>' +
                 '</tbody>' +
@@ -23,9 +29,15 @@ describe('linkCaseToContact', function () {
                 '<table id="cases">' +
                 '</table>' +
 
+                '<input id="contact-linked-cases" value="" name="linkedCases"/>' +
                 '<button id="link-case-button">Link cases</button>' +
-                '<button id="contact-save" disabled = "disabled">Update</button>';
+                '<button id="contact-save" disabled = "disabled">Update</button>'+
+                '<div id="case-contact-relationship-dialog" title="Relationship to case" style="display: none;">' +
+                '<input id="case-contact-relationship"/>' +
+                '</div>';
+
         $(tempHTML).appendTo("#fixtures");
+
         frontlinesms.linkCaseToContact();
     });
 
@@ -46,46 +58,9 @@ describe('linkCaseToContact', function () {
         expect($("#caseId").val()).toEqual("");
     });
 
-    it('when unlink button is clicked the appropriate case is unlinked from contact', function() {
-        spyOn(window, 'prompt').andReturn('client');
-        $("#link-case-button").click();
-        $("#case1").click();
-        var secondRowSelector = "table#linked-cases tr:first";
-        $(secondRowSelector + " td.unlink-case-button").click();
-        expect($(secondRowSelector + ":contains('case1')").size()).toEqual(0);
-    });
-
-    it('when unlink button is clicked the appropriate case is unlinked from hidden form field', function() {
-        spyOn(window, 'prompt').andReturn('client');
-        $("#link-case-button").click();
-        $("#case1").click();
-        $("#link-case-button").click();
-        $("#case2").click();
-        var secondRowSelector = "table#cases tr:nth-child(2)";
-        $(secondRowSelector + " td.unlink-case-button").click();
-        expect($('#contact-linked-cases').val()).toEqual("{\"case1\":\"client\"}");
-    });
-
     it('when link-cases button is clicked case search dialog is opened', function () {
-        spyOn(window, 'prompt').andReturn('client');
         $("#link-case-button").click();
         expect($('#link-case-dialog:visible').size()).toEqual(1);
-    });
-
-    it('should enable the Update button when case is unlinked', function() {
-        spyOn(window, 'prompt').andReturn('client');
-        $("#link-case-button").click();
-        $("#case1").click();
-        var secondRowSelector = "table#linked-cases tr:first";
-        $(secondRowSelector + " td.unlink-case-button").click();
-        expect($("#contact-save").attr("disabled")).toBeUndefined();
-    });
-
-    it('should enable the Update button when case is linked', function() {
-        spyOn(window, 'prompt').andReturn('client');
-        $("#link-case-button").click();
-        $("#case1").click();
-        expect($("#contact-save").attr("disabled")).toBeUndefined();
     });
 
     it('should keep Update button Disabled when case linking is canceled', function() {
@@ -94,6 +69,19 @@ describe('linkCaseToContact', function () {
         $("#cancel-button").click();
         expect($("#contact-save").attr("disabled")).toBeTruthy();
     });
+
+    it('should not show relationship dialog if case Id is clicked', function() {
+        $("#link-case-button").click();
+        $("#case1.caseId").click();
+        expect ($("#case-contact-relationship-dialog:visible").size()).toEqual(0);
+    });
+
+    it('should not show relationship dialog if case Status is clicked', function() {
+        $("#link-case-button").click();
+        $("#case1.status").click();
+        expect ($("#case-contact-relationship-dialog:visible").size()).toEqual(0);
+    });
+
     afterEach(function() {
         $('body#fixtures > *').not(".jasmine_reporter").not('script').remove();
     });

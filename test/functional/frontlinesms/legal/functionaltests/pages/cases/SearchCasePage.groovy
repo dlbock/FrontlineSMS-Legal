@@ -37,7 +37,8 @@ class CaseRow extends Module {
     static content = {
         cell { i -> $("td", i) }
         caseId { cell(0).text() }
-        active { cell(1).text() }
+        caseTitle {cell(1).text()}
+        active { cell(2).text() }
         deleteButton { $("button", class: "deleteButtons")}
     }
 }

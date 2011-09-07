@@ -28,15 +28,16 @@ class CreateLegalContactPage extends Page {
         linkCaseCancelButton { $(".ui-button-text").value("Cancel") }
         caseContactRelationshipDialog { $("div", id: "case-contact-relationship-dialog")}
         relationshipInput { $("input", id: "case-contact-relationship")}
-        relationshipConfirmButton { $("button", id: "confirm-yes")}
-        relationshipCancelButton { $("button", id: "confirm-no")}
+        relationshipConfirmButton { $("button", id: "confirm-relationship")}
+        relationshipCancelButton { $("button", id: "cancel-relationship")}
     }
 }
 class CaseRow extends Module {
     static content = {
         cell { i -> $("td", i) }
         caseId { cell(0).text() }
-        status { cell(1).text() }
+        caseTitle { cell(1).text() }
+        status { cell(2).text() }
         linkCaseButton { $("a", class: "caseLinkButton") }
     }
 }
