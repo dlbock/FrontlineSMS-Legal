@@ -20,8 +20,6 @@ class SchedulePage extends Page {
             true
         }
 
-        contactsNotInSearchResults { $("tr", class: "contactRow", filtermatch: "false").collect {module LinkContactRow, it} }
-
         linkContactSearchDialog {$('#link-contact-dialog')}
         yesConfirmationButton { $("#confirm-yes")}
         noConfirmationButton { $("#confirm-no")}
@@ -98,9 +96,10 @@ class ContactRow extends Module {
 }
 
 class LinkContactDialog extends Module {
+    static base = { $('#link-contact-dialog').parent(".ui-dialog") }
     static content = {
         searchbox { $(id: "contact-name-search") }
-        contacts { $("#contactsTable tbody tr").collect {module LinkContactRow, it} }
+        contacts { $("#contactsTable tbody tr").findAll { it.displayed }.collect { module LinkContactRow, it } }
 
         searchFor { query ->
             searchbox.value(query)

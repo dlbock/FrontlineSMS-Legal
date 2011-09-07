@@ -118,14 +118,14 @@ class LinkContactToExistingEventSpec extends FrontlinesmsLegalGebSpec {
         to SchedulePage, "index"
 
         when:
-        events()[0].click()
+        selectEvent("Test")
         eventDialog.clickLinkContact()
 
         and:
         eventDialog.linkContactDialog.searchFor("ne")
 
         then:
-        contactsNotInSearchResults().size() == 1
+        eventDialog.linkContactDialog.contacts.collect { it.contactName } == ["neetu", "neil"]
     }
 
     def "should display all the contacts when the dialog box is reopened after a previous filter"() {
@@ -144,7 +144,7 @@ class LinkContactToExistingEventSpec extends FrontlinesmsLegalGebSpec {
         and:
         eventDialog.linkContactDialog.cancel()
         and:
-        eventDialog.linkContact()
+        eventDialog.clickLinkContact()
 
         then:
         eventDialog.linkContactDialog.contacts.size() == 2
