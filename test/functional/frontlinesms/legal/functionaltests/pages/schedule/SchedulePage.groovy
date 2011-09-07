@@ -62,6 +62,7 @@ class EventDialog extends Module {
         updateEvent {
             updateEventButton.click()
             waitFor { try { !$().isVisible() } catch(e) { true } }
+            waitFor { browser.at SchedulePage }
         }
 
         deleteEvent {
