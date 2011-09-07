@@ -21,7 +21,6 @@ class SchedulePage extends Page {
             true
         }
 
-        linkCaseButtonExists { $("#link-case-button").size() == 1}
         linkCaseDialog { $("div", id: "link-case-dialog") }
         caseDialogCancelButton { $("#cancel-link-case") }
         casesToLink { $("tr", class: "caseLink").collect {module LinkableCase, it} }
