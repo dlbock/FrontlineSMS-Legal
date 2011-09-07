@@ -20,7 +20,6 @@ class SchedulePage extends Page {
             events.find { it.text() == "test event" }.click()
             true
         }
-        atDate {$('span.fc-header-title').text()}
         existingContactList {
             $("#contactsTable tbody tr").collect {module LinkContactRow, it}
         }
