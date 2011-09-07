@@ -37,7 +37,7 @@ class CreateCaseSpec extends FrontlinesmsLegalGebSpec {
         caseTitle == "Test Title"
     }
 
-     def 'should remain on Create case page when NO is clicked while saving case without case title'() {
+    def 'should remain on Create case page when NO is clicked while saving case without case title'() {
         given:
         to NewCasePage
 
@@ -152,7 +152,7 @@ class CreateCaseSpec extends FrontlinesmsLegalGebSpec {
         contactNameSearch.value() == ""
     }
 
-     def "should display all the contacts when the dialog box is reopened after a previous filter"() {
+    def "should display all the contacts when the dialog box is reopened after a previous filter"() {
         setup:
         new LegalContact(name: "fabio", primaryMobile: "22222").save(flush: true)
         new LegalContact(name: "dev", primaryMobile: "55555").save(flush: true)
@@ -171,5 +171,22 @@ class CreateCaseSpec extends FrontlinesmsLegalGebSpec {
 
         then:
         contactLinkNotVisible().size() == 0
+    }
+
+    def "should not link contact to the case when cancel is clicked on the relationship dialog"() {
+        setup:
+        new LegalContact(name: "fabio", primaryMobile: "22222").save(flush: true)
+        new LegalContact(name: "dev", primaryMobile: "55555").save(flush: true)
+
+        when:
+        to NewCasePage
+        and:
+        clickLinkContact.click()
+        contactListInPopUp[0].click()
+        relationshipCancelButton.click()
+
+        then:
+        linkContactDialog.present
+        noLinkedContacts
     }
 }

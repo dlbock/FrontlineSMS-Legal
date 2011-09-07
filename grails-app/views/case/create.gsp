@@ -10,11 +10,13 @@
     <g:javascript library="picnet.table.filter.min"/>
     <g:javascript library="contactSearch"/>
     <g:javascript library="enableOrDisableKeyStrokeOnField"/>
+    <g:javascript library="linkCaseToContact"/>
 
     <script type="text/javascript">
         $(function() {
             frontlinesms.createNewCaseOnLoad();
             frontlinesms.linkContactToCase();
+            frontlinesms.linkCaseToContact();
             frontlinesms.contactSearchOnLoad();
             var keyCodeForEnterKey = 13;
             frontlinesms.blockKeyInField(keyCodeForEnterKey, '#case-id');
@@ -114,6 +116,10 @@
 
 <div id="save-case-without-case-title-dialog" title="Save without case title?" style="display: none;">
     <p>Are you sure you want to save a case without a title?</p>
+</div>
+
+<div id="case-contact-relationship-dialog" title="Relationship to case" style="display: none;">
+    <input id="case-contact-relationship"/>
 </div>
 </body>
 </html>

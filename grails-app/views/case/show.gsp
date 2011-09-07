@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'forms.css')}"/>
 
     <g:javascript library="linkContactToCase"/>
+    <g:javascript library="linkCaseToContact"/>
     <g:javascript library="caseUpdate"/>
     <g:javascript library="picnet.table.filter.min"/>
     <g:javascript library="contactSearch"/>
@@ -18,6 +19,7 @@
         $(function() {
             frontlinesms.showCaseOnLoad();
             frontlinesms.linkContactToCase();
+            frontlinesms.linkCaseToContact();
             frontlinesms.contactSearchOnLoad();
             frontlinesms.initializeCaseDeletion();
             var keyCodeForEnterKey = 13;
@@ -214,6 +216,10 @@
 
 <div id="deleteDialog" title="Delete Case" style="display: none;">
     <p>Are you sure you want to delete this case?</p>
+</div>
+
+<div id="case-contact-relationship-dialog" title="Relationship to case" style="display: none;">
+    <input id="case-contact-relationship"/>
 </div>
 </body>
 

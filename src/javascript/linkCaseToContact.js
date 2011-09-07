@@ -27,40 +27,10 @@ frontlinesms.linkCaseToContact = function() {
 
     $(".caseLinkButton").click(function() {
         var caseId = $(this).parents("tr").attr('id');
-
         if (!frontlinesms.checkIfContactHasCaseLinked(caseId)) {
-            $("#case-contact-relationship-dialog").dialog({
-                open: function(event, ui){
-                    $("#case-contact-relationship").val("");
-                },
-                modal: true,
-                buttons: [
-                    {
-                        text: "OK",
-                        click: function() {
-                            var relationship = $("#case-contact-relationship").val();
-                            frontlinesms.addLinkedCaseToHiddenField(caseId, relationship);
-                            frontlinesms.addLinkedCaseToTable(caseId, relationship);
-                            $('#contact-save').removeAttr("disabled");
-                            $(this).dialog("close");
-                            $("#link-case-dialog").dialog("close");
-                            return true
-                        },
-                        id: "confirm-relationship"
-                    },
-                    {
-                        text: "Cancel",
-                        click: function() {
-                            $(this).dialog("close");
-                            return false
-                        },
-                        id: "cancel-relationship"
-                    }
-                ]
-            });
+            frontlinesms.relationshipDialog(caseId, "Case")
+            return false;
         }
-
-        return false;
     });
 
     $("a.unlink-case").live('click', function() {
@@ -72,6 +42,47 @@ frontlinesms.linkCaseToContact = function() {
     });
 };
 
+frontlinesms.relationshipDialog = function (Id, type) {
+
+    $("#case-contact-relationship-dialog").dialog({
+        open: function(event, ui) {
+            $("#case-contact-relationship").val("");
+        },
+        modal: true,
+        buttons: [
+            {
+                text: "OK",
+                click: function() {
+                    var relationship = $("#case-contact-relationship").val();
+                    if (type == "Case") {
+                        frontlinesms.addLinkedCaseToHiddenField(Id, relationship);
+                        frontlinesms.addLinkedCaseToTable(Id, relationship);
+                        $('#contact-save').removeAttr("disabled");
+                        $(this).dialog("close");
+                        $("#link-case-dialog").dialog("close");
+                    }
+                    else {
+                        frontlinesms.addLinkedContactToCaseHiddenField(Id, relationship);
+                        frontlinesms.addLinkedContactToCaseTable(Id, relationship);
+                        $('#case-save').removeAttr("disabled");
+                        $(this).dialog("close");
+                        $("#link-contacts").dialog("close");
+                    }
+                    return true
+                },
+                id: "confirm-relationship"
+            },
+            {
+                text: "Cancel",
+                click: function() {
+                    $(this).dialog("close");
+                    return false
+                },
+                id: "cancel-relationship"
+            }
+        ]
+    });
+}
 frontlinesms.checkIfContactHasCaseLinked = function(caseId) {
     var linkedCases = $.parseJSON($('#contact-linked-cases').val()) || {};
     return (caseId in linkedCases);

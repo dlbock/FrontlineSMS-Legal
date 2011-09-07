@@ -34,6 +34,8 @@ class ShowCasePage extends Page {
         pastEventsTable {$("#past-events tbody tr").collect {module EventRow, it} }
         futureEventsTable {$("#future-events tbody tr").collect {module EventRow, it} }
         currentEventsTable {$("#current-events tbody tr").collect {module EventRow, it} }
+        relationshipCancelButton { $("button", id: "cancel-relationship")}
+        noLinkedContacts {$("#contacts tbody tr").size() == 1}
     }
 }
 

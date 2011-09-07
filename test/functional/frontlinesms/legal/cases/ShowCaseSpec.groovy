@@ -290,6 +290,26 @@ class ShowCaseSpec extends FrontlinesmsLegalGebSpec {
         caseone.caseId
     }
 
+    def "should not link contact to the case when cancel is clicked on the relationship dialog"() {
+        setup:
+        new LegalContact(name: "fabio", primaryMobile: "22222").save(flush: true)
+        new LegalContact(name: "dev", primaryMobile: "55555").save(flush: true)
+        def caseOne = new Case(caseId: "1112", description: "ertyui")
+        caseOne.save(flush: true)
+
+        when:
+        to ShowCasePage, caseOne.caseId
+
+        and:
+        clickLinkContact.click()
+        contactsTable[0].click()
+        relationshipCancelButton.click()
+
+        then:
+        linkContactDialog.present
+        noLinkedContacts
+    }
+
     def createCurrentAndPastEventsAndLinkCases() {
         def yearOffsetForDate = 1900
         def caseone = new Case(caseId: "1112", description: "ertyui")
@@ -307,6 +327,5 @@ class ShowCaseSpec extends FrontlinesmsLegalGebSpec {
         EventCase.link(futureEvent, caseone)
         EventCase.link(currentEvent, caseone)
         caseone.caseId
-
     }
 }

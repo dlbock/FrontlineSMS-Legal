@@ -23,5 +23,9 @@ class NewCasePage extends Page {
         saveCaseWithoutCaseTitleDialog{ $("div", id:"save-case-without-case-title-dialog")}
         saveWithoutCaseTitleYes{ $("button", id:"save-confirm-yes")}
         saveWithoutCaseTitleNo{ $("button", id:"save-confirm-no")}
+        contactListInPopUp{$(".contact-name")}
+        noLinkedContacts {$("#contacts tbody tr").size() == 1}
+        relationshipConfirmButton { $("button", id: "confirm-relationship")}
+        relationshipCancelButton { $("button", id: "cancel-relationship")}
     }
 }
