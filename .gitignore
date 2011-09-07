@@ -1,6 +1,5 @@
 build.properties
 cobertura.ser
-CodeNarcReport.html
 
 /*.iml
 /.idea
