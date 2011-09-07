@@ -124,24 +124,25 @@ frontlinesms.attachActionWithLinkContactButton = function(buttonSelector, dialog
         }
         linkContactIds += contactId + ",";
     }
+};
 
-    frontlinesms.attachActionWithUnlink = function() {
-        $(".unlink-contact").live('click', function() {
-            var contactId = $(this).attr("id");
-            $(this).parent().parent().remove();
-            frontlinesms.unlinkLinkedContactIdFromHiddenField(contactId);
-            if (linkContactIds.indexOf(contactId) > -1) {
-                var contactsArray = linkContactIds.split(",");
-                for (var i = 0; i < contactsArray.length; i++) {
-                    if (contactsArray[i] == contactId)
-                        contactsArray.splice(i, 1);
-                }
-                linkContactIds = contactsArray.toString();
+
+frontlinesms.attachActionWithUnlink = function() {
+    $(".unlink-contact").live('click', function() {
+        var contactId = $(this).attr("id");
+        $(this).parent().parent().remove();
+        frontlinesms.unlinkLinkedContactIdFromHiddenField(contactId);
+        if (linkContactIds.indexOf(contactId) > -1) {
+            var contactsArray = linkContactIds.split(",");
+            for (var i = 0; i < contactsArray.length; i++) {
+                if (contactsArray[i] == contactId)
+                    contactsArray.splice(i, 1);
             }
-            else
-                unlinkContactIds += contactId + ",";
-            $('#update-event').attr('disabled', false)
-            return false;
-        });
-    }
+            linkContactIds = contactsArray.toString();
+        }
+        else
+            unlinkContactIds += contactId + ",";
+        $('#update-event').attr('disabled', false)
+        return false;
+    });
 };

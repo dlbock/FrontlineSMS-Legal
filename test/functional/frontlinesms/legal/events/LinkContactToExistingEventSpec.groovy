@@ -15,7 +15,7 @@ class LinkContactToExistingEventSpec extends FrontlinesmsLegalGebSpec {
 
         when:
         events()[0].click()
-        eventDialog.linkContact()
+        eventDialog.clickLinkContact()
 
         then:
         existingContactList.collect { it -> it.contactName }.size() == 2
@@ -36,7 +36,7 @@ class LinkContactToExistingEventSpec extends FrontlinesmsLegalGebSpec {
 
         when:
         events()[0].click()
-        eventDialog.linkContact()
+        eventDialog.clickLinkContact()
 
         and:
         linkContactFromPopup()
@@ -58,7 +58,7 @@ class LinkContactToExistingEventSpec extends FrontlinesmsLegalGebSpec {
 
         when:
         events()[0].click()
-        eventDialog.linkContact()
+        eventDialog.clickLinkContact()
 
         and:
         CancelButtonIsClicked()
@@ -76,13 +76,13 @@ class LinkContactToExistingEventSpec extends FrontlinesmsLegalGebSpec {
 
         when:
         events()[0].click()
-        eventDialog.linkContact()
+        eventDialog.clickLinkContact()
         linkContactFromPopup()
         to SchedulePage, "index"
 
         and:
         events()[1].click()
-        eventDialog.linkContact()
+        eventDialog.clickLinkContact()
         linkContactFromPopup()
 
         then:
@@ -98,7 +98,7 @@ class LinkContactToExistingEventSpec extends FrontlinesmsLegalGebSpec {
 
         when:
         events()[0].click()
-        eventDialog.linkContact()
+        eventDialog.clickLinkContact()
 
         and:
         contactNameSearch.value("ne")
@@ -106,7 +106,7 @@ class LinkContactToExistingEventSpec extends FrontlinesmsLegalGebSpec {
         and:
         CancelButtonIsClicked()
         and:
-        eventDialog.linkContact()
+        eventDialog.clickLinkContact()
 
         then:
         contactNameSearch.value() == ""
@@ -122,7 +122,7 @@ class LinkContactToExistingEventSpec extends FrontlinesmsLegalGebSpec {
 
         when:
         events()[0].click()
-        eventDialog.linkContact()
+        eventDialog.clickLinkContact()
 
         and:
         contactNameSearch.value("ne")
@@ -141,7 +141,7 @@ class LinkContactToExistingEventSpec extends FrontlinesmsLegalGebSpec {
 
         when:
         events()[0].click()
-        eventDialog.linkContact()
+        eventDialog.clickLinkContact()
 
         and:
         contactNameSearch.value("ne")
@@ -162,7 +162,7 @@ class LinkContactToExistingEventSpec extends FrontlinesmsLegalGebSpec {
 
         when:
         events()[0].click()
-        eventDialog.linkContact()
+        eventDialog.clickLinkContact()
         linkContactFromPopup()
 
         then:
@@ -181,7 +181,7 @@ class LinkContactToExistingEventSpec extends FrontlinesmsLegalGebSpec {
         when:
         to SchedulePage, "index"
         events()[0].click()
-        eventDialog.linkContact()
+        eventDialog.clickLinkContact()
         contactNameSearch.value("fab\r")
 
         then:
@@ -199,7 +199,7 @@ class LinkContactToExistingEventSpec extends FrontlinesmsLegalGebSpec {
 
         when:
         events()[0].click()
-        eventDialog.linkContact()
+        eventDialog.clickLinkContact()
         linkContactFromPopup()
         eventDialog.updateEvent()
 
@@ -216,7 +216,7 @@ class LinkContactToExistingEventSpec extends FrontlinesmsLegalGebSpec {
         when:
         events()[0].click()
         eventDialog.contactsLinkedToEvent[0].unlinkContact.click()
-        eventDialog.linkContact()
+        eventDialog.clickLinkContact()
         linkContactFromPopup()
         eventDialog.updateEvent()
 

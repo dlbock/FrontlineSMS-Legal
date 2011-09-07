@@ -10,20 +10,31 @@ class SchedulePage extends Page {
     static url = "schedule"
     static content = {
         calendarHeader { $('.fc-header-title').text() }
-        events { $('.fc-event-title') }
-
-        eventDialog(wait: true) { module EventDialog }
-        unlinkConfirmationDialog(required: false) { module ConfirmationDialog, messageId: "unlink-contact-dialog" }
-        deleteConfirmationDialog(required: false) { module ConfirmationDialog, messageId: "delete-event-dialog" }
-
         existingContactList {
             $("#contactsTable tbody tr").collect {module LinkContactRow, it}
         }
-
+        events {
+            $("span[class='fc-event-title']")
+        }
+        selectTestEvent {
+            events.find { it.text() == "test event" }.click()
+            true
+        }
+        atDate {$('span.fc-header-title').text()}
+        existingContactList {
+            $("#contactsTable tbody tr").collect {module LinkContactRow, it}
+        }
+        eventDialog(wait: true) { module EventDialog }
+        unlinkConfirmationDialog(required: false) { module ConfirmationDialog, messageId: "unlink-contact-dialog" }
+        deleteConfirmationDialog(required: false) { module ConfirmationDialog, messageId: "delete-event-dialog" }
         linkContactFromPopup {
             $('.contactLink')[0].click()
             true
         }
+        unlinkFirstContactLinkedToEvent {
+            eventDialog.unlinkFirstContactLinkedToEvent()
+        }
+        noLinkedContactsToEvent { eventDialog.contactsLinkedToEvent.size() == 0}
         linkedContactsInEventDetailsPopup {
             $("#event-contacts-table tbody tr").collect {module LinkContactRow, it}
         }
@@ -54,8 +65,12 @@ class EventDialog extends Module {
         updateEventButton { $('#update-event') }
         deleteEventButton { $('#delete-event') }
         errorMessage { $(id: "error-message").text() }
+        unlinkFirstContactLinkedToEvent() {
+            contactsLinkedToEvent[0].unlinkContact.click()
+            true
+        }
 
-        updateEvent {
+        updateEvent() {
             updateEventButton.click()
             waitFor { try { !$().isVisible() } catch(e) { true } }
             waitFor { browser.at SchedulePage }
@@ -67,7 +82,7 @@ class EventDialog extends Module {
             true
         }
 
-        linkContact {
+        clickLinkContact {
             $('#link-contact-button').click()
             true
         }
