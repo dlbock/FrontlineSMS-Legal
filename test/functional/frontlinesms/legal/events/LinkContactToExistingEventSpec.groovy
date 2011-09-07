@@ -55,11 +55,11 @@ class LinkContactToExistingEventSpec extends FrontlinesmsLegalGebSpec {
         to SchedulePage, "index"
 
         when:
-        events()[0].click()
+        selectEvent("Test")
         eventDialog.clickLinkContact()
 
         and:
-        CancelButtonIsClicked()
+        eventDialog.linkContactDialog.cancel()
 
         then:
         eventDialog.contactsLinkedToEvent.collect { it -> it.contactName }.size() == 0
@@ -95,14 +95,14 @@ class LinkContactToExistingEventSpec extends FrontlinesmsLegalGebSpec {
         to SchedulePage, "index"
 
         when:
-        events()[0].click()
+        selectEvent("Test")
         eventDialog.clickLinkContact()
 
         and:
         contactNameSearch.value("ne")
         sleep(500)
         and:
-        CancelButtonIsClicked()
+        eventDialog.linkContactDialog.cancel()
         and:
         eventDialog.clickLinkContact()
 
@@ -145,7 +145,7 @@ class LinkContactToExistingEventSpec extends FrontlinesmsLegalGebSpec {
         contactNameSearch.value("ne")
         sleep(500)
         and:
-        CancelButtonIsClicked()
+        eventDialog.linkContactDialog.cancel()
         and:
         eventDialog.linkContact()
 

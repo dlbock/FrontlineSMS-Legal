@@ -20,10 +20,6 @@ class SchedulePage extends Page {
             true
         }
 
-        CancelButtonIsClicked {
-            $("#cancel-button").click()
-            true
-        }
         contactNameSearch {
             $("input", id: "contact-name-search")
         }
@@ -110,6 +106,11 @@ class LinkContactDialog extends Module {
 
         link { name ->
             contacts.find{ it.contactName == name }.link()
+            true
+        }
+
+        cancel {
+            $("#cancel-button").click()
             true
         }
     }
