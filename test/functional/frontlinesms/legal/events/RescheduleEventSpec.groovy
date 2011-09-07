@@ -151,7 +151,7 @@ class RescheduleEventSpec extends FrontlinesmsLegalGebSpec {
         eventDialog << Keys.ESCAPE
 
         and:
-        noConfirmationButton.click()
+        cancelEditConfirmationDialog.noButton.click()
 
         then:
         $('#confirmation-dialog').size() == 0
@@ -166,7 +166,7 @@ class RescheduleEventSpec extends FrontlinesmsLegalGebSpec {
         eventDialog << Keys.ESCAPE
 
         and:
-        yesConfirmationButton.click()
+        cancelEditConfirmationDialog.confirm()
 
         then:
         $('#confirmation-dialog').size() == 0

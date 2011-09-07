@@ -14,15 +14,12 @@ class SchedulePage extends Page {
         eventDialog(wait: true) { module EventDialog }
         unlinkConfirmationDialog(required: false) { module ConfirmationDialog, messageId: "unlink-contact-dialog" }
         deleteConfirmationDialog(required: false) { module ConfirmationDialog, messageId: "delete-event-dialog" }
+        cancelEditConfirmationDialog { module ConfirmationDialog, messageId: "confirmation-dialog" }
 
         selectEvent { title ->
             events.find { it.text() == title }.click()
             true
         }
-
-        yesConfirmationButton { $("#confirm-yes")}
-        noConfirmationButton { $("#confirm-no")}
-        confirmationDialog { $("#confirmation-dialog")}
 
         linkCaseButton {  $("#link-case-button")}
         linkCaseButtonExists { $("#link-case-button").size() == 1}
