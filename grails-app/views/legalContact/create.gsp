@@ -60,7 +60,7 @@
     </div>
 </form>
 
-<g:render template="linkCases"/>
+<g:render template="../linkCases"/>
 
 <div id="contact-save-no-name-dialog" title="Save Contact without Contact Name?" style="display: none;">
     <p>Are you sure you would like to save contact without a name?</p>

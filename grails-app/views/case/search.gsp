@@ -29,6 +29,7 @@
         <thead>
         <tr>
             <th>Case ID</th>
+            <th>Case Title</th>
             <th>Status</th>
         </tr>
         </thead>
@@ -37,6 +38,9 @@
             <tr class="caseLink" id="<%=legalCase.caseId%>">
                 <td>
                     <g:link controller="case" action="show" id="${legalCase.caseId}"><%=legalCase.caseId%></g:link>
+                </td>
+                <td>
+                    <%=legalCase.caseTitle%>
                 </td>
                 <td>
                     <%=legalCase.active ? "active" : "inactive"%>

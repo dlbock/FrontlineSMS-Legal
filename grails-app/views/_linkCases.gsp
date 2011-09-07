@@ -1,12 +1,13 @@
 <%@ page import="org.springframework.web.util.HtmlUtils" %>
 
 <div id="link-case-dialog" title="Link Cases">
+
     <h3 class="form-header">Search for Case by Case ID</h3>
     <label>Enter the case ID to search for cases</label>
+
     <g:textField class="medium-text-box" name="caseId" id="caseId"/>
 
     <g:form action="search" method="POST">
-
         <g:if test="${allCases}">
             <table class="search-results" id="SearchResults">
                 <thead>
@@ -27,11 +28,11 @@
                             <%=HtmlUtils.htmlEscape(legalCase.caseTitle)%>
                         </td>
 
-                        <td>
+                        <td class = "caseStatus">
                             <%=legalCase.active ? "active" : "inactive"%>
                         </td>
                         <td>
-                            <a href="#" class="caseLinkButton">Link Case</a>
+                            <a href="" class="caseLinkButton" id="${legalCase.caseId}">Link</a>
                         </td>
                     </tr>
                 </g:each>

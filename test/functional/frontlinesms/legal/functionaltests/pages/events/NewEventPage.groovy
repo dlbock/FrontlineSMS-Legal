@@ -3,6 +3,7 @@ package frontlinesms.legal.functionaltests.pages.events
 import frontlinesms.legal.functionaltests.pages.DateField
 import geb.Module
 import geb.Page
+import frontlinesms.legal.functionaltests.pages.LinkedCaseRow
 
 class NewEventPage extends Page {
     static at = { $("title").text() == "Create New Event" }
@@ -25,11 +26,14 @@ class NewEventPage extends Page {
         contactNameSearch { $("input", id: "contact-name-search") }
         contactLinkNotVisible { $("tr", class: "contactLink", filtermatch: "false").collect {module ContactRow, it} }
         contactDialogCancelButton { $("#cancel-link-contact") }
-        linkCaseButton { $("button", id: "link-case-button") }
+        linkCaseToEventButton { $("button", id: "link-case-button") }
         linkCaseDialog { $("div", id: "link-case-dialog") }
         caseDialogCancelButton { $("#cancel-link-case") }
         casesToLink { $("tr", class:"caseLink").collect {module LinkableCase, it} }
         oneContactIsDisplayed { $("#cases").size() == 1 }
+        linkedCasesTable {
+            $("#cases tbody tr").collect {module LinkedCaseRow, it}
+        }
     }
 }
 
@@ -51,8 +55,9 @@ class LinkableContact extends Module {
 class LinkableCase extends Module {
     static content = {
         cell { i -> $("td", i) }
-        name { $(class: "case-name").text() }
-        number { cell(1).text() }
-        linkCase { cell(2) }
+        caseId { $(class: "case-name").text() }
+        caseTitle { $(class: "case-title").text() }
+        status { $(class: "case-status").text() }
+        linkCase { $("a", class: "link-case") }
     }
 }

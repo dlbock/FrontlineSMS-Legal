@@ -67,6 +67,7 @@
         <thead>
         <tr>
             <th>Case ID</th>
+            <th>Case Title</th>
             <th>Status</th>
         </tr>
         </thead>

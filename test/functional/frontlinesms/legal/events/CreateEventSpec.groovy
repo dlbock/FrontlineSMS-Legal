@@ -189,7 +189,7 @@ class CreateEventSpec extends FrontlinesmsLegalGebSpec {
         to NewEventPage
 
         then:
-        linkCaseButton.size() == 1
+        linkCaseToEventButton.size() == 1
     }
 
     def "should not display link case dialog when page is loaded"()
@@ -207,7 +207,7 @@ class CreateEventSpec extends FrontlinesmsLegalGebSpec {
         to NewEventPage
 
         and:
-        linkCaseButton.click()
+        linkCaseToEventButton.click()
 
         then:
         linkCaseDialog.displayed == true
@@ -218,7 +218,7 @@ class CreateEventSpec extends FrontlinesmsLegalGebSpec {
         to NewEventPage
 
         and:
-        linkCaseButton.click()
+        linkCaseToEventButton.click()
 
         and:
         caseDialogCancelButton.click()
@@ -237,10 +237,10 @@ class CreateEventSpec extends FrontlinesmsLegalGebSpec {
         to NewEventPage
 
         and:
-        linkCaseButton.click()
+        linkCaseToEventButton.click()
 
         then:
-        casesToLink.size() == 2
+        casesToLink.collect {it -> it.linkCase }.size() == 2
     }
 
     def "should display link button next to each case in the case dialog"(){
@@ -252,7 +252,7 @@ class CreateEventSpec extends FrontlinesmsLegalGebSpec {
         to NewEventPage
 
         and:
-        linkCaseButton.click()
+        linkCaseToEventButton.click()
 
         then:
         casesToLink.collect { it -> it.linkCase }.size() == 2
@@ -267,7 +267,7 @@ class CreateEventSpec extends FrontlinesmsLegalGebSpec {
         to NewEventPage
 
         and:
-        linkCaseButton.click()
+        linkCaseToEventButton.click()
 
         and:
         casesToLink[0].linkCase.click()
@@ -286,13 +286,13 @@ class CreateEventSpec extends FrontlinesmsLegalGebSpec {
         to NewEventPage
 
         and:
-        linkCaseButton.click()
+        linkCaseToEventButton.click()
 
         and:
         casesToLink[0].linkCase.click()
 
         and:
-        linkCaseButton.click()
+        linkCaseToEventButton.click()
 
         and:
         casesToLink[0].linkCase.click()

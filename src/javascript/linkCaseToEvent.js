@@ -51,7 +51,13 @@ frontlinesms.linkCaseToEvent = function() {
                 $(row).find('.case-id').text() +
                 '</td>' +
                 '<td>' +
+                $(row).find('.case-title').text() +
+                '</td>' +
+                '<td>' +
                 $(row).find('.case-status').text() +
+                '</td>'+
+                '<td>' +
+                '<a class="unlink-case" href="">Unlink</a>' +
                 '</td>'
         );
         $('#cases').append(rowToAdd);

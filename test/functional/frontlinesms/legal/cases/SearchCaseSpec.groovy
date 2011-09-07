@@ -41,4 +41,16 @@ class SearchCaseSpec extends FrontlinesmsLegalGebSpec {
         then:
         caseLinkNotVisible().size()==2
     }
+
+    def "should display case titles for each case listed in the search"() {
+        given:
+        new Case(caseId: "123", description: "test1", caseTitle:"Case Title 1").save(flush: true)
+        new Case(caseId: "321", description: "test2", caseTitle:"Case Title 2").save(flush: true)
+
+        when:
+        at SearchCasePage
+
+        then:
+        searchResults.collect { it -> it.caseTitle }.size() == 2
+    }
 }

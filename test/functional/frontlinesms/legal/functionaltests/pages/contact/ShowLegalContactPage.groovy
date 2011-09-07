@@ -2,6 +2,7 @@ package frontlinesms.legal.functionaltests.pages.contact
 
 import geb.Module
 import geb.Page
+import frontlinesms.legal.functionaltests.pages.LinkedCaseRow
 
 class ShowLegalContactPage extends Page {
     static at = { $("title").text() == "Show Contact Page"}

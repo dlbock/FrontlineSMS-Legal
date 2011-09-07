@@ -1,4 +1,4 @@
-package frontlinesms.legal.functionaltests.pages.contact
+package frontlinesms.legal.functionaltests.pages
 
 import geb.Module
 

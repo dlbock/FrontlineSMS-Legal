@@ -2,6 +2,7 @@ package frontlinesms.legal.functionaltests.pages.contact
 
 import geb.Page
 import geb.Module
+import frontlinesms.legal.functionaltests.pages.LinkedCaseRow
 
 
 
