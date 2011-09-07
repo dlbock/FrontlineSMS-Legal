@@ -22,6 +22,8 @@
             frontlinesms.initializeCaseDeletion();
             var keyCodeForEnterKey = 13;
             frontlinesms.blockKeyInField(keyCodeForEnterKey, '#case-id');
+            frontlinesms.blockKeyInField(keyCodeForEnterKey, '#case-title');
+
         })
     </script>
 </head>
