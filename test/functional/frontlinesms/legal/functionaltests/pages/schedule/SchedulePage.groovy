@@ -20,9 +20,6 @@ class SchedulePage extends Page {
             true
         }
 
-        contactNameSearch {
-            $("input", id: "contact-name-search")
-        }
         contactsNotInSearchResults { $("tr", class: "contactRow", filtermatch: "false").collect {module LinkContactRow, it} }
 
         linkContactSearchDialog {$('#link-contact-dialog')}
@@ -102,7 +99,14 @@ class ContactRow extends Module {
 
 class LinkContactDialog extends Module {
     static content = {
+        searchbox { $(id: "contact-name-search") }
         contacts { $("#contactsTable tbody tr").collect {module LinkContactRow, it} }
+
+        searchFor { query ->
+            searchbox.value(query)
+            sleep(500)
+            true
+        }
 
         link { name ->
             contacts.find{ it.contactName == name }.link()

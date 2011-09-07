@@ -99,15 +99,14 @@ class LinkContactToExistingEventSpec extends FrontlinesmsLegalGebSpec {
         eventDialog.clickLinkContact()
 
         and:
-        contactNameSearch.value("ne")
-        sleep(500)
+        eventDialog.linkContactDialog.searchFor("ne")
         and:
         eventDialog.linkContactDialog.cancel()
         and:
         eventDialog.clickLinkContact()
 
         then:
-        contactNameSearch.value() == ""
+        eventDialog.linkContactDialog.searchbox.value() == ""
     }
 
     def "should display all the contacts filtered by the value in the search input of the search contact dialog"() {
@@ -123,8 +122,7 @@ class LinkContactToExistingEventSpec extends FrontlinesmsLegalGebSpec {
         eventDialog.clickLinkContact()
 
         and:
-        contactNameSearch.value("ne")
-        sleep(500)
+        eventDialog.linkContactDialog.searchFor("ne")
 
         then:
         contactsNotInSearchResults().size() == 1
@@ -142,8 +140,7 @@ class LinkContactToExistingEventSpec extends FrontlinesmsLegalGebSpec {
         eventDialog.clickLinkContact()
 
         and:
-        contactNameSearch.value("ne")
-        sleep(500)
+        eventDialog.linkContactDialog.searchFor("ne")
         and:
         eventDialog.linkContactDialog.cancel()
         and:
@@ -177,7 +174,7 @@ class LinkContactToExistingEventSpec extends FrontlinesmsLegalGebSpec {
         to SchedulePage, "index"
         events()[0].click()
         eventDialog.clickLinkContact()
-        contactNameSearch.value("fab\r")
+        eventDialog.linkContactDialog.searchFor("fab\r")
 
         then:
         eventDialog.contactsLinkedToEvent.collect { it -> it.contactName }.size() == 0
