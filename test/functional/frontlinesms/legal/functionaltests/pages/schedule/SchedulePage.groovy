@@ -10,9 +10,7 @@ class SchedulePage extends Page {
     static url = "schedule"
     static content = {
         calendarHeader { $('.fc-header-title').text() }
-        events {
-            $("span[class='fc-event-title']")
-        }
+        events { $("span[class='fc-event-title']") }
         selectTestEvent {
             events.find { it.text() == "test event" }.click()
             true
