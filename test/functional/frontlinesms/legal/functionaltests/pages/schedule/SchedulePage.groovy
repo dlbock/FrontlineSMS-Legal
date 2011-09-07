@@ -58,6 +58,17 @@ class EventDialog extends Module {
     static base = { $(id: "view-event") }
     static content = {
         title { $('#event-title') }
+        close {
+            $(".ui-dialog-titlebar-close ui-corner-all") .click()
+            true
+        }
+        confirmYesOnCloseWithoutUpdating {
+            $("#confirm-yes").click()
+            true
+        }
+        contactsLinkedToEvent {
+            $(".event-contact").collect {module ContactRow, it}
+        }
         date { module DateField, $('#event-date') }
         startTime { $('#event-start-time') }
         endTime { $('#event-end-time') }

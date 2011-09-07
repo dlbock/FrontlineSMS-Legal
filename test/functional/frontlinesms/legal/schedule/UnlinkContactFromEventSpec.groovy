@@ -7,7 +7,7 @@ import frontlinesms.legal.functionaltests.pages.schedule.SchedulePage
 
 class UnlinkContactFromEventSpec extends FrontlinesmsLegalGebSpec {
 
-    def 'should remove pre-existing contact row from contacts table when unlink link next to it is clicked on event details pop-up'() {
+    def 'should remove pre-linked contact when unlink is clicked on the event details pop-up'() {
         given:
         createContact("76575658", "Bob")
         createEventWithLink("test event", "Bob")
@@ -21,7 +21,7 @@ class UnlinkContactFromEventSpec extends FrontlinesmsLegalGebSpec {
         noLinkedContactsToEvent
     }
 
-    def 'should remove newly created contact row from contacts table when unlink link next to it is clicked on event details pop-up'() {
+    def 'should remove newly linked contact when unlink is clicked on the event details pop-up'() {
         given:
         createContact("76575658", "Bob")
         createEvent("test event")
@@ -39,7 +39,7 @@ class UnlinkContactFromEventSpec extends FrontlinesmsLegalGebSpec {
         noLinkedContactsToEvent
     }
 
-    def 'should unlink contact from event when the UPDATE button is clicked'() {
+    def 'should unlink contact from an event when the UPDATE button is clicked'() {
         given:
         createContact("76575658", "Bob")
         createEventWithLink("test event", "Bob")
@@ -55,6 +55,25 @@ class UnlinkContactFromEventSpec extends FrontlinesmsLegalGebSpec {
 
         then:
         noLinkedContactsToEvent
+    }
+
+    def 'should not unlink contact when X(close) is clicked on the event-details pop up'(){
+        given:
+        createContact("76575658", "Bob")
+        createEventWithLink("test event", "Bob")
+        to SchedulePage, "index"
+
+        when:
+        selectTestEvent
+        unlinkFirstContactLinkedToEvent
+        eventDialog.close
+        eventDialog.confirmYesOnCloseWithoutUpdating
+
+        and:
+        selectTestEvent
+
+        then:
+        noLinkedContactsToEvent == false
     }
 
     private def createContact(number, name) {
