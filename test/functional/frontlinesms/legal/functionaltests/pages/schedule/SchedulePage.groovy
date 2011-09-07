@@ -1,9 +1,9 @@
 package frontlinesms.legal.functionaltests.pages.schedule
 
 import frontlinesms.legal.functionaltests.pages.ConfirmationDialog
+import frontlinesms.legal.functionaltests.pages.DateField
 import geb.Module
 import geb.Page
-import frontlinesms.legal.functionaltests.pages.DateField
 
 class SchedulePage extends Page {
     static at = { $("title").text() == "Schedule" }
@@ -11,19 +11,15 @@ class SchedulePage extends Page {
     static content = {
         calendarHeader { $('.fc-header-title').text() }
         events { $("span[class='fc-event-title']") }
+        eventDialog(wait: true) { module EventDialog }
+        unlinkConfirmationDialog(required: false) { module ConfirmationDialog, messageId: "unlink-contact-dialog" }
+        deleteConfirmationDialog(required: false) { module ConfirmationDialog, messageId: "delete-event-dialog" }
 
         selectEvent { title ->
             events.find { it.text() == title }.click()
             true
         }
 
-        eventDialog(wait: true) { module EventDialog }
-        unlinkConfirmationDialog(required: false) { module ConfirmationDialog, messageId: "unlink-contact-dialog" }
-        deleteConfirmationDialog(required: false) { module ConfirmationDialog, messageId: "delete-event-dialog" }
-        linkContactFromPopup {
-            $('.contactLink')[0].click()
-            true
-        }
         unlinkFirstContactLinkedToEvent {
             eventDialog.unlinkFirstContactLinkedToEvent()
         }
@@ -118,6 +114,11 @@ class ContactRow extends Module {
 class LinkContactDialog extends Module {
     static content = {
         contacts { $("#contactsTable tbody tr").collect {module LinkContactRow, it} }
+
+        link { name ->
+            contacts.find{ it.contactName == name }.link()
+            true
+        }
     }
 }
 
@@ -126,7 +127,11 @@ class LinkContactRow extends Module {
         cell { i -> $("td", i) }
         contactName { cell(0).text() }
         contactNumber { cell(1).text() }
-        linkContact {$("a", class: "link")}
+
+        link {
+            $("a").find { it.text() == "Link" }.click()
+            true
+        }
     }
 }
 

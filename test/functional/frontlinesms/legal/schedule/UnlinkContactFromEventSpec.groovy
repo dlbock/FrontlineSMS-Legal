@@ -28,9 +28,9 @@ class UnlinkContactFromEventSpec extends FrontlinesmsLegalGebSpec {
         to SchedulePage, "index"
 
         when:
-        selectEvent "test event"
+        selectEvent("test event")
         eventDialog.clickLinkContact()
-        linkContactFromPopup
+        eventDialog.linkContactDialog.link("Bob")
 
         and:
         unlinkFirstContactLinkedToEvent

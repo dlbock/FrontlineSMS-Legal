@@ -40,7 +40,7 @@ class LinkContactToExistingEventSpec extends FrontlinesmsLegalGebSpec {
         eventDialog.clickLinkContact()
 
         and:
-        linkContactFromPopup()
+        eventDialog.linkContactDialog.link("fa")
 
         then:
         linkedContactsInEventDetailsPopup.collect { it -> it.contactName }.size() == 1
@@ -78,13 +78,13 @@ class LinkContactToExistingEventSpec extends FrontlinesmsLegalGebSpec {
         when:
         events()[0].click()
         eventDialog.clickLinkContact()
-        linkContactFromPopup()
+        eventDialog.linkContactDialog.link("fa")
         to SchedulePage, "index"
 
         and:
         events()[1].click()
         eventDialog.clickLinkContact()
-        linkContactFromPopup()
+        eventDialog.linkContactDialog.link("fa")
 
         then:
         linkedContactsInEventDetailsPopup.collect { it -> it.contactName }[0] == 'fa'
@@ -164,13 +164,13 @@ class LinkContactToExistingEventSpec extends FrontlinesmsLegalGebSpec {
         when:
         events()[0].click()
         eventDialog.clickLinkContact()
-        linkContactFromPopup()
+        eventDialog.linkContactDialog.link("neetu")
 
         then:
-        linkedContactsInEventDetailsPopup.collect { it -> it.contactName }.size() == 1
+        linkedContactsInEventDetailsPopup.size() == 1
 
         and:
-        linkedContactsInEventDetailsPopup.collect { it -> it.contactName }[0] == "neetu"
+        linkedContactsInEventDetailsPopup.any{ it.contactName == "neetu" }
     }
 
     def "should continue showing the search contact dialog box after pressing RETURN when searching for a contact"() {
@@ -199,14 +199,14 @@ class LinkContactToExistingEventSpec extends FrontlinesmsLegalGebSpec {
         to SchedulePage, "index"
 
         when:
-        events()[0].click()
+        selectEvent("Test")
         eventDialog.clickLinkContact()
-        linkContactFromPopup()
+        eventDialog.linkContactDialog.link("fabio")
         eventDialog.updateEvent()
 
         then:
-        events()[0].click()
-        linkedContactsInEventDetailsPopup.collect { it -> it.contactName }.size() == 1
+        selectEvent("Test")
+        linkedContactsInEventDetailsPopup.collect { it.contactName } == ["fabio"]
     }
 
     def 'should be able to link a contact which has already been unlinked on the event details pop up'() {
@@ -215,14 +215,14 @@ class LinkContactToExistingEventSpec extends FrontlinesmsLegalGebSpec {
         to SchedulePage, "index"
 
         when:
-        events()[0].click()
+        selectEvent("Test")
         eventDialog.contactsLinkedToEvent[0].unlinkContact.click()
         eventDialog.clickLinkContact()
-        linkContactFromPopup()
+        eventDialog.linkContactDialog.link("neetu")
         eventDialog.updateEvent()
 
         then:
-        events()[0].click()
+        selectEvent("Test")
         linkedContactsInEventDetailsPopup.size() == 1
     }
 
