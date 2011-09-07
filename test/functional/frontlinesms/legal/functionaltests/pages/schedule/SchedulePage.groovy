@@ -20,9 +20,6 @@ class SchedulePage extends Page {
             true
         }
 
-        unlinkFirstContactLinkedToEvent {
-            eventDialog.unlinkFirstContactLinkedToEvent()
-        }
         noLinkedContactsToEvent { eventDialog.contactsLinkedToEvent.size() == 0}
         linkedContactsInEventDetailsPopup {
             $("#event-contacts-table tbody tr").collect {module LinkContactRow, it}
