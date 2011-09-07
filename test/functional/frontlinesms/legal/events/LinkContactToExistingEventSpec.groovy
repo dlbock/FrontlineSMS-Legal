@@ -180,7 +180,7 @@ class LinkContactToExistingEventSpec extends FrontlinesmsLegalGebSpec {
         eventDialog.contactsLinkedToEvent.collect { it -> it.contactName }.size() == 0
 
         and:
-        linkContactSearchDialog.displayed == true
+        eventDialog.linkContactDialog.displayed
     }
 
     def "should link contact to event on hitting the update button"() {

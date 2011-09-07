@@ -20,7 +20,6 @@ class SchedulePage extends Page {
             true
         }
 
-        linkContactSearchDialog {$('#link-contact-dialog')}
         yesConfirmationButton { $("#confirm-yes")}
         noConfirmationButton { $("#confirm-no")}
         confirmationDialog { $("#confirmation-dialog")}
