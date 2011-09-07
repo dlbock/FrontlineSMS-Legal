@@ -18,6 +18,9 @@ grails.project.dependency.resolution = {
     }
 
     dependencies {
+        compile 'org.mortbay.jetty:jetty:6.1.14'
+        compile 'org.mortbay.jetty:jetty-util:6.1.14'
+
         test "org.codehaus.geb:geb-core:0.6.0"
         test "org.codehaus.geb:geb-spock:0.6.0"
         test "org.seleniumhq.selenium:selenium-firefox-driver:2.4.0"
