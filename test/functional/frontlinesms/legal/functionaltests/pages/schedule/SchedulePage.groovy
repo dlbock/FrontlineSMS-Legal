@@ -21,7 +21,6 @@ class SchedulePage extends Page {
             true
         }
 
-        linkCaseButton {  $("#link-case-button")}
         linkCaseButtonExists { $("#link-case-button").size() == 1}
         linkCaseDialog { $("div", id: "link-case-dialog") }
         caseDialogCancelButton { $("#cancel-link-case") }
@@ -38,6 +37,11 @@ class EventDialog extends Module {
     static content = {
         title { $('#event-title') }
         linkContactDialog { module LinkContactDialog, page.$() }
+
+        linkCase {
+            $("#link-case-button").click()
+            true
+        }
 
         close {
             $(".ui-dialog-titlebar-close ui-corner-all") .click()

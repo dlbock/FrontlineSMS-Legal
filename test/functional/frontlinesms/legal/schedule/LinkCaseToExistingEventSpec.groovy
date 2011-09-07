@@ -25,8 +25,8 @@ class LinkCaseToExistingEventSpec extends FrontlinesmsLegalGebSpec {
         to SchedulePage, "index"
 
         when:
-        events()[0].click()
-        linkCaseButton.click()
+        selectEvent("fabio")
+        eventDialog.linkCase()
 
         then:
         linkCaseDialog.displayed == true
@@ -39,7 +39,7 @@ class LinkCaseToExistingEventSpec extends FrontlinesmsLegalGebSpec {
 
         when:
         events()[0].click()
-        linkCaseButton.click()
+        eventDialog.linkCase()
 
         and:
         caseDialogCancelButton.click()
@@ -60,7 +60,7 @@ class LinkCaseToExistingEventSpec extends FrontlinesmsLegalGebSpec {
 
         and:
         events()[0].click()
-        linkCaseButton.click()
+        eventDialog.linkCase()
 
         then:
         casesToLink.size() == 2
@@ -77,7 +77,7 @@ class LinkCaseToExistingEventSpec extends FrontlinesmsLegalGebSpec {
 
         and:
         events()[0].click()
-        linkCaseButton.click()
+        eventDialog.linkCase()
 
         then:
         casesToLink.collect { it -> it.linkCase }.size() == 2
@@ -94,7 +94,7 @@ class LinkCaseToExistingEventSpec extends FrontlinesmsLegalGebSpec {
 
         and:
         events()[0].click()
-        linkCaseButton.click()
+        eventDialog.linkCase()
 
         and:
         linkToBeSelected[0].click()
@@ -115,13 +115,13 @@ class LinkCaseToExistingEventSpec extends FrontlinesmsLegalGebSpec {
 
         and:
         events()[0].click()
-        linkCaseButton.click()
+        eventDialog.linkCase()
 
         and:
         linkToBeSelected[0].click()
 
         and:
-        linkCaseButton.click()
+        eventDialog.linkCase()
 
         and:
         linkToBeSelected[0].click()
