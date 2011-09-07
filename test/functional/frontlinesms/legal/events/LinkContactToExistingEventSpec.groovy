@@ -43,11 +43,8 @@ class LinkContactToExistingEventSpec extends FrontlinesmsLegalGebSpec {
         eventDialog.linkContactDialog.link("fa")
 
         then:
-        linkedContactsInEventDetailsPopup.collect { it -> it.contactName }.size() == 1
-
-        and:
-        linkedContactsInEventDetailsPopup.collect { it -> it.contactName }[0] == 'fa'
-        linkedContactsInEventDetailsPopup.collect { it -> it.contactNumber }[0] == '1234567'
+        eventDialog.contactsLinkedToEvent.collect { it.name } == ['fa']
+        eventDialog.contactsLinkedToEvent.collect { it.primaryMobileNumber } == ['1234567']
     }
 
     def 'should not link any contacts when cancel button is clicked'() {
@@ -65,7 +62,7 @@ class LinkContactToExistingEventSpec extends FrontlinesmsLegalGebSpec {
         CancelButtonIsClicked()
 
         then:
-        linkedContactsInEventDetailsPopup.collect { it -> it.contactName }.size() == 0
+        eventDialog.contactsLinkedToEvent.collect { it -> it.contactName }.size() == 0
     }
 
     def 'should be able to link a contact to multiple events'() {
@@ -87,7 +84,7 @@ class LinkContactToExistingEventSpec extends FrontlinesmsLegalGebSpec {
         eventDialog.linkContactDialog.link("fa")
 
         then:
-        linkedContactsInEventDetailsPopup.collect { it -> it.contactName }[0] == 'fa'
+        eventDialog.contactsLinkedToEvent.any { it.name == 'fa' }
     }
 
     def "should clear the search input when the contacts search dialog is opened, closed and reopened"() {
@@ -167,10 +164,7 @@ class LinkContactToExistingEventSpec extends FrontlinesmsLegalGebSpec {
         eventDialog.linkContactDialog.link("neetu")
 
         then:
-        linkedContactsInEventDetailsPopup.size() == 1
-
-        and:
-        linkedContactsInEventDetailsPopup.any{ it.contactName == "neetu" }
+        eventDialog.contactsLinkedToEvent.collect{ it.name } == ["neetu"]
     }
 
     def "should continue showing the search contact dialog box after pressing RETURN when searching for a contact"() {
@@ -186,7 +180,7 @@ class LinkContactToExistingEventSpec extends FrontlinesmsLegalGebSpec {
         contactNameSearch.value("fab\r")
 
         then:
-        linkedContactsInEventDetailsPopup.collect { it -> it.contactName }.size() == 0
+        eventDialog.contactsLinkedToEvent.collect { it -> it.contactName }.size() == 0
 
         and:
         linkContactSearchDialog.displayed == true
@@ -206,7 +200,7 @@ class LinkContactToExistingEventSpec extends FrontlinesmsLegalGebSpec {
 
         then:
         selectEvent("Test")
-        linkedContactsInEventDetailsPopup.collect { it.contactName } == ["fabio"]
+        eventDialog.contactsLinkedToEvent.collect { it.name } == ["fabio"]
     }
 
     def 'should be able to link a contact which has already been unlinked on the event details pop up'() {
@@ -223,7 +217,7 @@ class LinkContactToExistingEventSpec extends FrontlinesmsLegalGebSpec {
 
         then:
         selectEvent("Test")
-        linkedContactsInEventDetailsPopup.size() == 1
+        eventDialog.contactsLinkedToEvent.size() == 1
     }
 
     private def createEvent(title) {

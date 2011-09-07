@@ -20,9 +20,6 @@ class SchedulePage extends Page {
             true
         }
 
-        linkedContactsInEventDetailsPopup {
-            $("#event-contacts-table tbody tr").collect {module LinkContactRow, it}
-        }
         CancelButtonIsClicked {
             $("#cancel-button").click()
             true
