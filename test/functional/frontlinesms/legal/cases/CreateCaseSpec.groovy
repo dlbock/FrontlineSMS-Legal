@@ -19,18 +19,6 @@ class CreateCaseSpec extends FrontlinesmsLegalGebSpec {
         assert at(NewCasePage)
     }
 
-    def "should have Case Title input box on create case page"(){
-        given:
-        to HomePage
-
-        when:
-        createNewCase.click()
-
-        then:
-        assert at(NewCasePage)
-        assert caseTitle.present
-    }
-
     def "should be able to create case with title, id, description"() {
         given:
         to NewCasePage
@@ -47,21 +35,6 @@ class CreateCaseSpec extends FrontlinesmsLegalGebSpec {
         then:
         assert at(ShowCasePage)
         caseTitle == "Test Title"
-    }
-
-    def "should display confirmation dialog for saving a case without a case title"() {
-        given:
-        to NewCasePage
-
-        when:
-        caseId = "123"
-        description = "whatever"
-
-        and:
-        save.click()
-
-        then:
-        assert saveCaseWithoutCaseTitleDialog.present
     }
 
      def 'should remain on Create case page when NO is clicked while saving case without case title'() {
@@ -123,16 +96,6 @@ class CreateCaseSpec extends FrontlinesmsLegalGebSpec {
 
         then:
         assert at(HomePage)
-    }
-
-    def "should show the search contact dialog box after pressing LINK CONTACT button"() {
-        when:
-        to NewCasePage
-        and:
-        clickLinkContact.click()
-
-        then:
-        linkContactDialog.displayed == true
     }
 
     def "should display all the contacts filtered by the value in the search input of the search contact dialog"() {
