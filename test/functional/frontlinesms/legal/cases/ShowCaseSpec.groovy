@@ -263,19 +263,6 @@ class ShowCaseSpec extends FrontlinesmsLegalGebSpec {
         futureEventsTable.collect{ it -> it.title }[0] == "Future"
     }
 
-    def createFutureAndPastEventsAndLinkCases() {
-        def yearOffsetForDate = 1900
-        def caseone = new Case(caseId: "1112", description: "ertyui")
-        caseone.save(flush: true)
-        def pastEvent = new Event(eventTitle: "Past", dateFieldSelected: new Date(1990 - yearOffsetForDate, 8, 12), startTimeField: new Time(12, 30, 0), endTimeField: new Time(13, 30, 0))
-        pastEvent.save(flush: true)
-        def futureEvent = new Event(eventTitle: "Future", dateFieldSelected: new Date(2020 - yearOffsetForDate, 8, 12), startTimeField: new Time(12, 30, 0), endTimeField: new Time(13, 30, 0))
-        futureEvent.save(flush: true)
-        EventCase.link(pastEvent, caseone)
-        EventCase.link(futureEvent, caseone)
-        caseone.caseId
-    }
-
 
     def "should show current and past event linked with case"() {
         setup:
@@ -288,6 +275,19 @@ class ShowCaseSpec extends FrontlinesmsLegalGebSpec {
         pastEventsTable.collect{ it -> it.title }[0] == "Past"
         and:
         currentEventsTable.collect{ it -> it.title }[0] == "Current"
+    }
+
+    def createFutureAndPastEventsAndLinkCases() {
+        def yearOffsetForDate = 1900
+        def caseone = new Case(caseId: "1112", description: "ertyui")
+        caseone.save(flush: true)
+        def pastEvent = new Event(eventTitle: "Past", dateFieldSelected: new Date(1990 - yearOffsetForDate, 8, 12), startTimeField: new Time(12, 30, 0), endTimeField: new Time(13, 30, 0))
+        pastEvent.save(flush: true)
+        def futureEvent = new Event(eventTitle: "Future", dateFieldSelected: new Date(2020 - yearOffsetForDate, 8, 12), startTimeField: new Time(12, 30, 0), endTimeField: new Time(13, 30, 0))
+        futureEvent.save(flush: true)
+        EventCase.link(pastEvent, caseone)
+        EventCase.link(futureEvent, caseone)
+        caseone.caseId
     }
 
     def createCurrentAndPastEventsAndLinkCases() {

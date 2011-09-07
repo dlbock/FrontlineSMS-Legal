@@ -49,7 +49,7 @@ class CreateLegalContactSpec extends FrontlinesmsLegalGebSpec {
         to CreateLegalContactPage
 
         then:
-        linkCaseButton.size() == 1
+        oneLinkCaseButtonExists
     }
 
     def "should show link case search window with search box and list of cases with case title when link case button is clicked"() {
@@ -89,7 +89,7 @@ class CreateLegalContactSpec extends FrontlinesmsLegalGebSpec {
 
     }
 
-    def "should return to create contact page with CASE ID, Case Title, Relationship and an Unlink link updated in the linked cases table"() {
+    def "should return to create contact page with CASE ID, Case Title and the Relationship of the linked case along with an Unlink link for that case"() {
         given:
         new Case(caseId: "123", caseTitle: "Case Title 1", description: "test").save(flush: true)
         new Case(caseId: "321", caseTitle: "Case Title 2",description: "test2").save(flush: true)
@@ -109,7 +109,7 @@ class CreateLegalContactSpec extends FrontlinesmsLegalGebSpec {
         linkedCasesTable[0].unlink.displayed
     }
 
-    def "should retain search results after cancelling relationship dialog"() {
+    def "should retain search results after cancelling the relationship dialog"() {
         given:
         new Case(caseId: "123", description: "test").save(flush: true)
         new Case(caseId: "321", description: "test2").save(flush: true)
@@ -127,7 +127,7 @@ class CreateLegalContactSpec extends FrontlinesmsLegalGebSpec {
         !caseContactRelationshipDialog.displayed
     }
 
-    def "should go to Contacts details page, save the contact and the linked cases when SAVE button is clicked"() {
+    def "should go to Contacts details page and the linked cases be displayed, when the SAVE button is clicked from the Create Contact page"() {
         given:
         new Case(caseId: "123", description: "test").save(flush: true)
         new Case(caseId: "321", description: "test2").save(flush: true)

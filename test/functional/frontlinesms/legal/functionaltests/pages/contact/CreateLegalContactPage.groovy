@@ -15,6 +15,7 @@ class CreateLegalContactPage extends Page {
         save { $("button", id: "contact-save") }
         cancel { $("button", id: "contact-create-cancel") }
         linkCaseButton { $("button", id: "link-case-button")}
+        oneLinkCaseButtonExists { $("button", id: "link-case-button").size()==1}
         linkedCasesTable {
             $("#cases tbody tr").collect {module LinkedCaseRow, it}
         }
@@ -25,7 +26,7 @@ class CreateLegalContactPage extends Page {
         linkCaseDialog { $("div", id: "link-case-dialog")}
         casesToLink { $("tbody tr").collect {module CaseRow, it} }
         caseIdSearch { $("input", id: "caseId") }
-        linkCaseCancelButton { $(".ui-button-text").value("Cancel") }
+        linkCaseCancelButton { $(".ui-button-text").value("Cancel")}
         caseContactRelationshipDialog { $("div", id: "case-contact-relationship-dialog")}
         relationshipInput { $("input", id: "case-contact-relationship")}
         relationshipConfirmButton { $("button", id: "confirm-relationship")}
@@ -35,7 +36,7 @@ class CreateLegalContactPage extends Page {
 class CaseRow extends Module {
     static content = {
         cell { i -> $("td", i) }
-        caseId { cell(0).text() }
+        caseId { cell(0).text().present }
         caseTitle { cell(1).text() }
         status { cell(2).text() }
         linkCaseButton { $("a", class: "caseLinkButton") }
