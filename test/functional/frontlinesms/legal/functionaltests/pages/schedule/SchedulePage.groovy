@@ -10,9 +10,6 @@ class SchedulePage extends Page {
     static url = "schedule"
     static content = {
         calendarHeader { $('.fc-header-title').text() }
-        existingContactList {
-            $("#contactsTable tbody tr").collect {module LinkContactRow, it}
-        }
         events {
             $("span[class='fc-event-title']")
         }
