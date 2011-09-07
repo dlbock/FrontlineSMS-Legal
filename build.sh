@@ -18,7 +18,6 @@ if [ "$*" != "--no-update" ]
 then
     ./updateCore.sh
 fi
-grails compile --non-interactive
 grails sass-compile --non-interactive
 grails -Dserver.port=4000 test-app -coverage --non-interactive
 grails war --non-interactive
