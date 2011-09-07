@@ -7,6 +7,7 @@ class Case {
     }
 
     static constraints = {
+        caseTitle(nullable: true)
         caseId(unique: true, blank: false)
         description(nullable: true)
     }
@@ -14,6 +15,7 @@ class Case {
     static hasMany = [contacts: LegalContact, linkedContacts: CaseContacts, linkedEvents: EventCase]
 
     String caseId
+    String caseTitle
     String description
     boolean active = true
 }

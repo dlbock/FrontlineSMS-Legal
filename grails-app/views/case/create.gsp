@@ -22,12 +22,15 @@
 <body>
 
 <h1 class="form-header">Create Case</h1>
-<g:form action="save" method="post">
+<form action="save" method="POST" id="case-create-form">
+
+    <label>Case Title</label>
+    <g:textField name="caseTitle" id="case-title"/>
 
     <label>Case ID</label>
     <g:textField name="caseId" id="case-id"/>
-    <label>Description</label>
 
+    <label>Description</label>
     <g:if test="${!params.description}">
         <g:textArea name="description" id="case-description" cols="100" rows="10"/>
     </g:if>
@@ -59,11 +62,11 @@
 
 
     <div class="form-submit-area">
-        <input type="submit" id="case-save" value="Save"/>
+        <button id="case-save">Save</button>
         <button id="case-cancel">Cancel</button>
     </div>
 
-</g:form>
+</form>
 
 
 <div id="link-contacts" title="Link Contacts">
@@ -105,5 +108,8 @@
     <p>Your changes have not been saved. Are you sure you want to cancel?</p>
 </div>
 
+<div id="save-case-without-case-title-dialog" title="Save without case title?" style="display: none;">
+    <p>Are you sure you want to save a case without a title?</p>
+</div>
 </body>
 </html>

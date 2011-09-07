@@ -27,17 +27,23 @@
 <h1 class="form-header">Case Details</h1>
 <g:form action="update" id="save-case-form" name="save-case-form">
 
+    <label>Case Title</label>
+    <g:textField name="caseTitle" id="case-title" value="${caseToDisplay.caseTitle}"/>
+
     <label>Case ID</label>
     <g:hiddenField name="currentId" id="current-id" value="${caseToDisplay.id}"/>
     <g:textField name="caseId" id="case-id" value="${caseToDisplay.caseId}"/>
-    <label>Description</label>
 
+    <label>Description</label>
     <g:textArea name="description" id="case-description" cols="100" rows="10" value="${caseToDisplay.description}"/>
+
+
     <p><g:checkBox name="caseStatus" id="case-status" checked="${caseToDisplay.active}"/>Case active</p>
 
     <div class="form-submit-area">
         <button class="link-button" id="link-contact-button">Link contacts</button>
     </div>
+
     <g:hiddenField name="caseLinkedContacts" id="case-linked-contacts" value="${caseLinkedContacts}"/>
 
     <table name="contacts" id="contacts">

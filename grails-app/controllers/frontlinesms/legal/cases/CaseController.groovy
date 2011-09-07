@@ -90,6 +90,7 @@ class CaseController {
         if (params.description) {
             caseToDisplay.description = params.description
             caseToDisplay.active = params.caseStatus
+            caseToDisplay.caseTitle = params.caseTitle
         }
         [caseToDisplay: caseToDisplay, caseLinkedContacts: caseLinkedContacts.toString() , contactList: LegalContact.list(), linkedContactRowData: CaseContacts.findContactsAndInvolvementByCase(caseToDisplay), pastEvents: pastEventList, ongoingEvents: ongoingEventList, futureEvents: futureEventList]
     }

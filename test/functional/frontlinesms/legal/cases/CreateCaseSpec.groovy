@@ -19,7 +19,37 @@ class CreateCaseSpec extends FrontlinesmsLegalGebSpec {
         assert at(NewCasePage)
     }
 
-    def "should be able to create case with id, description"() {
+    def "should have Case Title input box on create case page"(){
+        given:
+        to HomePage
+
+        when:
+        createNewCase.click()
+
+        then:
+        assert at(NewCasePage)
+        assert caseTitle.present
+    }
+
+    def "should be able to create case with title, id, description"() {
+        given:
+        to NewCasePage
+
+        when:
+        caseTitle = "Test Title"
+        caseId = "123"
+        description = "whatever"
+
+        and:
+        save.click()
+        sleep(500)
+
+        then:
+        assert at(ShowCasePage)
+        caseTitle == "Test Title"
+    }
+
+    def "should display confirmation dialog for saving a case without a case title"() {
         given:
         to NewCasePage
 
@@ -31,8 +61,39 @@ class CreateCaseSpec extends FrontlinesmsLegalGebSpec {
         save.click()
 
         then:
+        assert saveCaseWithoutCaseTitleDialog.present
+    }
+
+     def 'should remain on Create case page when NO is clicked while saving case without case title'() {
+        given:
+        to NewCasePage
+
+        when:
+        caseId = "123"
+        save.click()
+
+        and:
+        saveWithoutCaseTitleNo.click()
+
+        then:
+        assert at(NewCasePage)
+    }
+
+    def 'should go to show case page when yes is clicked while saving case without case title'() {
+        given:
+        to NewCasePage
+
+        when:
+        caseId = "123"
+        save.click()
+
+        and:
+        saveWithoutCaseTitleYes.click()
+
+        then:
         assert at(ShowCasePage)
     }
+
 
     def 'should remain on Create case page when no is clicked on cancel confirm dialog'() {
         given:
