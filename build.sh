@@ -13,14 +13,14 @@ else
 fi
 
 before="$(date +%s)"
-grails clean
+grails clean --non-interactive
 if [ "$*" != "--no-update" ]
 then
     ./updateCore.sh
 fi
-grails sass-compile
-grails -Dserver.port=4000 test-app -coverage
-grails dist
+grails sass-compile --non-interactive
+grails -Dserver.port=4000 test-app -coverage --non-interactive
+grails dist --non-interactive
 after="$(date +%s)"
 elapsed_time="$(expr $after - $before)"
 echo "Build took $elapsed_time secs."
