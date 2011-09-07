@@ -18,7 +18,7 @@ class UnlinkContactFromEventSpec extends FrontlinesmsLegalGebSpec {
         eventDialog.unlinkFirstContactLinkedToEvent()
 
         then:
-        noLinkedContactsToEvent
+        !eventDialog.contactsLinkedToEvent.any { it.name == "Bob" }
     }
 
     def 'should remove newly linked contact when unlink is clicked on the event details pop-up'() {
@@ -36,7 +36,7 @@ class UnlinkContactFromEventSpec extends FrontlinesmsLegalGebSpec {
         eventDialog.unlinkFirstContactLinkedToEvent()
 
         then:
-        noLinkedContactsToEvent
+        !eventDialog.contactsLinkedToEvent.any { it.name == "Bob" }
     }
 
     def 'should unlink contact from an event when the UPDATE button is clicked'() {
@@ -54,7 +54,7 @@ class UnlinkContactFromEventSpec extends FrontlinesmsLegalGebSpec {
         selectEvent "test event"
 
         then:
-        noLinkedContactsToEvent
+        !eventDialog.contactsLinkedToEvent.any { it.name == "Bob" }
     }
 
     def 'should not unlink contact when X(close) is clicked on the event-details pop up'(){
@@ -73,7 +73,7 @@ class UnlinkContactFromEventSpec extends FrontlinesmsLegalGebSpec {
         selectEvent "test event"
 
         then:
-        noLinkedContactsToEvent == false
+        eventDialog.contactsLinkedToEvent.any { it.name == "Bob" }
     }
 
     private def createContact(number, name) {
