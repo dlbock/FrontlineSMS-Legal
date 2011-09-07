@@ -17,9 +17,6 @@ class SchedulePage extends Page {
             true
         }
 
-        existingContactList {
-            $("#contactsTable tbody tr").collect {module LinkContactRow, it}
-        }
         eventDialog(wait: true) { module EventDialog }
         unlinkConfirmationDialog(required: false) { module ConfirmationDialog, messageId: "unlink-contact-dialog" }
         deleteConfirmationDialog(required: false) { module ConfirmationDialog, messageId: "delete-event-dialog" }
@@ -64,6 +61,8 @@ class EventDialog extends Module {
     static base = { $(id: "view-event") }
     static content = {
         title { $('#event-title') }
+        linkContactDialog { module LinkContactDialog, page.$() }
+
         close {
             $(".ui-dialog-titlebar-close ui-corner-all") .click()
             true
@@ -113,6 +112,12 @@ class ContactRow extends Module {
         name { cell(0).text() }
         primaryMobileNumber { cell(1).text() }
         unlinkContact { $("a", class: "unlink-contact")}
+    }
+}
+
+class LinkContactDialog extends Module {
+    static content = {
+        contacts { $("#contactsTable tbody tr").collect {module LinkContactRow, it} }
     }
 }
 

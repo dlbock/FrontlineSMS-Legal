@@ -14,16 +14,17 @@ class LinkContactToExistingEventSpec extends FrontlinesmsLegalGebSpec {
         to SchedulePage, "index"
 
         when:
-        events()[0].click()
+        selectEvent("Test Event")
         eventDialog.clickLinkContact()
 
         then:
-        existingContactList.collect { it -> it.contactName }.size() == 2
+        def linkableContacts = eventDialog.linkContactDialog.contacts
+        linkableContacts.size() == 2
         and:
-        existingContactList[0].contactName == "fa"
-        existingContactList[0].contactNumber == "1234567"
-        existingContactList[1].contactName == "faooio"
-        existingContactList[1].contactNumber == "12309004567"
+        linkableContacts[0].contactName == "fa"
+        linkableContacts[0].contactNumber == "1234567"
+        linkableContacts[1].contactName == "faooio"
+        linkableContacts[1].contactNumber == "12309004567"
 
     }
 
@@ -140,7 +141,7 @@ class LinkContactToExistingEventSpec extends FrontlinesmsLegalGebSpec {
         to SchedulePage, "index"
 
         when:
-        events()[0].click()
+        selectEvent("Test")
         eventDialog.clickLinkContact()
 
         and:
@@ -152,7 +153,7 @@ class LinkContactToExistingEventSpec extends FrontlinesmsLegalGebSpec {
         eventDialog.linkContact()
 
         then:
-        existingContactList.collect { it -> it.contactName }.size() == 2
+        eventDialog.linkContactDialog.contacts.size() == 2
     }
 
     def "should not be able to link already linked contact"() {
