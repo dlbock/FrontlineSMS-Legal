@@ -42,7 +42,7 @@ class LinkCaseToExistingEventSpec extends FrontlinesmsLegalGebSpec {
         eventDialog.linkCase()
 
         and:
-        caseDialogCancelButton.click()
+        eventDialog.linkCaseDialog.cancel()
 
         then:
         eventDialog.linkCaseDialog.displayed == false

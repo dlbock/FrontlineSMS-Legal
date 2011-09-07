@@ -21,7 +21,6 @@ class SchedulePage extends Page {
             true
         }
 
-        caseDialogCancelButton { $("#cancel-link-case") }
         casesToLink { $("tr", class: "caseLink").collect {module LinkableCase, it} }
         existingCaseList {
             $("#cases tbody tr").collect {module LinkableCase, it}
@@ -133,6 +132,12 @@ class LinkContactRow extends Module {
 
 class LinkCaseDialog extends Module {
     static base = { $('#link-case-dialog').parent(".ui-dialog") }
+    static content = {
+        cancel {
+            $("#cancel-link-case").click()
+            true
+        }
+    }
 }
 
 class LinkableCase extends Module {
