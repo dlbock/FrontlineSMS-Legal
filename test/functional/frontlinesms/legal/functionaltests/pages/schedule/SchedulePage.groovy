@@ -21,7 +21,6 @@ class SchedulePage extends Page {
             true
         }
 
-        linkCaseDialog { $("div", id: "link-case-dialog") }
         caseDialogCancelButton { $("#cancel-link-case") }
         casesToLink { $("tr", class: "caseLink").collect {module LinkableCase, it} }
         existingCaseList {
@@ -36,6 +35,7 @@ class EventDialog extends Module {
     static content = {
         title { $('#event-title') }
         linkContactDialog { module LinkContactDialog, page.$() }
+        linkCaseDialog { module LinkCaseDialog, page.$() }
 
         linkCase {
             $("#link-case-button").click()
@@ -129,6 +129,10 @@ class LinkContactRow extends Module {
             true
         }
     }
+}
+
+class LinkCaseDialog extends Module {
+    static base = { $('#link-case-dialog').parent(".ui-dialog") }
 }
 
 class LinkableCase extends Module {

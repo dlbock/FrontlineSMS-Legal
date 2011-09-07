@@ -16,7 +16,7 @@ class LinkCaseToExistingEventSpec extends FrontlinesmsLegalGebSpec {
         events()[0].click()
 
         then:
-        linkCaseDialog.displayed == false
+        eventDialog.linkCaseDialog.displayed == false
     }
 
     def "should display a dialog with list of cases when link case button is clicked"() {
@@ -29,7 +29,7 @@ class LinkCaseToExistingEventSpec extends FrontlinesmsLegalGebSpec {
         eventDialog.linkCase()
 
         then:
-        linkCaseDialog.displayed == true
+        eventDialog.linkCaseDialog.displayed == true
     }
 
     def "should close case dialog when cancel button is clicked on the dialog"() {
@@ -45,7 +45,7 @@ class LinkCaseToExistingEventSpec extends FrontlinesmsLegalGebSpec {
         caseDialogCancelButton.click()
 
         then:
-        linkCaseDialog.displayed == false
+        eventDialog.linkCaseDialog.displayed == false
     }
 
     def "should display cases in the case dialog "() {
