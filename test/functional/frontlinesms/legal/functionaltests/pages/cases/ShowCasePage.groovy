@@ -31,6 +31,9 @@ class ShowCasePage extends Page {
         cancelButton {$("button", id: "case-update-cancel")}
         cancelYes { $("button", id: "cancel-confirm-yes")}
         cancelNo { $("button", id: "cancel-confirm-no")}
+        pastEventsTable {$("#past-events tbody tr").collect {module EventRow, it} }
+        futureEventsTable {$("#future-events tbody tr").collect {module EventRow, it} }
+        currentEventsTable {$("#current-events tbody tr").collect {module EventRow, it} }
     }
 }
 
@@ -39,5 +42,12 @@ class ContactRow extends Module {
         cell { i -> $("td", i) }
         name { cell(0).text() }
         primaryMobile { cell(1).text() }
+    }
+}
+
+class EventRow extends Module {
+    static content = {
+        cell { i -> $("td", i) }
+        title { cell(0).text() }
     }
 }

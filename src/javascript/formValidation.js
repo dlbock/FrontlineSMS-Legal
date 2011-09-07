@@ -6,43 +6,11 @@ frontlinesms.validateContactNumber = function() {
     var lengthOfContactNumber = 0;
 
     $("#contact-primary-mobile").keyup(function(){
-        var validMobileNumber= "";
-        var primaryMobileNumber = $("#contact-primary-mobile").val();
-        for(var i=0; i < primaryMobileNumber.length ; i++)
-           {
-               var key = primaryMobileNumber[i].which;
-               for(var j=0 ; j < validCharacters.length ; j++){
-                   if(primaryMobileNumber[i] == validCharacters[j]){
-                       validMobileNumber = validMobileNumber + primaryMobileNumber[i];
-                   }
-               }
-               for(var k=0 ; k < keyCodesForAllowedKeys.length ; k++){
-                   if(key == keyCodesForAllowedKeys[k]){
-                       validMobileNumber = validMobileNumber + primaryMobileNumber[i];
-                   }
-               }
-           }
-        $("#contact-primary-mobile").val(validMobileNumber);
+        frontlinesms.filterOutUnwantedCharacters("#contact-primary-mobile", validCharacters, keyCodesForAllowedKeys);
     });
 
     $("#contact-primary-mobile").change(function(){
-        var validMobileNumber= "";
-        var primaryMobileNumber = $("#contact-primary-mobile").val();
-        for(var i=0; i < primaryMobileNumber.length ; i++)
-           {
-               var key = primaryMobileNumber[i].which;
-               for(var j=0 ; j < validCharacters.length ; j++){
-                   if(primaryMobileNumber[i] == validCharacters[j]){
-                       validMobileNumber = validMobileNumber + primaryMobileNumber[i];
-                   }
-               }
-               for(var k=0 ; k < keyCodesForAllowedKeys.length ; k++){
-                   if(key == keyCodesForAllowedKeys[k]){
-                       validMobileNumber = validMobileNumber + primaryMobileNumber[i];
-                   }
-               }
-           }
-        $("#contact-primary-mobile").val(validMobileNumber);
+        frontlinesms.filterOutUnwantedCharacters("#contact-primary-mobile", validCharacters, keyCodesForAllowedKeys);
     });
 
     $("#contact-primary-mobile").keypress(function(key) {
@@ -67,4 +35,37 @@ frontlinesms.validateContactNumber = function() {
             return false;
         }
     );
+
 };
+
+frontlinesms.blockKeyPressInDateField = function() {
+    var keyCodeForTabKey = 9;
+    $("#event-date").keydown(function(key) {
+            if (key.keyCode == keyCodeForTabKey) {
+                return true;
+            }
+            return false;
+        }
+    );
+};
+
+frontlinesms.filterOutUnwantedCharacters = function(fieldId, validCharacters, keyCodesForAllowedKeys) {
+     var validMobileNumber= "";
+        var primaryMobileNumber = $(fieldId).val();
+        for(var i=0; i < primaryMobileNumber.length ; i++)
+           {
+               var key = primaryMobileNumber[i].which;
+               for(var j=0 ; j < validCharacters.length ; j++){
+                   if(primaryMobileNumber[i] == validCharacters[j]){
+                       validMobileNumber = validMobileNumber + primaryMobileNumber[i];
+                   }
+               }
+               for(var k=0 ; k < keyCodesForAllowedKeys.length ; k++){
+                   if(key == keyCodesForAllowedKeys[k]){
+                       validMobileNumber = validMobileNumber + primaryMobileNumber[i];
+                   }
+               }
+           }
+        $(fieldId).val(validMobileNumber);
+};
+
