@@ -126,6 +126,8 @@ class CaseController {
         def originalCaseId = fetchedCase.caseId
         fetchedCase.caseId = params.caseId
         fetchedCase.description = params.description
+        fetchedCase.caseTitle = params.caseTitle
+
         if (params.caseStatus == null) {
 
             fetchedCase.active = ""
@@ -140,11 +142,11 @@ class CaseController {
         }
         else if (params.caseId == null || params.caseId == "" || params.caseId.isAllWhitespace()) {
             flash.error = "Case ID required"
-            redirect(action: 'show', params: [id: originalCaseId, description: fetchedCase.description, uniqueId: originalUniqueId, caseStatus: params.caseStatus])
+            redirect(action: 'show', params: [id: originalCaseId, caseTitle: fetchedCase.caseTitle, description: fetchedCase.description, uniqueId: originalUniqueId, caseStatus: params.caseStatus])
         }
         else {
             flash.error = "Case ID already exists. Please enter a unique Case ID."
-            redirect(action: 'show', params: [id: originalCaseId, description: fetchedCase.description, uniqueId: originalUniqueId, caseStatus: params.caseStatus])
+            redirect(action: 'show', params: [id: originalCaseId, caseTitle: fetchedCase.caseTitle, description: fetchedCase.description, uniqueId: originalUniqueId, caseStatus: params.caseStatus])
         }
     }
 

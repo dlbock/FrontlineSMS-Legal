@@ -35,7 +35,7 @@
 <g:form action="update" id="save-case-form" name="save-case-form">
 
     <label>Case Title</label>
-    <g:textField name="caseTitle" id="case-title" value="${caseToDisplay.caseTitle}"/>
+    <g:textField name="caseTitle" id="case-title" value="${caseToDisplay.caseTitle}" maxlength="300"/>
 
     <label>Case ID</label>
     <g:hiddenField name="currentId" id="current-id" value="${caseToDisplay.id}"/>

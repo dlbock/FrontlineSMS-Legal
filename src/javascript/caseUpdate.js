@@ -16,8 +16,9 @@ frontlinesms.showCaseOnLoad = function() {
         $('#case-update').removeAttr('disabled');
     });
 
-    frontlinesms.enableUpdateButtonOnDetailsChange("#case-description", "#case-update");
+    frontlinesms.enableUpdateButtonOnDetailsChange("#case-title", "#case-update");
     frontlinesms.enableUpdateButtonOnDetailsChange("#case-id", "#case-update");
+    frontlinesms.enableUpdateButtonOnDetailsChange("#case-description", "#case-update");
 
     $('tr.contactLink, td.unlink-contact-button').click(function() {
         modified = true;

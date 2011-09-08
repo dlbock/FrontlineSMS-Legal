@@ -31,7 +31,7 @@
 <form action="save" method="POST" id="case-create-form">
 
     <label>Case Title</label>
-    <g:textField name="caseTitle" id="case-title"/>
+    <g:textField name="caseTitle" id="case-title"  maxlength="300"/>
 
     <label>Case ID</label>
     <g:textField name="caseId" id="case-id"/>
