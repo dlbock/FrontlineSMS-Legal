@@ -3,7 +3,6 @@ var linkContactIds = "";
 var unlinkContactIds = "";
 var eventDate = "";
 frontlinesms.eventDetails = function() {
-    $("#view-event").hide();
     $("#view-event").dialog({
         autoOpen: false,
         modal: true,
@@ -14,7 +13,6 @@ frontlinesms.eventDetails = function() {
         beforeClose: frontlinesms.yesNoDialogBox
     });
 
-    $('#error-message').html("").fadeIn();
     $('#update-event').click(frontlinesms.updateEventDetails);
 
     $('input').keyup(function() {
@@ -23,7 +21,8 @@ frontlinesms.eventDetails = function() {
 };
 
 frontlinesms.updateEventDetails = function () {
-    var errorMessage = ""
+    var errorMessage = "";
+    var errorMessageForTime = "";
     if ($('#event-title').val() == "") {
         errorMessage = "title.";
     } else if ($('#event-date').val() == "") {
@@ -33,9 +32,24 @@ frontlinesms.updateEventDetails = function () {
     } else if ($('#event-end-time').val() == "") {
         errorMessage = "end time.";
     }
-    if (errorMessage != "") {
-        $('#error-message').html("An event must have a title, date and time. Please enter a " + errorMessage).fadeIn();
+
+    if ($('#event-start-time').val() >= $('#event-end-time').val()) {
+        errorMessageForTime = "The end time cannot be earlier than the start time.";
+    }
+
+    if (errorMessage != "" && errorMessageForTime != "") {
+        errorMessage = "Please enter a " + errorMessage + errorMessageForTime;
+    } else if (errorMessage != "") {
+        errorMessage = "Please enter a " + errorMessage;
+    } else if (errorMessageForTime != "") {
+        errorMessage = errorMessageForTime;
+    }
+
+    if (errorMessage != "" || errorMessageForTime != "") {
+        $('#error-message').html(errorMessage).fadeIn();
+        $('#update-event').attr('disabled', true);
     } else {
+        $('#error-message').html("").fadeIn();
         $('#update-event').attr('disabled', true);
         $("#view-event").dialog("close");
         $.ajax({

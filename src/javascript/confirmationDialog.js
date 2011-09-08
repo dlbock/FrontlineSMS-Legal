@@ -9,7 +9,7 @@ frontlinesms.attachActionWithConfirmationToButton = function(buttonSelector, dia
 }
 
 frontlinesms.yesNoDialogBox = function() {
-    if (!$("#update-event").attr("disabled")) {
+    if (!$("#update-event").attr("disabled") || $('#error-message').text() != "") {
         $("#confirmation-dialog").dialog("destroy").empty();
         $("#schedule").append('<div class="confirmation-dialog" id="confirmation-dialog" title="Cancel edit event?" style="display: none;"><p>Are you sure you want to leave this page without saving? Your changes will not be saved.</p></div>');
         $("#confirmation-dialog").dialog({

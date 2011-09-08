@@ -72,7 +72,9 @@ class RescheduleEventSpec extends FrontlinesmsLegalGebSpec {
         eventDialog.updateEvent()
 
         then:
-        eventDialog.errorMessage == "An event must have a title, date and time. Please enter a title."
+        eventDialog.errorMessage == "Please enter a title."
+        and:
+        eventDialog.updateEventButton.@disabled == 'true'
     }
 
     def "should show error message when date field is blank"() {
@@ -86,7 +88,9 @@ class RescheduleEventSpec extends FrontlinesmsLegalGebSpec {
         eventDialog.updateEvent()
 
         then:
-        eventDialog.errorMessage == "An event must have a title, date and time. Please enter a date."
+        eventDialog.errorMessage == "Please enter a date."
+        and:
+        eventDialog.updateEventButton.@disabled == 'true'
     }
 
     def "should show error message when start time field is blank"() {
@@ -101,7 +105,9 @@ class RescheduleEventSpec extends FrontlinesmsLegalGebSpec {
         eventDialog.updateEvent()
 
         then:
-        eventDialog.errorMessage == "An event must have a title, date and time. Please enter a start time."
+        eventDialog.errorMessage == "Please enter a start time."
+        and:
+        eventDialog.updateEventButton.@disabled == 'true'
     }
 
     def "should show error message when end time field is blank"() {
@@ -116,7 +122,9 @@ class RescheduleEventSpec extends FrontlinesmsLegalGebSpec {
         eventDialog.updateEvent()
 
         then:
-        eventDialog.errorMessage == "An event must have a title, date and time. Please enter a end time."
+        eventDialog.errorMessage == "Please enter a end time.The end time cannot be earlier than the start time."
+        and:
+        eventDialog.updateEventButton.@disabled == 'true'
     }
 
     def "should not show confirmation dialog when user close the event detail pop up and fields have no changes"() {

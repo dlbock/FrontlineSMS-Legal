@@ -70,6 +70,7 @@ frontlinesms.displayEventDetails = function(calEvent) {
     });
 
     $("#view-event").dialog("open");
+    $('#error-message').html("").fadeIn();
 };
 
 frontlinesms.constructContactsTable = function(data, eventId) {
@@ -161,8 +162,6 @@ frontlinesms.calendarInteractions = function() {
         eventColor: "rgb(0,162,232)",
         eventClick: function(calEvent, jsEvent, view) {
             frontlinesms.displayEventDetails(calEvent);
-
-
         },
         windowResize: function () {
             $("#schedule").fullCalendar("option", "height", frontlinesms.calculateScheduleHeight($(window).height()))

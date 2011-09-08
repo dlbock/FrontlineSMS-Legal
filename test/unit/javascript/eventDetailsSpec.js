@@ -76,23 +76,28 @@ describe('event detail pop up', function() {
 
     it("show error message when title field is blank", function() {
         $('#event-title').val("");
+        $('#event-start-time').val("04:30PM");
+        $('#event-end-time').val("05:20PM");
         $("#update-button").click();
-        expect($('#error-message').html()).toBe("An event must have a title, date and time. Please enter a title.");
+        expect($('#error-message').html()).toBe("Please enter a title.");
     });
 
     it("show error message when date field is blank", function() {
         $('#event-title').val("test-title");
+        $('#event-start-time').val("04:30PM");
+        $('#event-end-time').val("05:20PM");
         $('#event-date').val("");
         $("#update-button").click();
-        expect($('#error-message').html()).toBe("An event must have a title, date and time. Please enter a date.");
+        expect($('#error-message').html()).toBe("Please enter a date.");
     });
 
     it("show error message when start time field is blank", function() {
         $('#event-title').val("test-title");
         $('#event-date').val("August 31,2011");
         $('#event-start-time').val("");
+        $('#event-end-time').val("05:20PM");    
         $("#update-button").click();
-        expect($('#error-message').html()).toBe("An event must have a title, date and time. Please enter a start time.");
+        expect($('#error-message').html()).toBe("Please enter a start time.");
     });
 
     it("show error message when end time field is blank", function() {
@@ -101,9 +106,26 @@ describe('event detail pop up', function() {
         $('#event-start-time').val("05:20PM");
         $('#event-end-time').val("");
         $("#update-button").click();
-        expect($('#error-message').html()).toBe("An event must have a title, date and time. Please enter a end time.");
+        expect($('#error-message').html()).toBe("Please enter a end time.The end time cannot be earlier than the start time.");
     });
 
+    it("show error message when end time field earlier than start time field ", function() {
+        $('#event-title').val("test-title");
+        $('#event-date').val("August 31,2011");
+        $('#event-start-time').val("05:20PM");
+        $('#event-end-time').val("04:20PM");
+        $("#update-button").click();
+        expect($('#error-message').html()).toBe("The end time cannot be earlier than the start time.");
+    });
+
+    it("show error message when end time field is the same as start time field ", function() {
+        $('#event-title').val("test-title");
+        $('#event-date').val("August 31,2011");
+        $('#event-start-time').val("05:20PM");
+        $('#event-end-time').val("05:20PM");
+        $("#update-button").click();
+        expect($('#error-message').html()).toBe("The end time cannot be earlier than the start time.");
+    });
     afterEach(function() {
         $('body#fixtures > *').not(".jasmine_reporter").not('script').remove();
     });
