@@ -20,7 +20,6 @@ class NewCasePage extends Page {
         contactLinkNotVisible { $("tr", class: "contactLink", filtermatch: "false").collect {module ContactRow, it} }
         linkContactDialogCancelButton { $(".ui-button-text").value("Cancel") }
         caseTitle {$("input", id:"case-title")}
-        saveCaseWithoutCaseTitleDialog{ $("div", id:"save-case-without-case-title-dialog")}
         saveWithoutCaseTitleYes{ $("button", id:"save-confirm-yes")}
         saveWithoutCaseTitleNo{ $("button", id:"save-confirm-no")}
         contactListInPopUp{$(".contact-name")}

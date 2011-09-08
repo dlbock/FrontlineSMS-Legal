@@ -45,7 +45,7 @@ frontlinesms.caseCancelConfirmAction = function() {
 frontlinesms.caseCreateWithoutTitleConfirmAction = function() {
 
     if(($("#case-title").val().trim() == "")) {
-        $("#save-case-without-case-title-dialog").dialog({
+        $("#blank-case-title-confirmation-dialog").dialog({
             modal: true,
             buttons: [
                 {

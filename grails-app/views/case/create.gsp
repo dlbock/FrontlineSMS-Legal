@@ -114,7 +114,7 @@
     <p>Your changes have not been saved. Are you sure you want to cancel?</p>
 </div>
 
-<div id="save-case-without-case-title-dialog" title="Save without case title?" style="display: none;">
+<div id="blank-case-title-confirmation-dialog" title="Save without case title?" style="display: none;">
     <p>Are you sure you want to save a case without a title?</p>
 </div>
 
