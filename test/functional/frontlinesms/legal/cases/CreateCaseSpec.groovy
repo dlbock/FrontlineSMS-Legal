@@ -190,6 +190,21 @@ class CreateCaseSpec extends FrontlinesmsLegalGebSpec {
 
         then:
         linkContactDialog.present
-        noLinkedContacts
+        sizeOflinkedContactsTable == 0
+    }
+
+    def "should link a contact to the case when a contact is selected in the link contact dialog"(){
+        setup:
+        new LegalContact(name: "fabio", primaryMobile: "22222").save(flush: true)
+
+        when:
+        to NewCasePage
+        and:
+        linkContact.click()
+        contactListInPopUp[0].click()
+        relationshipConfirmButton.click()
+
+        then:
+        sizeOflinkedContactsTable == 1
     }
 }

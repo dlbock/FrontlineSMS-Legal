@@ -19,12 +19,12 @@ class NewCasePage extends Page {
         contactNameSearch { $("input", id: "contact-name-search") }
         contactLinkNotVisible { $("tr", class: "contactLink", filtermatch: "false").collect {module ContactRow, it} }
         linkContactDialogCancelButton { $(".ui-button-text").value("Cancel") }
-        caseTitle {$("input", id:"case-title")}
-        saveWithoutCaseTitleYes{ $("button", id:"save-confirm-yes")}
-        saveWithoutCaseTitleNo{ $("button", id:"save-confirm-no")}
-        contactListInPopUp{$(".contact-name")}
-        noLinkedContacts {$("#contacts tbody tr").size() == 1}
+        caseTitle {$("input", id: "case-title")}
+        saveWithoutCaseTitleYes { $("button", id: "save-confirm-yes")}
+        saveWithoutCaseTitleNo { $("button", id: "save-confirm-no")}
+        contactListInPopUp {$(".contact-name")}
         relationshipConfirmButton { $("button", id: "confirm-relationship")}
         relationshipCancelButton { $("button", id: "cancel-relationship")}
+        sizeOflinkedContactsTable {$("#contacts tbody tr:not(:first-child)").size()}
     }
 }
