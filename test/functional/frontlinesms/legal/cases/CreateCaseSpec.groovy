@@ -5,19 +5,10 @@ import frontlinesms.legal.functionaltests.pages.HomePage
 import frontlinesms.legal.functionaltests.pages.cases.NewCasePage
 import frontlinesms.legal.functionaltests.pages.cases.ShowCasePage
 import frontlinesms.legal.LegalContact
+import org.junit.runner.Description
+import frontlinesms.legal.Case
 
 class CreateCaseSpec extends FrontlinesmsLegalGebSpec {
-
-    def "should be able to navigate to the create case page from the menu"() {
-        given:
-        to HomePage
-
-        when:
-        createNewCase.click()
-
-        then:
-        assert at(NewCasePage)
-    }
 
     def "should be able to create case with title, id, description"() {
         given:
@@ -30,11 +21,25 @@ class CreateCaseSpec extends FrontlinesmsLegalGebSpec {
 
         and:
         save.click()
-        sleep(500)
 
         then:
         assert at(ShowCasePage)
         caseTitle == "Test Title"
+    }
+
+    def "should display a error message when the user tries to save the case without case id"() {
+        given:
+        to NewCasePage
+
+        when:
+        caseTitle = "Test Title"
+        caseId = ""
+
+        and:
+        save.click()
+
+        then:
+        errorMessage == "Case ID is required"
     }
 
     def 'should remain on Create case page when NO is clicked while saving case without case title'() {
@@ -51,22 +56,6 @@ class CreateCaseSpec extends FrontlinesmsLegalGebSpec {
         then:
         assert at(NewCasePage)
     }
-
-    def 'should go to show case page when yes is clicked while saving case without case title'() {
-        given:
-        to NewCasePage
-
-        when:
-        caseId = "123"
-        save.click()
-
-        and:
-        saveWithoutCaseTitleYes.click()
-
-        then:
-        assert at(ShowCasePage)
-    }
-
 
     def 'should remain on Create case page when no is clicked on cancel confirm dialog'() {
         given:
@@ -98,6 +87,20 @@ class CreateCaseSpec extends FrontlinesmsLegalGebSpec {
         assert at(HomePage)
     }
 
+    def "should display error message when the user tries to save case with the existing case id"() {
+        setup:
+        new Case(caseId: "1112", description: "ertyui").save(flush: true)
+
+        when:
+        to NewCasePage
+        caseTitle = "Test Title"
+        caseId = "1112"
+        save.click()
+
+        then:
+        errorMessage == "Case ID already exists. Please enter a unique Case ID."
+    }
+
     def "should display all the contacts filtered by the value in the search input of the search contact dialog"() {
         setup:
         new LegalContact(name: "fabio", primaryMobile: "22222").save(flush: true)
@@ -106,7 +109,7 @@ class CreateCaseSpec extends FrontlinesmsLegalGebSpec {
         when:
         to NewCasePage
         and:
-        clickLinkContact.click()
+        linkContact.click()
         and:
         contactNameSearch.value("fab")
         sleep(500)
@@ -123,7 +126,7 @@ class CreateCaseSpec extends FrontlinesmsLegalGebSpec {
         when:
         to NewCasePage
         and:
-        clickLinkContact.click()
+        linkContact.click()
         and:
         contactNameSearch.value("\r")
 
@@ -139,14 +142,14 @@ class CreateCaseSpec extends FrontlinesmsLegalGebSpec {
         when:
         to NewCasePage
         and:
-        clickLinkContact.click()
+        linkContact.click()
         and:
         contactNameSearch.value("fab")
         sleep(500)
         and:
-        clickDialogCancelButton.click()
+        linkContactDialogCancelButton.click()
         and:
-        clickLinkContact.click()
+        linkContact.click()
 
         then:
         contactNameSearch.value() == ""
@@ -160,14 +163,14 @@ class CreateCaseSpec extends FrontlinesmsLegalGebSpec {
         when:
         to NewCasePage
         and:
-        clickLinkContact.click()
+        linkContact.click()
         and:
         contactNameSearch.value("fab")
         sleep(500)
         and:
-        clickDialogCancelButton.click()
+        linkContactDialogCancelButton.click()
         and:
-        clickLinkContact.click()
+        linkContact.click()
 
         then:
         contactLinkNotVisible().size() == 0
@@ -181,7 +184,7 @@ class CreateCaseSpec extends FrontlinesmsLegalGebSpec {
         when:
         to NewCasePage
         and:
-        clickLinkContact.click()
+        linkContact.click()
         contactListInPopUp[0].click()
         relationshipCancelButton.click()
 

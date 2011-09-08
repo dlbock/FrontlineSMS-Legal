@@ -14,11 +14,11 @@ class NewCasePage extends Page {
         caseCancelDialog { $("div", id: "case-cancel-dialog")}
         cancelYes { $("button", id: "cancel-confirm-yes")}
         cancelNo { $("button", id: "cancel-confirm-no")}
-        clickLinkContact {$("#link-contact-button")}
+        linkContact {$("#link-contact-button")}
         linkContactDialog { $("div", id: "link-contacts") }
         contactNameSearch { $("input", id: "contact-name-search") }
         contactLinkNotVisible { $("tr", class: "contactLink", filtermatch: "false").collect {module ContactRow, it} }
-        clickDialogCancelButton { $(".ui-button-text").value("Cancel") }
+        linkContactDialogCancelButton { $(".ui-button-text").value("Cancel") }
         caseTitle {$("input", id:"case-title")}
         saveCaseWithoutCaseTitleDialog{ $("div", id:"save-case-without-case-title-dialog")}
         saveWithoutCaseTitleYes{ $("button", id:"save-confirm-yes")}
