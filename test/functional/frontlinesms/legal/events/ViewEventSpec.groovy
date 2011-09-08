@@ -8,7 +8,7 @@ import frontlinesms.legal.LegalContact
 
 class ViewEventSpec extends FrontlinesmsLegalGebSpec {
 
-    def "should display linked contacts for event when event is clicked"() {
+    def "should display linked cases and contacts for event when event is clicked"() {
         given:
         new LegalContact(name: "fabio", primaryMobile: "22222").save(flush: true)
         new Case(caseId: "123", description: "test", caseTitle:"Case 1").save(flush: true)
@@ -20,7 +20,8 @@ class ViewEventSpec extends FrontlinesmsLegalGebSpec {
         sleep(500)
 
         then:
-        assert eventDialog.present
+        existingCaseList.size() == 1
+        existingContactList.size() == 1
     }
 
 

@@ -5,7 +5,6 @@ import frontlinesms.legal.functionaltests.pages.DateField
 import geb.Module
 import geb.Page
 import frontlinesms.legal.functionaltests.pages.LinkableCase
-import frontlinesms.legal.functionaltests.pages.contact.CaseRow
 import frontlinesms.legal.functionaltests.pages.LinkedCaseRow
 
 class SchedulePage extends Page {
@@ -26,7 +25,10 @@ class SchedulePage extends Page {
 
         casesToLink { $("tr", class: "caseLink").collect {module LinkableCase, it} }
         existingCaseList {
-            $("#cases tbody tr").collect {module LinkableCase, it}
+            $("#cases tbody tr").collect {module LinkedCaseRow, it}
+        }
+        existingContactList {
+            $("#event-contacts-table tbody tr").collect {module ContactRow, it}
         }
         linkToBeSelected{ $(".link-case")}
     }
@@ -58,8 +60,7 @@ class EventDialog extends Module {
         date { module DateField, $('#event-date') }
         startTime { $('#event-start-time') }
         endTime { $('#event-end-time') }
-        contactsLinkedToEvent { $(".event-contact").collect {module ContactRow, it} }
-        casesLinkedToEvent { $(".event-cases").collect {module LinkedCaseRow, it} }
+        //contactsLinkedToEvent { $(".event-contact").collect {module ContactRow, it} }
         updateEventButton { $('#update-event') }
         deleteEventButton { $('#delete-event') }
         errorMessage { $(id: "error-message").text() }
