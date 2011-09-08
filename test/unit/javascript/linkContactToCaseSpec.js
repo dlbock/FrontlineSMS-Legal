@@ -21,6 +21,7 @@ describe('linkContactToCase', function () {
                 '</table> ' +
                 '</div>' +
 
+
                 '<table name="contacts" id="contacts">' +
                 '<tr>' +
                 '<th>Contact Name</th>' +
@@ -31,6 +32,8 @@ describe('linkContactToCase', function () {
 
                 '<button id="link-contact-button">Link contacts</button>' +
 
+                '<div id="case-contact-relationship-dialog" title="Relationship to case" style="display: none;">' +
+                '<input id="case-contact-relationship"/>'+
                 '</div>';
 
 
@@ -56,25 +59,27 @@ describe('linkContactToCase', function () {
     });
 
     it('when a contact is clicked on link contact dialog box it should appear on show case page table', function() {
-        spyOn(window, 'prompt').andReturn('Client');
-        $("#link-contact-button").click();
         $("#5").click();
-        expect($('#contacts tr > td:contains(fabio) + td:contains(99999) + td:contains(Client)').length).toEqual(1);
+        $("#case-contact-relationship").val("Client");
+        $("#confirm-relationship").click();
+        expect($('#contacts tr > td:contains(fabio) + td:contains(99999)+ td:contains(Client)').length).toEqual(1);
     });
 
     it('when a contact is clicked in the link contacts  the Unique Id from database should be appended to caseLinkedContact', function() {
-        spyOn(window, 'prompt').andReturn('Client');
         $('#5').click();
+        $("#case-contact-relationship").val("Client");
+        $("#confirm-relationship").click();
         expect($('#case-linked-contacts').val()).toEqual("{\"5\":\"Client\"}");
     });
 
     it('when a contact is unlinked from the linked contacts list the Unique Id from database should be unlinked from caseLinkedContact', function() {
-        spyOn(window, 'prompt').andReturn('Client');
+        $("#link-contact-button").click();
         $('#5').click();
-        $('#6').click();
+        $("#case-contact-relationship").val("Client");
+        $("#confirm-relationship").click();
         var firstContactSelector = "table#contacts tr:nth-child(2)";
         $(firstContactSelector + " td.unlink-contact-button").click();
-        expect($('#case-linked-contacts').val()).toEqual("{\"6\":\"Client\"}");
+        expect($('#case-linked-contacts').val()).toEqual("{}");
     });
 
     it('when a contact has already been added, and is clicked again on the popup , the contact shouldnt get added again', function() {
@@ -95,9 +100,9 @@ describe('linkContactToCase', function () {
         expect($(secondRowSelector + ":contains('fabio')").size()).toEqual(0);
     });
 
+
     afterEach(function() {
         $('body#fixtures > *').not(".jasmine_reporter").not('script').remove()
     })
-
 
 });
