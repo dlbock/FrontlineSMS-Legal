@@ -12,7 +12,7 @@ class EventController {
         params.startTimeField = params.startTimeField ? params.startTimeField : ""
         params.dateFieldSelected = params.dateFieldSelected ? params.dateFieldSelected : ""
         params.endTimeField = params.endTimeField ? params.endTimeField : ""
-        [allCases: Case.getAll(), contactList: LegalContact.list()]
+        [allCases: Case.list(), contactList: LegalContact.list()]
     }
 
 

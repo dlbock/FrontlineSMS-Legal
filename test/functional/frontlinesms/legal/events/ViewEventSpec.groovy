@@ -1,45 +1,39 @@
 package frontlinesms.legal.events
 
 import frontlinesms.legal.functionaltests.FrontlinesmsLegalGebSpec
-import frontlinesms.legal.functionaltests.pages.contact.CreateLegalContactPage
 import frontlinesms.legal.functionaltests.pages.events.NewEventPage
 import frontlinesms.legal.functionaltests.pages.schedule.SchedulePage
-import spock.lang.Ignore
+import frontlinesms.legal.Case
+import frontlinesms.legal.LegalContact
 
 class ViewEventSpec extends FrontlinesmsLegalGebSpec {
-    @Ignore
+
     def "should display linked contacts for event when event is clicked"() {
         given:
-        createContact("76575658")
-        createEventWithLink("test event")
+        new LegalContact(name: "fabio", primaryMobile: "22222").save(flush: true)
+        new Case(caseId: "123", description: "test", caseTitle:"Case 1").save(flush: true)
+        createEventWithLinkedCaseAndLinkedContact("test event")
         to SchedulePage, "index"
 
         when:
-        at SchedulePage
-        testEvent.click()
+        events()[0].click()
         sleep(500)
 
         then:
-        assert eventContacts.size() == 1
-
+        assert eventDialog.present
     }
 
-    def createContact(number) {
-        to CreateLegalContactPage
-        name = "Fred"
-        primaryMobile = number
-        notes = "Blah"
-        save.click()
-    }
 
-    def createEventWithLink(title) {
+    def createEventWithLinkedCaseAndLinkedContact(title) {
         to NewEventPage
         eventTitle = title
-        date.setValue(new Date().format("MMMM d, yyyy"))
+        date.setDate(6)
         startTimeField = "08:09AM"
         endTimeField = "08:56PM"
         linkContactButton.click()
         contactsToLink.first().click()
+        linkCaseToEventButton.click()
+        casesToLink[0].linkCase.click()
         save.click()
     }
 

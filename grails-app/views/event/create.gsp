@@ -33,7 +33,8 @@
 <body>
 <h1>Create Event</h1>
 
-<form action="save" name="createEventForm" method="post">
+<g:form action="save" name="createEventForm" method="post">
+
     <label>Title</label>
     <g:textField id="event-title" name="eventTitle" value="${params.eventTitle}"/><br><br>
     <label>Date</label>
@@ -63,6 +64,7 @@
         <button id="link-case-button">Link case</button>
     </div>
 
+    <g:hiddenField name="linkedCases" id="event-linked-cases" value="${params.linkedCases}"/>
     <table name="cases" id="cases">
         <thead>
         <tr>
@@ -82,7 +84,7 @@
         return false;">Cancel</button>
     </div>
 
-</form>
+</g:form>
 
 <div id="link-contacts" title="Link Contacts">
     <g:textField name="contactNameSearch" id="contact-name-search"/>

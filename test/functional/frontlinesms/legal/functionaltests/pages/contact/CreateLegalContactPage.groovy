@@ -1,10 +1,8 @@
 package frontlinesms.legal.functionaltests.pages.contact
 
 import geb.Page
-import geb.Module
+
 import frontlinesms.legal.functionaltests.pages.LinkedCaseRow
-
-
 
 class CreateLegalContactPage extends Page {
     static at = { $("title").text() == "Create New Contact" }
@@ -32,14 +30,5 @@ class CreateLegalContactPage extends Page {
         relationshipInput { $("input", id: "case-contact-relationship")}
         relationshipConfirmButton { $("button", id: "confirm-relationship")}
         relationshipCancelButton { $("button", id: "cancel-relationship")}
-    }
-}
-class CaseRow extends Module {
-    static content = {
-        cell { i -> $("td", i) }
-        caseId { cell(0).text().present }
-        caseTitle { cell(1).text() }
-        status { cell(2).text() }
-        linkCaseButton { $("a", class: "caseLinkButton") }
     }
 }

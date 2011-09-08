@@ -27,10 +27,11 @@
         </div>
 
         <g:hiddenField name="linkedCases" id="event-linked-cases" value="${params.linkedCases}"/>
-        <table id="cases">
+        <table name= "cases" id="cases">
             <thead>
             <tr>
                 <th>Case ID</th>
+                <th>Case Title</th>
                 <th>Status</th>
             </tr>
             </thead>

@@ -4,6 +4,7 @@ import frontlinesms.legal.functionaltests.pages.DateField
 import geb.Module
 import geb.Page
 import frontlinesms.legal.functionaltests.pages.LinkedCaseRow
+import frontlinesms.legal.functionaltests.pages.LinkableCase
 
 class NewEventPage extends Page {
     static at = { $("title").text() == "Create New Event" }
@@ -52,12 +53,3 @@ class LinkableContact extends Module {
     }
 }
 
-class LinkableCase extends Module {
-    static content = {
-        cell { i -> $("td", i) }
-        caseId { $(class: "case-name").text() }
-        caseTitle { $(class: "case-title").text() }
-        status { $(class: "case-status").text() }
-        linkCase { $("a", class: "link-case") }
-    }
-}

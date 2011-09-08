@@ -4,6 +4,9 @@ import frontlinesms.legal.functionaltests.pages.ConfirmationDialog
 import frontlinesms.legal.functionaltests.pages.DateField
 import geb.Module
 import geb.Page
+import frontlinesms.legal.functionaltests.pages.LinkableCase
+import frontlinesms.legal.functionaltests.pages.contact.CaseRow
+import frontlinesms.legal.functionaltests.pages.LinkedCaseRow
 
 class SchedulePage extends Page {
     static at = { $("title").text() == "Schedule" }
@@ -56,6 +59,7 @@ class EventDialog extends Module {
         startTime { $('#event-start-time') }
         endTime { $('#event-end-time') }
         contactsLinkedToEvent { $(".event-contact").collect {module ContactRow, it} }
+        casesLinkedToEvent { $(".event-cases").collect {module LinkedCaseRow, it} }
         updateEventButton { $('#update-event') }
         deleteEventButton { $('#delete-event') }
         errorMessage { $(id: "error-message").text() }
@@ -140,12 +144,4 @@ class LinkCaseDialog extends Module {
     }
 }
 
-class LinkableCase extends Module {
-    static content = {
-        cell { i -> $("td", i) }
-        name { $(class: "case-name").text() }
-        number { cell(1).text() }
-        linkCase { cell(2) }
-    }
-}
 

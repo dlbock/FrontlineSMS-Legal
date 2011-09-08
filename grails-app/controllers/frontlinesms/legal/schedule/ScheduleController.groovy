@@ -47,7 +47,7 @@ class ScheduleController {
             render(contentType: "text/json") {
                 array {
                     for (c in linkedCases) {
-                        event(id: c.caseId, status: c.active)
+                        event(id: c.caseId, caseTitle: c.caseTitle, status: c.active)
                     }
                 }
             }

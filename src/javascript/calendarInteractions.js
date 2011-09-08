@@ -44,9 +44,10 @@ frontlinesms.displayEventDetails = function(calEvent) {
             frontlinesms.log("Failed to get linked contacts for event.");
         },
         success : function(data) {
+
             frontlinesms.log("Success" + data.toString() + "  " + calEvent.id);
-            frontlinesms.constructContactsTable(data, calEvent.id);
             frontlinesms.populateHiddenFieldWithLinkedContacts(data);
+            frontlinesms.constructContactsTable(data, calEvent.id);
         },
         cache:false
     });
@@ -62,8 +63,8 @@ frontlinesms.displayEventDetails = function(calEvent) {
         success : function(data) {
             frontlinesms.log("SuccessCases:");
             frontlinesms.log(data);
-            frontlinesms.constructCasesTable(data);
             frontlinesms.populateHiddenFieldWithLinkedCases(data);
+            frontlinesms.constructCasesTable(data);
         },
         cache:false
     });
@@ -90,7 +91,7 @@ frontlinesms.constructContactsTable = function(data, eventId) {
 
 frontlinesms.constructCasesTable = function(data) {
 
-    $('#event-cases-table tbody *').remove();
+    $('#cases tbody *').remove();
     for (var i = 0; i < data.length; i++) {
         var status;
         if (data[i]["status"]) {
@@ -102,9 +103,10 @@ frontlinesms.constructCasesTable = function(data) {
         var newRow =
             '<tr class="event-cases">' +
                 '<td>' + data[i]["id"] + '</td>' +
+                '<td>' + data[i]["caseTitle"] + '</td>' +
                 '<td>' + status + '</td>' +
                 '</tr>';
-        $('#event-cases-table tbody').append(newRow);
+        $('#cases tbody').append(newRow);
     }
 };
 
