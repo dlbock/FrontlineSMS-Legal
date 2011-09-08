@@ -12,7 +12,6 @@
     <g:javascript library="eventDetails"/>
     <g:javascript library="jquery.timeentry.min"/>
     <g:javascript library="eventInteractions"/>
-    <g:javascript library="unlinkContactFromEvent"/>
     <g:javascript library="picnet.table.filter.min"/>
     <g:javascript library="contactSearch"/>
     <g:javascript library="caseSearch"/>
@@ -30,7 +29,6 @@
             frontlinesms.activateTimePicker();
             frontlinesms.contactSearchOnLoad("#contactsTable", "#contact-name-search");
             frontlinesms.caseSearchOnLoad();
-            frontlinesms.blockKeyPressInDateField();
             frontlinesms.linkCaseToEvent();
             <g:if test="${year}">
             <g:if test="${month}">

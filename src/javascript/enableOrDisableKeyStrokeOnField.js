@@ -12,7 +12,7 @@ frontlinesms.blockKeyInField = function(keyCode, fieldId) {
 
 frontlinesms.enableKeyInField = function(keyCode, fieldId) {
 
-    $(fieldId).keypress(function(key) {
+    $(fieldId).keydown(function(key) {
             if(keyCode == key.keyCode) {
                 return true;
             }

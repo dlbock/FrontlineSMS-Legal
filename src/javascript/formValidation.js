@@ -37,17 +37,6 @@ frontlinesms.validateContactNumber = function() {
 
 };
 
-frontlinesms.blockKeyPressInDateField = function() {
-    var keyCodeForTabKey = 9;
-    $("#event-date").keydown(function(key) {
-            if (key.keyCode == keyCodeForTabKey) {
-                return true;
-            }
-            return false;
-        }
-    );
-};
-
 frontlinesms.filterOutUnwantedCharacters = function(fieldId, validCharacters, keyCodesForAllowedKeys) {
      var validMobileNumber= "";
         var primaryMobileNumber = $(fieldId).val();
