@@ -34,18 +34,18 @@ class ShowCaseSpec extends FrontlinesmsLegalGebSpec {
         when:
         to ShowCasePage, "1112"
         and:
-        clickLinkContact.click()
+        linkContact.click()
 
         then:
-        contactsTable.collect { it -> it.name }.contains("fabio")
+        contactListInPopUp.collect { it -> it.name }.contains("fabio")
 
         and:
-        contactsTable.collect { it -> it.primaryMobile}.contains("22222")
+        contactListInPopUp.collect { it -> it.primaryMobile}.contains("22222")
 
         and:
-        contactsTable.collect { it -> it.name }.contains("dev")
+        contactListInPopUp.collect { it -> it.name }.contains("dev")
         and:
-        contactsTable.collect { it -> it.primaryMobile }.contains("55555")
+        contactListInPopUp.collect { it -> it.primaryMobile }.contains("55555")
     }
 
     def "should be able to edit case ID of case"() {
@@ -165,7 +165,7 @@ class ShowCaseSpec extends FrontlinesmsLegalGebSpec {
         when:
         to ShowCasePage, "1112"
         and:
-        clickLinkContact.click()
+        linkContact.click()
 
         then:
         linkContactDialog.displayed == true
@@ -180,7 +180,7 @@ class ShowCaseSpec extends FrontlinesmsLegalGebSpec {
         when:
         to ShowCasePage, "1112"
         and:
-        clickLinkContact.click()
+        linkContact.click()
         and:
         contactNameSearch.value("fab")
         sleep(500)
@@ -198,7 +198,7 @@ class ShowCaseSpec extends FrontlinesmsLegalGebSpec {
         when:
         to ShowCasePage, "1112"
         and:
-        clickLinkContact.click()
+        linkContact.click()
         and:
         contactNameSearch.value("\r")
 
@@ -215,14 +215,14 @@ class ShowCaseSpec extends FrontlinesmsLegalGebSpec {
         when:
         to ShowCasePage, "1112"
         and:
-        clickLinkContact.click()
+        linkContact.click()
         and:
         contactNameSearch.value("fab")
         sleep(500)
         and:
-        clickDialogCancelButton.click()
+        linkContactDialogCancelButton.click()
         and:
-        clickLinkContact.click()
+        linkContact.click()
 
         then:
         contactNameSearch.value() == ""
@@ -237,14 +237,14 @@ class ShowCaseSpec extends FrontlinesmsLegalGebSpec {
         when:
         to ShowCasePage, "1112"
         and:
-        clickLinkContact.click()
+        linkContact.click()
         and:
         contactNameSearch.value("fab")
         sleep(500)
         and:
-        clickDialogCancelButton.click()
+        linkContactDialogCancelButton.click()
         and:
-        clickLinkContact.click()
+        linkContact.click()
 
         then:
         contactLinkNotVisible().size() == 0
@@ -258,9 +258,9 @@ class ShowCaseSpec extends FrontlinesmsLegalGebSpec {
         to ShowCasePage, id
 
         then:
-        pastEventsTable.collect{ it -> it.title }[0] == "Past"
+        pastEventsTable.collect { it -> it.title }[0] == "Past"
         and:
-        futureEventsTable.collect{ it -> it.title }[0] == "Future"
+        futureEventsTable.collect { it -> it.title }[0] == "Future"
     }
 
 
@@ -272,9 +272,9 @@ class ShowCaseSpec extends FrontlinesmsLegalGebSpec {
         to ShowCasePage, id
 
         then:
-        pastEventsTable.collect{ it -> it.title }[0] == "Past"
+        pastEventsTable.collect { it -> it.title }[0] == "Past"
         and:
-        currentEventsTable.collect{ it -> it.title }[0] == "Current"
+        currentEventsTable.collect { it -> it.title }[0] == "Current"
     }
 
     def createFutureAndPastEventsAndLinkCases() {
@@ -301,14 +301,34 @@ class ShowCaseSpec extends FrontlinesmsLegalGebSpec {
         to ShowCasePage, caseOne.caseId
 
         and:
-        clickLinkContact.click()
-        contactsTable[0].click()
+        linkContact.click()
+        contactListInPopUp[0].click()
         relationshipCancelButton.click()
 
         then:
         linkContactDialog.present
-        noLinkedContacts
+        sizeOflinkedContactsTable == 0
     }
+
+    def "should link a contact to the case when a contact is selected in the link contact dialog"() {
+        setup:
+        new LegalContact(name: "fabio", primaryMobile: "22222").save(flush: true)
+        def caseOne = new Case(caseId: "1112", description: "ertyui")
+        caseOne.save(flush: true)
+
+        when:
+        to ShowCasePage, caseOne.caseId
+
+        and:
+        linkContact.click()
+        contactListInPopUp[0].click()
+//        contactsTable[0].click()
+        relationshipConfirmButton.click()
+
+        then:
+        sizeOflinkedContactsTable == 1
+    }
+
 
     def createCurrentAndPastEventsAndLinkCases() {
         def yearOffsetForDate = 1900

@@ -15,8 +15,8 @@ class ShowCasePage extends Page {
         deleteButton {$("button", id: "delete-button")}
         deleteButtonExists {$("button", id: "delete-button").size() == 1}
         caseActive { $("input", id: "case-status") }
-        clickLinkContact {$("#link-contact-button")}
-        contactsTable {$("#link-contacts-inner-table-div #contactsTable tbody tr").collect {module ContactRow, it} }
+        linkContact {$("#link-contact-button")}
+        contactListInPopUp {$("#link-contacts-inner-table-div #contactsTable tbody tr").collect {module ContactRow, it} }
         statusMessage { $("div", id: "status").text() }
         errorMessage { $("div", id: "errorMessage").text() }
         linkedContactsRow {$(name: "contactRow", id: "contact-row")}
@@ -26,7 +26,7 @@ class ShowCasePage extends Page {
         linkContactDialog { $("div", id: "link-contacts") }
         contactNameSearch { $("input", id: "contact-name-search") }
         contactLinkNotVisible { $("tr", class: "contactLink", filtermatch: "false").collect {module ContactRow, it} }
-        clickDialogCancelButton { $(".ui-button-text").value("Cancel") }
+        linkContactDialogCancelButton { $(".ui-button-text").value("Cancel") }
         cancelDialog { $("div", id: "case-update-cancel-dialog") }
         cancelButton {$("button", id: "case-update-cancel")}
         cancelYes { $("button", id: "cancel-confirm-yes")}
@@ -35,7 +35,8 @@ class ShowCasePage extends Page {
         futureEventsTable {$("#future-events tbody tr").collect {module EventRow, it} }
         currentEventsTable {$("#current-events tbody tr").collect {module EventRow, it} }
         relationshipCancelButton { $("button", id: "cancel-relationship")}
-        noLinkedContacts {$("#contacts tbody tr").size() == 1}
+        relationshipConfirmButton { $("button", id: "confirm-relationship")}
+        sizeOflinkedContactsTable {$("#contacts tbody tr:not(:first-child)").size()}
     }
 }
 
