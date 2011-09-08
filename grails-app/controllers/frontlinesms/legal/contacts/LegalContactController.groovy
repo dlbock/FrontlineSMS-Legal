@@ -1,12 +1,10 @@
 package frontlinesms.legal.contacts
 
-import frontlinesms.legal.LegalContact
-import frontlinesms2.Contact
 import frontlinesms.legal.Case
 import frontlinesms.legal.CaseContacts
+import frontlinesms.legal.EventContact
 import frontlinesms.legal.LegalContact
 import grails.converters.JSON
-import frontlinesms.legal.EventContact
 
 class LegalContactController {
 
@@ -48,6 +46,10 @@ class LegalContactController {
             redirect(action: 'show', params: [id: legalContact.id])
         }
 
+        else if (params.name.size() > 250) {
+            flash.error = "Please reduce the number of characters entered in the name field to save contact. Name field cannot have more than 250 characters"
+            redirect(action: 'create', params: [name: params.name, notes: params.notes, primaryMobile: params.primaryMobile])
+        }
         else if (params.primaryMobile == null || params.primaryMobile == "" || params.primaryMobile.isAllWhitespace()) {
             flash.error = "Please enter a contact number. Contact cannot be saved without a contact number."
             redirect(action: 'create', params: [name: params.name, notes: params.notes])

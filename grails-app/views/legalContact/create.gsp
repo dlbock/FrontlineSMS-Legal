@@ -31,7 +31,7 @@
 <form action="save" method="POST" id="contact-save-form">
     <g:hiddenField name="linkedCases" id="contact-linked-cases" value="${contactLinkedCases}"/>
     <label>Name</label>
-    <g:textField name="name" id="contact-name" value="${params.name}"/>
+    <g:textField name="name" id="contact-name" value="${params.name}" maxlength="250"/>
     <label>Number</label>
     <g:textField name="primaryMobile" id="contact-primary-mobile" value="${params.primaryMobile}" maxlength="25"/>
     <label>Notes (Max 1024 characters)</label>

@@ -36,7 +36,7 @@
     <g:hiddenField name="currentId" value="${contactToDisplay.id}"/>
     <g:hiddenField name="linkedCases" id="contact-linked-cases" value="${contactLinkedCases}"/>
     <label>Name</label>
-    <g:textField name="name" id="contact-name" value="${contactToDisplay.name}"/>
+    <g:textField name="name" id="contact-name" value="${contactToDisplay.name}" maxlength="250"/>
     <label>Number</label>
     <g:textField name="primaryMobile" id="contact-primary-mobile" value="${contactToDisplay.primaryMobile}"
                  maxlength="25"/>

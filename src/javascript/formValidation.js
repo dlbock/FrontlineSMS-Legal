@@ -14,7 +14,6 @@ frontlinesms.validateContactNumber = function() {
     });
 
     $("#contact-primary-mobile").keypress(function(key) {
-            frontlinesms.log(key);
             var keypressed = key? key.which : window.event.keyCode;
             var characterPressed = String.fromCharCode(keypressed);
             lengthOfContactNumber++;
