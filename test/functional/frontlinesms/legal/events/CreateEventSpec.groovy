@@ -230,8 +230,8 @@ class CreateEventSpec extends FrontlinesmsLegalGebSpec {
     def "should display cases in the case dialog "(){
 
         setup:
-        new Case(caseId: "1112", description: "ertyui").save(flush: true)
-        new Case(caseId: "1113", description: "erdstyui").save(flush: true)
+        new Case(caseId: "1112", caseTitle: "CaseTitle 1",description: "ertyui").save(flush: true)
+        new Case(caseId: "1113", caseTitle: "CaseTitle 2",description: "erdstyui").save(flush: true)
 
         when:
         to NewEventPage
@@ -245,8 +245,8 @@ class CreateEventSpec extends FrontlinesmsLegalGebSpec {
 
     def "should display link button next to each case in the case dialog"(){
         setup:
-        new Case(caseId: "1112", description: "ertyui").save(flush: true)
-        new Case(caseId: "1113", description: "erdstyui").save(flush: true)
+        new Case(caseId: "1112", caseTitle: "CaseTitle 1",description: "ertyui").save(flush: true)
+        new Case(caseId: "1113", caseTitle: "CaseTitle 2",description: "erdstyui").save(flush: true)
 
         when:
         to NewEventPage
@@ -258,10 +258,10 @@ class CreateEventSpec extends FrontlinesmsLegalGebSpec {
         casesToLink.collect { it -> it.linkCase }.size() == 2
     }
 
-    def "should append the selected case to the linked case table on the create event page"(){
+    def "should append the selected case with case title to the linked case table on the create event page"(){
         setup:
-        new Case(caseId: "1112", description: "ertyui").save(flush: true)
-        new Case(caseId: "1113", description: "erdstyui").save(flush: true)
+        new Case(caseId: "1112", caseTitle: "CaseTitle 1", description: "ertyui").save(flush: true)
+        new Case(caseId: "1113", caseTitle: "CaseTitle 2", description: "erdstyui").save(flush: true)
 
         when:
         to NewEventPage
@@ -274,13 +274,14 @@ class CreateEventSpec extends FrontlinesmsLegalGebSpec {
 
         then:
         oneContactIsDisplayed
+        linkedCasesTable[0].caseTitle == "CaseTitle 1"
 
     }
 
     def "an already linked case should not be linked again"(){
         setup:
-        new Case(caseId: "1112", description: "ertyui").save(flush: true)
-        new Case(caseId: "1113", description: "erdstyui").save(flush: true)
+        new Case(caseId: "1112", caseTitle: "CaseTitle 1",description: "ertyui").save(flush: true)
+        new Case(caseId: "1113", caseTitle: "CaseTitle 2",description: "erdstyui").save(flush: true)
 
         when:
         to NewEventPage

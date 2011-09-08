@@ -12,6 +12,7 @@
                 <thead>
                 <tr>
                     <th>Case ID</th>
+                    <th>Case Title</th>
                     <th>Status</th>
                 </tr>
                 </thead>
@@ -22,6 +23,10 @@
                         <td class="case-id">
                             <%=HtmlUtils.htmlEscape(legalCase.caseId)%>
                         </td>
+                        <td class="case-title">
+                            <%=HtmlUtils.htmlEscape(legalCase.caseTitle)%>
+                        </td>
+
                         <td class="case-status">
                             <%=legalCase.active ? "active" : "inactive"%>
                         </td>
