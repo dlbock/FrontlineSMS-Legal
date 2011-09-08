@@ -32,7 +32,7 @@
                             <%=legalCase.active ? "active" : "inactive"%>
                         </td>
                         <td>
-                            <a href="" class="caseLinkButton" id="${legalCase.caseId}">Link</a>
+                            <a href="#" class="caseLinkButton" id="${legalCase.caseId}">Link</a>
                         </td>
                     </tr>
                 </g:each>

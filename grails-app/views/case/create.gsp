@@ -48,8 +48,8 @@
     <div class="form-submit-area">
         <button id="link-contact-button">Link contacts</button>
     </div>
-    <g:hiddenField name="caseLinkedContacts" id="case-linked-contacts" value="${caseLinkedContacts}"/>
 
+    <g:hiddenField name="caseLinkedContacts" id="case-linked-contacts" value="${caseLinkedContacts}"/>
 
     <table name="contacts" id="contacts">
         <tr>

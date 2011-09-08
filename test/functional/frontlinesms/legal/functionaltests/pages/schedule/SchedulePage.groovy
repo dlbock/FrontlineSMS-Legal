@@ -60,7 +60,6 @@ class EventDialog extends Module {
         date { module DateField, $('#event-date') }
         startTime { $('#event-start-time') }
         endTime { $('#event-end-time') }
-        //contactsLinkedToEvent { $(".event-contact").collect {module ContactRow, it} }
         updateEventButton { $('#update-event') }
         deleteEventButton { $('#delete-event') }
         errorMessage { $(id: "error-message").text() }

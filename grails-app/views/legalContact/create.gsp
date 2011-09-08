@@ -29,7 +29,7 @@
 <h1 class="form-header">Create Contact</h1>
 
 <form action="save" method="POST" id="contact-save-form">
-    <g:hiddenField name="linkedCases" id="contact-linked-cases" value="${contactLinkedCases}"/>
+
     <label>Name</label>
     <g:textField name="name" id="contact-name" value="${params.name}" maxlength="250"/>
     <label>Number</label>
@@ -38,10 +38,12 @@
     <g:textArea name="notes" id="contact-notes" value="${params.notes}" cols="100" rows="10" maxlength="1024"/>
 
     <div class="form-submit-area">
-        <button id="link-case-button">Link Cases</button>
+       <button id="link-case-button">Link Cases</button>
     </div>
 
-    <table id="cases">
+    <g:hiddenField name="linkedCases" id="contact-linked-cases" value="${contactLinkedCases}"/>
+
+    <table name="cases" id="cases">
         <thead>
         <tr>
             <th>Case Id</th>

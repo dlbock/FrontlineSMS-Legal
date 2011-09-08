@@ -65,7 +65,7 @@ class CreateLegalContactSpec extends FrontlinesmsLegalGebSpec {
         linkCaseDialog.present
         casesToLink.collect { it -> it.linkCaseButton }.size() == 2
         casesToLink[0].caseTitle == "Case 1"
-        casesToLink[1].caseTitle=="Case 2"
+        casesToLink[1].caseTitle == "Case 2"
         caseIdSearch.present
         linkCaseCancelButton.present
     }
@@ -79,7 +79,6 @@ class CreateLegalContactSpec extends FrontlinesmsLegalGebSpec {
         to CreateLegalContactPage
         linkCaseButton.click()
         casesToLink[0].linkCaseButton.click()
-
 
         then:
         caseContactRelationshipDialog.present
@@ -100,6 +99,10 @@ class CreateLegalContactSpec extends FrontlinesmsLegalGebSpec {
         casesToLink[0].linkCaseButton.click()
         relationshipInput << "Victim"
         relationshipConfirmButton.click()
+        linkCaseButton.click()
+        casesToLink[1].linkCaseButton.click()
+        relationshipInput << "Victim"
+        relationshipConfirmButton.click()
 
         then:
         at(CreateLegalContactPage)
@@ -107,6 +110,11 @@ class CreateLegalContactSpec extends FrontlinesmsLegalGebSpec {
         linkedCasesTable[0].relationship == "Victim"
         linkedCasesTable[0].caseTitle == "Case Title 1"
         linkedCasesTable[0].unlink.displayed
+        linkedCasesTable[1].caseId == "321"
+        linkedCasesTable[1].relationship == "Victim"
+        linkedCasesTable[1].caseTitle == "Case Title 2"
+        linkedCasesTable[1].unlink.displayed
+
     }
 
     def "should retain search results after cancelling the relationship dialog"() {
@@ -154,5 +162,24 @@ class CreateLegalContactSpec extends FrontlinesmsLegalGebSpec {
         linkedCasesTable[0].unlink.displayed
     }
 
+    def "should not link a case that is already linked to the contact and should stay on the link case pop-up"(){
+        given:
+        new Case(caseId: "123", caseTitle: "Case Title 1", description: "test").save(flush: true)
+        new Case(caseId: "321", caseTitle: "Case Title 2", description: "test2").save(flush: true)
 
+        when:
+        to CreateLegalContactPage
+        name << "Bob"
+        primaryMobile << "8675309"
+        notes << "Testing"
+        linkCaseButton.click()
+        casesToLink[0].linkCaseButton.click()
+        relationshipInput << "Victim"
+        relationshipConfirmButton.click()
+        linkCaseButton.click()
+        casesToLink[0].linkCaseButton.click()
+
+        then:
+        linkCaseDialog.present
+    }
 }

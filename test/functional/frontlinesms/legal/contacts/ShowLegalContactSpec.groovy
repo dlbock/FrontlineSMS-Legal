@@ -272,4 +272,23 @@ class ShowLegalContactSpec extends FrontlinesmsLegalGebSpec {
         then:
         caseLinkNotVisible.size() == 0
     }
+
+    def "should not link a case that is already linked to the contact and should stay on the link case pop-up"(){
+        given:
+        new Case(caseId: "123", caseTitle: "Case Title 1", description: "test").save(flush: true)
+        new Case(caseId: "321", caseTitle: "Case Title 2", description: "test2").save(flush: true)
+        def contact1 = new LegalContact(name: "fabio", primaryMobile: "22222").save(flush: true)
+
+        when:
+        to ShowLegalContactPage, contact1.id
+        linkCaseButton.click()
+        casesToLink[0].linkCaseButton.click()
+        relationshipInput << "Victim"
+        relationshipConfirmButton.click()
+        linkCaseButton.click()
+        casesToLink[0].linkCaseButton.click()
+
+        then:
+        linkCaseDialog.present
+    }
 }

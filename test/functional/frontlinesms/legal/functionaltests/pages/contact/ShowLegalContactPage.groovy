@@ -12,6 +12,7 @@ class ShowLegalContactPage extends Page {
         primaryMobile { $("input", id: "contact-primary-mobile").value()}
         notes {$("textarea", id: "contact-notes")}
         linkCaseButton { $("button", id: "link-case-button")}
+        linkCaseDialog { $("div", id: "link-case-dialog")}
         linkedCasesTable {
             $("#cases tbody tr").collect {module LinkedCaseRow, it}
         }
@@ -21,7 +22,7 @@ class ShowLegalContactPage extends Page {
         deleteDialog { $("div", id: "deleteDialog") }
         deleteYes { $("button", id: "confirm-yes")}
         deleteNo { $("button", id: "confirm-no")}
-        casesToLink { $("tbody tr").collect {module CaseRow, it} }
+        casesToLink { $("#SearchResults tbody tr").collect {module CaseRow, it} }
         currentEventsTable {$("#current-events tbody tr").collect {module EventRow, it} }
         caseIdSearch { $("input", id: "caseId") }
         caseLinkNotVisible { $("tr", class: "caseLink", filtermatch: "false").collect {module LegalContactRow, it} }

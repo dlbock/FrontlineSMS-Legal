@@ -36,7 +36,7 @@ frontlinesms.linkContactToCase = function() {
     $(".contactLink").click(function() {
         var contactId = $(this).attr('id');
         if (!frontlinesms.checkIfCaseHasContactLinked(contactId)) {
-            frontlinesms.relationshipDialog(contactId, "Contact")
+            frontlinesms.relationshipDialog(contactId, "Contact");
             return false;
         }
     });

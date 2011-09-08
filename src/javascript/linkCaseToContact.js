@@ -28,7 +28,7 @@ frontlinesms.linkCaseToContact = function() {
     $(".caseLinkButton").click(function() {
         var caseId = $(this).parents("tr").attr('id');
         if (!frontlinesms.checkIfContactHasCaseLinked(caseId)) {
-            frontlinesms.relationshipDialog(caseId, "Case")
+            frontlinesms.relationshipDialog(caseId, "Case");
             return false;
         }
     });
@@ -82,7 +82,8 @@ frontlinesms.relationshipDialog = function (Id, type) {
             }
         ]
     });
-}
+};
+
 frontlinesms.checkIfContactHasCaseLinked = function(caseId) {
     var linkedCases = $.parseJSON($('#contact-linked-cases').val()) || {};
     return (caseId in linkedCases);
