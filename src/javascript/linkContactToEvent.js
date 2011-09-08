@@ -1,22 +1,20 @@
 var frontlinesms = this.frontlinesms || {};
 
 frontlinesms.linkContactToEvent = function() {
-
-    $("#link-contacts").dialog({
+    $("#link-contact-dialog").dialog({
         autoOpen: false,
         modal: true,
         open: function() {
             $("#contact-name-search").val("");
-            $(".contactLink").removeAttr("filtermatch", true).show();
+            $(".contactRow").removeAttr("filtermatch", true).show();
         },
-
         buttons: {
             "Cancel" : {
                 text: "Cancel",
-                id: "cancel-link-contact",
+                id: "cancel-button",
                 click: function() {
                     $("#contact-name-search").val("");
-                    $(".contactLink").removeAttr("filtermatch", true).show();
+                    $(".contactRow").removeAttr("filtermatch", true).show();
                     $(this).dialog("close");
                 }
             }
@@ -24,7 +22,7 @@ frontlinesms.linkContactToEvent = function() {
     });
 
     $("#link-contact-button").click(function() {
-        $("#link-contacts").dialog("open");
+        $("#link-contact-dialog").dialog("open");
         return false;
     });
 
@@ -33,10 +31,8 @@ frontlinesms.linkContactToEvent = function() {
         if (!frontlinesms.checkIfEventHasContactLinked(contactId)) {
             frontlinesms.addDomainIdsToHiddenField(contactId, "event-linked-contacts");
             frontlinesms.addLinkedContactToTable(contactId);
-
-
         }
-        $("#link-contacts").dialog("close");
+        $("#link-contact-dialog").dialog("close");
         return false;
     });
 
@@ -67,11 +63,9 @@ frontlinesms.addLinkedContactToTable = function(contactId) {
             '</td>' +
             '<td class="unlink-contact-button">' +
             '<a href="">Unlink</a>' +
-
             '</td>'
     );
     $('#contacts').append(rowToAdd);
-
 }
 
 frontlinesms.checkIfEventHasContactLinked = function(contactId) {

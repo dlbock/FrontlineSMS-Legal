@@ -53,7 +53,7 @@
     <p>Are you sure you want to unlink this contact from the event?</p>
 </div>
 
-<g:render template="linkContacts"/>
+<g:render template="../shared/linkContacts"/>
 <g:render template="../shared/linkCases"/>
 
 </body>

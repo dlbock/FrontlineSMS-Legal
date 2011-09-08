@@ -1,7 +1,6 @@
 var frontlinesms = this.frontlinesms || {};
 
 frontlinesms.linkCaseToEvent = function() {
-
     $("#link-case-dialog").dialog({
         autoOpen: false,
         modal: true,

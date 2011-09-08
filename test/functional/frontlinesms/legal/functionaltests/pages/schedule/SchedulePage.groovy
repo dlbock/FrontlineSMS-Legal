@@ -37,14 +37,10 @@ class SchedulePage extends Page {
 class EventDialog extends Module {
     static base = { $(id: "view-event") }
     static content = {
-        title { $('#event-title') }
         linkContactDialog { module LinkContactDialog, page.$() }
         linkCaseDialog { module LinkCaseDialog, page.$() }
 
-        linkCase {
-            $("#link-case-button").click()
-            true
-        }
+        title { $('#event-title') }
 
         close {
             $(".ui-dialog-titlebar-close ui-corner-all") .click()
@@ -84,6 +80,11 @@ class EventDialog extends Module {
             $('#link-contact-button').click()
             true
         }
+        
+        linkCase {
+            $("#link-case-button").click()
+            true
+        }
     }
 }
 
@@ -94,43 +95,6 @@ class ContactRow extends Module {
         name { cell(0).text() }
         primaryMobileNumber { cell(1).text() }
         unlinkContact { $("a", class: "unlink-contact")}
-    }
-}
-
-class LinkContactDialog extends Module {
-    static base = { $('#link-contact-dialog').parent(".ui-dialog") }
-    static content = {
-        searchbox { $(id: "contact-name-search") }
-        contacts { $("#contactsTable tbody tr").findAll { it.displayed }.collect { module LinkContactRow, it } }
-
-        searchFor { query ->
-            searchbox.value(query)
-            sleep(500)
-            true
-        }
-
-        link { name ->
-            contacts.find{ it.contactName == name }.link()
-            true
-        }
-
-        cancel {
-            $("#cancel-button").click()
-            true
-        }
-    }
-}
-
-class LinkContactRow extends Module {
-    static content = {
-        cell { i -> $("td", i) }
-        contactName { cell(0).text() }
-        contactNumber { cell(1).text() }
-
-        link {
-            $("a").find { it.text() == "Link" }.click()
-            true
-        }
     }
 }
 

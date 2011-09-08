@@ -91,8 +91,8 @@ class UnlinkContactFromEventSpec extends FrontlinesmsLegalGebSpec {
         startTimeField = "08:09AM"
         endTimeField = "08:56PM"
         for (name in names) {
-            linkContactButton.click()
-            contactsToLink.find { it.name == name }.click()
+            linkContact()
+            linkContactDialog.link(name)
         }
         save.click()
     }

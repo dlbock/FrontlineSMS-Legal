@@ -58,7 +58,6 @@
         </tr>
 
     </table>
-    <br>
 
     <div class="form-submit-area">
         <button id="link-case-button">Link case</button>
@@ -86,41 +85,7 @@
 
 </g:form>
 
-<div id="link-contacts" title="Link Contacts">
-    <g:textField name="contactNameSearch" id="contact-name-search"/>
-    <g:form action="">
-        <table id="link-contacts-outer-table">
-            <thead>
-            <tr><td>Name</td></tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>
-                    <div id="link-contacts-inner-table-div" style="height:200px;overflow: scroll; width:200px">
-                        <table id="contactsTable">
-                            <thead>
-                            </thead>
-                            <tbody>
-                            <g:each in="${contactList}" var="contact">
-                                <tr class="contactLink" id="${contact.id}">
-                                    <td class="contact-name">
-                                        <a href="#"><%=contact.name%></a>
-                                    </td>
-                                    <td class="contact-number">
-                                        <a href="#"><%=contact.primaryMobile%></a>
-                                    </td>
-                                </tr>
-                            </g:each>
-                            </tbody>
-                        </table>
-                    </div>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </g:form>
-</div>
-
+<g:render template="../shared/linkContacts"/>
 <g:render template="../shared/linkCases" />
 
 <div id="event-cancel-dialog" title="Cancel event creation?" style="display: none;">

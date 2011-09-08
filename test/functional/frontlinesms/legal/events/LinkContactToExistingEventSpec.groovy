@@ -25,7 +25,6 @@ class LinkContactToExistingEventSpec extends FrontlinesmsLegalGebSpec {
         linkableContacts[0].contactNumber == "1234567"
         linkableContacts[1].contactName == "faooio"
         linkableContacts[1].contactNumber == "12309004567"
-
     }
 
     def 'should link the correct contact to an existing event when the LINK CONTACT link next to it is clicked'() {
@@ -156,12 +155,12 @@ class LinkContactToExistingEventSpec extends FrontlinesmsLegalGebSpec {
         to SchedulePage, "index"
 
         when:
-        events()[0].click()
+        selectEvent("Test")
         eventDialog.clickLinkContact()
         eventDialog.linkContactDialog.link("neetu")
 
         then:
-        eventDialog.contactsLinkedToEvent.collect{ it.name } == ["neetu"]
+        eventDialog.contactsLinkedToEvent.collect { it.name } == ["neetu"]
     }
 
     def "should continue showing the search contact dialog box after pressing RETURN when searching for a contact"() {
@@ -172,7 +171,7 @@ class LinkContactToExistingEventSpec extends FrontlinesmsLegalGebSpec {
 
         when:
         to SchedulePage, "index"
-        events()[0].click()
+        selectEvent("Test")
         eventDialog.clickLinkContact()
         eventDialog.linkContactDialog.searchFor("fab\r")
 
@@ -195,7 +194,7 @@ class LinkContactToExistingEventSpec extends FrontlinesmsLegalGebSpec {
         eventDialog.linkContactDialog.link("fabio")
         eventDialog.updateEvent()
 
-        then:
+        then:   
         selectEvent("Test")
         eventDialog.contactsLinkedToEvent.collect { it.name } == ["fabio"]
     }
@@ -233,11 +232,9 @@ class LinkContactToExistingEventSpec extends FrontlinesmsLegalGebSpec {
         date.setDate(16)
         startTimeField = "08:09AM"
         endTimeField = "08:56PM"
-        clickLinkContact.click()
-        contactNameSearch.value("ne")
-        sleep(5000)
-        contactsToLink.first().click()
+        linkContact()
+        linkContactDialog.searchFor("ne")
+        linkContactDialog.link("neetu")
         save.click()
     }
-
 }

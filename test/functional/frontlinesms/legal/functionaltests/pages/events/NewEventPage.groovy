@@ -1,10 +1,10 @@
 package frontlinesms.legal.functionaltests.pages.events
 
 import frontlinesms.legal.functionaltests.pages.DateField
-import geb.Module
 import geb.Page
 import frontlinesms.legal.functionaltests.pages.LinkedCaseRow
 import frontlinesms.legal.functionaltests.pages.LinkableCase
+import frontlinesms.legal.functionaltests.pages.LinkContactDialog
 
 class NewEventPage extends Page {
     static at = { $("title").text() == "Create New Event" }
@@ -20,36 +20,19 @@ class NewEventPage extends Page {
         cancelNo { $("button", id: "cancel-confirm-no") }
         startTimeField { $("input", id: "event-start-time") }
         endTimeField { $("input", id: "event-end-time") }
-        clickLinkContact { $("#link-contact-button") }
-        linkContactButton { $("button", id: "link-contact-button") }
-        contactsToLink { $("tr[class='contactLink']").collect { module LinkableContact, it } }
-        linkContactDialog { $("div", id: "link-contacts") }
-        contactNameSearch { $("input", id: "contact-name-search") }
-        contactLinkNotVisible { $("tr", class: "contactLink", filtermatch: "false").collect {module ContactRow, it} }
         contactDialogCancelButton { $("#cancel-link-contact") }
         linkCaseToEventButton { $("button", id: "link-case-button") }
         linkCaseDialog { $("div", id: "link-case-dialog") }
         caseDialogCancelButton { $("#cancel-link-case") }
-        casesToLink { $("tr", class:"caseLink").collect {module LinkableCase, it} }
+        casesToLink { $("tr", class: "caseLink").collect {module LinkableCase, it} }
         oneContactIsDisplayed { $("#cases").size() == 1 }
         linkedCasesTable {
             $("#cases tbody tr").collect {module LinkedCaseRow, it}
+            linkContactDialog { module LinkContactDialog }
+            linkContact {
+                $("button", id: "link-contact-button").click()
+                true
+            }
         }
     }
 }
-
-class ContactRow extends Module {
-    static content = {
-        cell { i -> $("td", i) }
-        name { cell(0).text() }
-        primaryMobile { cell(1).text() }
-    }
-}
-
-class LinkableContact extends Module {
-    static content = {
-        name { $(class: "contact-name").text() }
-        number { $(class: "contact-number").text() }
-    }
-}
-
