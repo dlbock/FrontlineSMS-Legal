@@ -17,7 +17,7 @@
             frontlinesms.createNewCaseOnLoad();
             frontlinesms.linkContactToCase();
             frontlinesms.linkCaseToContact();
-            frontlinesms.contactSearchOnLoad();
+            frontlinesms.contactSearchOnLoad("#contactsTable", "#contact-name-search");
             var keyCodeForEnterKey = 13;
             frontlinesms.blockKeyInField(keyCodeForEnterKey, '#case-id');
             frontlinesms.blockKeyInField(keyCodeForEnterKey, '#case-title');

@@ -4,13 +4,13 @@
     <meta name="layout" content="main">
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'forms.css')}"/>
     <g:javascript library="picnet.table.filter.min"/>
-    <g:javascript library="contactSearchForSearchPage"/>
+    <g:javascript library="contactSearch"/>
     <g:javascript library="confirmationDialog"/>
     <g:javascript library="deleteFromSearchPage"/>
 
     <script type="text/javascript">
         $(function() {
-            frontlinesms.contactSearchOnLoad();
+            frontlinesms.contactSearchOnLoad("#SearchResults", "#contact-search-bar");
             frontlinesms.initializeCaseDeletion();
         });
     </script>

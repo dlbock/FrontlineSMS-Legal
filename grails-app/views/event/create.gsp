@@ -20,7 +20,7 @@
         $(function() {
             frontlinesms.linkContactToEvent();
             frontlinesms.linkCaseToEvent();
-            frontlinesms.contactSearchOnLoad();
+            frontlinesms.contactSearchOnLoad("#contactsTable", "#contact-name-search");
             frontlinesms.caseSearchOnLoad();
             frontlinesms.blockKeyPressInDateField();
             var keyCodeForEnterKey = 13;
