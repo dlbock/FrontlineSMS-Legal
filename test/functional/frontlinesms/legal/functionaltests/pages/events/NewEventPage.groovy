@@ -28,11 +28,11 @@ class NewEventPage extends Page {
         oneContactIsDisplayed { $("#cases").size() == 1 }
         linkedCasesTable {
             $("#cases tbody tr").collect {module LinkedCaseRow, it}
-            linkContactDialog { module LinkContactDialog }
-            linkContact {
-                $("button", id: "link-contact-button").click()
-                true
-            }
+        }
+        linkContactDialog { module LinkContactDialog }
+        linkContact {
+            $("button", id: "link-contact-button").click()
+            true
         }
     }
 }

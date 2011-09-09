@@ -11,7 +11,7 @@ class ViewEventSpec extends FrontlinesmsLegalGebSpec {
     def "should display linked cases and contacts for event when event is clicked"() {
         given:
         new LegalContact(name: "fabio", primaryMobile: "22222").save(flush: true)
-        new Case(caseId: "123", description: "test", caseTitle:"Case 1").save(flush: true)
+        new Case(caseId: "123", description: "test", caseTitle: "Case 1").save(flush: true)
         createEventWithLinkedCaseAndLinkedContact("test event")
         to SchedulePage, "index"
 
@@ -31,8 +31,8 @@ class ViewEventSpec extends FrontlinesmsLegalGebSpec {
         date.setDate(6)
         startTimeField = "08:09AM"
         endTimeField = "08:56PM"
-        linkContactButton.click()
-        contactsToLink.first().click()
+        linkContact()
+        linkContactDialog.link("fabio")
         linkCaseToEventButton.click()
         casesToLink[0].linkCase.click()
         save.click()

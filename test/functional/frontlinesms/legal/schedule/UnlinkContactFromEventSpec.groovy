@@ -29,7 +29,7 @@ class UnlinkContactFromEventSpec extends FrontlinesmsLegalGebSpec {
 
         when:
         selectEvent("test event")
-        eventDialog.clickLinkContact()
+        eventDialog.linkContact()
         eventDialog.linkContactDialog.link("Bob")
 
         and:

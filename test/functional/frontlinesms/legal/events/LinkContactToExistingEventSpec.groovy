@@ -15,7 +15,7 @@ class LinkContactToExistingEventSpec extends FrontlinesmsLegalGebSpec {
 
         when:
         selectEvent("Test Event")
-        eventDialog.clickLinkContact()
+        eventDialog.linkContact()
 
         then:
         def linkableContacts = eventDialog.linkContactDialog.contacts
@@ -36,7 +36,7 @@ class LinkContactToExistingEventSpec extends FrontlinesmsLegalGebSpec {
 
         when:
         events()[0].click()
-        eventDialog.clickLinkContact()
+        eventDialog.linkContact()
 
         and:
         eventDialog.linkContactDialog.link("fa")
@@ -55,7 +55,7 @@ class LinkContactToExistingEventSpec extends FrontlinesmsLegalGebSpec {
 
         when:
         selectEvent("Test")
-        eventDialog.clickLinkContact()
+        eventDialog.linkContact()
 
         and:
         eventDialog.linkContactDialog.cancel()
@@ -73,13 +73,13 @@ class LinkContactToExistingEventSpec extends FrontlinesmsLegalGebSpec {
 
         when:
         events()[0].click()
-        eventDialog.clickLinkContact()
+        eventDialog.linkContact()
         eventDialog.linkContactDialog.link("fa")
         to SchedulePage, "index"
 
         and:
         events()[1].click()
-        eventDialog.clickLinkContact()
+        eventDialog.linkContact()
         eventDialog.linkContactDialog.link("fa")
 
         then:
@@ -95,14 +95,14 @@ class LinkContactToExistingEventSpec extends FrontlinesmsLegalGebSpec {
 
         when:
         selectEvent("Test")
-        eventDialog.clickLinkContact()
+        eventDialog.linkContact()
 
         and:
         eventDialog.linkContactDialog.searchFor("ne")
         and:
         eventDialog.linkContactDialog.cancel()
         and:
-        eventDialog.clickLinkContact()
+        eventDialog.linkContact()
 
         then:
         eventDialog.linkContactDialog.searchbox.value() == ""
@@ -118,13 +118,13 @@ class LinkContactToExistingEventSpec extends FrontlinesmsLegalGebSpec {
 
         when:
         selectEvent("Test")
-        eventDialog.clickLinkContact()
+        eventDialog.linkContact()
 
         and:
         eventDialog.linkContactDialog.searchFor("ne")
 
         then:
-        eventDialog.linkContactDialog.contacts.collect { it.contactName } == ["neetu", "neil"]
+        eventDialog.linkContactDialog.contactsNotInSearchResults.size() == 1
     }
 
     def "should display all the contacts when the dialog box is reopened after a previous filter"() {
@@ -136,14 +136,14 @@ class LinkContactToExistingEventSpec extends FrontlinesmsLegalGebSpec {
 
         when:
         selectEvent("Test")
-        eventDialog.clickLinkContact()
+        eventDialog.linkContact()
 
         and:
         eventDialog.linkContactDialog.searchFor("ne")
         and:
         eventDialog.linkContactDialog.cancel()
         and:
-        eventDialog.clickLinkContact()
+        eventDialog.linkContact()
 
         then:
         eventDialog.linkContactDialog.contacts.size() == 2
@@ -156,7 +156,7 @@ class LinkContactToExistingEventSpec extends FrontlinesmsLegalGebSpec {
 
         when:
         selectEvent("Test")
-        eventDialog.clickLinkContact()
+        eventDialog.linkContact()
         eventDialog.linkContactDialog.link("neetu")
 
         then:
@@ -172,7 +172,7 @@ class LinkContactToExistingEventSpec extends FrontlinesmsLegalGebSpec {
         when:
         to SchedulePage, "index"
         selectEvent("Test")
-        eventDialog.clickLinkContact()
+        eventDialog.linkContact()
         eventDialog.linkContactDialog.searchFor("fab\r")
 
         then:
@@ -190,7 +190,7 @@ class LinkContactToExistingEventSpec extends FrontlinesmsLegalGebSpec {
 
         when:
         selectEvent("Test")
-        eventDialog.clickLinkContact()
+        eventDialog.linkContact()
         eventDialog.linkContactDialog.link("fabio")
         eventDialog.updateEvent()
 
@@ -207,7 +207,7 @@ class LinkContactToExistingEventSpec extends FrontlinesmsLegalGebSpec {
         when:
         selectEvent("Test")
         eventDialog.contactsLinkedToEvent[0].unlinkContact.click()
-        eventDialog.clickLinkContact()
+        eventDialog.linkContact()
         eventDialog.linkContactDialog.link("neetu")
         eventDialog.updateEvent()
 

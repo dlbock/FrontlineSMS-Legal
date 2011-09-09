@@ -6,6 +6,7 @@ import geb.Module
 import geb.Page
 import frontlinesms.legal.functionaltests.pages.LinkableCase
 import frontlinesms.legal.functionaltests.pages.LinkedCaseRow
+import frontlinesms.legal.functionaltests.pages.LinkContactDialog
 
 class SchedulePage extends Page {
     static at = { $("title").text() == "Schedule" }
@@ -37,7 +38,6 @@ class SchedulePage extends Page {
 class EventDialog extends Module {
     static base = { $(id: "view-event") }
     static content = {
-        linkContactDialog { module LinkContactDialog, page.$() }
         linkCaseDialog { module LinkCaseDialog, page.$() }
 
         title { $('#event-title') }
@@ -76,15 +76,16 @@ class EventDialog extends Module {
             true
         }
 
-        clickLinkContact {
+        linkContact {
             $('#link-contact-button').click()
             true
         }
-        
+
         linkCase {
             $("#link-case-button").click()
             true
         }
+        linkContactDialog { module LinkContactDialog, page.$() }
     }
 }
 
