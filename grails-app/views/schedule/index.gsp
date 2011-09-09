@@ -33,6 +33,7 @@
             frontlinesms.linkCaseToEvent();
             var keyCodeForTabKey = 9;
             frontlinesms.enableKeyInField(keyCodeForTabKey, '#event-date');
+            frontlinesms.linkContactToEvent();
             <g:if test="${year}">
             <g:if test="${month}">
             $('#schedule').fullCalendar('gotoDate', ${year}, ${month});

@@ -2,14 +2,13 @@ var frontlinesms = this.frontlinesms || {};
 
 frontlinesms.linkCaseToEvent = function() {
     $("#link-case-dialog").dialog({
-        width: 400,
+        width: 450,
         autoOpen: false,
         modal: true,
         open: function() {
             $("#caseId").val("");
             $(".caseLink").removeAttr("filtermatch", true).show();
         },
-
         buttons: {
             "Cancel" : {
                 text: "Cancel",

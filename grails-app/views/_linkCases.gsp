@@ -11,7 +11,7 @@
         <g:if test="${allCases}">
             <table class="search-results" id="SearchResults">
                 <thead>
-                <tr>
+                <tr align="left">
                     <th>Case ID</th>
                     <th>Case Title</th>
                     <th>Status</th>

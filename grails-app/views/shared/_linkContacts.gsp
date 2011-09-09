@@ -1,9 +1,9 @@
 <div id="link-contact-dialog" title="Link Contact to an Event" style="display: none;">
+<p>Search by name or mobile phone</p>
 <g:textField name="contactNameSearch" id="contact-name-search"/>
 <g:form action="">
-    <p>Search by name or mobile phone</p>
 
-    <div id="link-contacts-inner-table-div" style="overflow: auto;">
+    %{--<div id="link-contacts-inner-table-div" style="overflow: auto;">--}%
         <table id="contactsTable">
             <thead>
             <tr>
@@ -29,7 +29,7 @@
             </g:each>
             </tbody>
         </table>
-    </div>
+    %{--</div>--}%
     </td>
         </tr>
         </tbody>

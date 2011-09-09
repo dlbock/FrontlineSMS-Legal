@@ -2,7 +2,7 @@ var frontlinesms = this.frontlinesms || {};
 
 frontlinesms.linkContactToEvent = function() {
     $("#link-contact-dialog").dialog({
-        width: 400,
+        width: 450,
         autoOpen: false,
         modal: true,
         open: function() {
