@@ -9,7 +9,6 @@ frontlinesms.eventDetails = function() {
         modal: true,
         open: function() {
             $('#update-event').attr('disabled', true);
-            frontlinesms.attachActionWithUnlink();
         },
         beforeClose: frontlinesms.yesNoDialogBox
     });
@@ -100,7 +99,7 @@ frontlinesms.updateEventDetails = function () {
             success : function() {
                 frontlinesms.log("update success");
                 window.location.reload(true);
-            },
+            },  
             cache:false
         });
     }

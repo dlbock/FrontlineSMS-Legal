@@ -109,7 +109,10 @@ class EventController {
             def contactIds = params.unlinkedContacts.split(",")
             contactIds.each { it ->
                 def contact = LegalContact.findById(it as Integer)
-                EventContact.findByEventAndLegalContact(event, contact).delete()
+                def eventContactToBeUnlinked = EventContact.findByEventAndLegalContact(event, contact)
+                contact.removeFromLinkedEvents(eventContactToBeUnlinked)
+                event.removeFromLinkedContacts(eventContactToBeUnlinked)
+                eventContactToBeUnlinked.delete()
             }
         }
     }

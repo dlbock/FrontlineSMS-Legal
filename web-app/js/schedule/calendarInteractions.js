@@ -184,6 +184,8 @@ frontlinesms.calendarInteractions = function() {
     });
 
     frontlinesms.attachActionWithLinkContactButton('#link-contact-button', '#link-contact-dialog');
+
+    frontlinesms.attachActionWithUnlink();
 }
 
 frontlinesms.deleteButtonHasBeenClicked = function() {
