@@ -5,6 +5,7 @@ import frontlinesms.legal.LegalContact
 import frontlinesms.legal.functionaltests.FrontlinesmsLegalGebSpec
 import frontlinesms.legal.functionaltests.pages.HomePage
 import frontlinesms.legal.functionaltests.pages.events.NewEventPage
+import org.openqa.selenium.Keys
 
 class CreateEventSpec extends FrontlinesmsLegalGebSpec {
     def "should be able to navigate to the create event page from the menu"() {
@@ -20,7 +21,16 @@ class CreateEventSpec extends FrontlinesmsLegalGebSpec {
 
         when: date.openDatePicker()
 
-        then: date.datePicker.present
+        then: date.datePicker.displayed
+    }
+
+    def "should remove focus from date field after hittin enter key in date picker"() {
+        given: to NewEventPage
+
+        when: date.openDatePicker()
+        and: date.selectCurrentDate()
+
+        then: !elementInFocusIs(date)
     }
 
     def "when hours are typed in the StartTime text box then minutes should be set to zero"() {

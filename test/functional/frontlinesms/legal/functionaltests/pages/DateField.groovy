@@ -10,7 +10,7 @@ class DateField extends Module {
         openDatePicker {
             $().jquery.focus()
             $().click()
-            waitFor { datePicker.present }
+            waitFor { datePicker.displayed }
         }
 
         setDate { dayOfMonth ->
@@ -22,6 +22,11 @@ class DateField extends Module {
         setValue { value ->
             $().value(value)
             true
+        }
+
+        selectCurrentDate {
+            $() << Keys.RETURN
+            waitFor { !datePicker.displayed }
         }
 
         clear {

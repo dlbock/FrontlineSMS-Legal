@@ -13,6 +13,9 @@ frontlinesms.activateDatePicker = function() {
             if (initialDate != dateText) {
                 $('#update-event').attr('disabled', false);
             }
+        },
+        onClose: function(dateText, inst) {
+            $('#event-date').blur();
         }
     })
     $('#event-date').click(function() {
