@@ -18,6 +18,7 @@
     <g:javascript library="linkContactToEvent"/>
     <g:javascript library="formValidation"/>
     <g:javascript library="linkCaseToEvent"/>
+    <g:javascript library="enableOrDisableKeyStrokeOnField"/>
 
     <script type="text/javascript">
         $(function() {
@@ -30,6 +31,8 @@
             frontlinesms.contactSearchOnLoad("#contactsTable", "#contact-name-search");
             frontlinesms.caseSearchOnLoad();
             frontlinesms.linkCaseToEvent();
+            var keyCodeForTabKey = 9;
+            frontlinesms.enableKeyInField(keyCodeForTabKey, '#event-date');
             <g:if test="${year}">
             <g:if test="${month}">
             $('#schedule').fullCalendar('gotoDate', ${year}, ${month});

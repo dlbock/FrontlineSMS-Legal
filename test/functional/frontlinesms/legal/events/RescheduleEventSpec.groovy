@@ -180,6 +180,32 @@ class RescheduleEventSpec extends FrontlinesmsLegalGebSpec {
         $('#confirmation-dialog').size() == 0
     }
 
+    def "should enable only tab key on event date field"() {
+        given: selectEvent("Test Event 1")
+        and: def initialDate = eventDialog.date.value
+
+        when: eventDialog.date.click()
+        and: eventDialog.date << "a!dfj-*#"
+
+        then: eventDialog.date.value() == initialDate
+    }
+
+    def "should not allow non-numeric keys on event start time field"() {
+        when: selectEvent("Test Event 1")
+        and: eventDialog.startTime.click()
+        and: eventDialog.startTime << "a!dfj-*#"
+
+        then: eventDialog.startTime.value() == "08:09AM"
+    }
+
+    def "should not allow non-numeric keys on event end time field"() {
+        when: selectEvent("Test Event 1")
+        and: eventDialog.endTime.click()
+        and: eventDialog.endTime << "a!dfj-*#"
+
+        then: eventDialog.endTime.value() == "08:56AM"
+    }
+
     def createEvent(title, String startTime, String endTime) {
         to NewEventPage
         eventTitle = title

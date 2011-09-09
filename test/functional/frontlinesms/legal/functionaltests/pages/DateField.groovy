@@ -29,5 +29,9 @@ class DateField extends Module {
             $() << Keys.DELETE
             true
         }
+
+        value {
+            $().value()
+        }
     }
 }
