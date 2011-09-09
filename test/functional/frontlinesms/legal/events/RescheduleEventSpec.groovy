@@ -192,6 +192,7 @@ class RescheduleEventSpec extends FrontlinesmsLegalGebSpec {
 
     def "should not allow non-numeric keys on event start time field"() {
         when: selectEvent("Test Event 1")
+        and: eventDialog.startTime.jquery.focus()
         and: eventDialog.startTime.click()
         and: eventDialog.startTime << "a!dfj-*#"
 
@@ -200,6 +201,7 @@ class RescheduleEventSpec extends FrontlinesmsLegalGebSpec {
 
     def "should not allow non-numeric keys on event end time field"() {
         when: selectEvent("Test Event 1")
+        and: eventDialog.endTime.jquery.focus()
         and: eventDialog.endTime.click()
         and: eventDialog.endTime << "a!dfj-*#"
 
