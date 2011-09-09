@@ -17,5 +17,9 @@ class FrontlinesmsLegalGebSpec extends GebSpec {
     String getPort() {
         System.getProperty("server.port", "8080")
     }
+
+    protected Boolean elementInFocusIs(element) {
+        browser.driver.switchTo().activeElement() == element.firstElement()
+    }
 }
 
