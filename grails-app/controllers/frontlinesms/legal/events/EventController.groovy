@@ -44,7 +44,7 @@ class EventController {
                 }
             }
             else {
-                flash.error = "End time cannot be before the start time."
+                flash.error = "The end time cannot be earlier than the start time."
                 redirect(action: "create", params: [eventTitle: params.eventTitle, dateFieldSelected: params.dateFieldSelected, startTimeField: params.startTimeField, endTimeField: params.endTimeField])
             }
         }
@@ -85,7 +85,7 @@ class EventController {
         Time start = Time.valueOf(TimeFormatter.formatTime(params.startTimeField))
         Time end = Time.valueOf(TimeFormatter.formatTime(params.endTimeField))
         if (start.equals(end))
-            return true
+            return false
         return start.before(end)
     }
 

@@ -93,7 +93,7 @@ class EventControllerSpec extends FrontlinesmsLegalControllerSpecBase {
         controller.save()
 
         then:
-        controller.flash.error == "End time cannot be before the start time."
+        controller.flash.error == "The end time cannot be earlier than the start time."
     }
 
     def "should return true for isStartTimeBeforeEndTime if startTime is before endTime"() {
@@ -105,13 +105,13 @@ class EventControllerSpec extends FrontlinesmsLegalControllerSpecBase {
         controller.isStartTimeBeforeEndTime() == true
     }
 
-    def 'should return true if start time  and end time are equal'() {
+    def 'should return false if start time  and end time are equal'() {
         when:
         controller.params.startTimeField = "04:30PM"
         controller.params.endTimeField = "04:30PM"
 
         then:
-        controller.isStartTimeBeforeEndTime() == true
+        controller.isStartTimeBeforeEndTime() == false
     }
 
 
