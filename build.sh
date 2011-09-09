@@ -21,6 +21,7 @@ fi
 grails sass-compile --non-interactive
 grails -Dserver.port=4000 test-app -coverage --non-interactive
 grails war --non-interactive
+rm frontlinesms2-core/plugin.xml
 after="$(date +%s)"
 elapsed_time="$(expr $after - $before)"
 echo "Build took $elapsed_time secs."
