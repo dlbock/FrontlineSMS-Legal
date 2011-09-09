@@ -3,13 +3,13 @@
 <head>
     <meta name="layout" content="main">
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'forms.css')}"/>
-    <g:javascript library="linkCaseToContact"/>
+    <g:javascript library="shared/linkCaseToContact"/>
     <g:javascript library="picnet.table.filter.min"/>
-    <g:javascript library="contactCreate"/>
-    <g:javascript library="caseSearch"/>
-    <g:javascript library="enableUpdateButtonOnDetailsChange"/>
-    <g:javascript library="formValidation"/>
-    <g:javascript library="enableOrDisableKeyStrokeOnField"/>
+    <g:javascript library="legalContact/create"/>
+    <g:javascript library="case/search"/>
+    <g:javascript library="shared/enableUpdateButtonOnDetailsChange"/>
+    <g:javascript library="shared/formValidation"/>
+    <g:javascript library="shared/enableOrDisableKeyStrokeOnField"/>
 
     <title>Create New Contact</title>
     <script type="text/javascript">

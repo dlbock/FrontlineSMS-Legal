@@ -5,15 +5,15 @@
     <meta name="layout" content="main">
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'forms.css')}"/>
 
-    <g:javascript library="linkContactToCase"/>
-    <g:javascript library="linkCaseToContact"/>
-    <g:javascript library="caseUpdate"/>
+    <g:javascript library="shared/linkContactToCase"/>
+    <g:javascript library="shared/linkCaseToContact"/>
+    <g:javascript library="case/update"/>
     <g:javascript library="picnet.table.filter.min"/>
-    <g:javascript library="contactSearch"/>
-    <g:javascript library="deleteFromDetailsPage"/>
-    <g:javascript library="confirmationDialog"/>
-    <g:javascript library="enableUpdateButtonOnDetailsChange"/>
-    <g:javascript library="enableOrDisableKeyStrokeOnField"/>
+    <g:javascript library="legalContact/search"/>
+    <g:javascript library="shared/deleteFromDetailsPage"/>
+    <g:javascript library="shared/confirmationDialog"/>
+    <g:javascript library="shared/enableUpdateButtonOnDetailsChange"/>
+    <g:javascript library="shared/enableOrDisableKeyStrokeOnField"/>
 
     <script type="text/javascript">
         $(function() {

@@ -13,7 +13,7 @@ class LinkCaseToExistingEventSpec extends FrontlinesmsLegalGebSpec {
         to SchedulePage, "index"
 
         when:
-        events()[0].click()
+        selectEvent("fabio")
 
         then:
         eventDialog.linkCaseDialog.displayed == false
@@ -38,7 +38,7 @@ class LinkCaseToExistingEventSpec extends FrontlinesmsLegalGebSpec {
         to SchedulePage, "index"
 
         when:
-        events()[0].click()
+        selectEvent("fabio")
         eventDialog.linkCase()
 
         and:
@@ -59,7 +59,7 @@ class LinkCaseToExistingEventSpec extends FrontlinesmsLegalGebSpec {
         to SchedulePage, "index"
 
         and:
-        events()[0].click()
+        selectEvent("fabio")
         eventDialog.linkCase()
 
         then:

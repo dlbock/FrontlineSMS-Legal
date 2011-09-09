@@ -5,10 +5,10 @@
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'forms.css')}"/>
 
     <g:javascript library="picnet.table.filter.min"/>
-    <g:javascript library="caseSearch"/>
-    <g:javascript library="confirmationDialog"/>
-    <g:javascript library="deleteFromSearchPage"/>
-    <g:javascript library="caseSearchForSearchPage"/>
+    <g:javascript library="case/search"/>
+    <g:javascript library="shared/confirmationDialog"/>
+    <g:javascript library="shared/deleteFromSearchPage"/>
+    <g:javascript library="case/caseSearchForSearchPage"/>
 
     <script type="text/javascript">
         $(function() {

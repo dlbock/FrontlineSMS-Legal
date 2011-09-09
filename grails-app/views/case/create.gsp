@@ -5,12 +5,12 @@
     <meta name="layout" content="main">
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'forms.css')}"/>
 
-    <g:javascript library="caseCreate"/>
-    <g:javascript library="linkContactToCase"/>
+    <g:javascript library="case/create"/>
+    <g:javascript library="shared/linkContactToCase"/>
     <g:javascript library="picnet.table.filter.min"/>
-    <g:javascript library="contactSearch"/>
-    <g:javascript library="enableOrDisableKeyStrokeOnField"/>
-    <g:javascript library="linkCaseToContact"/>
+    <g:javascript library="legalContact/search"/>
+    <g:javascript library="shared/enableOrDisableKeyStrokeOnField"/>
+    <g:javascript library="shared/linkCaseToContact"/>
 
     <script type="text/javascript">
         $(function() {

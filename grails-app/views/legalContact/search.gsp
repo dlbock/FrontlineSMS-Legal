@@ -4,9 +4,9 @@
     <meta name="layout" content="main">
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'forms.css')}"/>
     <g:javascript library="picnet.table.filter.min"/>
-    <g:javascript library="contactSearch"/>
-    <g:javascript library="confirmationDialog"/>
-    <g:javascript library="deleteFromSearchPage"/>
+    <g:javascript library="legalContact/search"/>
+    <g:javascript library="shared/confirmationDialog"/>
+    <g:javascript library="shared/deleteFromSearchPage"/>
 
     <script type="text/javascript">
         $(function() {

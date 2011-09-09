@@ -7,13 +7,13 @@
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'forms.css')}"/>
     <g:javascript library="picnet.table.filter.min"/>
     <g:javascript library="jquery.timeentry.min"/>
-    <g:javascript library="calendarInteractions"/>
-    <g:javascript library="eventInteractions"/>
-    <g:javascript library="linkContactToEvent"/>
-    <g:javascript library="linkCaseToEvent"/>
-    <g:javascript library="contactSearch"/>
-    <g:javascript library="caseSearch"/>
-    <g:javascript library="enableOrDisableKeyStrokeOnField"/>
+    <g:javascript library="schedule/calendarInteractions"/>
+    <g:javascript library="event/interactions"/>
+    <g:javascript library="shared/linkContactToEvent"/>
+    <g:javascript library="shared/linkCaseToEvent"/>
+    <g:javascript library="legalContact/search"/>
+    <g:javascript library="case/search"/>
+    <g:javascript library="shared/enableOrDisableKeyStrokeOnField"/>
 
     <script type="text/javascript">
         $(function() {

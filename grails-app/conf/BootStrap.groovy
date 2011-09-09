@@ -26,7 +26,8 @@ class BootStrap {
                 arg(line: command)
             }
 
-            ant.delete(dir: "web-app/js", includes: "*.js")
+            ant.delete(dir: "web-app/js/*")
+
             updateJsFiles()
         }
 
@@ -39,7 +40,7 @@ class BootStrap {
 
     private def updateJsFiles() {
         new AntBuilder().copy(todir: "web-app/js/", verbose: "true") {
-            fileset(dir: "src/javascript/", includes: "*.js")
+            fileset(dir: "src/javascript/")
             fileset(dir: "lib/javascript/", includes: "*.js")
         }
     }

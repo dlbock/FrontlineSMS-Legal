@@ -34,7 +34,6 @@ frontlinesms.validateContactNumber = function() {
             return false;
         }
     );
-
 };
 
 frontlinesms.filterOutUnwantedCharacters = function(fieldId, validCharacters, keyCodesForAllowedKeys) {
