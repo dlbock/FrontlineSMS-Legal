@@ -9,6 +9,7 @@ import frontlinesms.legal.Event
 import java.sql.Time
 import frontlinesms.legal.EventCase
 import frontlinesms.legal.functionaltests.pages.cases.SearchCasePage
+import frontlinesms.legal.CaseContacts
 
 class ShowCaseSpec extends FrontlinesmsLegalGebSpec {
 
@@ -47,23 +48,6 @@ class ShowCaseSpec extends FrontlinesmsLegalGebSpec {
 
         and:
         contactListInPopUp.collect { it -> it.primaryMobile }.contains("55555")
-    }
-
-    def "should be able to edit case ID of case"() {
-        setup:
-        new Case(caseId: "1112", description: "ertyui").save(flush: true)
-
-        when:
-        to ShowCasePage, "1112"
-
-        and:
-        caseId = "1123"
-
-        and:
-        updateCaseButton.click()
-
-        then:
-        statusMessage == "Case details updated"
     }
 
     def "should not update case id that already exists"() {
@@ -122,28 +106,6 @@ class ShowCaseSpec extends FrontlinesmsLegalGebSpec {
 
         then:
         errorMessage == "Case ID required"
-    }
-
-    def "should update status"() {
-        setup:
-        new Case(caseId: "1112", description: "ertyui").save(flush: true)
-
-        when:
-        to ShowCasePage, "1112"
-
-        and:
-        caseId = "1112"
-        description = "new description"
-
-        and:
-        caseActive.value("off")
-
-        and:
-        updateCaseButton.click()
-
-        then:
-        true
-        caseActive.value() == null
     }
 
     def "should show the same case status on trying to update case id that already exists"() {
@@ -280,7 +242,7 @@ class ShowCaseSpec extends FrontlinesmsLegalGebSpec {
         currentEventsTable.collect { it -> it.title }[0] == "Current"
     }
 
-    def "should not link contact to the case when cancel is clicked on the relationship dialog"() {
+    def "should not show contact in the contact table when cancel is clicked on the relationship dialog"() {
         setup:
         new LegalContact(name: "fabio", primaryMobile: "22222").save(flush: true)
         new LegalContact(name: "dev", primaryMobile: "55555").save(flush: true)
@@ -300,7 +262,7 @@ class ShowCaseSpec extends FrontlinesmsLegalGebSpec {
         sizeOflinkedContactsTable == 0
     }
 
-    def "should link a contact to the case when a contact is selected in the link contact dialog"() {
+    def "should show the contact in the contact table when the contact is selected in the link contact dialog"() {
         setup:
         new LegalContact(name: "fabio", primaryMobile: "22222").save(flush: true)
         def caseOne = new Case(caseId: "1112", description: "ertyui")
@@ -396,6 +358,53 @@ class ShowCaseSpec extends FrontlinesmsLegalGebSpec {
         Case.findByCaseId("1113") == null
         def originalCase = Case.findByCaseId("1112")
         originalCase.caseId == "1112"
+    }
+
+    def "should not show contact linked to the case in the contact table when user clicks on unlink"() {
+        given:
+        def caseOne = new Case(caseId: "1112", description: "ertyui")
+        caseOne.save(flush: true)
+        def contactOne = new LegalContact(name: "fabio", primaryMobile: "22222")
+        contactOne.save(flush: true)
+        CaseContacts.link(caseOne, contactOne, "click link button")
+
+        when:
+        to ShowCasePage, "1112"
+
+        then:
+        sizeOflinkedContactsTable == 1
+
+        and:
+        unlinkButton[0].click()
+
+        then:
+        sizeOflinkedContactsTable == 0
+    }
+
+    def "should update case details when update is clicked"() {
+        given:
+        def caseOne = new Case(caseId: "1112", description: "ertyui")
+        caseOne.save(flush: true)
+        def contactOne = new LegalContact(name: "fabio", primaryMobile: "22222")
+        contactOne.save(flush: true)
+        CaseContacts.link(caseOne, contactOne, "click link button")
+
+        when:
+        to ShowCasePage, "1112"
+
+        and:
+        caseId = "1113"
+        description = "update"
+        caseActive.value("on")
+        unlinkButton[0].click()
+        updateCaseButton.click()
+
+        then:
+        caseId == "1113"
+        description == "update"
+        caseActive.value() == "on"
+        sizeOflinkedContactsTable == 0
+        statusMessage == "Case details updated"
     }
 
     def createFutureAndPastEventsAndLinkCases() {

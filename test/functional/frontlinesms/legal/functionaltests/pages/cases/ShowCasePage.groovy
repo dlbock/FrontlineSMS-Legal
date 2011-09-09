@@ -18,7 +18,7 @@ class ShowCasePage extends Page {
         contactListInPopUp {$("#link-contacts-inner-table-div #contactsTable tbody tr").collect {module ContactRow, it} }
         statusMessage { $("div", id: "status").text() }
         errorMessage { $("div", id: "errorMessage").text() }
-        linkedContactsRow {$(name: "contactRow", id: "contact-row")}
+        unlinkButton{$(".unlink-contact-button")}
         deleteDialog { $("div", id: "deleteDialog") }
         deleteYes { $("button", id: "confirm-yes")}
         deleteNo { $("button", id: "confirm-no")}
