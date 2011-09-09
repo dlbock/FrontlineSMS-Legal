@@ -12,14 +12,6 @@ class DeleteCaseFromSearchCasePageSpec extends FrontlinesmsLegalGebSpec {
         new Case(caseId: "321", description: "test2").save(flush: true)
     }
 
-    def "should have as many delete buttons as cases"() {
-        when:
-        to SearchCasePage
-
-        then:
-        assert searchResults.collect { it -> it.deleteButton }.size() == 2
-    }
-
     def 'should not delete when NO is clicked on delete confirmation dialog'() {
         given:
         to SearchCasePage
