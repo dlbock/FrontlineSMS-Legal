@@ -11,19 +11,17 @@ import frontlinesms.legal.EventCase
 
 class ShowCaseSpec extends FrontlinesmsLegalGebSpec {
 
-    def "should display case details given case id"() {
-        given: aCase(caseId: "testCaseid", description: "whatever")
+    def "should display details of the selected case in the show case page"() {
+        given:
+        new Case(caseId: "testCaseid", description: "whatever").save()
 
         when: to ShowCasePage, "testCaseid"
 
         then: caseId == "testCaseid"
+
         and: description == "whatever"
+
         and: caseActive.value() == "on"
-
-    }
-
-    private Case aCase(options) {
-        return new Case(options).save()
     }
 
     def "should display all contacts in contact list table in pop-up dialog on load"() {
@@ -31,6 +29,7 @@ class ShowCaseSpec extends FrontlinesmsLegalGebSpec {
         new LegalContact(name: "fabio", primaryMobile: "22222").save(flush: true)
         new LegalContact(name: "dev", primaryMobile: "55555").save(flush: true)
         new Case(caseId: "1112").save(flush: true)
+
         when:
         to ShowCasePage, "1112"
         and:
@@ -44,6 +43,7 @@ class ShowCaseSpec extends FrontlinesmsLegalGebSpec {
 
         and:
         contactListInPopUp.collect { it -> it.name }.contains("dev")
+
         and:
         contactListInPopUp.collect { it -> it.primaryMobile }.contains("55555")
     }
@@ -51,42 +51,46 @@ class ShowCaseSpec extends FrontlinesmsLegalGebSpec {
     def "should be able to edit case ID of case"() {
         setup:
         new Case(caseId: "1112", description: "ertyui").save(flush: true)
+
         when:
         to ShowCasePage, "1112"
+
         and:
         caseId = "1123"
+
         and:
         updateCaseButton.click()
 
         then:
         statusMessage == "Case details updated"
-
     }
 
     def "should not update case id that already exists"() {
         setup:
         new Case(caseId: "1112", description: "ertyui").save(flush: true)
         new Case(caseId: "1123", description: "ertyui").save(flush: true)
+
         when:
         to ShowCasePage, "1112"
+
         and:
         caseId = "1123"
+
         and:
         updateCaseButton.click()
 
         then:
         errorMessage == "Case ID already exists. Please enter a unique Case ID."
-
     }
-
-
 
     def "should show the same description on trying to update case id that already exists"() {
         setup:
         new Case(caseId: "1112", description: "ertyui").save(flush: true)
         new Case(caseId: "1123", description: "ertyui").save(flush: true)
+
         when:
         to ShowCasePage, "1112"
+
         and:
         caseId = "1123"
         description = "new description"
@@ -100,75 +104,66 @@ class ShowCaseSpec extends FrontlinesmsLegalGebSpec {
 
         and:
         caseId == "1112"
-
     }
 
     def "should not allow update case if case id is blank"() {
         setup:
         new Case(caseId: "1112", description: "ertyui").save(flush: true)
+
         when:
         to ShowCasePage, "1112"
+
         and:
         caseId = ""
+
         and:
         updateCaseButton.click()
 
         then:
         errorMessage == "Case ID required"
-
     }
 
     def "should update status"() {
         setup:
         new Case(caseId: "1112", description: "ertyui").save(flush: true)
+
         when:
         to ShowCasePage, "1112"
+
         and:
         caseId = "1112"
         description = "new description"
 
-
         and:
         caseActive.value("off")
+
         and:
         updateCaseButton.click()
 
         then:
         true
         caseActive.value() == null
-
     }
 
     def "should show the same case status on trying to update case id that already exists"() {
         setup:
         new Case(caseId: "1112", description: "ertyui").save(flush: true)
         new Case(caseId: "1123", description: "ertyui").save(flush: true)
+
         when:
         to ShowCasePage, "1112"
+
         and:
         caseId = "1123"
         description = "new description"
         caseActive.value("off")
+
         and:
         updateCaseButton.click()
 
         then:
         at ShowCasePage
         caseActive.value() == null
-
-    }
-
-    def "should show the search contact dialog box after pressing LINK CONTACT button"() {
-        setup:
-        new Case(caseId: "1112", description: "ertyui").save(flush: true)
-
-        when:
-        to ShowCasePage, "1112"
-        and:
-        linkContact.click()
-
-        then:
-        linkContactDialog.displayed == true
     }
 
     def "should display all the contacts filtered by the value in the search input of the search contact dialog"() {
@@ -179,8 +174,10 @@ class ShowCaseSpec extends FrontlinesmsLegalGebSpec {
 
         when:
         to ShowCasePage, "1112"
+
         and:
         linkContact.click()
+
         and:
         contactNameSearch.value("fab")
         sleep(500)
@@ -197,8 +194,10 @@ class ShowCaseSpec extends FrontlinesmsLegalGebSpec {
 
         when:
         to ShowCasePage, "1112"
+
         and:
         linkContact.click()
+
         and:
         contactNameSearch.value("\r")
 
@@ -214,13 +213,17 @@ class ShowCaseSpec extends FrontlinesmsLegalGebSpec {
 
         when:
         to ShowCasePage, "1112"
+
         and:
         linkContact.click()
+
         and:
         contactNameSearch.value("fab")
         sleep(500)
+
         and:
         linkContactDialogCancelButton.click()
+
         and:
         linkContact.click()
 
@@ -262,7 +265,6 @@ class ShowCaseSpec extends FrontlinesmsLegalGebSpec {
         and:
         futureEventsTable.collect { it -> it.title }[0] == "Future"
     }
-
 
     def "should show current and past event linked with case"() {
         setup:
@@ -322,13 +324,11 @@ class ShowCaseSpec extends FrontlinesmsLegalGebSpec {
         and:
         linkContact.click()
         contactListInPopUp[0].click()
-//        contactsTable[0].click()
         relationshipConfirmButton.click()
 
         then:
         sizeOflinkedContactsTable == 1
     }
-
 
     def createCurrentAndPastEventsAndLinkCases() {
         def yearOffsetForDate = 1900
