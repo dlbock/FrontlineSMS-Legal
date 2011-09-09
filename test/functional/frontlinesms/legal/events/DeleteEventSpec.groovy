@@ -52,22 +52,38 @@ class DeleteEventSpec extends FrontlinesmsLegalGebSpec {
         calendarHeader == new Date().format("MMMM yyyy")
     }
 
-     def 'should not display the update confirmation dialog on deleting an edited event'() {
-         given:
-         createEvent("Test Event", "08:09AM", "08:56PM")
-         to SchedulePage, "index"
+    def 'should not display a confirmation dialog when deleting an edited event is confirmed'() {
+        given:
+        createEvent("Test Event", "08:09AM", "08:56PM")
+        to SchedulePage, "index"
 
-         when:
-         events()[0].click()
-         eventDialog.title << "foo"
-         eventDialog.deleteEventButton.click()
-         deleteConfirmationDialog.yesButton.click()
+        when:
+        events()[0].click()
+        eventDialog.title << "foo"
+        eventDialog.deleteEventButton.click()
+        deleteConfirmationDialog.yesButton.click()
 
-         then:
-         at SchedulePage
-         and:
-         $('#confirmation-dialog').size() == 0
-     }
+        then:
+        cancelEditConfirmationDialog.displayed == false
+    }
+
+    def 'should not display a confirmation dialog when the deletion of an edited event is canceled'() {
+        given:
+        createEvent("Test Event", "08:09AM", "08:56PM")
+        to SchedulePage, "index"
+
+        when:
+        events()[0].click()
+        eventDialog.title << "foo"
+        eventDialog.deleteEventButton.click()
+        deleteConfirmationDialog.noButton.click()
+
+        then:
+        eventDialog.displayed == true
+
+        and:
+        cancelEditConfirmationDialog.displayed == false
+    }
 
     def createEvent(title, String startTime, String endTime) {
         to NewEventPage

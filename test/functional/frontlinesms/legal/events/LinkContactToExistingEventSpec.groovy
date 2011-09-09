@@ -216,6 +216,22 @@ class LinkContactToExistingEventSpec extends FrontlinesmsLegalGebSpec {
         eventDialog.contactsLinkedToEvent.size() == 1
     }
 
+    def 'should not enable the update button on clicking cancel on the link contacts dialog after searching for a contact'() {
+        given:
+        createEvent("Test")
+        new LegalContact(name: "fabio", primaryMobile: "22222").save(flush: true)
+        to SchedulePage, "index"
+
+        when:
+        selectEvent("Test")
+        eventDialog.linkContact()
+        eventDialog.linkContactDialog.searchbox.value() == "abc"
+        eventDialog.linkContactDialog.cancel()
+
+        then:
+        eventDialog.updateEventButton.@disabled == 'true'
+    }
+
     private def createEvent(title) {
         to NewEventPage
         eventTitle = title

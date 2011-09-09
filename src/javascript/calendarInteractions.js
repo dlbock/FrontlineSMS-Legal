@@ -186,6 +186,6 @@ frontlinesms.calendarInteractions = function() {
     frontlinesms.attachActionWithLinkContactButton('#link-contact-button', '#link-contact-dialog');
 }
 
-frontlinesms.deleteButtonTracker = function() {
+frontlinesms.deleteButtonHasBeenClicked = function() {
     return deleteButtonClicked;
 }

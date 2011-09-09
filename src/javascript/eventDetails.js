@@ -16,13 +16,20 @@ frontlinesms.eventDetails = function() {
 
     $('#update-event').click(frontlinesms.updateEventDetails);
 
-    $('input').keyup(function() {
-        $('#update-event').attr('disabled', false)
-    });
+    frontlinesms.enableUpdateButton("#event-title");
+    frontlinesms.enableUpdateButton("#event-date");
+    frontlinesms.enableUpdateButton("#event-start-time");
+    frontlinesms.enableUpdateButton("#event-end-time");
 };
 
+frontlinesms.enableUpdateButton = function(updatedFieldId) {
+      $(updatedFieldId).keyup(function() {
+        $('#update-event').attr('disabled', false)
+    });
+}
+
 frontlinesms.yesNoDialogBox = function() {
-    if ((!$("#update-event").attr("disabled") && !frontlinesms.deleteButtonTracker()) || $('#error-message').text() != "") {
+    if ((!$("#update-event").attr("disabled") && !frontlinesms.deleteButtonHasBeenClicked()) || $('#error-message').text() != "") {
         $("#confirmation-dialog").dialog("destroy").empty();
         $("#schedule").append('<div class="confirmation-dialog" id="confirmation-dialog" title="Cancel edit event?" style="display: none;"><p>Are you sure you want to leave this page without saving? Your changes will not be saved.</p></div>');
         $("#confirmation-dialog").dialog({
