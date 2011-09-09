@@ -21,6 +21,36 @@ frontlinesms.eventDetails = function() {
     });
 };
 
+frontlinesms.yesNoDialogBox = function() {
+    if ((!$("#update-event").attr("disabled") && !frontlinesms.deleteButtonTracker()) || $('#error-message').text() != "") {
+        $("#confirmation-dialog").dialog("destroy").empty();
+        $("#schedule").append('<div class="confirmation-dialog" id="confirmation-dialog" title="Cancel edit event?" style="display: none;"><p>Are you sure you want to leave this page without saving? Your changes will not be saved.</p></div>');
+        $("#confirmation-dialog").dialog({
+            modal: true,
+            buttons: [
+                {
+                    text: "Yes",
+                    click: function() {
+                        $(".confirmation-dialog").remove();
+                        return true
+                    },
+                    id: "confirm-yes"
+                },
+                {
+                    text: "No",
+                    click: function() {
+                        $(".confirmation-dialog").remove();
+                        $("#view-event").dialog("open");
+                        $('#update-event').attr('disabled', false);
+                        return true
+                    },
+                    id: "confirm-no"
+                }
+            ]
+        });
+    }
+}
+
 frontlinesms.updateEventDetails = function () {
     var errorMessage = "";
     var errorMessageForTime = "";

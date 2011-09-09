@@ -1,4 +1,5 @@
 var frontlinesms = this.frontlinesms || {};
+var deleteButtonClicked;
 
 frontlinesms.calculateScheduleHeight = function (windowHeight) {
     var headerHeight = $("#header").outerHeight();
@@ -161,6 +162,7 @@ frontlinesms.calendarInteractions = function() {
         allDayDefault: false,
         eventColor: "rgb(0,162,232)",
         eventClick: function(calEvent, jsEvent, view) {
+            deleteButtonClicked = false;
             frontlinesms.displayEventDetails(calEvent);
         },
         windowResize: function () {
@@ -175,10 +177,15 @@ frontlinesms.calendarInteractions = function() {
     };
 
     frontlinesms.attachActionWithConfirmationToButton("#delete-event", "#delete-event-dialog", function () {
+        deleteButtonClicked = true;
         $("#view-event").dialog("close");
         $.ajax("deleteEvent/" + $('#event-id').val(), ajaxDefaults);
         $('#schedule').fullCalendar('removeEvents', $('#event-id').val())
     });
 
     frontlinesms.attachActionWithLinkContactButton('#link-contact-button', '#link-contact-dialog');
+}
+
+frontlinesms.deleteButtonTracker = function() {
+    return deleteButtonClicked;
 }
