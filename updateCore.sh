@@ -16,14 +16,13 @@ then
     get_command="curl --silent --connect-timeout 5"
 elif which wget >/dev/null
 then
-    get_command="wget --quiet --tries=1 --connect-timeout=5"
+    get_command="wget --quiet --tries=1 --connect-timeout=5 --output-document=-"
 else
     echo "Can't find curl or wget"
     exit 1
 fi
 
-url=$(build_url $jenkins_server) metadata=$($get_command "$url") ||
-url=$(build_url localhost) metadata=$($get_command "$url")
+metadata=$($get_command $(build_url $jenkins_server) || $get_command $(build_url localhost))
 last_successful_revision=$(echo "$metadata" | sed -E 's/.*"SHA1":"([0-9a-f]{40}).*/\1/')
 
 cd frontlinesms2-core
