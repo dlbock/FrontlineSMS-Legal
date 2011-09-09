@@ -39,7 +39,7 @@
 
     <label>Case ID</label>
     <g:hiddenField name="currentId" id="current-id" value="${caseToDisplay.id}"/>
-    <g:textField name="caseId" id="case-id" value="${caseToDisplay.caseId}"/>
+    <g:textField name="caseId" id="case-id" value="${caseToDisplay.caseId}" maxlength="100"/>
 
     <label>Description</label>
     <g:textArea name="description" id="case-description" cols="100" rows="10" value="${caseToDisplay.description}"/>

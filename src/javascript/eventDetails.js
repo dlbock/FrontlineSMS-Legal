@@ -4,6 +4,7 @@ var unlinkContactIds = "";
 var eventDate = "";
 frontlinesms.eventDetails = function() {
     $("#view-event").dialog({
+        width: 500,
         autoOpen: false,
         modal: true,
         open: function() {

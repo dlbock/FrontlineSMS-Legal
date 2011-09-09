@@ -34,7 +34,7 @@
     <g:textField name="caseTitle" id="case-title"  maxlength="300"/>
 
     <label>Case ID</label>
-    <g:textField name="caseId" id="case-id"/>
+    <g:textField name="caseId" id="case-id" maxlength="100"/>
 
     <label>Description</label>
     <g:if test="${!params.description}">

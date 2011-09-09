@@ -2,9 +2,9 @@ var frontlinesms = this.frontlinesms || {};
 
 frontlinesms.linkCaseToEvent = function() {
     $("#link-case-dialog").dialog({
+        width: 400,
         autoOpen: false,
         modal: true,
-        width: 'auto',
         open: function() {
             $("#caseId").val("");
             $(".caseLink").removeAttr("filtermatch", true).show();
