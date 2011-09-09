@@ -13,7 +13,6 @@ class ShowCasePage extends Page {
         description { $("textarea", id: "case-description").value()}
         updateCaseButton {$("input", id: "case-update")}
         deleteButton {$("button", id: "delete-button")}
-        deleteButtonExists {$("button", id: "delete-button").size() == 1}
         caseActive { $("input", id: "case-status") }
         linkContact {$("#link-contact-button")}
         contactListInPopUp {$("#link-contacts-inner-table-div #contactsTable tbody tr").collect {module ContactRow, it} }

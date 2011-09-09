@@ -8,6 +8,7 @@ import frontlinesms.legal.LegalContact
 import frontlinesms.legal.Event
 import java.sql.Time
 import frontlinesms.legal.EventCase
+import frontlinesms.legal.functionaltests.pages.cases.SearchCasePage
 
 class ShowCaseSpec extends FrontlinesmsLegalGebSpec {
 
@@ -279,19 +280,6 @@ class ShowCaseSpec extends FrontlinesmsLegalGebSpec {
         currentEventsTable.collect { it -> it.title }[0] == "Current"
     }
 
-    def createFutureAndPastEventsAndLinkCases() {
-        def yearOffsetForDate = 1900
-        def caseone = new Case(caseId: "1112", description: "ertyui")
-        caseone.save(flush: true)
-        def pastEvent = new Event(eventTitle: "Past", dateFieldSelected: new Date(1990 - yearOffsetForDate, 8, 12), startTimeField: new Time(12, 30, 0), endTimeField: new Time(13, 30, 0))
-        pastEvent.save(flush: true)
-        def futureEvent = new Event(eventTitle: "Future", dateFieldSelected: new Date(2020 - yearOffsetForDate, 8, 12), startTimeField: new Time(12, 30, 0), endTimeField: new Time(13, 30, 0))
-        futureEvent.save(flush: true)
-        EventCase.link(pastEvent, caseone)
-        EventCase.link(futureEvent, caseone)
-        caseone.caseId
-    }
-
     def "should not link contact to the case when cancel is clicked on the relationship dialog"() {
         setup:
         new LegalContact(name: "fabio", primaryMobile: "22222").save(flush: true)
@@ -328,6 +316,99 @@ class ShowCaseSpec extends FrontlinesmsLegalGebSpec {
 
         then:
         sizeOflinkedContactsTable == 1
+    }
+
+    def 'should not delete when NO is clicked on delete confirmation dialog'() {
+        given:
+        new Case(caseId: "123", description: "test").save(flush: true)
+        new Case(caseId: "321", description: "test2").save(flush: true)
+        to ShowCasePage, "123"
+
+        when:
+        deleteButton.click()
+
+        and:
+        deleteNo.click()
+
+        then:
+        at(ShowCasePage)
+    }
+
+    def 'should stay on search page when YES is clicked in delete confirmation dialog'() {
+        given:
+        new Case(caseId: "123", description: "test").save(flush: true)
+        new Case(caseId: "321", description: "test2").save(flush: true)
+
+        to ShowCasePage, "123"
+
+        when:
+        deleteButton.click();
+        deleteYes.click();
+        waitFor { !deleteDialog.isVisible() }
+
+        then:
+        assert at(SearchCasePage)
+    }
+
+    def 'should not discard the changes made to case details when the user clicks NO on the Cancel Case Changes dialog'() {
+        setup:
+        new Case(caseId: "1112", description: "ertyui").save(flush: true)
+
+        when:
+        to ShowCasePage, "1112"
+
+        and:
+        caseId = "1113"
+
+        and:
+        cancelButton.click()
+
+        then:
+        cancelDialog.displayed == true
+
+        and:
+        cancelNo.click()
+
+        then:
+        caseId == "1113"
+    }
+
+    def 'should discard the changes made to case details when the user clicks YES on the Cancel Case Changes dialog'() {
+        setup:
+        new Case(caseId: "1112", description: "ertyui").save(flush: true)
+
+        when:
+        to ShowCasePage, "1112"
+
+        and:
+        caseId = "1113"
+
+        and:
+        cancelButton.click()
+
+        then:
+        cancelDialog.displayed == true
+
+        and:
+        cancelYes.click()
+
+        then:
+        Case.findByCaseId("1113") == null
+        def originalCase = Case.findByCaseId("1112")
+        originalCase.caseId == "1112"
+    }
+
+    def createFutureAndPastEventsAndLinkCases() {
+        def yearOffsetForDate = 1900
+        def caseone = new Case(caseId: "1112", description: "ertyui")
+        caseone.save(flush: true)
+        def pastEvent = new Event(eventTitle: "Past", dateFieldSelected: new Date(1990 - yearOffsetForDate, 8, 12), startTimeField: new Time(12, 30, 0), endTimeField: new Time(13, 30, 0))
+        pastEvent.save(flush: true)
+        def futureEvent = new Event(eventTitle: "Future", dateFieldSelected: new Date(2020 - yearOffsetForDate, 8, 12), startTimeField: new Time(12, 30, 0), endTimeField: new Time(13, 30, 0))
+        futureEvent.save(flush: true)
+        EventCase.link(pastEvent, caseone)
+        EventCase.link(futureEvent, caseone)
+        caseone.caseId
     }
 
     def createCurrentAndPastEventsAndLinkCases() {
