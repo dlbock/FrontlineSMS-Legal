@@ -16,14 +16,14 @@ frontlinesms.eventDetails = function() {
 
     $('#update-event').click(frontlinesms.updateEventDetails);
 
-    frontlinesms.enableUpdateButton("#event-title");
-    frontlinesms.enableUpdateButton("#event-date");
-    frontlinesms.enableUpdateButton("#event-start-time");
-    frontlinesms.enableUpdateButton("#event-end-time");
+    frontlinesms.enableUpdateButtonOnKeyUpOf("#event-title");
+    frontlinesms.enableUpdateButtonOnKeyUpOf("#event-date");
+    frontlinesms.enableUpdateButtonOnKeyUpOf("#event-start-time");
+    frontlinesms.enableUpdateButtonOnKeyUpOf("#event-end-time");
 };
 
-frontlinesms.enableUpdateButton = function(updatedFieldId) {
-      $(updatedFieldId).keyup(function() {
+frontlinesms.enableUpdateButtonOnKeyUpOf = function(inputFieldId) {
+      $(inputFieldId).keyup(function() {
         $('#update-event').attr('disabled', false)
     });
 }
