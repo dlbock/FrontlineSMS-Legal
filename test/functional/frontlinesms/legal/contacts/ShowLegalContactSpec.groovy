@@ -8,10 +8,11 @@ import frontlinesms.legal.functionaltests.pages.contact.ShowLegalContactPage
 import java.sql.Time
 import frontlinesms.legal.Case
 import frontlinesms.legal.functionaltests.pages.contact.CreateLegalContactPage
+import frontlinesms.legal.functionaltests.pages.cases.ShowCasePage
 
 class ShowLegalContactSpec extends FrontlinesmsLegalGebSpec {
 
-    def "should show contact details"(){
+    def "should show contact details"() {
         given:
         new Case(caseId: "123", description: "test").save(flush: true)
         new Case(caseId: "321", description: "test2").save(flush: true)
@@ -58,11 +59,10 @@ class ShowLegalContactSpec extends FrontlinesmsLegalGebSpec {
         relationshipInput.present
         relationshipConfirmButton.present
         relationshipCancelButton.present
-
     }
 
-    def "Update button should be disabled when no changes are made to the contact details"(){
-      given:
+    def "Update button should be disabled when no changes are made to the contact details"() {
+        given:
         new Case(caseId: "123", description: "test").save(flush: true)
         new Case(caseId: "321", description: "test2").save(flush: true)
         to CreateLegalContactPage
@@ -84,8 +84,8 @@ class ShowLegalContactSpec extends FrontlinesmsLegalGebSpec {
         updateContactButtonIsDisabled == 1
     }
 
-    def "Update button should be enabled when changes are made to the contact details"(){
-      given:
+    def "Update button should be enabled when changes are made to the contact details"() {
+        given:
         new Case(caseId: "123", description: "test").save(flush: true)
         new Case(caseId: "321", description: "test2").save(flush: true)
         to CreateLegalContactPage
@@ -108,8 +108,8 @@ class ShowLegalContactSpec extends FrontlinesmsLegalGebSpec {
         updateContactButtonIsDisabled == 0
     }
 
-    def "Update button should be enabled when cases are linked to the contact"(){
-      given:
+    def "Update button should be enabled when cases are linked to the contact"() {
+        given:
         new Case(caseId: "123", description: "test").save(flush: true)
         new Case(caseId: "321", description: "test2").save(flush: true)
         to CreateLegalContactPage
@@ -129,8 +129,8 @@ class ShowLegalContactSpec extends FrontlinesmsLegalGebSpec {
         updateContactButtonIsDisabled == 0
     }
 
-    def "Update button should be enabled when cases are unlinked from the contact"(){
-      given:
+    def "Update button should be enabled when cases are unlinked from the contact"() {
+        given:
         new Case(caseId: "123", description: "test").save(flush: true)
         new Case(caseId: "321", description: "test2").save(flush: true)
         to CreateLegalContactPage
@@ -165,20 +165,6 @@ class ShowLegalContactSpec extends FrontlinesmsLegalGebSpec {
         futureEventsTable.first().title == "Future"
     }
 
-    def createFutureAndPastEventsAndLinkContacts() {
-        def yearOffsetForDate = 1900
-        def legalContact = new LegalContact(name: 'fabio', primaryMobile: '1234567')
-        legalContact.save(flush: true)
-        def pastEvent = new Event(eventTitle: "Past", dateFieldSelected: new Date(1990 - yearOffsetForDate, 8, 12), startTimeField: new Time(12, 30, 0), endTimeField: new Time(13, 30, 0))
-        pastEvent.save(flush: true)
-        def futureEvent = new Event(eventTitle: "Future", dateFieldSelected: new Date(2020 - yearOffsetForDate, 8, 12), startTimeField: new Time(12, 30, 0), endTimeField: new Time(13, 30, 0))
-        futureEvent.save(flush: true)
-        EventContact.link(pastEvent, legalContact)
-        EventContact.link(futureEvent, legalContact)
-        legalContact.id
-    }
-
-
     def "should show current and past event linked with legal contact"() {
         setup:
         def id = createCurrentAndPastEventsAndLinkContacts()
@@ -190,27 +176,6 @@ class ShowLegalContactSpec extends FrontlinesmsLegalGebSpec {
         pastEventsTable.first().title == "Past"
         and:
         currentEventsTable.first().title == "Current"
-    }
-
-    def createCurrentAndPastEventsAndLinkContacts() {
-        def yearOffsetForDate = 1900
-        def legalContact = new LegalContact(name: 'temptation', primaryMobile: '987654')
-        legalContact.save(flush: true)
-        def pastEvent = new Event(eventTitle: "Past", dateFieldSelected: new Date(1990 - yearOffsetForDate, 8, 12), startTimeField: new Time(12, 30, 0), endTimeField: new Time(13, 30, 0))
-        pastEvent.save(flush: true)
-        def futureEvent = new Event(eventTitle: "Future", dateFieldSelected: new Date(2020 - yearOffsetForDate, 8, 12), startTimeField: new Time(12, 30, 0), endTimeField: new Time(13, 30, 0))
-        futureEvent.save(flush: true)
-        def startDate = new Date()
-        def startTime = new Time(startDate.getTime() - 240000)
-        def endTime = new Time(startDate.getTime() + 240000)
-        def currentEvent = new Event(eventTitle: "Current", dateFieldSelected: startDate, startTimeField: startTime, endTimeField: endTime)
-        currentEvent.save(flush: true)
-
-        EventContact.link(pastEvent, legalContact)
-        EventContact.link(futureEvent, legalContact)
-        EventContact.link(currentEvent, legalContact)
-        legalContact.id
-
     }
 
     def "should continue showing the search contact dialog box after pressing RETURN when searching for a contact"() {
@@ -231,7 +196,7 @@ class ShowLegalContactSpec extends FrontlinesmsLegalGebSpec {
         caseLinkNotVisible.size() == 0
     }
 
-    def "should not link a case that is already linked to the contact and should stay on the link case pop-up"(){
+    def "should not link a case that is already linked to the contact and should stay on the link case pop-up"() {
         given:
         new Case(caseId: "123", caseTitle: "Case Title 1", description: "test").save(flush: true)
         new Case(caseId: "321", caseTitle: "Case Title 2", description: "test2").save(flush: true)
@@ -248,5 +213,59 @@ class ShowLegalContactSpec extends FrontlinesmsLegalGebSpec {
 
         then:
         linkCaseDialog.present
+    }
+
+    def "should show linked case on contact details page when contact is linked from case detail page "() {
+        given:
+        def case1 = new Case(caseId: "123", caseTitle: "Case Title 1", description: "test").save(flush: true)
+        def contact1 = new LegalContact(name: "batman", primaryMobile: "123454321").save(flush: true)
+
+        to ShowCasePage, case1.caseId
+
+        when:
+        linkContact.click()
+        contactListInPopUp[0].click()
+        relationshipConfirmButton.click()
+        updateCaseButton.click()
+
+        and:
+        to ShowLegalContactPage, contact1.id
+
+        then:
+        linkedCasesTable.collect { it -> it.caseTitle }[0] == "Case Title 1"
+    }
+
+    private def createFutureAndPastEventsAndLinkContacts() {
+        def yearOffsetForDate = 1900
+        def legalContact = new LegalContact(name: 'fabio', primaryMobile: '1234567')
+        legalContact.save(flush: true)
+        def pastEvent = new Event(eventTitle: "Past", dateFieldSelected: new Date(1990 - yearOffsetForDate, 8, 12), startTimeField: new Time(12, 30, 0), endTimeField: new Time(13, 30, 0))
+        pastEvent.save(flush: true)
+        def futureEvent = new Event(eventTitle: "Future", dateFieldSelected: new Date(2020 - yearOffsetForDate, 8, 12), startTimeField: new Time(12, 30, 0), endTimeField: new Time(13, 30, 0))
+        futureEvent.save(flush: true)
+        EventContact.link(pastEvent, legalContact)
+        EventContact.link(futureEvent, legalContact)
+        legalContact.id
+    }
+
+    private def createCurrentAndPastEventsAndLinkContacts() {
+        def yearOffsetForDate = 1900
+        def legalContact = new LegalContact(name: 'temptation', primaryMobile: '987654')
+        legalContact.save(flush: true)
+        def pastEvent = new Event(eventTitle: "Past", dateFieldSelected: new Date(1990 - yearOffsetForDate, 8, 12), startTimeField: new Time(12, 30, 0), endTimeField: new Time(13, 30, 0))
+        pastEvent.save(flush: true)
+        def futureEvent = new Event(eventTitle: "Future", dateFieldSelected: new Date(2020 - yearOffsetForDate, 8, 12), startTimeField: new Time(12, 30, 0), endTimeField: new Time(13, 30, 0))
+        futureEvent.save(flush: true)
+        def startDate = new Date()
+        def startTime = new Time(startDate.getTime() - 240000)
+        def endTime = new Time(startDate.getTime() + 240000)
+        def currentEvent = new Event(eventTitle: "Current", dateFieldSelected: startDate, startTimeField: startTime, endTimeField: endTime)
+        currentEvent.save(flush: true)
+
+        EventContact.link(pastEvent, legalContact)
+        EventContact.link(futureEvent, legalContact)
+        EventContact.link(currentEvent, legalContact)
+        legalContact.id
+
     }
 }

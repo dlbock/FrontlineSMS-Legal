@@ -35,6 +35,7 @@ class ShowLegalContactPage extends Page {
         updateButton {$("#contact-save")}
     }
 }
+
 class EventRow extends Module {
     static content = {
         cell { i -> $("td", i) }
