@@ -192,48 +192,6 @@ class ShowLegalContactSpec extends FrontlinesmsLegalGebSpec {
         currentEventsTable.first().title == "Current"
     }
 
-    def "should add case linking details to the hidden form field when case is linked"(){
-        given:
-        def case1 = new Case(caseId: "1112", description: "ertyui")
-        case1.save(flush: true)
-        def case2 = new Case(caseId: "1123", description: "ertooo")
-        case2.save(flush: true)
-        def contact1 = new LegalContact(name: "fabio", primaryMobile: "22222").save(flush: true)
-        to ShowLegalContactPage, contact1.id
-
-        when:
-        linkCaseButton.click()
-        casesToLink[0].linkCaseButton.click()
-        relationshipInput << "Victim"
-        relationshipConfirmButton.click()
-
-        then:
-        assert linkedCasesHiddenField.value().contains("Victim")
-        assert linkedCasesHiddenField.value().contains(case1.id.toString())
-    }
-
-     def "should remove case details from linked cases table and case link details from the hidden form field when case is unlinked"(){
-        given:
-        def case1 = new Case(caseId: "1112", description: "ertyui")
-        case1.save(flush: true)
-        def case2 = new Case(caseId: "1123", description: "ertooo")
-        case2.save(flush: true)
-        def contact1 = new LegalContact(name: "fabio", primaryMobile: "22222").save(flush: true)
-        to ShowLegalContactPage, contact1.id
-
-        when:
-        linkCaseButton.click()
-        casesToLink[0].linkCaseButton.click()
-        relationshipInput << "Victim"
-        relationshipConfirmButton.click()
-        linkedCasesTable[0].unlink.click()
-
-        then:
-        assert !linkedCasesHiddenField.value().contains("Victim")
-        assert !linkedCasesHiddenField.value().contains(case1.id.toString())
-        assert linkedCasesTable[0] == null
-    }
-
     def createCurrentAndPastEventsAndLinkContacts() {
         def yearOffsetForDate = 1900
         def legalContact = new LegalContact(name: 'temptation', primaryMobile: '987654')

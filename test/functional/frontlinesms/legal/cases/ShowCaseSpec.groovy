@@ -1,15 +1,11 @@
 package frontlinesms.legal.cases
 
-import frontlinesms.legal.Case
 import frontlinesms.legal.functionaltests.FrontlinesmsLegalGebSpec
-import frontlinesms.legal.functionaltests.pages.cases.ShowCasePage
-import frontlinesms.legal.functionaltests.pages.HomePage
-import frontlinesms.legal.LegalContact
-import frontlinesms.legal.Event
-import java.sql.Time
-import frontlinesms.legal.EventCase
 import frontlinesms.legal.functionaltests.pages.cases.SearchCasePage
-import frontlinesms.legal.CaseContacts
+import frontlinesms.legal.functionaltests.pages.cases.ShowCasePage
+import frontlinesms.legal.functionaltests.pages.contact.ShowLegalContactPage
+import java.sql.Time
+import frontlinesms.legal.*
 
 class ShowCaseSpec extends FrontlinesmsLegalGebSpec {
 
@@ -407,7 +403,28 @@ class ShowCaseSpec extends FrontlinesmsLegalGebSpec {
         statusMessage == "Case details updated"
     }
 
-    def createFutureAndPastEventsAndLinkCases() {
+    def "should show linked contact in the case details page"() {
+        given:
+        def contact = new LegalContact(id: "1", name: "fabio", primaryMobile: "22222").save(flush: true)
+        def caseOne = new Case(caseId: "1112", description: "ertyui")
+        caseOne.save(flush: true)
+        to ShowLegalContactPage, contact.id
+
+        when:
+        linkCaseButton.click()
+        casesToLink[0].linkCaseButton.click()
+        relationshipInput << "Victim"
+        relationshipConfirmButton.click()
+        updateButton.click()
+
+        and:
+        to ShowCasePage, caseOne.caseId
+
+        then:
+        sizeOflinkedContactsTable == 1
+    }
+
+    private def createFutureAndPastEventsAndLinkCases() {
         def yearOffsetForDate = 1900
         def caseone = new Case(caseId: "1112", description: "ertyui")
         caseone.save(flush: true)
@@ -420,7 +437,7 @@ class ShowCaseSpec extends FrontlinesmsLegalGebSpec {
         caseone.caseId
     }
 
-    def createCurrentAndPastEventsAndLinkCases() {
+    private def createCurrentAndPastEventsAndLinkCases() {
         def yearOffsetForDate = 1900
         def caseone = new Case(caseId: "1112", description: "ertyui")
         caseone.save(flush: true)

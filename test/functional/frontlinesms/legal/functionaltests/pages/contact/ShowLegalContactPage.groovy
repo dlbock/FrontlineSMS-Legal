@@ -32,7 +32,7 @@ class ShowLegalContactPage extends Page {
         relationshipInput { $("input", id: "case-contact-relationship")}
         relationshipConfirmButton { $("button", id: "confirm-relationship")}
         relationshipCancelButton { $("button", id: "cancel-relationship")}
-        linkedCasesHiddenField{ $("input", id:"contact-linked-cases")}
+        updateButton {$("#contact-save")}
     }
 }
 class EventRow extends Module {
