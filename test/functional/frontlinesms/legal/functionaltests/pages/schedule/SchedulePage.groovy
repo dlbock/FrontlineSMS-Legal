@@ -39,6 +39,7 @@ class EventDialog extends Module {
     static base = { $(id: "view-event") }
     static content = {
         linkCaseDialog { module LinkCaseDialog, page.$() }
+        linkContactDialog { module LinkContactDialog, page.$() }
 
         title { $('#event-title') }
 
@@ -85,7 +86,11 @@ class EventDialog extends Module {
             $("#link-case-button").click()
             true
         }
-        linkContactDialog { module LinkContactDialog, page.$() }
+
+        cancel {
+            $("#cancel-event").click()
+            true
+        }
     }
 }
 

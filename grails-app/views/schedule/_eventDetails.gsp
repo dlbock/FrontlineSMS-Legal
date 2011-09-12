@@ -48,6 +48,7 @@
         <div align="right" class="form-submit-area">
             <input type="button" id="update-event" value="Update" disabled="disabled"/>
             <input type="button" id="delete-event" value="Delete"/>
+            <input type="button" id="cancel-event" value="Cancel"/>
         </div>
     </g:form>
 </div>

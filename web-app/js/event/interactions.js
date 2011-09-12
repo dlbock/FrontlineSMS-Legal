@@ -34,14 +34,10 @@ frontlinesms.activateTimePicker = function() {
         defaultTime: "00:00AM"
     });
 
-    $("#event-start-time").change(
-        frontlinesms.autoUpdateEventEndTime
-    );
-}
-
-frontlinesms.autoUpdateEventEndTime = function() {
-    var date = $("#event-start-time").timeEntry('getTime');
-    $("#event-end-time").timeEntry("setTime", new Date(0, 0, 0, date.getHours() + 1, date.getMinutes(), 0));
+    $("#event-start-time").change(function() {
+        var date = $("#event-start-time").timeEntry('getTime');
+        $("#event-end-time").timeEntry("setTime", new Date(0, 0, 0, date.getHours() + 1, date.getMinutes(), 0));
+    });
 }
 
 frontlinesms.redirectToHomePage = function() {

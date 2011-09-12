@@ -75,7 +75,6 @@ frontlinesms.displayEventDetails = function(calEvent) {
 };
 
 frontlinesms.constructContactsTable = function(data, eventId) {
-
     $('#event-contacts-table tbody *').remove();
     for (var i = 0; i < data.length; i++) {
         var contactId = data[i]["id"];
@@ -92,7 +91,6 @@ frontlinesms.constructContactsTable = function(data, eventId) {
 };
 
 frontlinesms.constructCasesTable = function(data) {
-
     $('#cases tbody *').remove();
     for (var i = 0; i < data.length; i++) {
         var status;
@@ -169,7 +167,6 @@ frontlinesms.calendarInteractions = function() {
             $("#schedule").fullCalendar("option", "height", frontlinesms.calculateScheduleHeight($(window).height()))
         }
     })
-
 
     var ajaxDefaults = {
         dataType: 'json',

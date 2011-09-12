@@ -106,7 +106,7 @@ describe('event detail pop up', function() {
         $('#event-start-time').val("05:20PM");
         $('#event-end-time').val("");
         $("#update-button").click();
-        expect($('#error-message').html()).toBe("Please enter a end time.The end time cannot be earlier than the start time.");
+        expect($('#error-message').html()).toBe("Please enter a end time.");
     });
 
     it("show error message when end time field earlier than start time field ", function() {

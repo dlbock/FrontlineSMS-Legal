@@ -1,7 +1,7 @@
 var frontlinesms = this.frontlinesms || {};
 var linkContactIds = "";
 var unlinkContactIds = "";
-var eventDate = "";
+
 frontlinesms.eventDetails = function() {
     $("#view-event").dialog({
         width: 500,
@@ -15,6 +15,9 @@ frontlinesms.eventDetails = function() {
     });
 
     $('#update-event').click(frontlinesms.updateEventDetails);
+    $('#cancel-event').click(function(){
+        $('#view-event').dialog('close');
+    });
 
     frontlinesms.enableUpdateButtonOnKeyUpOf("#event-title");
     frontlinesms.enableUpdateButtonOnKeyUpOf("#event-date");
@@ -23,7 +26,7 @@ frontlinesms.eventDetails = function() {
 };
 
 frontlinesms.enableUpdateButtonOnKeyUpOf = function(inputFieldId) {
-      $(inputFieldId).keyup(function() {
+    $(inputFieldId).keyup(function() {
         $('#update-event').attr('disabled', false)
     });
 }
@@ -58,6 +61,10 @@ frontlinesms.yesNoDialogBox = function() {
     }
 }
 
+frontlinesms.timeToDate = function (timeElement) {
+    return $(timeElement).timeEntry('getTime');
+}
+
 frontlinesms.updateEventDetails = function () {
     var errorMessage = "";
     var errorMessageForTime = "";
@@ -69,10 +76,10 @@ frontlinesms.updateEventDetails = function () {
         errorMessage = "start time.";
     } else if ($('#event-end-time').val() == "") {
         errorMessage = "end time.";
-    }
-
-    if ($('#event-start-time').val() >= $('#event-end-time').val()) {
-        errorMessageForTime = "The end time cannot be earlier than the start time.";
+    } else {
+        if (errorMessage == "" && frontlinesms.timeToDate('#event-start-time') >= frontlinesms.timeToDate('#event-end-time')) {
+            errorMessageForTime = "The end time cannot be earlier than the start time.";
+        }
     }
 
     if (errorMessage != "" && errorMessageForTime != "") {
@@ -138,7 +145,6 @@ frontlinesms.attachActionWithLinkContactButton = function(buttonSelector, dialog
             $("#event-linked-contacts").val("");
         }
     });
-
 
     $(".contactLink").click(function() {
         var contactId = $(this).attr('id');

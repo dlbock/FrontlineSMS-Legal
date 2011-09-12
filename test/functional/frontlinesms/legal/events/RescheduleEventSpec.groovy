@@ -122,7 +122,7 @@ class RescheduleEventSpec extends FrontlinesmsLegalGebSpec {
         eventDialog.updateEvent()
 
         then:
-        eventDialog.errorMessage == "Please enter a end time.The end time cannot be earlier than the start time."
+        eventDialog.errorMessage == "Please enter a end time."
         and:
         eventDialog.updateEventButton.@disabled == 'true'
     }
@@ -162,7 +162,7 @@ class RescheduleEventSpec extends FrontlinesmsLegalGebSpec {
         cancelEditConfirmationDialog.noButton.click()
 
         then:
-        $('#confirmation-dialog').size() == 0
+        cancelEditConfirmationDialog.size() == 0
     }
 
     def "should close event detail pop up and confirmation dialog when YES is clicked in confirmation dialog"() {
@@ -177,35 +177,102 @@ class RescheduleEventSpec extends FrontlinesmsLegalGebSpec {
         cancelEditConfirmationDialog.confirm()
 
         then:
-        $('#confirmation-dialog').size() == 0
+        cancelEditConfirmationDialog.size() == 0
     }
 
     def "should enable only tab key on event date field"() {
-        given: selectEvent("Test Event 1")
-        and: def initialDate = eventDialog.date.value
+        given:
+        selectEvent("Test Event 1")
 
-        when: eventDialog.date.click()
-        and: eventDialog.date << "a!dfj-*#"
+        and:
+        def initialDate = eventDialog.date.value
 
-        then: eventDialog.date.value() == initialDate
+        when:
+        eventDialog.date.click()
+
+        and:
+        eventDialog.date << "a!dfj-*#"
+
+        then:
+        eventDialog.date.value() == initialDate
     }
 
     def "should not allow non-numeric keys on event start time field"() {
-        when: selectEvent("Test Event 1")
-        and: eventDialog.startTime.jquery.focus()
-        and: eventDialog.startTime.click()
-        and: eventDialog.startTime << "a!dfj-*#"
+        when:
+        selectEvent("Test Event 1")
 
-        then: eventDialog.startTime.value() == "08:09AM"
+        and:
+        eventDialog.startTime.jquery.focus()
+
+        and:
+        eventDialog.startTime.click()
+
+        and:
+        eventDialog.startTime << "a!dfj-*#"
+
+        then:
+        eventDialog.startTime.value() == "08:09AM"
     }
 
     def "should not allow non-numeric keys on event end time field"() {
-        when: selectEvent("Test Event 1")
-        and: eventDialog.endTime.jquery.focus()
-        and: eventDialog.endTime.click()
-        and: eventDialog.endTime << "a!dfj-*#"
+        when:
+        selectEvent("Test Event 1")
 
-        then: eventDialog.endTime.value() == "08:56AM"
+        and:
+        eventDialog.endTime.jquery.focus()
+
+        and:
+        eventDialog.endTime.click()
+
+        and:
+        eventDialog.endTime << "a!dfj-*#"
+
+        then:
+        eventDialog.endTime.value() == "08:56AM"
+    }
+
+    def "should not allow start time to be after end time"() {
+        when:
+        selectEvent("Test Event 1")
+
+        and:
+        eventDialog.startTime.value("11:30PM")
+
+        and:
+        eventDialog.endTime.value("12:30AM")
+
+        and:
+        eventDialog.updateEvent()
+
+        then:
+        eventDialog.errorMessage == "The end time cannot be earlier than the start time."
+    }
+
+    def "cancel button should close the event dialog window if no update is made"() {
+        when:
+        selectEvent("Test Event 1")
+
+        and:
+        eventDialog.cancel()
+
+        then:
+        eventDialog.displayed == false
+        cancelEditConfirmationDialog.size() == 0
+    }
+
+    def "should display confirmation dialog when changes have been made to the fields and the cancel button is clicked"() {
+        when:
+        selectEvent("Test Event 1")
+
+        and:
+        eventDialog.title << "Update"
+
+        and:
+        eventDialog.cancel()
+
+        then:
+        eventDialog.displayed == false
+        cancelEditConfirmationDialog.size() != 0
     }
 
     def createEvent(title, String startTime, String endTime) {
