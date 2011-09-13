@@ -21,7 +21,7 @@ frontlinesms.enableKeyInField = function(keyCode, fieldId) {
 };
 
 frontlinesms.disablePasteOnField = function(fieldId) {
-    $(fieldId).bind('paste', function (e) {
-         e.preventDefault();
+    $(fieldId).bind('paste', function (event) {
+         event.preventDefault();
       });
 }
