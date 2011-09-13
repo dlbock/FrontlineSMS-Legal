@@ -26,6 +26,7 @@
             frontlinesms.calendarInteractions();
             frontlinesms.eventDetails();
             frontlinesms.attachActionWithLinkContactButton();
+            frontlinesms.attachActionWithUnlink();
             frontlinesms.activateDatePicker();
             frontlinesms.activateTimePicker();
             frontlinesms.contactSearchOnLoad("#contactsTable", "#contact-name-search");

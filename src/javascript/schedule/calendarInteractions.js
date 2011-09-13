@@ -62,8 +62,7 @@ frontlinesms.displayEventDetails = function(calEvent) {
             frontlinesms.log("Failed to get linked cases for event.");
         },
         success : function(data) {
-            frontlinesms.log("SuccessCases:");
-            frontlinesms.log(data);
+            frontlinesms.log("Success");
             frontlinesms.populateHiddenFieldWithLinkedCases(data);
             frontlinesms.constructCasesTable(data);
         },

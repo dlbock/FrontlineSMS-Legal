@@ -9,7 +9,6 @@ frontlinesms.eventDetails = function() {
         modal: true,
         open: function() {
             $('#update-event').attr('disabled', true);
-            frontlinesms.attachActionWithUnlink();
         },
         beforeClose: frontlinesms.yesNoDialogBox
     });
@@ -41,6 +40,8 @@ frontlinesms.yesNoDialogBox = function() {
                 {
                     text: "Yes",
                     click: function() {
+                        unlinkContactIds = "";
+                        linkContactIds = "";
                         $(".confirmation-dialog").remove();
                         return true
                     },
@@ -106,6 +107,8 @@ frontlinesms.updateEventDetails = function () {
             },
             success : function() {
                 frontlinesms.log("update success");
+                unlinkContactIds = "";
+                linkContactIds = "";
                 window.location.reload(true);
             },
             cache:false
@@ -180,7 +183,8 @@ frontlinesms.attachActionWithLinkContactButton = function(buttonSelector, dialog
             }
             unlinkContactIds = contactsArray.toString();
         }
-        linkContactIds += contactId + ",";
+        else
+            linkContactIds += contactId + ",";
     }
 };
 
