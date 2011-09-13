@@ -8,10 +8,13 @@ import frontlinesms.legal.functionaltests.pages.contact.SearchLegalContactPage
 
 class SearchCaseSpec extends FrontlinesmsLegalGebSpec {
 
+    def setup() {
+        new Case(caseId: "123", description: "test1", caseTitle: "Case Title 1").save(flush: true)
+        new Case(caseId: "321", description: "test2", caseTitle: "Case Title 2").save(flush: true)
+    }
+
     def "should have all the cases in the search results after a previous search has been done and the case search page is reopened"() {
         given:
-        new Case(caseId: "123", description: "test1").save(flush: true)
-        new Case(caseId: "321", description: "test2").save(flush: true)
         to SearchCasePage
         and:
         id.value("12")
@@ -25,13 +28,11 @@ class SearchCaseSpec extends FrontlinesmsLegalGebSpec {
 
         then:
         assert id.value() == ""
-        caseLinkNotVisible().size()==0
+        caseLinkNotVisible().size() == 0
     }
 
     def "should display only the filtered search on pressing RETURN"() {
         given:
-        new Case(caseId: "123", description: "test1").save(flush: true)
-        new Case(caseId: "321", description: "test2").save(flush: true)
         to SearchCasePage
 
         when:
@@ -39,18 +40,54 @@ class SearchCaseSpec extends FrontlinesmsLegalGebSpec {
         sleep(500)
 
         then:
-        caseLinkNotVisible().size()==2
+        caseLinkNotVisible().size() == 2
     }
 
     def "should display case titles for each case listed in the search"() {
-        given:
-        new Case(caseId: "123", description: "test1", caseTitle:"Case Title 1").save(flush: true)
-        new Case(caseId: "321", description: "test2", caseTitle:"Case Title 2").save(flush: true)
-
         when:
-        at SearchCasePage
+        to SearchCasePage
 
         then:
         searchResults.collect { it -> it.caseTitle }.size() == 2
+    }
+
+    def 'should not delete when NO is clicked on delete confirmation dialog'() {
+        given:
+        to SearchCasePage
+
+        when:
+        searchResults[0].deleteButton.click()
+
+        and:
+        deleteNo.click()
+
+        then:
+        searchResults().size() == 2
+    }
+
+    def 'should delete case from database when YES is clicked'() {
+        given:
+        to SearchCasePage
+
+        when:
+        searchResults[0].deleteButton.click();
+        deleteYes.click();
+
+        then:
+        searchResults().size() == 1
+
+    }
+
+    def 'should stay on search page when YES is clicked in delete confirmation dialog'() {
+        given:
+        to SearchCasePage
+
+        when:
+        searchResults[0].deleteButton.click();
+        deleteYes.click();
+
+        then:
+        assert at(SearchCasePage)
+
     }
 }

@@ -39,28 +39,6 @@ class ShowLegalContactSpec extends FrontlinesmsLegalGebSpec {
         linkedCasesTable[0].unlink.displayed
     }
 
-    def "should show relationship description dialog when link case button is clicked for a desired case"() {
-        given:
-        new Case(caseId: "123", description: "test").save(flush: true)
-        new Case(caseId: "321", description: "test2").save(flush: true)
-        to CreateLegalContactPage
-        name << "Bob"
-        primaryMobile << "8675309"
-        notes << "Testing"
-        save.click()
-
-        when:
-        at(ShowLegalContactPage)
-        linkCaseButton.click()
-        casesToLink[0].linkCaseButton.click()
-
-        then:
-        caseContactRelationshipDialog.present
-        relationshipInput.present
-        relationshipConfirmButton.present
-        relationshipCancelButton.present
-    }
-
     def "Update button should be disabled when no changes are made to the contact details"() {
         given:
         new Case(caseId: "123", description: "test").save(flush: true)

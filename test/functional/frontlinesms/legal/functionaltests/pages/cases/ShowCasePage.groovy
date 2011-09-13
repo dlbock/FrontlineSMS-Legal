@@ -18,7 +18,7 @@ class ShowCasePage extends Page {
         contactListInPopUp {$("#link-contacts-inner-table-div #contactsTable tbody tr").collect {module ContactRow, it} }
         statusMessage { $("div", id: "status").text() }
         errorMessage { $("div", id: "errorMessage").text() }
-        unlinkButton{$(".unlink-contact-button")}
+        unlinkButton {$(".unlink-contact-button")}
         deleteDialog { $("div", id: "deleteDialog") }
         deleteYes { $("button", id: "confirm-yes")}
         deleteNo { $("button", id: "confirm-no")}
@@ -36,12 +36,13 @@ class ShowCasePage extends Page {
         relationshipCancelButton { $("button", id: "cancel-relationship")}
         relationshipConfirmButton { $("button", id: "confirm-relationship")}
         sizeOflinkedContactsTable {$("#contacts tbody tr:not(:first-child)").size()}
+        linkedContactsTable {$("#contacts tbody tr:not(:first-child)").collect {module ContactRow, it}}
     }
 }
 
 class ContactRow extends Module {
     static content = {
-        cell { i -> $("td", i) }
+        cell {i -> $("td", i)}
         name { cell(0).text() }
         primaryMobile { cell(1).text() }
     }
@@ -49,7 +50,7 @@ class ContactRow extends Module {
 
 class EventRow extends Module {
     static content = {
-        cell { i -> $("td", i) }
+        cell {i -> $("td", i)}
         title { cell(0).text() }
     }
 }

@@ -334,13 +334,25 @@ class ShowCaseSpec extends FrontlinesmsLegalGebSpec {
 
     def 'should discard the changes made to case details when the user clicks YES on the Cancel Case Changes dialog'() {
         setup:
-        new Case(caseId: "1112", description: "ertyui").save(flush: true)
+        def caseOne = new Case(caseId: "1112", description: "ertyui").save(flush: true)
+        def contactOne = new LegalContact(name: "one", primaryMobile: "11111").save(flush: true)
+        CaseContacts.link(caseOne, contactOne, "click link button")
+
+        def contactTwo = new LegalContact(name: "two", primaryMobile: "22222").save(flush: true)
 
         when:
         to ShowCasePage, "1112"
 
         and:
         caseId = "1113"
+
+        and:
+        unlinkButton[0].click()
+
+        and:
+        linkContact.click()
+        contactListInPopUp[1].click()
+        relationshipConfirmButton.click()
 
         and:
         cancelButton.click()
@@ -351,10 +363,15 @@ class ShowCaseSpec extends FrontlinesmsLegalGebSpec {
         and:
         cancelYes.click()
 
+        when:
+        to ShowCasePage, "1112"
+
         then:
         Case.findByCaseId("1113") == null
         def originalCase = Case.findByCaseId("1112")
         originalCase.caseId == "1112"
+        sizeOflinkedContactsTable == 1
+        linkedContactsTable.collect { it -> it.name }[0] == "one"
     }
 
     def "should not show contact linked to the case in the contact table when user clicks on unlink"() {
