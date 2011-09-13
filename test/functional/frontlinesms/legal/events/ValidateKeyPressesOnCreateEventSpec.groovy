@@ -55,4 +55,16 @@ class ValidateKeyPressesOnCreateEventSpec extends FrontlinesmsLegalGebSpec {
         then: startTimeField.value() == ""
     }
 
+    def "should not allow copy paste in end time field"() {
+        given: to NewEventPage
+
+        when: eventTitle.click()
+        and: eventTitle << "dsjfgsd"
+        eventTitle << Keys.chord(Keys.CONTROL, "a")
+        eventTitle << Keys.chord(Keys.CONTROL, "c")
+        endTimeField.click()
+        endTimeField << Keys.chord(Keys.CONTROL, "v")
+
+        then: endTimeField.value() == ""
+    }
 }
