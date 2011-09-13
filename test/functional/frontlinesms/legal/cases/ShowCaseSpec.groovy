@@ -32,19 +32,19 @@ class ShowCaseSpec extends FrontlinesmsLegalGebSpec {
         when:
         to ShowCasePage, "1112"
         and:
-        linkContact.click()
+        linkContact()
 
         then:
-        contactListInPopUp.collect { it -> it.name }.contains("fabio")
+        linkContactDialog.contacts.collect { it -> it.contactName }.contains("fabio")
 
         and:
-        contactListInPopUp.collect { it -> it.primaryMobile}.contains("22222")
+        linkContactDialog.contacts.collect { it -> it.contactNumber}.contains("22222")
 
         and:
-        contactListInPopUp.collect { it -> it.name }.contains("dev")
+        linkContactDialog.contacts.collect { it -> it.contactName }.contains("dev")
 
         and:
-        contactListInPopUp.collect { it -> it.primaryMobile }.contains("55555")
+        linkContactDialog.contacts.collect { it -> it.contactNumber }.contains("55555")
     }
 
     def "should not update case id that already exists"() {
@@ -136,14 +136,14 @@ class ShowCaseSpec extends FrontlinesmsLegalGebSpec {
         to ShowCasePage, "1112"
 
         and:
-        linkContact.click()
+        linkContact()
 
         and:
-        contactNameSearch.value("fab")
+        linkContactDialog.searchFor("fab")
         sleep(500)
 
         then:
-        contactLinkNotVisible().size() == 1
+       linkContactDialog.contactsNotInSearchResults.size() == 1
     }
 
     def "should continue showing the search contact dialog box after pressing RETURN when searching for a contact"() {
@@ -156,10 +156,10 @@ class ShowCaseSpec extends FrontlinesmsLegalGebSpec {
         to ShowCasePage, "1112"
 
         and:
-        linkContact.click()
+        linkContact()
 
         and:
-        contactNameSearch.value("\r")
+        linkContactDialog.searchFor("\r")
 
         then:
         linkContactDialog.displayed == true
@@ -175,20 +175,20 @@ class ShowCaseSpec extends FrontlinesmsLegalGebSpec {
         to ShowCasePage, "1112"
 
         and:
-        linkContact.click()
+        linkContact()
 
         and:
-        contactNameSearch.value("fab")
+        linkContactDialog.searchFor("fab")
         sleep(500)
 
         and:
-        linkContactDialogCancelButton.click()
+        linkContactDialog.cancel()
 
         and:
-        linkContact.click()
+        linkContact()
 
         then:
-        contactNameSearch.value() == ""
+        linkContactDialog.searchbox.value() == ""
     }
 
     def "should display all the contacts when the dialog box is reopened after a previous filter"() {
@@ -200,14 +200,14 @@ class ShowCaseSpec extends FrontlinesmsLegalGebSpec {
         when:
         to ShowCasePage, "1112"
         and:
-        linkContact.click()
+        linkContact()
         and:
-        contactNameSearch.value("fab")
+        linkContactDialog.searchFor("fab")
         sleep(500)
         and:
-        linkContactDialogCancelButton.click()
+        linkContactDialog.cancel()
         and:
-        linkContact.click()
+        linkContact()
 
         then:
         contactLinkNotVisible().size() == 0
@@ -250,8 +250,8 @@ class ShowCaseSpec extends FrontlinesmsLegalGebSpec {
         to ShowCasePage, caseOne.caseId
 
         and:
-        linkContact.click()
-        contactListInPopUp[0].link()
+        linkContact()
+        linkContactDialog.link("fabio")
         relationshipCancelButton.click()
 
         then:
@@ -269,8 +269,8 @@ class ShowCaseSpec extends FrontlinesmsLegalGebSpec {
         to ShowCasePage, caseOne.caseId
 
         and:
-        linkContact.click()
-        contactListInPopUp[0].link()
+        linkContact()
+        linkContactDialog.link("fabio")
         relationshipConfirmButton.click()
 
         then:
@@ -337,8 +337,7 @@ class ShowCaseSpec extends FrontlinesmsLegalGebSpec {
         def caseOne = new Case(caseId: "1112", description: "ertyui").save(flush: true)
         def contactOne = new LegalContact(name: "one", primaryMobile: "11111").save(flush: true)
         CaseContacts.link(caseOne, contactOne, "click link button")
-
-        def contactTwo = new LegalContact(name: "two", primaryMobile: "22222").save(flush: true)
+        new LegalContact(name: "two", primaryMobile: "22222").save(flush: true)
 
         when:
         to ShowCasePage, "1112"
@@ -350,8 +349,8 @@ class ShowCaseSpec extends FrontlinesmsLegalGebSpec {
         unlinkButton[0].click()
 
         and:
-        linkContact.click()
-        contactListInPopUp[1].link()
+        linkContact()
+        linkContactDialog.link("two")
         relationshipConfirmButton.click()
 
         and:

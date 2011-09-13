@@ -2,7 +2,7 @@ package frontlinesms.legal.functionaltests.pages.cases
 
 import geb.Page
 import geb.Module
-import frontlinesms.legal.functionaltests.pages.ConfirmationDialog
+import frontlinesms.legal.functionaltests.pages.LinkContactDialog
 
 class ShowCasePage extends Page {
     static at = { $("title").text() == "ShowCasePage"}
@@ -14,18 +14,17 @@ class ShowCasePage extends Page {
         updateCaseButton {$("input", id: "case-update")}
         deleteButton {$("button", id: "delete-button")}
         caseActive { $("input", id: "case-status") }
-        linkContact {$("#link-contact-button")}
-        contactListInPopUp {$("#link-contacts-inner-table-div #contactsTable tbody tr").collect {module ContactRow, it} }
+        linkContact {
+            $("button", id: "link-contact-button").click()
+            true
+        }
         statusMessage { $("div", id: "status").text() }
         errorMessage { $("div", id: "errorMessage").text() }
         unlinkButton {$(".unlink-contact-button")}
         deleteDialog { $("div", id: "deleteDialog") }
         deleteYes { $("button", id: "confirm-yes")}
         deleteNo { $("button", id: "confirm-no")}
-        linkContactDialog { $("div", id: "link-contact-dialog") }
-        contactNameSearch { $("input", id: "contact-name-search") }
-        contactLinkNotVisible { $("tr", class: "contactRow", filtermatch: "false").collect {module ContactRow, it} }
-        linkContactDialogCancelButton { $("#cancel-button") }
+        linkContactDialog { module LinkContactDialog }
         cancelDialog { $("div", id: "case-update-cancel-dialog") }
         cancelButton {$("button", id: "case-update-cancel")}
         cancelYes { $("button", id: "cancel-confirm-yes")}

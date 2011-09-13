@@ -164,54 +164,13 @@
     </div>
 </g:form>
 <div id="offset-button-container">
-<g:form action="delete" class="form-delete" id="${caseToDisplay.caseId}">
-    <button id="delete-button" class="action-button">Delete</button>
-</g:form>
-
-<button id="case-update-cancel" class="action-button">Cancel</button>
-</div>
-
-<div id="link-contact-dialog" title="Link Contacts">
-    <g:textField name="contactNameSearch" id="contact-name-search"/>
-    <g:form action="">
-        <table id="link-contacts-outer-table">
-            <thead>
-            <tr><td>Name</td></tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>
-                    <div id="link-contacts-inner-table-div" style="height:200px;overflow: scroll; width:200px">
-                        <table id="contactsTable">
-                            <thead>
-                            </thead>
-                            <tbody>
-                            <g:each in="${contactList}" var="contact">
-                                <tr class="contactRow" id="<%=contact.id%>">
-
-                                    <td class="contact-name">
-                                        <a href="#"><%=contact.name%></a>
-                                    </td>
-
-                                    <td class="contact-number">
-                                        <a href="#"><%=contact.primaryMobile%></a>
-                                    </td>
-                                    <td style="text-decoration: underline" class="contactLink" id="${contact.id}">
-                                        <a href="#">Link</a>
-                                    </td>
-
-                                </tr>
-                            </g:each>
-                            </tbody>
-                        </table>
-                    </div>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-
+    <g:form action="delete" class="form-delete" id="${caseToDisplay.caseId}">
+        <button id="delete-button" class="action-button">Delete</button>
     </g:form>
+
+    <button id="case-update-cancel" class="action-button">Cancel</button>
 </div>
+<g:render template="../shared/linkContacts"></g:render>
 
 <div id="case-update-cancel-dialog" title="Cancel case changes?" style="display: none;">
     <p>Your changes have not been saved. Are you sure you want to cancel?</p>
