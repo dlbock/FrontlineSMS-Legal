@@ -6,6 +6,7 @@ import frontlinesms.legal.functionaltests.pages.cases.ShowCasePage
 import frontlinesms.legal.functionaltests.pages.contact.ShowLegalContactPage
 import java.sql.Time
 import frontlinesms.legal.*
+import frontlinesms.legal.functionaltests.pages.events.NewEventPage
 
 class ShowCaseSpec extends FrontlinesmsLegalGebSpec {
 
@@ -424,6 +425,35 @@ class ShowCaseSpec extends FrontlinesmsLegalGebSpec {
         sizeOflinkedContactsTable == 1
     }
 
+    def "should show previous and upcoming events when they exist"() {
+        given:
+        def caseOne = new Case(caseId: "1001", description: "case linked event").save(flush: true)
+
+        and:
+        to NewEventPage
+        createEvent("previous event", 12)
+        createEvent("upcoming event", 14)
+
+        when:
+        to ShowCasePage, caseOne.caseId
+
+        then:
+        pastEventsTable.size() == 1
+        futureEventsTable.size() == 1
+    }
+
+    def "should not show any event table when there is no events linked"() {
+        given:
+        def caseOne = new Case(caseId: "1001", description: "case linked event").save(flush: true)
+
+        when:
+        to ShowCasePage, caseOne.caseId
+
+        then:
+        pastEventsTable == []
+        futureEventsTable == []
+    }
+
     private def createFutureAndPastEventsAndLinkCases() {
         def yearOffsetForDate = 1900
         def caseone = new Case(caseId: "1112", description: "ertyui")
@@ -454,5 +484,16 @@ class ShowCaseSpec extends FrontlinesmsLegalGebSpec {
         EventCase.link(futureEvent, caseone)
         EventCase.link(currentEvent, caseone)
         caseone.caseId
+    }
+
+    private def createEvent(title, eventDate) {
+        to NewEventPage
+        eventTitle = title
+        date.setDate(eventDate)
+        startTimeField = "08:09AM"
+        endTimeField = "08:56PM"
+        linkCaseToEventButton.click()
+        casesToLink[0].linkCase.click()
+        save.click()
     }
 }
