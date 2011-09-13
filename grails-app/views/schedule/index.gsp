@@ -35,6 +35,7 @@
             var keyCodeForTabKey = 9;
             frontlinesms.enableKeyInField(keyCodeForTabKey, '#event-date');
             frontlinesms.disablePasteOnField('#event-start-time');
+            frontlinesms.disablePasteOnField('#event-date');
             frontlinesms.disablePasteOnField('#event-end-time');
             frontlinesms.linkContactToEvent();
             <g:if test="${year}">
