@@ -20,6 +20,7 @@
 
 <body>
 <h1 class="form-header">Search for Case by Case ID</h1>
+<div class="offset">
  <label>Enter the case ID to search for cases</label>
  <br />
  <g:textField class="wide-text-box" name="caseId" id="caseId" value="" size="70"/>
@@ -55,7 +56,7 @@
         </tbody>
     </table>
 </g:if>
-
+</div>
 <div id="deleteDialog" title="Delete Case" style="display: none;">
     <p>Are you sure you want to delete this case?</p>
 </div>

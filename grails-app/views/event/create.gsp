@@ -34,7 +34,7 @@
 </head>
 
 <body>
-<h1>Create Event</h1>
+<h1 class="form-header">Create Event</h1>
 
 <g:form action="save" name="createEventForm" method="post">
 

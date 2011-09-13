@@ -21,16 +21,6 @@ form
   div#show-case-update-form,div#show-contact-update-form
     :display inline
 
-form#save-case-form
-  :display inline
-
-form#contact-save-form
-  :display inline
-
-form.form-delete
-  :display inline
-  :margin 0
-
 .form-header
   :margin 0 0 15px 20px
   :display block
@@ -38,6 +28,13 @@ form.form-delete
   :font-weight bold
   :padding-top 15px
 
+.form-delete
+  :display inline
+
+.case-update-cancel
+  :margin-left 30px
+  :display inline
+  
 table
   :margin 20px 0
 
@@ -64,9 +61,10 @@ tr.contactLink, tr.caseLink
   :cursor pointer
 
 .action-button
-  :margin-right 30px
   :width 50px
   :height 20px
+  :display block
+  :float left
 
 .link-button
   :margin-right 30px
@@ -82,7 +80,8 @@ input#contact-name-search
     :display block
 
 input#contact-search-bar
-  :margin 15px 0 0 0
+  :margin 10px 0 0 0
 
 input#caseId
-  :margin 15px 0 0 0
+  :margin 10px 0 0 0
+  

@@ -19,6 +19,7 @@
 <body>
 
 <h1 class="form-header">Search for Contact by Name/Mobile Number</h1>
+<div class="offset">
 <label>Enter the contact Name/Mobile Number to search for a contact</label>
 <br>
 <g:textField class="wide-text-box" name="contact-search-bar" id="contact-search-bar" value="" size="70"/>
@@ -58,7 +59,7 @@
         </tbody>
     </table>
 </g:if>
-
+</div>
 
 <div id="deleteDialog" title="Delete Contact" style="display: none;">
     <p>Are you sure you want to delete this contact?</p>

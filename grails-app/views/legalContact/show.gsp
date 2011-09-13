@@ -165,12 +165,13 @@
     </div>
 </form>
 
+<div id="offset-button-container">
 <g:form action="delete" class="form-delete" id="${contactToDisplay.id}">
     <button id="delete-button" class="action-button">Delete</button>
 </g:form>
 
 <button id="contact-create-cancel" class="action-button">Cancel</button>
-
+</div>
 <g:render template="../linkCases"/>
 
 <div id="contact-save-no-name-dialog" title="Save Contact without a Name?" style="display: none;">

@@ -163,13 +163,13 @@
         <g:actionSubmit id="case-update" value="Update" disabled="disabled"/>
     </div>
 </g:form>
-
+<div id="offset-button-container">
 <g:form action="delete" class="form-delete" id="${caseToDisplay.caseId}">
     <button id="delete-button" class="action-button">Delete</button>
-
 </g:form>
-<button id="case-update-cancel" class="action-button">Cancel</button>
 
+<button id="case-update-cancel" class="action-button">Cancel</button>
+</div>
 
 <div id="link-contact-dialog" title="Link Contacts">
     <g:textField name="contactNameSearch" id="contact-name-search"/>
