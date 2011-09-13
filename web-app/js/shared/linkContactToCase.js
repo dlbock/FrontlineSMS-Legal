@@ -5,24 +5,28 @@ frontlinesms.buildContactsRow = function (row, involvement) {
 }
 frontlinesms.linkContactToCase = function() {
     $('#linked-contact-ids').val("");
-    $("#link-contacts").dialog({
+    $("#link-contact-dialog").dialog({
         autoOpen: false,
         modal: true,
         open: function() {
             $("#contact-name-search").val("");
-            $(".contactLink").removeAttr("filtermatch", true).show();
+            $(".contactRow").removeAttr("filtermatch", true).show();
         },
         buttons: {
-            "Cancel": function() {
-                $("#contact-name-search").val("");
-                $(".contactLink").removeAttr("filtermatch", true).show();
-                $(this).dialog("close");
+            "Cancel" : {
+                text: "Cancel",
+                id: "cancel-button",
+                click: function() {
+                    $("#contact-name-search").val("");
+                    $(".contactRow").removeAttr("filtermatch", true).show();
+                    $(this).dialog("close");
+                }
             }
         }
     });
 
     $("#link-contact-button").click(function() {
-        $("#link-contacts").dialog("open");
+        $("#link-contact-dialog").dialog("open");
         return false;
     });
 
@@ -34,7 +38,7 @@ frontlinesms.linkContactToCase = function() {
     });
 
     $(".contactLink").click(function() {
-        var contactId = $(this).attr('id');
+        var contactId = $(this).parents("tr").attr('id');
         if (!frontlinesms.checkIfCaseHasContactLinked(contactId)) {
             frontlinesms.relationshipDialog(contactId, "Contact");
             return false;

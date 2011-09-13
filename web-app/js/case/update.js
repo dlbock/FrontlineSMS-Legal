@@ -20,7 +20,7 @@ frontlinesms.showCaseOnLoad = function() {
     frontlinesms.enableUpdateButtonOnDetailsChange("#case-id", "#case-update");
     frontlinesms.enableUpdateButtonOnDetailsChange("#case-description", "#case-update");
 
-    $('tr.contactLink, td.unlink-contact-button').click(function() {
+    $('tr.contactRow, td.unlink-contact-button').click(function() {
         modified = true;
         $('#case-update').removeAttr("disabled");
     });

@@ -74,41 +74,7 @@
 
 </form>
 
-
-<div id="link-contacts" title="Link Contacts">
-    <g:textField name="contactNameSearch" id="contact-name-search"/>
-    <g:form action="">
-        <table id="link-contacts-outer-table">
-            <thead>
-            <tr><td>Name</td></tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>
-                    <div id="link-contacts-inner-table-div" style="height:200px;overflow: scroll; width:200px">
-                        <table id="contactsTable">
-                            <thead>
-                            </thead>
-                            <tbody>
-                            <g:each in="${contactList}" var="contact">
-                                <tr class="contactLink" id="${contact.id}">
-                                    <td class="contact-name">
-                                        <a href="#"><%=contact.name%></a>
-                                    </td>
-                                    <td class="contact-number">
-                                        <a href="#"><%=contact.primaryMobile%></a>
-                                    </td>
-                                </tr>
-                            </g:each>
-                            </tbody>
-                        </table>
-                    </div>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </g:form>
-</div>
+<g:render template="../shared/linkContacts"></g:render>
 
 <div id="case-cancel-dialog" title="Cancel case creation?" style="display: none;">
     <p>Your changes have not been saved. Are you sure you want to cancel?</p>

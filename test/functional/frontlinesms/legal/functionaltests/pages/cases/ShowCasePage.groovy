@@ -22,10 +22,10 @@ class ShowCasePage extends Page {
         deleteDialog { $("div", id: "deleteDialog") }
         deleteYes { $("button", id: "confirm-yes")}
         deleteNo { $("button", id: "confirm-no")}
-        linkContactDialog { $("div", id: "link-contacts") }
+        linkContactDialog { $("div", id: "link-contact-dialog") }
         contactNameSearch { $("input", id: "contact-name-search") }
-        contactLinkNotVisible { $("tr", class: "contactLink", filtermatch: "false").collect {module ContactRow, it} }
-        linkContactDialogCancelButton { $(".ui-button-text").value("Cancel") }
+        contactLinkNotVisible { $("tr", class: "contactRow", filtermatch: "false").collect {module ContactRow, it} }
+        linkContactDialogCancelButton { $("#cancel-button") }
         cancelDialog { $("div", id: "case-update-cancel-dialog") }
         cancelButton {$("button", id: "case-update-cancel")}
         cancelYes { $("button", id: "cancel-confirm-yes")}
@@ -45,6 +45,10 @@ class ContactRow extends Module {
         cell {i -> $("td", i)}
         name { cell(0).text() }
         primaryMobile { cell(1).text() }
+        link {
+            $("a").find { it.text() == "Link" }.click()
+            true
+        }
     }
 }
 

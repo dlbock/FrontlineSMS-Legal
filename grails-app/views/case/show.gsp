@@ -171,7 +171,7 @@
 <button id="case-update-cancel" class="action-button">Cancel</button>
 
 
-<div id="link-contacts" title="Link Contacts">
+<div id="link-contact-dialog" title="Link Contacts">
     <g:textField name="contactNameSearch" id="contact-name-search"/>
     <g:form action="">
         <table id="link-contacts-outer-table">
@@ -187,7 +187,7 @@
                             </thead>
                             <tbody>
                             <g:each in="${contactList}" var="contact">
-                                <tr class="contactLink" id="<%=contact.id%>">
+                                <tr class="contactRow" id="<%=contact.id%>">
 
                                     <td class="contact-name">
                                         <a href="#"><%=contact.name%></a>
@@ -195,6 +195,9 @@
 
                                     <td class="contact-number">
                                         <a href="#"><%=contact.primaryMobile%></a>
+                                    </td>
+                                    <td style="text-decoration: underline" class="contactLink" id="${contact.id}">
+                                        <a href="#">Link</a>
                                     </td>
 
                                 </tr>

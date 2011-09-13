@@ -202,8 +202,10 @@ class ShowLegalContactSpec extends FrontlinesmsLegalGebSpec {
 
         when:
         linkContact.click()
-        contactListInPopUp[0].click()
+        contactListInPopUp[0].link()
+        sleep(5000)
         relationshipConfirmButton.click()
+        sleep(5000)
         updateCaseButton.click()
 
         and:

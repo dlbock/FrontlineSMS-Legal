@@ -251,7 +251,7 @@ class ShowCaseSpec extends FrontlinesmsLegalGebSpec {
 
         and:
         linkContact.click()
-        contactListInPopUp[0].click()
+        contactListInPopUp[0].link()
         relationshipCancelButton.click()
 
         then:
@@ -270,7 +270,7 @@ class ShowCaseSpec extends FrontlinesmsLegalGebSpec {
 
         and:
         linkContact.click()
-        contactListInPopUp[0].click()
+        contactListInPopUp[0].link()
         relationshipConfirmButton.click()
 
         then:
@@ -351,7 +351,7 @@ class ShowCaseSpec extends FrontlinesmsLegalGebSpec {
 
         and:
         linkContact.click()
-        contactListInPopUp[1].click()
+        contactListInPopUp[1].link()
         relationshipConfirmButton.click()
 
         and:

@@ -5,7 +5,6 @@ import frontlinesms.legal.functionaltests.pages.HomePage
 import frontlinesms.legal.functionaltests.pages.cases.NewCasePage
 import frontlinesms.legal.functionaltests.pages.cases.ShowCasePage
 import frontlinesms.legal.LegalContact
-import org.junit.runner.Description
 import frontlinesms.legal.Case
 
 class CreateCaseSpec extends FrontlinesmsLegalGebSpec {
@@ -109,13 +108,13 @@ class CreateCaseSpec extends FrontlinesmsLegalGebSpec {
         when:
         to NewCasePage
         and:
-        linkContact.click()
+        linkContact()
         and:
-        contactNameSearch.value("fab")
+        linkContactDialog.searchFor("fab")
         sleep(500)
 
         then:
-        contactLinkNotVisible().size() == 1
+        linkContactDialog.contactsNotInSearchResults.size() == 1
     }
 
     def "should continue showing the search contact dialog box after pressing RETURN when searching for a contact"() {
@@ -126,9 +125,9 @@ class CreateCaseSpec extends FrontlinesmsLegalGebSpec {
         when:
         to NewCasePage
         and:
-        linkContact.click()
+        linkContact()
         and:
-        contactNameSearch.value("\r")
+        linkContactDialog.searchFor("\r")
 
         then:
         linkContactDialog.displayed == true
@@ -142,17 +141,17 @@ class CreateCaseSpec extends FrontlinesmsLegalGebSpec {
         when:
         to NewCasePage
         and:
-        linkContact.click()
+        linkContact()
         and:
-        contactNameSearch.value("fab")
+        linkContactDialog.searchFor("fab")
         sleep(500)
         and:
-        linkContactDialogCancelButton.click()
+        linkContactDialog.cancel()
         and:
-        linkContact.click()
+        linkContact()
 
         then:
-        contactNameSearch.value() == ""
+        linkContactDialog.searchbox.value() == ""
     }
 
     def "should display all the contacts when the dialog box is reopened after a previous filter"() {
@@ -163,17 +162,17 @@ class CreateCaseSpec extends FrontlinesmsLegalGebSpec {
         when:
         to NewCasePage
         and:
-        linkContact.click()
+        linkContact()
         and:
-        contactNameSearch.value("fab")
+        linkContactDialog.searchFor("fab")
         sleep(500)
         and:
-        linkContactDialogCancelButton.click()
+        linkContactDialog.cancel()
         and:
-        linkContact.click()
+        linkContact()
 
         then:
-        contactLinkNotVisible().size() == 0
+        linkContactDialog.contactsNotInSearchResults.size() == 0
     }
 
     def "should not link contact to the case when cancel is clicked on the relationship dialog"() {
@@ -184,8 +183,8 @@ class CreateCaseSpec extends FrontlinesmsLegalGebSpec {
         when:
         to NewCasePage
         and:
-        linkContact.click()
-        contactListInPopUp[0].click()
+        linkContact()
+        linkContactDialog.link("fabio")
         relationshipCancelButton.click()
 
         then:
@@ -200,8 +199,8 @@ class CreateCaseSpec extends FrontlinesmsLegalGebSpec {
         when:
         to NewCasePage
         and:
-        linkContact.click()
-        contactListInPopUp[0].click()
+        linkContact()
+        linkContactDialog.link("fabio")
         relationshipConfirmButton.click()
 
         then:

@@ -65,8 +65,9 @@ frontlinesms.relationshipDialog = function (Id, type) {
                         frontlinesms.addLinkedContactToCaseHiddenField(Id, relationship);
                         frontlinesms.addLinkedContactToCaseTable(Id, relationship);
                         $('#case-save').removeAttr("disabled");
+                        $('#case-update').removeAttr("disabled");
                         $(this).dialog("close");
-                        $("#link-contacts").dialog("close");
+                        $("#link-contact-dialog").dialog("close");
                     }
                     return true
                 },
