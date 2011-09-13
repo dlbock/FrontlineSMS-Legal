@@ -2,6 +2,7 @@ package frontlinesms.legal.events
 
 import frontlinesms.legal.functionaltests.FrontlinesmsLegalGebSpec
 import frontlinesms.legal.functionaltests.pages.events.NewEventPage
+import org.openqa.selenium.Keys
 
 class ValidateKeyPressesOnCreateEventSpec extends FrontlinesmsLegalGebSpec {
 
@@ -40,4 +41,18 @@ class ValidateKeyPressesOnCreateEventSpec extends FrontlinesmsLegalGebSpec {
 
         then: elementInFocusIs(eventTitle)
     }
+
+    def "should not allow copy paste in start time field"() {
+        given: to NewEventPage
+
+        when: eventTitle.click()
+        and: eventTitle << "dsjfgsd"
+        eventTitle << Keys.chord(Keys.CONTROL, "a")
+        eventTitle << Keys.chord(Keys.CONTROL, "c")
+        startTimeField.click()
+        startTimeField << Keys.chord(Keys.CONTROL, "v")
+
+        then: startTimeField.value() == ""
+    }
+
 }

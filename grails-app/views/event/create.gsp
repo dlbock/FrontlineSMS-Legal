@@ -25,6 +25,8 @@
             frontlinesms.blockKeyInField(keyCodeForEnterKey, '#event-title');
             var keyCodeForTabKey = 9;
             frontlinesms.enableKeyInField(keyCodeForTabKey, '#event-date');
+            frontlinesms.disablePasteOnField('#event-start-time');
+            frontlinesms.disablePasteOnField('#event-end-time');
         })
     </script>
 

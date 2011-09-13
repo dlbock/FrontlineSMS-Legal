@@ -19,3 +19,9 @@ frontlinesms.enableKeyInField = function(keyCode, fieldId) {
             return false;
     });
 };
+
+frontlinesms.disablePasteOnField = function(fieldId) {
+    $(fieldId).bind('paste', function (e) {
+         e.preventDefault();
+      });
+}
