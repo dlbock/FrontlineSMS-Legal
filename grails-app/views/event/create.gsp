@@ -39,7 +39,7 @@
 <g:form action="save" name="createEventForm" method="post">
 
     <label>Title</label>
-    <g:textField id="event-title" name="eventTitle" value="${params.eventTitle}"/><br><br>
+    <g:textField id="event-title" name="eventTitle" value="${params.eventTitle}" maxlength="300"/><br><br>
     <label>Date</label>
     <g:textField name="dateFieldSelected" id="event-date" value="${params.dateFieldSelected}"/><br><br>
     <label>Start time (UTC)</label>

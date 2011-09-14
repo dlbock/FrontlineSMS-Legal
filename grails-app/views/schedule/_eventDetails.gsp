@@ -3,7 +3,7 @@
         <g:hiddenField name="eventId" id="event-id"></g:hiddenField>
         <div id="error-message" style="color:#FF0000"></div><br/>
         <label><b>Title</b></label><br/>
-        <input type="text" name="eventTitle" id="event-title"/><br/><br/>
+        <input type="text" name="eventTitle" id="event-title" maxlength="300"/><br/><br/>
         <label><b>Date</b></label><br/>
         <input type="text" name="dateFieldSelected" id="event-date"/><br/><br/>
         <label><b>Start Time</b></label><br/>
