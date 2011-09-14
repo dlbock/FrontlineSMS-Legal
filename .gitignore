@@ -11,5 +11,5 @@ cobertura.ser
 /target
 /testDb.*
 /web-app/css/*.css
-/web-app/js/*.js
+/web-app/js/*
 /out
