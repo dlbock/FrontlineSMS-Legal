@@ -3,11 +3,22 @@ var frontlinesms = this.frontlinesms || {};
 frontlinesms.validateContactNumber = function() {
     var validCharacters = ['0','1','2','3','4','5','6','7','8','9','#','+','-','*'];
     var keyCodesForAllowedKeys = [0, 8, 9, 118];
+    var keyCodesForArrowKeys = [37, 38, 39, 40];
     var lengthOfContactNumber = 0;
 
-    $("#contact-primary-mobile").keyup(function(){
-        frontlinesms.filterOutUnwantedCharacters("#contact-primary-mobile", validCharacters, keyCodesForAllowedKeys);
+    $("#contact-primary-mobile").keyup(function(key){
+        var keyPressed = key.which;
+        for (i = 0; i < keyCodesForArrowKeys.length; i ++) {
+            if (keyPressed == keyCodesForArrowKeys[i]) {
+                return true;
+            }
+            else {
+                frontlinesms.filterOutUnwantedCharacters("#contact-primary-mobile", validCharacters, keyCodesForAllowedKeys);
+            }
+        }
     });
+
+
 
     $("#contact-primary-mobile").change(function(){
         frontlinesms.filterOutUnwantedCharacters("#contact-primary-mobile", validCharacters, keyCodesForAllowedKeys);
