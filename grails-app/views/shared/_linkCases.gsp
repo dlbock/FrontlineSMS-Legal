@@ -1,7 +1,7 @@
 <%@ page import="org.springframework.web.util.HtmlUtils" %>
 <div id="link-case-dialog" title="Link Cases">
-    <h3 class="form-header">Search for Case by Case ID</h3>
-    <label>Enter the case ID to search for cases</label>
+    <h3 class="form-header">Search for Case</h3>
+    <br/>
     <g:textField class="medium-text-box" name="caseId" id="caseId"/>
 
     <g:form action="search" method="POST">
