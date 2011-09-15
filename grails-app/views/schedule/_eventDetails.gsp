@@ -14,8 +14,8 @@
         <table name="linkedContacts" id="event-contacts-table">
             <thead>
             <tr>
-                <th>Contact name</th>
-                <th>Phone number</th>
+                <th class="table-contact-name-column">Contact name</th>
+                <th class="table-contact-number-column">Phone number</th>
             </tr>
             </thead>
             <tbody>
@@ -27,19 +27,19 @@
         </div>
 
         <g:hiddenField name="linkedCases" id="event-linked-cases" value="${params.linkedCases}"/>
-        <table name= "cases" class = "linkedCasesTable" id="cases">
+        <table name="cases" class="linkedCasesTable" id="cases">
             <thead>
             <tr>
-                <th>Case ID</th>
-                <th>Case Title</th>
-                <th>Status</th>
+                <th class="table-case-id-column">Case ID</th>
+                <th class="table-case-title-column">Case Title</th>
+                <th class="table-case-status-column">Status</th>
             </tr>
             </thead>
             <tbody>
             </tbody>
         </table>
 
-         <div align="left">
+        <div align="left">
             <input type="button" id="link-case-button" value="Link Case"/>
         </div>
 

@@ -4,10 +4,28 @@
 .fc-header-title
   :padding 5px 0px 0px 5px
 
+table#SearchResults td.contactLink
+  :border none
+
 table
-  :width 400px
   :text-align left
-  :margin 20px 0px 20px 0px
+  :margin 20px 0px 20px 0px 
+  :overflow hidden
+  :width 620px
+  :table-layout fixed
+  :word-wrap break-word
+
+table th.table-contact-name-column,th.table-contact-number-column
+  :width 250px
+
+table th.table-case-id-column
+  :width 150px
+
+table th.table-case-title-column
+  :width 250px
+  
+table th.table-case-status-column
+  :width 70px
 
 th
   :width 400px
@@ -21,5 +39,5 @@ table#event-contacts-table td,table#cases td,table#contactsTable td, table#cases
   :padding 2px 5px 2px 5px
   :border 1px lightgray solid
 
-.contactLink, .link-case
+.contactLink, .link-case, .unlink-contact, .unlink-case
   :text-decoration underline
