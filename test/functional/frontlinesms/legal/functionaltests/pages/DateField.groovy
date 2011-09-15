@@ -32,6 +32,7 @@ class DateField extends Module {
         clear {
             $().value("")
             $() << Keys.DELETE
+            $() << Keys.ESCAPE
             true
         }
 

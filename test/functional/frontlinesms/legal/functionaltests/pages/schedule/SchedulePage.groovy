@@ -31,7 +31,7 @@ class SchedulePage extends Page {
         existingContactList {
             $("#event-contacts-table tbody tr").collect {module ContactRow, it}
         }
-        linkToBeSelected{ $(".link-case")}
+        linkToBeSelected { $(".link-case")}
     }
 }
 
@@ -44,7 +44,7 @@ class EventDialog extends Module {
         title { $('#event-title') }
 
         close {
-            $(".ui-dialog-titlebar-close ui-corner-all") .click()
+            $(".ui-dialog-titlebar-close ui-corner-all").click()
             true
         }
         confirmYesOnCloseWithoutUpdating {
@@ -67,7 +67,7 @@ class EventDialog extends Module {
 
         updateEvent() {
             updateEventButton.click()
-            waitFor { try { !$().isVisible() } catch(e) { true } }
+            waitFor { try { !$().isVisible() } catch (e) { true } }
             waitFor { browser.at SchedulePage }
         }
 

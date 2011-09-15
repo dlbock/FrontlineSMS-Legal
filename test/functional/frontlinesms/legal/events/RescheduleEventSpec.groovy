@@ -275,6 +275,28 @@ class RescheduleEventSpec extends FrontlinesmsLegalGebSpec {
         cancelEditConfirmationDialog.size() != 0
     }
 
+    def "should not enable update button if the details of the event havent been changed"() {
+        when:
+        selectEvent("Test Event 1")
+
+        and:
+        eventDialog.title << "\t"
+
+        then:
+        eventDialog.updateEventButton.@disabled == 'true'
+    }
+
+    def "should enable update button if the details of the event have been changed"() {
+        when:
+        selectEvent("Test Event 1")
+
+        and:
+        eventDialog.title << "new test event\t"
+
+        then:
+        eventDialog.updateEventButton.@disabled == 'false'
+    }
+
     def createEvent(title, String startTime, String endTime) {
         to NewEventPage
         eventTitle = title
