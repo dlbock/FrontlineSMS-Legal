@@ -12,10 +12,14 @@ frontlinesms.linkCaseToContact = function() {
 
         },
         buttons: {
-            "Cancel": function() {
-                $("#caseId").val("");
-                $(".caseLink").removeAttr("filtermatch", true).show();
-                $(this).dialog("close");
+            "Cancel" : {
+                text: "Cancel",
+                id: "cancel-link-case",
+                click: function() {
+                    $("#caseId").val("");
+                    $(".caseLink").removeAttr("filtermatch", true).show();
+                    $(this).dialog("close");
+                }
             }
         }
     });
@@ -25,7 +29,7 @@ frontlinesms.linkCaseToContact = function() {
         return false;
     });
 
-    $(".caseLinkButton").click(function() {
+    $(".link-case").click(function() {
         var caseId = $(this).parents("tr").attr('id');
         if (!frontlinesms.checkIfContactHasCaseLinked(caseId)) {
             frontlinesms.relationshipDialog(caseId, "Case");
@@ -100,11 +104,11 @@ frontlinesms.addLinkedCaseToTable = function(caseId, relationship) {
     var row = $('#SearchResults #' + caseId);
     var rowToAdd = $('<tr>').append(
         '<td>' +
-            $(row).find('.caseName').html().trim() +
+            $(row).find('.case-id').html().trim() +
             '<span class="id" style="display:none;">' + caseId + '</span>' +
             '</td>' +
             '<td>' +
-            $(row).find('.caseTitle').html().trim() +
+            $(row).find('.case-title').html().trim() +
             '</td>' +
             '<td>' +
             frontlinesms.encodeHTML(relationship) +

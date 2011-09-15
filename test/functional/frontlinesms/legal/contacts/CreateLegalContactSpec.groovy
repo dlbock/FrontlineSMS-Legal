@@ -63,22 +63,21 @@ class CreateLegalContactSpec extends FrontlinesmsLegalGebSpec {
 
         then:
         linkCaseDialog.present
-        casesToLink.collect { it -> it.linkCaseButton }.size() == 2
-        casesToLink[0].caseTitle == "Case 1"
-        casesToLink[1].caseTitle == "Case 2"
-        caseIdSearch.present
-        linkCaseCancelButton.present
+        linkCaseDialog.casesToLink.collect { it -> it.linkCase }.size() == 2
+        linkCaseDialog.casesToLink[0].caseTitle == "Case 1"
+        linkCaseDialog.casesToLink[1].caseTitle == "Case 2"
+        linkCaseDialog.caseIdSearch.present
+        linkCaseDialog.linkCaseCancelButton.displayed
     }
 
     def "should show relationship description dialog when link case button is clicked for a desired case"() {
         given:
-        new Case(caseId: "123", description: "test").save(flush: true)
-        new Case(caseId: "321", description: "test2").save(flush: true)
+        new Case(caseId: "123", description: "test", caseTitle: "Case 1").save(flush: true)
 
         when:
         to CreateLegalContactPage
         linkCaseButton.click()
-        casesToLink[0].linkCaseButton.click()
+        linkCaseDialog.link("Case 1")
 
         then:
         caseContactRelationshipDialog.present
@@ -96,11 +95,11 @@ class CreateLegalContactSpec extends FrontlinesmsLegalGebSpec {
         when:
         to CreateLegalContactPage
         linkCaseButton.click()
-        casesToLink[0].linkCaseButton.click()
+        linkCaseDialog.link("Case Title 1")
         relationshipInput << "Victim"
         relationshipConfirmButton.click()
         linkCaseButton.click()
-        casesToLink[1].linkCaseButton.click()
+        linkCaseDialog.link("Case Title 2")
         relationshipInput << "Victim"
         relationshipConfirmButton.click()
 
@@ -119,26 +118,24 @@ class CreateLegalContactSpec extends FrontlinesmsLegalGebSpec {
 
     def "should retain search results after cancelling the relationship dialog"() {
         given:
-        new Case(caseId: "123", description: "test").save(flush: true)
-        new Case(caseId: "321", description: "test2").save(flush: true)
+        new Case(caseId: "123", description: "test", caseTitle: "Case Title 1").save(flush: true)
 
         when:
         to CreateLegalContactPage
         linkCaseButton.click()
-        caseIdSearch << "123"
-        casesToLink[0].linkCaseButton.click()
+        linkCaseDialog.searchFor("123")
+        linkCaseDialog.link("Case Title 1")
         relationshipCancelButton.click()
 
         then:
         linkCaseDialog.displayed
-        caseIdSearch.value() == "123"
+        linkCaseDialog.caseIdSearch.value() == "123"
         !caseContactRelationshipDialog.displayed
     }
 
     def "should go to Contacts details page and the linked cases be displayed, when the SAVE button is clicked from the Create Contact page"() {
         given:
-        new Case(caseId: "123", description: "test").save(flush: true)
-        new Case(caseId: "321", description: "test2").save(flush: true)
+        new Case(caseId: "123", description: "test", caseTitle: "Case Title 1").save(flush: true)
         to CreateLegalContactPage
 
         when:
@@ -146,8 +143,8 @@ class CreateLegalContactSpec extends FrontlinesmsLegalGebSpec {
         primaryMobile << "8675309"
         notes << "Testing"
         linkCaseButton.click()
-        caseIdSearch << "123"
-        casesToLink[0].linkCaseButton.click()
+        linkCaseDialog.searchFor("123")
+        linkCaseDialog.link("Case Title 1")
         relationshipInput << "Victim"
         relationshipConfirmButton.click()
         save.click()
@@ -165,7 +162,6 @@ class CreateLegalContactSpec extends FrontlinesmsLegalGebSpec {
     def "should not link a case that is already linked to the contact and should stay on the link case pop-up"(){
         given:
         new Case(caseId: "123", caseTitle: "Case Title 1", description: "test").save(flush: true)
-        new Case(caseId: "321", caseTitle: "Case Title 2", description: "test2").save(flush: true)
 
         when:
         to CreateLegalContactPage
@@ -173,11 +169,11 @@ class CreateLegalContactSpec extends FrontlinesmsLegalGebSpec {
         primaryMobile << "8675309"
         notes << "Testing"
         linkCaseButton.click()
-        casesToLink[0].linkCaseButton.click()
+        linkCaseDialog.link("Case Title 1")
         relationshipInput << "Victim"
         relationshipConfirmButton.click()
         linkCaseButton.click()
-        casesToLink[0].linkCaseButton.click()
+        linkCaseDialog.link("Case Title 1")
 
         then:
         linkCaseDialog.present

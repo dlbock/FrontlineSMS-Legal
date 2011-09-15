@@ -19,19 +19,19 @@
                 <tbody>
 
                 <g:each in="${allCases}" var="legalCase">
-                    <tr class="caseLink" id="${legalCase.id}">
-                        <td class="caseName">
+                    <tr class="caseLink" id="${legalCase.caseId}">
+                        <td class="case-id">
                             <%=HtmlUtils.htmlEscape(legalCase.caseId)%>
                         </td>
-                        <td class="caseTitle">
+                        <td class="case-title">
                             <%=HtmlUtils.htmlEscape(legalCase.caseTitle)%>
                         </td>
 
-                        <td class = "caseStatus">
+                        <td class = "case-status">
                             <%=legalCase.active ? "active" : "inactive"%>
                         </td>
                         <td>
-                            <a href="#" class="caseLinkButton" id="${legalCase.caseId}">Link</a>
+                            <a href="#" class="link-case" id="${legalCase.caseId}">Link</a>
                         </td>
                     </tr>
                 </g:each>

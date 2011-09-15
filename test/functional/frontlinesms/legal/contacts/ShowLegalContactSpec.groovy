@@ -14,8 +14,7 @@ class ShowLegalContactSpec extends FrontlinesmsLegalGebSpec {
 
     def "should show contact details"() {
         given:
-        new Case(caseId: "123", description: "test").save(flush: true)
-        new Case(caseId: "321", description: "test2").save(flush: true)
+        new Case(caseId: "123", description: "test", caseTitle: "Case 1").save(flush: true)
         to CreateLegalContactPage
 
         when:
@@ -23,8 +22,8 @@ class ShowLegalContactSpec extends FrontlinesmsLegalGebSpec {
         primaryMobile << "8675309"
         notes << "Testing"
         linkCaseButton.click()
-        caseIdSearch << "123"
-        casesToLink[0].linkCaseButton.click()
+        linkCaseDialog.searchFor("123")
+        linkCaseDialog.link("Case 1")
         relationshipInput << "Victim"
         relationshipConfirmButton.click()
         save.click()
@@ -41,8 +40,7 @@ class ShowLegalContactSpec extends FrontlinesmsLegalGebSpec {
 
     def "Update button should be disabled when no changes are made to the contact details"() {
         given:
-        new Case(caseId: "123", description: "test").save(flush: true)
-        new Case(caseId: "321", description: "test2").save(flush: true)
+        new Case(caseId: "123", description: "test", caseTitle: "Case 1").save(flush: true)
         to CreateLegalContactPage
 
         when:
@@ -50,8 +48,8 @@ class ShowLegalContactSpec extends FrontlinesmsLegalGebSpec {
         primaryMobile << "8675309"
         notes << "Testing"
         linkCaseButton.click()
-        caseIdSearch << "123"
-        casesToLink[0].linkCaseButton.click()
+        linkCaseDialog.searchFor("123")
+        linkCaseDialog.link("Case 1")
         relationshipInput << "Victim"
         relationshipConfirmButton.click()
 
@@ -64,8 +62,7 @@ class ShowLegalContactSpec extends FrontlinesmsLegalGebSpec {
 
     def "Update button should be enabled when changes are made to the contact details"() {
         given:
-        new Case(caseId: "123", description: "test").save(flush: true)
-        new Case(caseId: "321", description: "test2").save(flush: true)
+        new Case(caseId: "123", description: "test", caseTitle: "Case 1").save(flush: true)
         to CreateLegalContactPage
 
         when:
@@ -73,8 +70,8 @@ class ShowLegalContactSpec extends FrontlinesmsLegalGebSpec {
         primaryMobile << "8675309"
         notes << "Testing"
         linkCaseButton.click()
-        caseIdSearch << "123"
-        casesToLink[0].linkCaseButton.click()
+        linkCaseDialog.searchFor("123")
+        linkCaseDialog.link("Case 1")
         relationshipInput << "Victim"
         relationshipConfirmButton.click()
 
@@ -88,8 +85,7 @@ class ShowLegalContactSpec extends FrontlinesmsLegalGebSpec {
 
     def "Update button should be enabled when cases are linked to the contact"() {
         given:
-        new Case(caseId: "123", description: "test").save(flush: true)
-        new Case(caseId: "321", description: "test2").save(flush: true)
+        new Case(caseId: "123", description: "test", caseTitle: "Case 1").save(flush: true)
         to CreateLegalContactPage
         name << "Bob"
         primaryMobile << "8675309"
@@ -109,15 +105,14 @@ class ShowLegalContactSpec extends FrontlinesmsLegalGebSpec {
 
     def "Update button should be enabled when cases are unlinked from the contact"() {
         given:
-        new Case(caseId: "123", description: "test").save(flush: true)
-        new Case(caseId: "321", description: "test2").save(flush: true)
+        new Case(caseId: "123", description: "test", caseTitle: "Case 1").save(flush: true)
         to CreateLegalContactPage
         name << "Bob"
         primaryMobile << "8675309"
         notes << "Testing"
         linkCaseButton.click()
-        caseIdSearch << "123"
-        casesToLink[0].linkCaseButton.click()
+        linkCaseDialog.searchFor("123")
+        linkCaseDialog.link("Case 1")
         relationshipInput << "Victim"
         relationshipConfirmButton.click()
         save.click()

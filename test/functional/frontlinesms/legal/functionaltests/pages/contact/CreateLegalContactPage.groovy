@@ -3,6 +3,7 @@ package frontlinesms.legal.functionaltests.pages.contact
 import geb.Page
 
 import frontlinesms.legal.functionaltests.pages.LinkedCaseRow
+import frontlinesms.legal.functionaltests.pages.LinkCaseDialog
 
 class CreateLegalContactPage extends Page {
     static at = { $("title").text() == "Create New Contact" }
@@ -22,10 +23,7 @@ class CreateLegalContactPage extends Page {
         saveWithoutNameYes { $("button", id: "save-confirm-yes") }
         cancelYes { $("button", id: "contact-create-cancel-confirm") }
         cancelNo { $("button", id: "contact-create-cancel-abort") }
-        linkCaseDialog { $("div", id: "link-case-dialog")}
-        casesToLink { $("#SearchResults tbody tr").collect {module CaseRow, it} }
-        caseIdSearch { $("input", id: "caseId") }
-        linkCaseCancelButton { $(".ui-button-text").value("Cancel")}
+        linkCaseDialog {module LinkCaseDialog}
         caseContactRelationshipDialog { $("div", id: "case-contact-relationship-dialog")}
         relationshipInput { $("input", id: "case-contact-relationship")}
         relationshipConfirmButton { $("button", id: "confirm-relationship")}

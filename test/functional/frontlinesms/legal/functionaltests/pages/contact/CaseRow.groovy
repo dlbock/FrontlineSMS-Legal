@@ -8,6 +8,6 @@ class CaseRow extends Module {
         caseId { cell(0).text().present }
         caseTitle { cell(1).text() }
         status { cell(2).text() }
-        linkCaseButton { $("a", class: "caseLinkButton") }
+        linkCaseButton { $("a", class: "link-case") }
     }
 }

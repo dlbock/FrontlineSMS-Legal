@@ -202,22 +202,20 @@ class LegalContactControllerSpec extends FrontlinesmsLegalControllerSpecBase {
         mockCoreClassesToAvoidIssuesWithContactEventHandlers()
         mockDomain(Case, [newCase1, newCase2])
         mockDomain(LegalContact, [legalContact])
-        mockDomain(CaseContacts, [])
+        mockDomain(CaseContacts)
 
         when:
         controller.params.currentId = 1
         controller.params.primaryMobile = "67890"
         controller.params.notes = ""
         controller.params.name = ""
-        controller.params.linkedCases = "{'1':'client','2':'witness'}"
+        controller.params.linkedCases = "{'567':'client','568':'witness'}"
 
         and:
         controller.update()
 
         then:
-        CaseContacts.count() == 2
-
-
+        legalContact.linkedCases.size() == 2
     }
 
     def 'should unlink cases from contacts'() {
@@ -237,13 +235,13 @@ class LegalContactControllerSpec extends FrontlinesmsLegalControllerSpecBase {
         controller.params.primaryMobile = "67890"
         controller.params.notes = ""
         controller.params.name = ""
-        controller.params.linkedCases = "{'1':'client'}"
+        controller.params.linkedCases = "{'567':'client'}"
 
         and:
         controller.update()
 
         then:
-        CaseContacts.count() == 1
+        legalContact.linkedCases.size() == 1
     }
 
 

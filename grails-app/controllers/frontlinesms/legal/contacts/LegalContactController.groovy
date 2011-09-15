@@ -65,7 +65,6 @@ class LegalContactController {
     }
 
     private def updateLegalContact(legalContact) {
-
         legalContact.primaryMobile = params.primaryMobile
         legalContact.name = params.name
         legalContact.notes = params.notes
@@ -90,14 +89,14 @@ class LegalContactController {
         def caseList = new HashMap<Long, String>(JSON.parse(caseListString))
         CaseContacts.findAllByLegalContact(legalContact)*.delete(flush: true)
         caseList.each { it ->
-            CaseContacts.link(Case.findById(it.key as Long), legalContact, it.value)
+            CaseContacts.link(Case.findByCaseId(it.key as Long), legalContact, it.value)
         }
     }
 
     private def pairUpCaseIdAndRelationship(caseContacts) {
         def returnList = new HashMap<Long, String>()
         caseContacts.each { it ->
-            returnList[it.legalCase.id] = it.involvement
+            returnList[it.legalCase.caseId] = it.involvement
         }
         return returnList
     }
