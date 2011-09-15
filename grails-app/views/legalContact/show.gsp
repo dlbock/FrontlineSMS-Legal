@@ -6,6 +6,7 @@
     <meta name="layout" content="main">
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'forms.css')}"/>
     <g:javascript library="shared/linkCaseToContact"/>
+    <g:javascript library="shared/relationshipDialog"/>
     <g:javascript library="picnet.table.filter.min"/>
     <g:javascript library="case/search"/>
     <g:javascript library="legalContact/create"/>

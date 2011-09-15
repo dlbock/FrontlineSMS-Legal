@@ -10,13 +10,12 @@
     <g:javascript library="picnet.table.filter.min"/>
     <g:javascript library="legalContact/search"/>
     <g:javascript library="shared/enableOrDisableKeyStrokeOnField"/>
-    <g:javascript library="shared/linkCaseToContact"/>
+    <g:javascript library="shared/relationshipDialog"/>
 
     <script type="text/javascript">
         $(function() {
             frontlinesms.createNewCaseOnLoad();
             frontlinesms.linkContactToCase();
-            frontlinesms.linkCaseToContact();
             frontlinesms.contactSearchOnLoad("#contactsTable", "#contact-name-search");
             var keyCodeForEnterKey = 13;
             frontlinesms.blockKeyInField(keyCodeForEnterKey, '#case-id');

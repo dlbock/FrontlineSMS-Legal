@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'forms.css')}"/>
 
     <g:javascript library="shared/linkContactToCase"/>
-    <g:javascript library="shared/linkCaseToContact"/>
+    <g:javascript library="shared/relationshipDialog"/>
     <g:javascript library="case/update"/>
     <g:javascript library="picnet.table.filter.min"/>
     <g:javascript library="legalContact/search"/>
@@ -19,7 +19,6 @@
         $(function() {
             frontlinesms.showCaseOnLoad();
             frontlinesms.linkContactToCase();
-            frontlinesms.linkCaseToContact();
             frontlinesms.contactSearchOnLoad("#contactsTable", "#contact-name-search");
             frontlinesms.initializeCaseDeletion();
             var keyCodeForEnterKey = 13;
