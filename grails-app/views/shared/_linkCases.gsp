@@ -1,5 +1,5 @@
 <%@ page import="org.springframework.web.util.HtmlUtils" %>
-<div id="link-case-dialog" title="Link Cases">
+<div id="link-case-dialog" title="Link Cases" style="display: none;">
     <h3 class="form-header">Search for Case</h3>
     <br/>
     <g:textField class="medium-text-box" name="caseId" id="caseId"/>
