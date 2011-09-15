@@ -442,24 +442,6 @@ class ShowCaseSpec extends FrontlinesmsLegalGebSpec {
         sizeOflinkedContactsTable == 1
     }
 
-    @Ignore
-    def "should show previous and upcoming events when they exist"() {
-        given:
-        def caseOne = new Case(caseId: "1001", description: "case linked event").save(flush: true)
-
-        and:
-        to NewEventPage
-        createEvent("previous event", 12)
-        createEvent("upcoming event", 14)
-
-        when:
-        to ShowCasePage, caseOne.caseId
-
-        then:
-        pastEventsTable.size() == 1
-        futureEventsTable.size() == 1
-    }
-
     def "should not show any event table when there is no events linked"() {
         given:
         def caseOne = new Case(caseId: "1001", description: "case linked event").save(flush: true)
