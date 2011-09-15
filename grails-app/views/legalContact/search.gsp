@@ -28,8 +28,8 @@
     <table class="search-results" id="SearchResults">
         <thead>
         <tr>
-            <th>Name</th>
-            <th>Mobile Number</th>
+            <th class="table-contact-name-column">Name</th>
+            <th class="table-contact-number-column">Mobile Number</th>
         </tr>
         </thead>
         <tbody>
@@ -46,7 +46,7 @@
                             id="${legalContact.id}"><%=legalContact.primaryMobile%></g:link>
 
                 </td>
-                <td class="table-cases-delete-row">
+                <td class="table-delete-column">
                     <g:form action="delete" id="${legalContact.id}">
                         <button class="deleteButtons action-button"
                                 id="deleteButton${legalContact.id}">Delete</button>

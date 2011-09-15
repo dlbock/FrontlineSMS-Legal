@@ -70,7 +70,7 @@ frontlinesms.addLinkedCaseToTable = function(caseId, relationship) {
             '<td>' +
             frontlinesms.encodeHTML(relationship) +
             '</td>' +
-            '<td>' +
+            '<td class="case-unlink">' +
             '<a class="unlink-case" href="">Unlink</a>' +
             '</td>'
     );

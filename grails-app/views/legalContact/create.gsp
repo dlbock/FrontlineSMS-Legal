@@ -46,9 +46,9 @@
     <table name="cases" id="cases">
         <thead>
         <tr>
-            <th>Case Id</th>
-            <th>Case Title</th>
-            <th>Relationship</th>
+            <th class="table-case-id-column">Case Id</th>
+            <th class="table-case-title-column">Case Title</th>
+            <th class="table-case-contact-relationship-column">Relationship</th>
         </tr>
         </thead>
         <tbody>

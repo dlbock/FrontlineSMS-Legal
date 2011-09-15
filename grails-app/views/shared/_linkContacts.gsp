@@ -6,8 +6,8 @@
         <table id="contactsTable">
             <thead>
             <tr>
-                <th>Name</th>
-                <th>Number</th>
+                <th class="table-contact-name-column">Name</th>
+                <th class="table-contact-number-column">Number</th>
             </tr>
             </thead>
             <tbody>

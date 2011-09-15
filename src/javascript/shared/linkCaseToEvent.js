@@ -54,7 +54,7 @@ frontlinesms.linkCaseToEvent = function() {
                 '<td>' +
                 $(row).find('.case-status').text() +
                 '</td>'+
-                '<td>' +
+                '<td class="case-unlink">' +
                 '<a class="unlink-case" href="">Unlink</a>' +
                 '</td>'
         );

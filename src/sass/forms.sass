@@ -38,6 +38,10 @@ form
   
 table
   :margin 20px 0
+  :overflow hidden
+  :width 620px
+  :table-layout fixed
+  :word-wrap break-word
 
   td, th
     :border 1px solid gray
@@ -49,10 +53,28 @@ table
   td
     :padding 3px
 
-table td.table-cases-delete-row
+table th.table-contact-name-column,th.table-contact-number-column
+  :width 250px
+
+table th.table-case-id-column
+  :width 150px
+
+table th.table-case-title-column
+  :width 250px
+
+table th.table-case-contact-relationship-column
+  :width 100px
+
+table th.table-case-status-column
+  :width 70px
+
+table td.case-unlink,td.case-link,td.unlink-contact-button,td.table-delete-column, td.contactLink
   :border none
 
-table td.table-cases-delete-row form
+table th.table-contact-name-column-on-case-create,th.table-contact-number-column-on-case-create
+  :width 200px
+
+table td.table-delete-column form
   :margin-left 5px
 
 table.search-results
@@ -62,7 +84,7 @@ tr.contactLink, tr.caseLink
   :cursor pointer
 
 .action-button
-  :width 50px
+  :width 60px
   :height 20px
   :display block
   :float left

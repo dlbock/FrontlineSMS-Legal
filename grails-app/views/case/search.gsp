@@ -29,9 +29,9 @@
     <table class="search-results" id="SearchResults">
         <thead>
         <tr>
-            <th>Case ID</th>
-            <th>Case Title</th>
-            <th>Status</th>
+            <th class="table-case-id-column">Case ID</th>
+            <th class="table-case-title-column">Case Title</th>
+            <th class="table-case-status-column">Status</th>
         </tr>
         </thead>
         <tbody>
@@ -46,7 +46,7 @@
                 <td>
                     <%=legalCase.active ? "active" : "inactive"%>
                 </td>
-                <td class="table-cases-delete-row">
+                <td class="table-delete-column">
                     <g:form action="delete" id="${legalCase.caseId}">
                         <button class="deleteButtons action-button" id="deleteButton${legalCase.caseId}">Delete</button>
                     </g:form>

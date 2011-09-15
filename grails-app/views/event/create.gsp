@@ -57,8 +57,8 @@
     <g:hiddenField name="linkedContacts" id="event-linked-contacts" value="${params.linkedContacts}"/>
     <table name="contacts" id="contacts">
         <tr>
-            <th>Contact Name</th>
-            <th>Phone</th>
+            <th class="table-contact-name-column">Contact Name</th>
+            <th class="table-contact-number-column">Phone</th>
         </tr>
 
     </table>
@@ -71,9 +71,9 @@
     <table name="cases" id="cases">
         <thead>
         <tr>
-            <th>Case ID</th>
-            <th>Case Title</th>
-            <th>Status</th>
+            <th class="table-case-id-column">Case ID</th>
+            <th class="table-case-title-column">Case Title</th>
+            <th class="table-case-status-column">Status</th>
         </tr>
         </thead>
         <tbody>

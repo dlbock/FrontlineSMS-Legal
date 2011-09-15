@@ -11,9 +11,9 @@
             <table class="search-results" id="SearchResults">
                 <thead>
                 <tr>
-                    <th>Case ID</th>
-                    <th>Case Title</th>
-                    <th>Status</th>
+                    <th class="table-case-id-column">Case ID</th>
+                    <th class="table-case-title-column">Case Title</th>
+                    <th class="table-case-status-column">Status</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -30,7 +30,7 @@
                         <td class="case-status">
                             <%=legalCase.active ? "active" : "inactive"%>
                         </td>
-                        <td>
+                        <td class="case-link">
                             <a href="" class="link-case" id="${legalCase.caseId}">Link</a>
                         </td>
                     </tr>

@@ -52,9 +52,9 @@
 
     <table name="contacts" id="contacts">
         <tr>
-            <th>Contact Name</th>
-            <th>Phone</th>
-            <th>Relationship</th>
+            <th class="table-contact-name-column-on-case-create">Contact Name</th>
+            <th class="table-contact-number-column-on-case-create">Phone</th>
+            <th class="table-case-contact-relationship-column">Relationship</th>
         </tr>
         <g:if test="${contacts?.size > 0}">
         <g:each in="${contacts}">
