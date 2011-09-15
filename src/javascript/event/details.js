@@ -64,16 +64,25 @@ frontlinesms.disableDateDragAndDrop = function (fieldId) {
     });
 };
 
-frontlinesms.disableTimeDragAndDrop = function (fieldId) {
-    var originalValue = $(fieldId).val();
+frontlinesms.disableTimeDragAndDrop = function (startFieldId, endFieldId) {
+    var originalStartValue = $(startFieldId).val();
+    var originalEndValue = $(endFieldId).val();
 
-    $(fieldId).mouseleave(function() {
-        try {
-            $(fieldId).timeEntry('getTime');
-            originalValue = $(fieldId).val();
-        } catch (e) {
-            $(fieldId).val(originalValue);
-        }
+    $(startFieldId).attr("maxlength", "7");
+    $(endFieldId).attr("maxlength", "7");
+
+    $(startFieldId).mouseleave(function() {
+        $(startFieldId).val(originalStartValue);
+        originalEndValue = $(endFieldId).val();
+    });
+
+    $(endFieldId).mouseleave(function() {
+        $(endFieldId).val(originalEndValue);
+    });
+
+    $(startFieldId).keydown(function () {
+        originalStartValue = $(startFieldId).val();
+        originalEndValue = $(endFieldId).val();
     });
 };
 

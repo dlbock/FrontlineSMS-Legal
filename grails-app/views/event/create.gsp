@@ -30,9 +30,9 @@
             frontlinesms.disablePasteOnField('#event-start-time');
             frontlinesms.disablePasteOnField('#event-date');
             frontlinesms.disablePasteOnField('#event-end-time');
-//            frontlinesms.disableDateDragAndDrop("#event-date");
-//            frontlinesms.disableTimeDragAndDrop("#event-start-time");
-//            frontlinesms.disableTimeDragAndDrop("#event-end-time");
+            frontlinesms.disableDateDragAndDrop("#event-date");
+            frontlinesms.disableTimeDragAndDrop("#event-start-time");
+            frontlinesms.disableTimeDragAndDrop("#event-end-time");
         })
     </script>
 
