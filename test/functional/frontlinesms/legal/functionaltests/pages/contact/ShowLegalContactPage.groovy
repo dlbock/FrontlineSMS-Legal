@@ -3,6 +3,7 @@ package frontlinesms.legal.functionaltests.pages.contact
 import geb.Module
 import geb.Page
 import frontlinesms.legal.functionaltests.pages.LinkedCaseRow
+import frontlinesms.legal.functionaltests.pages.LinkCaseDialog
 
 class ShowLegalContactPage extends Page {
     static at = { $("title").text() == "Show Contact Page"}
@@ -12,7 +13,7 @@ class ShowLegalContactPage extends Page {
         primaryMobile { $("input", id: "contact-primary-mobile").value()}
         notes {$("textarea", id: "contact-notes")}
         linkCaseButton { $("button", id: "link-case-button")}
-        linkCaseDialog { $("div", id: "link-case-dialog")}
+        linkCaseDialog {module LinkCaseDialog}
         linkedCasesTable {
             $("#cases tbody tr").collect {module LinkedCaseRow, it}
         }
@@ -22,12 +23,8 @@ class ShowLegalContactPage extends Page {
         deleteDialog { $("div", id: "deleteDialog") }
         deleteYes { $("button", id: "confirm-yes")}
         deleteNo { $("button", id: "confirm-no")}
-        casesToLink { $("#SearchResults tbody tr").collect {module CaseRow, it} }
         currentEventsTable {$("#current-events tbody tr").collect {module EventRow, it} }
-        caseIdSearch { $("input", id: "caseId") }
-        caseLinkNotVisible { $("tr", class: "caseLink", filtermatch: "false").collect {module LegalContactRow, it} }
         updateContactButtonIsDisabled { $("#contact-save:disabled").size() }
-        linkCaseCancelButton { $(".ui-button-text").value("Cancel") }
         caseContactRelationshipDialog { $("div", id: "case-contact-relationship-dialog")}
         relationshipInput { $("input", id: "case-contact-relationship")}
         relationshipConfirmButton { $("button", id: "confirm-relationship")}

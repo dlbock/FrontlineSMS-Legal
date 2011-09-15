@@ -95,7 +95,7 @@ class ShowLegalContactSpec extends FrontlinesmsLegalGebSpec {
         when:
         at(ShowLegalContactPage)
         linkCaseButton.click()
-        casesToLink[0].linkCaseButton.click()
+        linkCaseDialog.link("Case 1")
         relationshipInput << "Victim"
         relationshipConfirmButton.click()
 
@@ -162,28 +162,26 @@ class ShowLegalContactSpec extends FrontlinesmsLegalGebSpec {
         and:
         linkCaseButton.click()
         and:
-        caseIdSearch.value("\r")
+        linkCaseDialog.searchFor("\r")
         sleep(500)
 
         then:
-        caseLinkNotVisible.size() == 0
+        linkCaseDialog.casesNotInSearchResults.size() == 0
     }
 
     def "should not link a case that is already linked to the contact and should stay on the link case pop-up"() {
         given:
         new Case(caseId: "123", caseTitle: "Case Title 1", description: "test").save(flush: true)
-        new Case(caseId: "321", caseTitle: "Case Title 2", description: "test2").save(flush: true)
         def contact1 = new LegalContact(name: "fabio", primaryMobile: "22222").save(flush: true)
 
         when:
         to ShowLegalContactPage, contact1.id
         linkCaseButton.click()
-        casesToLink[0].linkCaseButton.click()
+        linkCaseDialog.link("Case Title 1")
         relationshipInput << "Victim"
         relationshipConfirmButton.click()
         linkCaseButton.click()
-        casesToLink[0].linkCaseButton.click()
-
+        linkCaseDialog.link("Case Title 1")
         then:
         linkCaseDialog.present
     }

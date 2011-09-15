@@ -424,13 +424,13 @@ class ShowCaseSpec extends FrontlinesmsLegalGebSpec {
     def "should show linked contact in the case details page"() {
         given:
         def contact = new LegalContact(id: "1", name: "fabio", primaryMobile: "22222").save(flush: true)
-        def caseOne = new Case(caseId: "1112", description: "ertyui")
+        def caseOne = new Case(caseId: "1112", description: "ertyui", caseTitle: "Case 1")
         caseOne.save(flush: true)
         to ShowLegalContactPage, contact.id
 
         when:
         linkCaseButton.click()
-        casesToLink[0].linkCaseButton.click()
+        linkCaseDialog.link("Case 1")
         relationshipInput << "Victim"
         relationshipConfirmButton.click()
         updateButton.click()
