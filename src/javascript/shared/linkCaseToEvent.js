@@ -6,7 +6,7 @@ frontlinesms.linkCaseToEvent = function() {
         autoOpen: false,
         modal: true,
         open: function() {
-            $("#caseId").val("");
+            $("#case-search-field").val("");
             $(".caseRow").removeAttr("filtermatch", true).show();
         },
         buttons: {
@@ -14,7 +14,7 @@ frontlinesms.linkCaseToEvent = function() {
                 text: "Cancel",
                 id: "cancel-link-case",
                 click: function() {
-                    $("#caseId").val("");
+                    $("#case-search-field").val("");
                     $(".caseRow").removeAttr("filtermatch", true).show();
                     $(this).dialog("close");
                 }

@@ -6,7 +6,7 @@ class LinkCaseDialog extends Module {
     static base = { $(id: "link-case-dialog") }
     static content = {
         casesToLink { $("#casesTable tbody tr").collect {module LinkCaseRow, it} }
-        caseIdSearch { $("input", id: "caseId") }
+        caseIdSearch { $("input", id: "case-search-field") }
         linkCaseCancelButton { page.$("#cancel-link-case") }
         casesNotInSearchResults { $("tr", class: "caseRow", filtermatch: "false").collect {module LinkCaseRow, it} }
 

@@ -7,7 +7,7 @@ frontlinesms.linkCaseToContact = function() {
         modal: true,
         width: 'auto',
         open: function() {
-            $("#caseId").val("");
+            $("#case-search-field").val("");
             $(".caseRow").removeAttr("filtermatch", true).show();
 
         },
@@ -16,7 +16,7 @@ frontlinesms.linkCaseToContact = function() {
                 text: "Cancel",
                 id: "cancel-link-case",
                 click: function() {
-                    $("#caseId").val("");
+                    $("#case-search-field").val("");
                     $(".caseRow").removeAttr("filtermatch", true).show();
                     $(this).dialog("close");
                 }

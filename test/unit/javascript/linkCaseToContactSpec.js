@@ -3,7 +3,7 @@ describe('linkCaseToContact', function () {
         var tempHTML =
             '<input type="hidden" id="contact-linked-cases" value=""/>' +
                 '<div id="link-case-dialog" title="Link Cases">' +
-                '<input name="caseIdSearch" id="caseId"/>' +
+                '<input name="caseSearchField" id="case-search-field"/>' +
                 '<table id="casesTable">' +
                 '<thead></thead>' +
                 '<tbody>' +
@@ -52,10 +52,10 @@ describe('linkCaseToContact', function () {
 
     it('when the case dialog is opened and a search phrase is entered, and the cancel button is clicked, case dialog is reopened, all results are visible and the search bar is cleared', function () {
         $("#link-case-button").click();
-        $("#caseId").val("cas");
+        $("#case-search-field").val("cas");
         $(".ui-button-text").click();
         $("#link-case-button").click();
-        expect($("#caseId").val()).toEqual("");
+        expect($("#case-search-field").val()).toEqual("");
     });
 
     it('when link-cases button is clicked case search dialog is opened', function () {
@@ -72,7 +72,7 @@ describe('linkCaseToContact', function () {
 
     it('should not show relationship dialog if case Id is clicked', function() {
         $("#link-case-button").click();
-        $("#case1.caseId").click();
+        $("#case1.case-search-field").click();
         expect ($("#case-contact-relationship-dialog:visible").size()).toEqual(0);
     });
 
