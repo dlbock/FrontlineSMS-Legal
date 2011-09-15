@@ -4,21 +4,21 @@ describe('linkCaseToContact', function () {
             '<input type="hidden" id="contact-linked-cases" value=""/>' +
                 '<div id="link-case-dialog" title="Link Cases">' +
                 '<input name="caseIdSearch" id="caseId"/>' +
-                '<table id="SearchResults">' +
+                '<table id="casesTable">' +
                 '<thead></thead>' +
                 '<tbody>' +
-                '<tr class="caseLink" id="case1">' +
-                '<td class="caseId">case1</td>' +
-                '<td class="status">active</td>' +
+                '<tr class="caseRow" id="case1">' +
+                '<td class="case-id">case1</td>' +
+                '<td class="case-status">active</td>' +
                 '<td>' +
-                '<a href="#" class="caseLinkButton">Link Case</a>' +
+                '<a href="#" class="link-case">Link Case</a>' +
                 '</td>' +
                 '</tr>' +
-                '<tr class="caseLink" id="case2">' +
-                ' <td class="caseId">case2</td>' +
-                '<td class="status">active</td>' +
+                '<tr class="caseRow" id="case2">' +
+                ' <td class="case-id">case2</td>' +
+                '<td class="case-status">active</td>' +
                 '<td>' +
-                '<a href="#" class="caseLinkButton">Link Case</a>' +
+                '<a href="#" class="link-case">Link Case</a>' +
                 '</td>' +
                 '</tr>' +
                 '<button id = "cancel-button">Cancel</button>' +

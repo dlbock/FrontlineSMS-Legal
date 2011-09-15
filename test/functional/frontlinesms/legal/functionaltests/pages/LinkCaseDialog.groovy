@@ -5,10 +5,10 @@ import geb.Module
 class LinkCaseDialog extends Module {
     static base = { $(id: "link-case-dialog") }
     static content = {
-        casesToLink { $("#SearchResults tbody tr").collect {module LinkCaseRow, it} }
+        casesToLink { $("#casesTable tbody tr").collect {module LinkCaseRow, it} }
         caseIdSearch { $("input", id: "caseId") }
         linkCaseCancelButton { page.$("#cancel-link-case") }
-        casesNotInSearchResults { $("tr", class: "caseLink", filtermatch: "false").collect {module LinkCaseRow, it} }
+        casesNotInSearchResults { $("tr", class: "caseRow", filtermatch: "false").collect {module LinkCaseRow, it} }
 
         searchFor { query ->
             caseIdSearch.value(query)

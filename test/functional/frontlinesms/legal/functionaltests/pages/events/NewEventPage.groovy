@@ -24,7 +24,7 @@ class NewEventPage extends Page {
         linkCaseToEventButton { $("button", id: "link-case-button") }
         linkCaseDialog { $("div", id: "link-case-dialog") }
         caseDialogCancelButton { $("#cancel-link-case") }
-        casesToLink { $("tr", class: "caseLink").collect {module LinkableCase, it} }
+        casesToLink { $("tr", class: "caseRow").collect {module LinkableCase, it} }
         oneContactIsDisplayed { $("#cases").size() == 1 }
         linkedCasesTable {
             $("#cases tbody tr").collect {module LinkedCaseRow, it}

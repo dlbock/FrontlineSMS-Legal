@@ -8,7 +8,7 @@ frontlinesms.linkCaseToContact = function() {
         width: 'auto',
         open: function() {
             $("#caseId").val("");
-            $(".caseLink").removeAttr("filtermatch", true).show();
+            $(".caseRow").removeAttr("filtermatch", true).show();
 
         },
         buttons: {
@@ -17,7 +17,7 @@ frontlinesms.linkCaseToContact = function() {
                 id: "cancel-link-case",
                 click: function() {
                     $("#caseId").val("");
-                    $(".caseLink").removeAttr("filtermatch", true).show();
+                    $(".caseRow").removeAttr("filtermatch", true).show();
                     $(this).dialog("close");
                 }
             }
@@ -58,7 +58,7 @@ frontlinesms.addLinkedCaseToHiddenField = function(caseId, relationship) {
 };
 
 frontlinesms.addLinkedCaseToTable = function(caseId, relationship) {
-    var row = $('#SearchResults #' + caseId);
+    var row = $('#casesTable #' + caseId);
     var rowToAdd = $('<tr>').append(
         '<td>' +
             jQuery.trim($(row).find('.case-id').html()) +

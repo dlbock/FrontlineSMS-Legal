@@ -7,7 +7,7 @@ frontlinesms.linkCaseToEvent = function() {
         modal: true,
         open: function() {
             $("#caseId").val("");
-            $(".caseLink").removeAttr("filtermatch", true).show();
+            $(".caseRow").removeAttr("filtermatch", true).show();
         },
         buttons: {
             "Cancel" : {
@@ -15,7 +15,7 @@ frontlinesms.linkCaseToEvent = function() {
                 id: "cancel-link-case",
                 click: function() {
                     $("#caseId").val("");
-                    $(".caseLink").removeAttr("filtermatch", true).show();
+                    $(".caseRow").removeAttr("filtermatch", true).show();
                     $(this).dialog("close");
                 }
             }
@@ -43,7 +43,7 @@ frontlinesms.linkCaseToEvent = function() {
     };
 
     frontlinesms.addLinkedCaseToTable = function(caseId) {
-        var row = $('.search-results').find('#' + caseId);
+        var row = $('#casesTable').find('#' + caseId);
         var rowToAdd = $('<tr>').append(
             '<td>' +
                 $(row).find('.case-id').text() +

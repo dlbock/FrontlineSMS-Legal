@@ -24,7 +24,7 @@ class SchedulePage extends Page {
             true
         }
 
-        casesToLink { $("tr", class: "caseLink").collect {module LinkableCase, it} }
+        casesToLink { $("tr", class: "caseRow").collect {module LinkableCase, it} }
         existingCaseList {
             $("#cases tbody tr").collect {module LinkedCaseRow, it}
         }

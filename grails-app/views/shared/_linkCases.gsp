@@ -8,7 +8,7 @@
 
         <g:if test="${allCases}">
             <g:hiddenField name="linkedCases" id="event-linked-cases" value="${params.linkedCases}"/>
-            <table class="search-results" id="SearchResults">
+            <table id="casesTable">
                 <thead>
                 <tr>
                     <th class="table-case-id-column">Case ID</th>
@@ -19,7 +19,7 @@
                 <tbody>
 
                 <g:each in="${allCases}" var="legalCase">
-                    <tr class="caseLink" id="${legalCase.caseId}">
+                    <tr class="caseRow" id="${legalCase.caseId}">
                         <td class="case-id">
                             <%=HtmlUtils.htmlEscape(legalCase.caseId)%>
                         </td>
