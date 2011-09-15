@@ -19,6 +19,20 @@ class DateField extends Module {
             true
         }
 
+        setPreviousDate { dayOfMonth ->
+            openDatePicker
+            $() << Keys.chord(Keys.CONTROL, Keys.PAGE_UP)
+            datePicker.$(".ui-state-default").find{ it.text() == dayOfMonth as String }.click()
+            true
+        }
+
+        setFutureDate { dayOfMonth ->
+            openDatePicker
+            $() << Keys.chord(Keys.CONTROL, Keys.PAGE_DOWN)
+            datePicker.$(".ui-state-default").find{ it.text() == dayOfMonth as String }.click()
+            true
+        }
+
         setValue { value ->
             $().value(value)
             true

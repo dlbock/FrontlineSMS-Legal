@@ -83,6 +83,7 @@ class RescheduleEventSpec extends FrontlinesmsLegalGebSpec {
 
         and:
         eventDialog.date.clear()
+        sleep(500)
 
         and:
         eventDialog.updateEvent()
