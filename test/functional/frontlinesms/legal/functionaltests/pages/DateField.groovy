@@ -30,6 +30,7 @@ class DateField extends Module {
         }
 
         clear {
+            $().jquery.focus()
             $().value("")
             $() << Keys.DELETE
             $() << Keys.ESCAPE
