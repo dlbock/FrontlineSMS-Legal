@@ -104,11 +104,11 @@ frontlinesms.addLinkedCaseToTable = function(caseId, relationship) {
     var row = $('#SearchResults #' + caseId);
     var rowToAdd = $('<tr>').append(
         '<td>' +
-            $(row).find('.case-id').html().trim() +
+            jQuery.trim($(row).find('.case-id').html()) +
             '<span class="id" style="display:none;">' + caseId + '</span>' +
             '</td>' +
             '<td>' +
-            $(row).find('.case-title').html().trim() +
+            jQuery.trim($(row).find('.case-title').html()) +
             '</td>' +
             '<td>' +
             frontlinesms.encodeHTML(relationship) +

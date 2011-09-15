@@ -14,6 +14,7 @@
     <g:javascript library="legalContact/search"/>
     <g:javascript library="case/search"/>
     <g:javascript library="shared/enableOrDisableKeyStrokeOnField"/>
+    <g:javascript library="shared/enableIndexOfInIE"/>
 
     <script type="text/javascript">
         $(function() {

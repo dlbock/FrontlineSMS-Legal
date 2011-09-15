@@ -17,7 +17,7 @@ frontlinesms.createNewCaseOnLoad = function() {
 
 frontlinesms.caseCancelConfirmAction = function() {
 
-    if(($("#case-id").val().trim() == "") && ($("#case-description").val().trim() == "")) {
+    if(jQuery.trim($("#case-id").val()) == "" && jQuery.trim($("#case-description").val()) == "") {
          $(window.location).attr("href" ,"/");
     }
     else {
@@ -44,7 +44,7 @@ frontlinesms.caseCancelConfirmAction = function() {
 };
 frontlinesms.caseCreateWithoutTitleConfirmAction = function() {
 
-    if(($("#case-title").val().trim() == "")) {
+    if(jQuery.trim($("#case-title").val()) == "") {
         $("#blank-case-title-confirmation-dialog").dialog({
             modal: true,
             buttons: [

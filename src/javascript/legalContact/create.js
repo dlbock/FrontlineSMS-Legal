@@ -17,7 +17,7 @@ frontlinesms.createNewContactOnLoad = function() {
 };
 
 frontlinesms.contactCancelConfirmAction = function() {
-    if (($("#contact-name").val().trim() == "") && ($("#contact-primary-mobile").val().trim() == "") && ($("#contact-notes").val().trim() == "")) {
+    if (jQuery.trim($("#contact-name").val()) == "" && jQuery.trim($("#contact-primary-mobile").val()) == "" && jQuery.trim($("#contact-notes").val()) == "") {
         $(window.location).attr("href", "/");
     }
     else{
@@ -51,7 +51,7 @@ frontlinesms.contactCreateWithoutNameConfirmAction = function() {
     };
 
 
-    if (($("#contact-name").val().trim() == "") && ($("#contact-primary-mobile").val().trim() != "")) {
+    if (jQuery.trim($("#contact-name").val()) == "" && jQuery.trim($("#contact-primary-mobile").val()) != "") {
         $("#contact-save-no-name-dialog").dialog({
                     modal: true,
                     buttons: [

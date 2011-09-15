@@ -19,6 +19,7 @@
     <g:javascript library="shared/formValidation"/>
     <g:javascript library="shared/linkCaseToEvent"/>
     <g:javascript library="shared/enableOrDisableKeyStrokeOnField"/>
+    <g:javascript library="shared/enableIndexOfInIE"/>       
 
     <script type="text/javascript">
         $(function() {
