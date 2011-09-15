@@ -9,6 +9,7 @@
     <g:javascript library="jquery.timeentry.min"/>
     <g:javascript library="schedule/calendarInteractions"/>
     <g:javascript library="event/interactions"/>
+    <g:javascript library="event/details"/>
     <g:javascript library="shared/linkContactToEvent"/>
     <g:javascript library="shared/linkCaseToEvent"/>
     <g:javascript library="legalContact/search"/>
@@ -29,6 +30,9 @@
             frontlinesms.disablePasteOnField('#event-start-time');
             frontlinesms.disablePasteOnField('#event-date');
             frontlinesms.disablePasteOnField('#event-end-time');
+//            frontlinesms.disableDateDragAndDrop("#event-date");
+//            frontlinesms.disableTimeDragAndDrop("#event-start-time");
+//            frontlinesms.disableTimeDragAndDrop("#event-end-time");
         })
     </script>
 

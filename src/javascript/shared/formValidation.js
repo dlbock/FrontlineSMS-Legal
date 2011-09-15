@@ -6,7 +6,7 @@ frontlinesms.validateContactNumber = function() {
     var keyCodesForArrowKeys = [37, 38, 39, 40];
     var lengthOfContactNumber = 0;
 
-    $("#contact-primary-mobile").keyup(function(key){
+    $("#contact-primary-mobile").keyup(function(key) {
         var keyPressed = key.which;
         for (i = 0; i < keyCodesForArrowKeys.length; i ++) {
             if (keyPressed == keyCodesForArrowKeys[i]) {
@@ -19,28 +19,26 @@ frontlinesms.validateContactNumber = function() {
     });
 
 
-
-    $("#contact-primary-mobile").change(function(){
+    $("#contact-primary-mobile").change(function() {
         frontlinesms.filterOutUnwantedCharacters("#contact-primary-mobile", validCharacters, keyCodesForAllowedKeys);
     });
 
     $("#contact-primary-mobile").keypress(function(key) {
-            var keypressed = key? key.which : window.event.keyCode;
+            var keypressed = key ? key.which : window.event.keyCode;
             var characterPressed = String.fromCharCode(keypressed);
             lengthOfContactNumber++;
-            if(lengthOfContactNumber < 26 || keypressed!=8 || keypressed!=0 || keypressed!=9)
-            {
-            var i;
-            for (i = 0; i < keyCodesForAllowedKeys.length; i++) {
-                if(keypressed == keyCodesForAllowedKeys[i]) {
-                    return true;
+            if (lengthOfContactNumber < 26 || keypressed != 8 || keypressed != 0 || keypressed != 9) {
+                var i;
+                for (i = 0; i < keyCodesForAllowedKeys.length; i++) {
+                    if (keypressed == keyCodesForAllowedKeys[i]) {
+                        return true;
+                    }
                 }
-            }
-            for (i = 0; i < validCharacters.length; i++) {
-                if (characterPressed == validCharacters[i]) {
-                    return true;
+                for (i = 0; i < validCharacters.length; i++) {
+                    if (characterPressed == validCharacters[i]) {
+                        return true;
+                    }
                 }
-            }
             }
             return false;
         }
@@ -48,22 +46,20 @@ frontlinesms.validateContactNumber = function() {
 };
 
 frontlinesms.filterOutUnwantedCharacters = function(fieldId, validCharacters, keyCodesForAllowedKeys) {
-     var validMobileNumber= "";
-        var primaryMobileNumber = $(fieldId).val();
-        for(var i=0; i < primaryMobileNumber.length ; i++)
-           {
-               var key = primaryMobileNumber[i].which;
-               for(var j=0 ; j < validCharacters.length ; j++){
-                   if(primaryMobileNumber[i] == validCharacters[j]){
-                       validMobileNumber = validMobileNumber + primaryMobileNumber[i];
-                   }
-               }
-               for(var k=0 ; k < keyCodesForAllowedKeys.length ; k++){
-                   if(key == keyCodesForAllowedKeys[k]){
-                       validMobileNumber = validMobileNumber + primaryMobileNumber[i];
-                   }
-               }
-           }
-        $(fieldId).val(validMobileNumber);
+    var validMobileNumber = "";
+    var primaryMobileNumber = $(fieldId).val();
+    for (var i = 0; i < primaryMobileNumber.length; i++) {
+        var key = primaryMobileNumber[i].which;
+        for (var j = 0; j < validCharacters.length; j++) {
+            if (primaryMobileNumber[i] == validCharacters[j]) {
+                validMobileNumber = validMobileNumber + primaryMobileNumber[i];
+            }
+        }
+        for (var k = 0; k < keyCodesForAllowedKeys.length; k++) {
+            if (key == keyCodesForAllowedKeys[k]) {
+                validMobileNumber = validMobileNumber + primaryMobileNumber[i];
+            }
+        }
+    }
+    $(fieldId).val(validMobileNumber);
 };
-

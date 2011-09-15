@@ -18,6 +18,10 @@ frontlinesms.eventDetails = function() {
             originalDate = $("#event-date").val();
             originalStartTime = $("#event-start-time").val();
             originalEndTime = $("#event-end-time").val();
+
+            frontlinesms.disableDateDragAndDrop("#event-date");
+            frontlinesms.disableTimeDragAndDrop("#event-start-time");
+            frontlinesms.disableTimeDragAndDrop("#event-end-time");
         },
         beforeClose: frontlinesms.yesNoDialogBox
     });
@@ -47,13 +51,31 @@ frontlinesms.enableUpdateButtonOnKeyUpOf = function() {
     });
 }
 
-frontlinesms.enableUpdateButton = function(inputFieldId, originalContent) {//delete it if not use!
-    $(inputFieldId).keyup(function() {
-        var newContent = $(inputFieldId).val();
-        var change = newContent != originalContent;
-        $('#update-event').attr('disabled', change ? false : true);
+frontlinesms.disableDateDragAndDrop = function (fieldId) {
+    var originalValue = $(fieldId).val();
+
+    $(fieldId).mouseleave(function() {
+        try {
+            $.datepicker.parseDate("MM d,yy", $(fieldId).val());
+            originalValue = $(fieldId).val();
+        } catch (e) {
+            $(fieldId).val(originalValue);
+        }
     });
-}
+};
+
+frontlinesms.disableTimeDragAndDrop = function (fieldId) {
+    var originalValue = $(fieldId).val();
+
+    $(fieldId).mouseleave(function() {
+        try {
+            $(fieldId).timeEntry('getTime');
+            originalValue = $(fieldId).val();
+        } catch (e) {
+            $(fieldId).val(originalValue);
+        }
+    });
+};
 
 frontlinesms.yesNoDialogBox = function() {
     if ((!$("#update-event").attr("disabled") && !frontlinesms.deleteButtonHasBeenClicked()) || $('#error-message').text() != "") {
@@ -232,4 +254,3 @@ frontlinesms.attachActionWithUnlink = function() {
         return false;
     });
 };
-

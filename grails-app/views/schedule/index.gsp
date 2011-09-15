@@ -12,6 +12,7 @@
     <g:javascript library="event/details"/>
     <g:javascript library="jquery.timeentry.min"/>
     <g:javascript library="event/interactions"/>
+    <g:javascript library="event/details"/>
     <g:javascript library="picnet.table.filter.min"/>
     <g:javascript library="legalContact/search"/>
     <g:javascript library="case/search"/>
@@ -19,7 +20,7 @@
     <g:javascript library="shared/formValidation"/>
     <g:javascript library="shared/linkCaseToEvent"/>
     <g:javascript library="shared/enableOrDisableKeyStrokeOnField"/>
-    <g:javascript library="shared/enableIndexOfInIE"/>       
+    <g:javascript library="shared/enableIndexOfInIE"/>
 
     <script type="text/javascript">
         $(function() {
