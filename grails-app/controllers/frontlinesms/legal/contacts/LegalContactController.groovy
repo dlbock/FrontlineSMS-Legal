@@ -89,7 +89,7 @@ class LegalContactController {
         def caseList = new HashMap<Long, String>(JSON.parse(caseListString))
         CaseContacts.findAllByLegalContact(legalContact)*.delete(flush: true)
         caseList.each { it ->
-            CaseContacts.link(Case.findByCaseId(it.key as Long), legalContact, it.value)
+            CaseContacts.link(Case.findByCaseId(it.key), legalContact, it.value)
         }
     }
 
