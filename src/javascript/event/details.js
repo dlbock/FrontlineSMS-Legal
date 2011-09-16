@@ -9,7 +9,7 @@ var originalEndTime = "";
 
 frontlinesms.eventDetails = function() {
     $("#view-event").dialog({
-        width: 500,
+        width: 'auto',
         autoOpen: false,
         modal: true,
         open: function() {
