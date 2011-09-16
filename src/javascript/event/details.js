@@ -21,6 +21,11 @@ frontlinesms.eventDetails = function() {
 
             frontlinesms.disableDateDragAndDrop("#event-date");
             frontlinesms.disableTimeDragAndDrop("#event-start-time", "#event-end-time");
+
+            window.setTimeout(function() {
+                jQuery(document).unbind('mousedown.dialog-overlay')
+                    .unbind('mouseup.dialog-overlay');
+            }, 100);
         },
         beforeClose: frontlinesms.yesNoDialogBox
     });
