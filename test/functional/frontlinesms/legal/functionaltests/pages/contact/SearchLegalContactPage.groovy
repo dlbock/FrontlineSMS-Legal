@@ -7,7 +7,7 @@ class SearchLegalContactPage extends Page {
     static url = "legalContact/search"
 
     static content = {
-      searchResults {
+        searchResults {
             $("tbody tr").collect {module LegalContactRow, it}
         }
         deleteDialog { $("div", id: "deleteDialog") }
@@ -15,24 +15,20 @@ class SearchLegalContactPage extends Page {
         deleteNo { $("button", id: "confirm-no")}
         contactNameSearch { $("input", id: "contact-search-bar") }
         contactLinkNotVisible { $("tr", class: "contactLink", filtermatch: "false").collect {module LegalContactRow, it} }
-        goToSearchPage{
+        goToSearchPage {
             $("a", name: "searchByCaseId")
         }
-        goToContactSearchPage{
+        goToContactSearchPage {
             $("a", name: "contactSearch")
         }
-
     }
 }
-
-
 
 class LegalContactRow extends Module {
     static content = {
         cell { i -> $("td", i) }
         name { cell(0).text() }
         primaryMobile { cell(1).text() }
-        deleteButton { $("button", class: "deleteButtons")}
+        deleteButton { $("input", class: "deleteButtons")}
     }
-
 }

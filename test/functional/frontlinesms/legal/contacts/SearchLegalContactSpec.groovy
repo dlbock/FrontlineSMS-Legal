@@ -24,12 +24,10 @@ class SearchLegalContactSpec extends FrontlinesmsLegalGebSpec {
         and:
         searchResults.collect {it->it.name}.contains('Me')
         searchResults.collect {it->it.primaryMobile}.contains('98765')
-
     }
 
      def "should display only the filtered contacts on pressing RETURN in the contact search bar"() {
         setup:
-
         new LegalContact(name: "fabio", primaryMobile: "22222").save(flush: true)
         new LegalContact(name: "dev", primaryMobile: "55555").save(flush: true)
 
@@ -50,4 +48,19 @@ class SearchLegalContactSpec extends FrontlinesmsLegalGebSpec {
         contactLinkNotVisible().size() == 1
     }
 
+    def "should not filter by DELETE button value"() {
+        setup:
+        new LegalContact(name: "fabio", primaryMobile: "22222").save(flush: true)
+        new LegalContact(name: "dev", primaryMobile: "55555").save(flush: true)
+
+        when:
+        to SearchLegalContactPage
+
+        and:
+        contactNameSearch.value("Delete")
+        sleep(500)
+
+        then:
+        contactLinkNotVisible().size() == 2
+    }
 }

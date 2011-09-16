@@ -29,7 +29,6 @@ class SearchCasePage extends Page {
         goToContactSearchPage{
             $("a", name: "contactSearch")
         }
-
     }
 }
 
@@ -39,7 +38,7 @@ class CaseRow extends Module {
         caseId { cell(0).text() }
         caseTitle {cell(1).text()}
         active { cell(2).text() }
-        deleteButton { $("button", class: "deleteButtons")}
+        deleteButton { $("input", class: "deleteButtons")}
     }
 }
 

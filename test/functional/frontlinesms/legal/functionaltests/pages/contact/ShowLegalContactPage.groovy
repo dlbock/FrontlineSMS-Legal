@@ -19,7 +19,7 @@ class ShowLegalContactPage extends Page {
         }
         pastEventsTable {$("#past-events tbody tr").collect {module EventRow, it} }
         futureEventsTable {$("#future-events tbody tr").collect {module EventRow, it} }
-        deleteButton {$("button", id: "delete-button")}
+        deleteButton {$("input", id: "delete-button")}
         deleteDialog { $("div", id: "deleteDialog") }
         deleteYes { $("button", id: "confirm-yes")}
         deleteNo { $("button", id: "confirm-no")}

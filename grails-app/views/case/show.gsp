@@ -164,7 +164,7 @@
 </g:form>
 <div id="offset-button-container">
     <g:form action="delete" class="form-delete" id="${caseToDisplay.caseId}">
-        <button id="delete-button" class="action-button">Delete</button>
+        <input type="button" id="delete-button" class="action-button" value="Delete"/>
     </g:form>
 
     <button id="case-update-cancel" class="action-button">Cancel</button>

@@ -48,7 +48,7 @@
                 </td>
                 <td class="table-delete-column">
                     <g:form action="delete" id="${legalCase.caseId}">
-                        <button class="deleteButtons action-button" id="deleteButton${legalCase.caseId}">Delete</button>
+                        <input class="deleteButtons action-button" id="deleteButton${legalCase.caseId}" value="Delete" type="button"/>
                     </g:form>
                 </td>
             </tr>

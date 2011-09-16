@@ -168,7 +168,7 @@
 
 <div id="offset-button-container">
 <g:form action="delete" class="form-delete" id="${contactToDisplay.id}">
-    <button id="delete-button" class="action-button">Delete</button>
+    <input id="delete-button" class="action-button" value="Delete" type="button"/>
 </g:form>
 
 <button id="contact-create-cancel" class="action-button">Cancel</button>

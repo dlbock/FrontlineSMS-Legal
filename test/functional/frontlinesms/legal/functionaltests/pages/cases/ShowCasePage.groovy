@@ -12,7 +12,7 @@ class ShowCasePage extends Page {
         currentId {$("input", id: "current-Id").value()}
         description { $("textarea", id: "case-description").value()}
         updateCaseButton {$("input", id: "case-update")}
-        deleteButton {$("button", id: "delete-button")}
+        deleteButton {$("input", id: "delete-button")}
         caseActive { $("input", id: "case-status") }
         linkContact {
             $("button", id: "link-contact-button").click()

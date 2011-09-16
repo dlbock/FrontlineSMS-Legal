@@ -75,7 +75,6 @@ class SearchCaseSpec extends FrontlinesmsLegalGebSpec {
 
         then:
         searchResults().size() == 1
-
     }
 
     def 'should stay on search page when YES is clicked in delete confirmation dialog'() {
@@ -88,6 +87,17 @@ class SearchCaseSpec extends FrontlinesmsLegalGebSpec {
 
         then:
         assert at(SearchCasePage)
+    }
 
+    def 'should not filter by DELETE button value'() {
+        given:
+        to SearchCasePage
+
+        when:
+        id.value("Delete")
+        sleep(500)
+
+        then:
+        caseLinkNotVisible().size() == 2
     }
 }
