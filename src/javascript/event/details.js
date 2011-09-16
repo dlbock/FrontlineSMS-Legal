@@ -20,8 +20,7 @@ frontlinesms.eventDetails = function() {
             originalEndTime = $("#event-end-time").val();
 
             frontlinesms.disableDateDragAndDrop("#event-date");
-            frontlinesms.disableTimeDragAndDrop("#event-start-time");
-            frontlinesms.disableTimeDragAndDrop("#event-end-time");
+            frontlinesms.disableTimeDragAndDrop("#event-start-time", "#event-end-time");
         },
         beforeClose: frontlinesms.yesNoDialogBox
     });
@@ -80,8 +79,12 @@ frontlinesms.disableTimeDragAndDrop = function (startFieldId, endFieldId) {
         $(endFieldId).val(originalEndValue);
     });
 
-    $(startFieldId).keydown(function () {
+    $(startFieldId).keyup(function () {
         originalStartValue = $(startFieldId).val();
+        originalEndValue = $(endFieldId).val();
+    });
+
+    $(endFieldId).keyup(function () {
         originalEndValue = $(endFieldId).val();
     });
 };
