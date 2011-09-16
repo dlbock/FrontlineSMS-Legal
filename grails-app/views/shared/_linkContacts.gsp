@@ -1,4 +1,4 @@
-<div id="link-contact-dialog" title="Link Contact to an Event" style="display: none;">
+<div id="link-contact-dialog" title="Link Contact" style="display: none;">
 <p id="message">Search by name or phone number</p>
 <br>
 <g:textField name="contactNameSearch" id="contact-name-search"/>
